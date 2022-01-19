@@ -1,2 +1,0 @@
-/usr/bin/ar qc libSMEFTRunner.a  CMakeFiles/SMEFTRunner.dir/RGESolver.cc.o
-/usr/bin/ranlib libSMEFTRunner.a

@@ -1,0 +1,10 @@
+prefix=@CMAKE_CURRENT_BINARY_DIR@
+includedir=@CMAKE_CURRENT_SOURCE_DIR@
+libdir=${prefix}
+bindir=${prefix}
+
+Name: SMEFTRunner
+Description: The SMEFTRunner library
+Version: 1.0
+Cflags: -I${includedir}
+Libs: -L${libdir} -lSMEFTRunner
