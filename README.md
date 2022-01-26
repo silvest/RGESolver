@@ -15,10 +15,10 @@ make
 make install
 ```
 ### Command line options
-`-DLOCAL_INSTALL:BOOL=<ON or OFF>`
-`-DCMAKE_INSTALL_PREFIX:PATH=<RGESolver installation directory>`
-`-DDEBUG_MODE:BOOL=<ON or OFF>`
-`-DBOOST_INCLUDE_DIR:PATH=<include path>/boost/`
-`-DGSL_CONFIG_DIR:PATH=<gsl-config directory>`
+* `-DLOCAL_INSTALL:BOOL=<ON or OFF>`
+* `-DCMAKE_INSTALL_PREFIX:PATH=<RGESolver installation directory>`
+* `-DDEBUG_MODE:BOOL=<ON or OFF>`
+* `-DBOOST_INCLUDE_DIR:PATH=<include path>/boost/`
+* `-DGSL_CONFIG_DIR:PATH=<gsl-config directory>`
 
- Note that depending on the setting of installation prefix you might need root privileges to be able to install `RGESolver` with `sudo make install` instead of `just make install`.
+ Note that depending on the setting of installation prefix you might need root privileges to be able to install `RGESolver` with `sudo make install` instead of `make install`.
