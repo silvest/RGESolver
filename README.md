@@ -4,8 +4,7 @@ A `C++` library to perform renormalization group evolution of SMEFT coefficients
 ## Dependencies
 * `BOOST`  : BOOST is a C++ library which can be obtained from the BOOST website or from Linux package managers or Mac ports. RGESolver only requires the BOOST headers, not the full libraries, so a header-only installation is sufficient.
 * `GSL` : The GNU Scientific Library (GSL) is a C library for numerical computations. It can be found on the GSL website. Most Linux package managers will have a stable version as will any ports for Mac. 
-
-
+* `C++11` : The compilation forces the `C++` standard to 11. 
 ## Installation
 
 The installation can be performed with:
