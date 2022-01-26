@@ -1,0 +1,10 @@
+prefix=/home/oem/Lalaland
+includedir=${prefix}/include
+libdir=${prefix}/lib
+bindir=${prefix}/bin
+
+Name: RGESolver
+Description: The RGESolver library
+Version: 1.0
+Cflags: -I${includedir}
+Libs: -L${libdir} -lRGESolver

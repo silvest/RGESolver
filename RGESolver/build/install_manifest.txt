@@ -1,0 +1,4 @@
+/home/oem/Lalaland/lib/libRGESolver.a
+/home/oem/Lalaland/include/RGESolver.h
+/home/oem/Lalaland/bin/rgesolver-config
+/home/oem/Lalaland/bin/RGESolver.pc

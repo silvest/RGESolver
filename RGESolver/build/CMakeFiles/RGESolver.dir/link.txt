@@ -1,0 +1,2 @@
+/usr/bin/ar qc libRGESolver.a  CMakeFiles/RGESolver.dir/RGESolver.cc.o
+/usr/bin/ranlib libRGESolver.a

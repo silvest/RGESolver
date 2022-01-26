@@ -1,0 +1,2 @@
+#!/bin/sh
+pkg-config $@ /home/oem/V9/RGESolver/build/RGESolver.pc

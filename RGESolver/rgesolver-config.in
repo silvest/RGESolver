@@ -1,0 +1,2 @@
+#!/bin/sh
+pkg-config $@ @CMAKE_CURRENT_BINARY_DIR@/RGESolver.pc

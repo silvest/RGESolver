@@ -1,6 +1,6 @@
 //RGESolver.cc
 #include "RGESolver.h"
-
+#include <boost/bind/bind.hpp>
 //#include <chrono> //To measure execution times
 
 
@@ -11,6 +11,8 @@
 
 RGESolver::RGESolver() {
     using namespace std;
+    using namespace boost::placeholders;
+
     //cout << "Constructor called" << endl;
     //cout << "epsabs : " << epsabs_ << "  epsrel : " << epsrel_ << endl;
     //cout << "step : " << step_ << endl;
