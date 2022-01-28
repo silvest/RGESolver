@@ -1,8 +1,8 @@
-if(NOT EXISTS "/home/oem/V9/RGESolver/build/install_manifest.txt")
-  message(FATAL_ERROR "Cannot find install manifest: /home/oem/V9/RGESolver/build/install_manifest.txt")
-endif(NOT EXISTS "/home/oem/V9/RGESolver/build/install_manifest.txt")
+if(NOT EXISTS "/home/oem/SMEFTRunner/RGESolver/build/install_manifest.txt")
+  message(FATAL_ERROR "Cannot find install manifest: /home/oem/SMEFTRunner/RGESolver/build/install_manifest.txt")
+endif(NOT EXISTS "/home/oem/SMEFTRunner/RGESolver/build/install_manifest.txt")
 
-file(READ "/home/oem/V9/RGESolver/build/install_manifest.txt" files)
+file(READ "/home/oem/SMEFTRunner/RGESolver/build/install_manifest.txt" files)
 string(REGEX REPLACE "\n" ";" files "${files}")
 foreach(file ${files})
   message(STATUS "Uninstalling $ENV{DESTDIR}${file}")
