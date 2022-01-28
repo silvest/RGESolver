@@ -4,8 +4,7 @@ A `C++` library to perform renormalization group evolution of SMEFT coefficients
 ## Dependencies
 * `BOOST`  : BOOST is a C++ library which can be obtained from the BOOST website or from Linux package managers or Mac ports. RGESolver only requires the BOOST headers, not the full libraries, so a header-only installation is sufficient.
 * `GSL` : The GNU Scientific Library (GSL) is a C library for numerical computations. It can be found on the GSL website. Most Linux package managers will have a stable version as will any ports for Mac. 
-
-
+* `C++11` : The compilation forces the `C++` standard to 11. 
 ## Installation
 
 The installation can be performed with:
@@ -16,10 +15,10 @@ make
 make install
 ```
 ### Command line options
-`-DLOCAL_INSTALL:BOOL=<ON or OFF>`
-`-DCMAKE_INSTALL_PREFIX:PATH=<RGESolver installation directory>`
-`-DDEBUG_MODE:BOOL=<ON or OFF>`
-`-DBOOST_INCLUDE_DIR:PATH=<include path>/boost/`
-`-DGSL_CONFIG_DIR:PATH=<gsl-config directory>`
+* `-DLOCAL_INSTALL:BOOL=<ON or OFF>`
+* `-DCMAKE_INSTALL_PREFIX:PATH=<RGESolver installation directory>`
+* `-DDEBUG_MODE:BOOL=<ON or OFF>`
+* `-DBOOST_INCLUDE_DIR:PATH=<include path>/boost/`
+* `-DGSL_CONFIG_DIR:PATH=<gsl-config directory>`
 
- Note that depending on the setting of installation prefix you might need root privileges to be able to install `RGESolver` with `sudo make install` instead of `just make install`.
+ Note that depending on the setting of installation prefix you might need root privileges to be able to install `RGESolver` with `sudo make install` instead of `make install`.
