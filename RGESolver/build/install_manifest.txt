@@ -1,0 +1,4 @@
+/usr/local/lib/libRGESolver.a
+/usr/local/include/RGESolver.h
+/usr/local/bin/rgesolver-config
+/usr/local/bin/RGESolver.pc
