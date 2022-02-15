@@ -1,0 +1,471 @@
+\hypertarget{classRGESolver}{}\doxysection{R\+G\+E\+Solver Class Reference}
+\label{classRGESolver}\index{RGESolver@{RGESolver}}
+
+
+A class that performs renormalization group evolution in the context of the S\+M\+E\+FT.  
+
+
+
+
+{\ttfamily \#include $<$R\+G\+E\+Solver.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRGESolver_a45669aa780325da0b1e866ba229b277f}\label{classRGESolver_a45669aa780325da0b1e866ba229b277f}} 
+\mbox{\hyperlink{classRGESolver_a45669aa780325da0b1e866ba229b277f}{R\+G\+E\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em The default constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classRGESolver_ab1edd7795c6a3dfd0ee1a13a0ae25361}\label{classRGESolver_ab1edd7795c6a3dfd0ee1a13a0ae25361}} 
+\mbox{\hyperlink{classRGESolver_ab1edd7795c6a3dfd0ee1a13a0ae25361}{$\sim$\+R\+G\+E\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em The default destructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classRGESolver_a834b18f36a698038cbf574ea52fa2545}\label{classRGESolver_a834b18f36a698038cbf574ea52fa2545}} 
+double \mbox{\hyperlink{classRGESolver_a834b18f36a698038cbf574ea52fa2545}{epsrel}} ()
+\begin{DoxyCompactList}\small\item\em Getter for the relative error used in the numerical integration. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classRGESolver_a87ca405240592096e3671d4e1fd81b6b}\label{classRGESolver_a87ca405240592096e3671d4e1fd81b6b}} 
+double \mbox{\hyperlink{classRGESolver_a87ca405240592096e3671d4e1fd81b6b}{epsabs}} ()
+\begin{DoxyCompactList}\small\item\em Getter for the absolute error used in the numerical integration. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classRGESolver_a3c47c6eedf33555875b32fda5166748b}\label{classRGESolver_a3c47c6eedf33555875b32fda5166748b}} 
+double \mbox{\hyperlink{classRGESolver_a3c47c6eedf33555875b32fda5166748b}{step}} ()
+\begin{DoxyCompactList}\small\item\em Getter for the step used in the numerical integration. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classRGESolver_af059a6bea6999430ab424de2633721cf}\label{classRGESolver_af059a6bea6999430ab424de2633721cf}} 
+void \mbox{\hyperlink{classRGESolver_af059a6bea6999430ab424de2633721cf}{Set\+\_\+epsrel}} (double \mbox{\hyperlink{classRGESolver_a834b18f36a698038cbf574ea52fa2545}{epsrel}})
+\begin{DoxyCompactList}\small\item\em Setter for the relative error used in the numerical integration. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classRGESolver_a25286cb7bd18f41e5d631a9a14be1cbf}\label{classRGESolver_a25286cb7bd18f41e5d631a9a14be1cbf}} 
+void \mbox{\hyperlink{classRGESolver_a25286cb7bd18f41e5d631a9a14be1cbf}{Set\+\_\+epsabs}} (double \mbox{\hyperlink{classRGESolver_a87ca405240592096e3671d4e1fd81b6b}{epsabs}})
+\begin{DoxyCompactList}\small\item\em Setter for the absolute error used in the numerical integration. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classRGESolver_a51938deb00fbca684c8e4e5b10a239ad}\label{classRGESolver_a51938deb00fbca684c8e4e5b10a239ad}} 
+void \mbox{\hyperlink{classRGESolver_a51938deb00fbca684c8e4e5b10a239ad}{Set\+\_\+step}} (double \mbox{\hyperlink{classRGESolver_a3c47c6eedf33555875b32fda5166748b}{step}})
+\begin{DoxyCompactList}\small\item\em Setter for the step used in the numerical integration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGESolver_adc2b8a9a10216ec5285569c8f24cbed2}{Set\+Coefficient}} (std\+::string name, double val)
+\begin{DoxyCompactList}\small\item\em Setter function for scalar/0F parameters (no flavour indices). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGESolver_aec5d994dae1dccb52ece9e51c28b9f2e}{Set\+Coefficient}} (std\+::string name, double val, int i, int j)
+\begin{DoxyCompactList}\small\item\em Setter function for 2F parameters (2 flavour indices). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGESolver_abd765cfec77255200600fd8151711c3f}{Set\+Coefficient}} (std\+::string name, double val, int i, int j, int k, int l)
+\begin{DoxyCompactList}\small\item\em Setter function for 4F parameters (4 flavour indices). \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classRGESolver_a23d5d847021421bc8a9ba03412d2674e}{Get\+Coefficient}} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Getter function for scalar/0F parameters (no flavour indices). \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classRGESolver_a26a55e4d88d327756d9bd5999d4c6045}{Get\+Coefficient}} (std\+::string name, int i, int j)
+\begin{DoxyCompactList}\small\item\em Getter function for 2F parameters (2 flavour indices). \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classRGESolver_ab4da1b64edf881b585de6bcfd03a2ab5}{Get\+Coefficient}} (std\+::string name, int i, int j, int k, int l)
+\begin{DoxyCompactList}\small\item\em Getter function for 4F parameters (4 flavour indices). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} (std\+::string method, double muI, double muF)
+\begin{DoxyCompactList}\small\item\em Command to perform the R\+GE evolution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGESolver_ab6a813bff78d9278d3b875ea9c2f5324}{Save\+Output\+File}} (std\+::string filename, std\+::string format)
+\begin{DoxyCompactList}\small\item\em Saves the current values of parameters in a file. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classRGESolver_a98473c7d53e598bfef878106a3715948}\label{classRGESolver_a98473c7d53e598bfef878106a3715948}} 
+void \mbox{\hyperlink{classRGESolver_a98473c7d53e598bfef878106a3715948}{Reset}} ()
+\begin{DoxyCompactList}\small\item\em Resets all the parameters to 0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class that performs renormalization group evolution in the context of the S\+M\+E\+FT. 
+
+The class solves the Renormalization Group Equations (R\+G\+Es) both numerically and in the leading-\/log approximations. Only operators up to dimension six that preserve lepton and baryon numbers are considered. The operator basis is the Warsaw basis, defined in \href{https://arxiv.org/abs/1008.4884}{\texttt{ https\+://arxiv.\+org/abs/1008.\+4884}}. ~\newline
+ The user must set separately real and imaginary part of each complex parameter. ~\newline
+ In tables \ref{SM}, \ref{0F}, \ref{2F} and \ref{4F} are listed all the parameters, together with their name (that must be used to correctly invoke getter and setter functions). ~\newline
+The numerical integration is performed with an adaptive step-\/size routine (the Explicit embedded Runge-\/\+Kutta-\/\+Fehlberg method), using the tools in the G\+NU Scientific Library. ~\newline
+ See \href{https://www.gnu.org/software/gsl/doc/html/ode-initval.html}{\texttt{ https\+://www.\+gnu.\+org/software/gsl/doc/html/ode-\/initval.\+html}} for all the details. ~\newline
+The accuracy level of the numerical integration can be tuned selecting the parameters $\epsilon_{rel}, \epsilon_{abs}$ and the integration step using the dedicated getter functions.
+
+\begin{DoxyAuthor}{Author}
+H\+E\+Pfit Collaboration 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\+NU General Public License  
+                
+ \begin{table}[H]
+        \centering
+        \renewcommand{\arraystretch}{1.5} % Default value: 1
+\begin{tabular}[t]{c|c} 
+Coefficient     & \multicolumn{1}{c}{Name}      \\ \hline 
+$g_1$         & \texttt{g1}      \\
+$g_2$         & \texttt{g2}      \\
+$g_3$         & \texttt{g3}      \\
+$\lambda$         & \texttt{lambda}      \\
+$m_h^2$ $[\mathrm{GeV}^2]$  & \texttt{mh2}      \\
+$\Re(\mathcal{Y}_u)$         & \texttt{YuR}      \\
+$\Im(\mathcal{Y}_u)$         & \texttt{YuI}      \\
+$\Re(\mathcal{Y}_d)$         & \texttt{YdR}      \\
+$\Im(\mathcal{Y}_d)$         & \texttt{YdI}      \\
+ $\Re(\mathcal{Y}_e)$         & \texttt{YeR}      \\
+$\Im(\mathcal{Y}_e)$         & \texttt{YeI}      
+\end{tabular}
+\vspace{3 pt}
+\caption{Standard Model parameters}
+\label{SM}
+\end{table}
+  
+   
+   
+   
+   
+   
+
+ 
+\begin{table}[H]
+        \centering
+        \renewcommand{\arraystretch}{1.5} % Default value: 1
+\begin{tabular}{cc}
+\begin{tabular}[t]{c|c}
+ \multicolumn{2}{c}{Classes 1-3} \\ \hline 
+Coefficient     & \multicolumn{1}{c}{Name}      \\ \hline 
+$C_{G}$         & \texttt{CG}      \\
+$C_{\tilde{G}}$ & \texttt{CGtilde} \\
+$C_{W}$         & \texttt{CW}      \\
+$C_{\tilde{W}}$ & \texttt{CWtilde} \\
+$C_H$           & \texttt{CH}      \\
+$C_{H \Box} $   & \texttt{CHbox}   \\
+$C_{HD}$        & \texttt{CHD}    
+\end{tabular} & 
+ \begin{tabular}[t]{c|c}
+\multicolumn{2}{c}{Class 4} \\ \hline 
+Coefficient     & \multicolumn{1}{c}{Name}         \\ \hline 
+$C_{HG}$         & \texttt{CHG}      \\
+$C_{H\tilde{G}}$ & \texttt{CHGtilde} \\
+$C_{HW}$         & \texttt{CHW}      \\
+$C_{H\tilde{W}}$ & \texttt{CHWtilde} \\
+$C_{HB}$         & \texttt{CHB}      \\
+$C_{H\tilde{B}}$ & \texttt{CHBtilde} \\
+$C_{HWB}$         & \texttt{CHWB}      \\
+$C_{H\tilde{W}B}$ & \texttt{CHWtildeB} 
+\end{tabular}
+\end{tabular}
+\vspace{3 pt}
+\caption{Scalar (and real) SMEFT operators.}
+\label{0F}
+\end{table}
+  
+   
+   
+   
+   
+   
+
+\begin{table}[H]
+        \centering
+        \renewcommand{\arraystretch}{1.5} % Default value: 1
+\begin{tabular}{ccc}
+\begin{tabular}[t]{c|c|c}
+ \multicolumn{3}{c}{Class 5} \\ \hline 
+Coefficient     & Name   & Symmetry      \\ \hline 
+$\Re(C_{eH})$ & \texttt{CeHR} & \multicolumn{1}{c}{WC1}   \\ 
+$\Im(C_{eH})$ & \texttt{CeHI}  & \multicolumn{1}{c}{WC1}\\ 
+$\Re(C_{uH})$ & \texttt{CuHR}  & \multicolumn{1}{c}{WC1}\\ 
+$\Im(C_{uH})$ & \texttt{CuHI}  & \multicolumn{1}{c}{WC1}\\ 
+$\Re(C_{dH})$ & \texttt{CdHR}  & \multicolumn{1}{c}{WC1}\\ 
+$\Im(C_{dH})$ & \texttt{CdHI}  & \multicolumn{1}{c}{WC1}
+\end{tabular} & 
+ \begin{tabular}[t]{c|c|c}
+\multicolumn{3}{c}{Class 6} \\ \hline 
+Coefficient     & Name  & Symmetry \\ \hline 
+$\Re(C_{eW})$ & \texttt{CeWR} & WC1 \\ 
+$\Im(C_{eW})$ & \texttt{CeWI} & WC1\\ 
+$\Re(C_{eB})$ & \texttt{CeBR} & WC1\\ 
+$\Im(C_{eB})$ & \texttt{CeBI} & WC1\\ 
+$\Re(C_{uG})$ & \texttt{CuGR} & WC1\\ 
+$\Im(C_{uG})$ & \texttt{CuGI} & WC1\\ 
+$\Re(C_{uW})$ & \texttt{CuWR} & WC1\\ 
+$\Im(C_{uW})$ & \texttt{CuWI} & WC1\\ 
+$\Re(C_{uB})$ & \texttt{CuBR} & WC1\\ 
+$\Im(C_{uB})$ & \texttt{CuBI} & WC1\\ 
+$\Re(C_{dG})$ & \texttt{CdGR} & WC1\\ 
+$\Im(C_{dG})$ & \texttt{CdGI} & WC1\\ 
+$\Re(C_{dW})$ & \texttt{CdWR} & WC1\\ 
+$\Im(C_{dW})$ & \texttt{CdWI} & WC1\\ 
+$\Re(C_{dB})$ & \texttt{CdBR} & WC1\\ 
+$\Im(C_{dB})$ & \texttt{CdBI} & WC1
+\end{tabular} &  
+ \begin{tabular}[t]{c|c|c}
+\multicolumn{3}{c}{Class 7} \\ \hline 
+Coefficient     & Name & Symmetry \\ \hline
+$\Re(C_{Hl1})$ & \texttt{CHl1R}& WC2R \\ 
+$\Im(C_{Hl1})$ & \texttt{CHl1I} & WC2I\\ 
+$\Re(C_{Hl3})$ & \texttt{CHl3R} & WC2R\\ 
+$\Im(C_{Hl3})$ & \texttt{CHl3I} & WC2I\\ 
+$\Re(C_{He})$ & \texttt{CHeR} & WC2R\\ 
+$\Im(C_{He})$ & \texttt{CHeI} & WC2I\\ 
+$\Re(C_{Hq1})$ & \texttt{CHq1R} & WC2R\\ 
+$\Im(C_{Hq1})$ & \texttt{CHq1I} & WC2I\\ 
+$\Re(C_{Hq3})$ & \texttt{CHq3R}& WC2R \\ 
+$\Im(C_{Hq3})$ & \texttt{CHq3I} & WC2I\\ 
+$\Re(C_{Hu})$ & \texttt{CHuR} & WC2R\\ 
+$\Im(C_{Hu})$ & \texttt{CHuI} & WC2I\\ 
+$\Re(C_{Hd})$ & \texttt{CHdR} & WC2R\\ 
+$\Im(C_{Hd})$ & \texttt{CHdI} & WC2I\\
+$\Re(C_{Hud})$ & \texttt{CHudR} & WC1\\ 
+$\Im(C_{Hud})$ & \texttt{CHudI} & WC1  
+\end{tabular}
+\end{tabular}
+\vspace{3 pt}
+\caption{2F SMEFT operators}
+\label{2F}
+\end{table}
+
+   
+   
+   
+    
+
+ 
+ \begin{table}[H]
+\centering
+        \renewcommand{\arraystretch}{1.5} % Default value: 1
+ \begin{tabular}[t]{ccc}
+\begin{tabular}[t]{c|c|c}
+\multicolumn{3}{c}{Class 8 $(\bar{L}L)(\bar{L}L)$} \\ \hline
+Coefficient     & Name & Symmetry \\ \hline
+$\Re(C_{ll})$ & \texttt{CllR} & WC6R \\
+$\Im(C_{ll})$ & \texttt{CllI} & WC6I \\ 
+$\Re(C_{qq1})$ & \texttt{Cqq1R} & WC6R \\
+$\Im(C_{qq1})$ & \texttt{Cqq1I} & WC6I \\   
+$\Re(C_{qq3})$ & \texttt{Cqq3R} & WC6R \\
+$\Im(C_{qq3})$ & \texttt{Cqq3I} & WC6I \\
+$\Re(C_{lq1})$ & \texttt{Clq1R} & WC7R \\
+$\Im(C_{lq1})$ & \texttt{Clq1I} & WC7I \\
+$\Re(C_{lq3})$ & \texttt{Clq3R} & WC7R \\
+$\Im(C_{lq3})$ & \texttt{Clq3I} & WC7I  \\ [7 pt]             
+\multicolumn{3}{c}{Class 8 $(\bar{L}R)(\bar{L}R)$} \\ \hline
+Coefficient     & Name & Symmetry \\ \hline
+$\Re(C_{quqd1})$ & \texttt{Cquqd1R} & WC5 \\
+$\Im(C_{quqd1})$ & \texttt{Cquqd1I} & WC5 \\
+$\Re(C_{quqd8})$ & \texttt{Cquqd8R} & WC5 \\
+$\Im(C_{quqd8})$ & \texttt{Cquqs8I} & WC5 \\
+$\Re(C_{lequ1})$ & \texttt{Clequ1R} & WC5 \\
+$\Im(C_{lequ1})$ & \texttt{Clequ1I} & WC5 \\    
+$\Re(C_{lequ3})$ & \texttt{Clequ3R} & WC5 \\
+$\Im(C_{lequ3})$ & \texttt{Clequ3I} & WC5       
+\end{tabular} &
+\begin{tabular}[t]{c|c|c} 
+\multicolumn{3}{c}{Class 8 $(\bar{R}R)(\bar{R}R)$} \\ \hline
+Coefficient     & Name & Symmetry \\ \hline
+$\Re(C_{ee})$ & \texttt{CeeR} & WC8R \\
+$\Im(C_{ee})$ & \texttt{CeeI} & WC8I \\
+$\Re(C_{uu})$ & \texttt{CuuR} & WC6R \\
+$\Im(C_{uu})$ & \texttt{CuuI} & WC6I \\
+$\Re(C_{dd})$ & \texttt{CddR} & WC6R \\
+$\Im(C_{dd})$ & \texttt{CddI} & WC6I \\ 
+$\Re(C_{eu})$ & \texttt{CeuR} & WC7R \\
+$\Im(C_{eu})$ & \texttt{CeuI} & WC7I \\
+$\Re(C_{ed})$ & \texttt{CedR} & WC7R \\
+$\Im(C_{ed})$ & \texttt{CedI} & WC7I \\
+$\Re(C_{ud1})$ & \texttt{Cud1R} & WC7R \\
+$\Im(C_{ud1})$ & \texttt{Cud1I} & WC7I \\
+$\Re(C_{ud8})$ & \texttt{Cud8R} & WC7R \\
+$\Im(C_{ud8})$ & \texttt{Cud8I} & WC7I \\ [7 pt]             
+\multicolumn{3}{c}{Class 8 $(\bar{L}R)(\bar{R}L)$} \\ \hline
+Coefficient     & Name & Symmetry \\ \hline
+$\Re(C_{ledq})$ & \texttt{CledqR} & WC5 \\
+$\Im(C_{ledq})$ & \texttt{CledqI} & WC5 
+\end{tabular} & 
+\begin{tabular}[t]{c|c|c} 
+\multicolumn{3}{c}{Class 8 $(\bar{L}L)(\bar{R}R)$} \\ \hline
+Coefficient     & Name & Symmetry \\ \hline
+$\Re(C_{le})$ & \texttt{CleR} & WC7R \\
+$\Im(C_{le})$ & \texttt{CleI} & WC7I \\
+$\Re(C_{lu})$ & \texttt{CluR} & WC7R \\
+$\Im(C_{lu})$ & \texttt{CluI} & WC7I \\
+$\Re(C_{ld})$ & \texttt{CldR} & WC7R \\
+$\Im(C_{ld})$ & \texttt{CldI} & WC7I \\
+$\Re(C_{qe})$ & \texttt{CqeR} & WC7R \\
+$\Im(C_{qe})$ & \texttt{CqeI} & WC7I \\
+$\Re(C_{qu1})$ & \texttt{Cqu1R} & WC7R \\
+$\Im(C_{qu1})$ & \texttt{Cqu1I} & WC7I \\
+$\Re(C_{qu8})$ & \texttt{Cqu8R} & WC7R \\
+$\Im(C_{qu8})$ & \texttt{Cqu8I} & WC7I \\
+$\Re(C_{qd1})$ & \texttt{Cqd1R} & WC7R \\
+$\Im(C_{qd1})$ & \texttt{Cqd1I} & WC7I \\
+$\Re(C_{qd8})$ & \texttt{Cqd8R} & WC7R \\
+$\Im(C_{qd8})$ & \texttt{Cqd8I} & WC7I \\
+\end{tabular} 
+\end{tabular}
+
+ \caption{4F SMEFT Operators.}
+ \label{4F}
+ \end{table} 
+  
+ 
+                
+ 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}\label{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}} 
+\index{RGESolver@{RGESolver}!Evolve@{Evolve}}
+\index{Evolve@{Evolve}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{Evolve()}{Evolve()}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Evolve (\begin{DoxyParamCaption}\item[{std\+::string}]{method,  }\item[{double}]{muI,  }\item[{double}]{muF }\end{DoxyParamCaption})}
+
+
+
+Command to perform the R\+GE evolution. 
+
+R\+G\+Es are solved with the chosen method from {\ttfamily muI} to {\ttfamily muF}. Currently, the available methods are \char`\"{}\+Numeric\char`\"{} and \char`\"{}\+Leading-\/\+Log\char`\"{}. ~\newline
+ The evolutor takes as initial values the current values of the parameters, set with the {\ttfamily Set\+Coefficient(...)} function. After completing the evolution the values of the parameters are updated and are accessible with the {\ttfamily Get\+Coefficient(...)} function. 
+\begin{DoxyParams}{Parameters}
+{\em method} & resolution method \\
+\hline
+{\em muI} & initial energy scale \\
+\hline
+{\em muF} & final energy scale \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRGESolver_a23d5d847021421bc8a9ba03412d2674e}\label{classRGESolver_a23d5d847021421bc8a9ba03412d2674e}} 
+\index{RGESolver@{RGESolver}!GetCoefficient@{GetCoefficient}}
+\index{GetCoefficient@{GetCoefficient}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCoefficient()}{GetCoefficient()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+Get\+Coefficient (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})}
+
+
+
+Getter function for scalar/0F parameters (no flavour indices). 
+
+If the parameter name does not match with any of the parameters, an error message is printed and the value 0 is returned. 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the requested parameter (if it exists), otherwise returns 0. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRGESolver_a26a55e4d88d327756d9bd5999d4c6045}\label{classRGESolver_a26a55e4d88d327756d9bd5999d4c6045}} 
+\index{RGESolver@{RGESolver}!GetCoefficient@{GetCoefficient}}
+\index{GetCoefficient@{GetCoefficient}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCoefficient()}{GetCoefficient()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+Get\+Coefficient (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})}
+
+
+
+Getter function for 2F parameters (2 flavour indices). 
+
+If the parameter name does not match with any of the parameters or if at least one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, ~\newline
+ an error message is printed and the value 0 is returned. 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the parameter \\
+\hline
+{\em i} & first flavour index \\
+\hline
+{\em j} & second flavour index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the requested parameter (if it exists), otherwise returns 0. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRGESolver_ab4da1b64edf881b585de6bcfd03a2ab5}\label{classRGESolver_ab4da1b64edf881b585de6bcfd03a2ab5}} 
+\index{RGESolver@{RGESolver}!GetCoefficient@{GetCoefficient}}
+\index{GetCoefficient@{GetCoefficient}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCoefficient()}{GetCoefficient()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+Get\+Coefficient (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{int}]{i,  }\item[{int}]{j,  }\item[{int}]{k,  }\item[{int}]{l }\end{DoxyParamCaption})}
+
+
+
+Getter function for 4F parameters (4 flavour indices). 
+
+If the parameter name does not match with any of the parameters or if at least one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, ~\newline
+ an error message is printed and the value 0 is returned. 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the parameter \\
+\hline
+{\em i} & first flavour index \\
+\hline
+{\em j} & second flavour index \\
+\hline
+{\em k} & third flavour index \\
+\hline
+{\em l} & fourth flavour index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the requested parameter (if it exists), otherwise returns 0. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRGESolver_ab6a813bff78d9278d3b875ea9c2f5324}\label{classRGESolver_ab6a813bff78d9278d3b875ea9c2f5324}} 
+\index{RGESolver@{RGESolver}!SaveOutputFile@{SaveOutputFile}}
+\index{SaveOutputFile@{SaveOutputFile}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{SaveOutputFile()}{SaveOutputFile()}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Save\+Output\+File (\begin{DoxyParamCaption}\item[{std\+::string}]{filename,  }\item[{std\+::string}]{format }\end{DoxyParamCaption})}
+
+
+
+Saves the current values of parameters in a file. 
+
+Currently, only \char`\"{}\+S\+L\+H\+A\char`\"{} format is implemented 
+\begin{DoxyParams}{Parameters}
+{\em filename} & Name of the output file \\
+\hline
+{\em format} & Format of the output file \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRGESolver_adc2b8a9a10216ec5285569c8f24cbed2}\label{classRGESolver_adc2b8a9a10216ec5285569c8f24cbed2}} 
+\index{RGESolver@{RGESolver}!SetCoefficient@{SetCoefficient}}
+\index{SetCoefficient@{SetCoefficient}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{SetCoefficient()}{SetCoefficient()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Set\+Coefficient (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{double}]{val }\end{DoxyParamCaption})}
+
+
+
+Setter function for scalar/0F parameters (no flavour indices). 
+
+If the parameter name does not match with any of the parameters, an error message is printed and no assignation is performed. 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the parameter \\
+\hline
+{\em val} & its value \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRGESolver_aec5d994dae1dccb52ece9e51c28b9f2e}\label{classRGESolver_aec5d994dae1dccb52ece9e51c28b9f2e}} 
+\index{RGESolver@{RGESolver}!SetCoefficient@{SetCoefficient}}
+\index{SetCoefficient@{SetCoefficient}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{SetCoefficient()}{SetCoefficient()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Set\+Coefficient (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{double}]{val,  }\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})}
+
+
+
+Setter function for 2F parameters (2 flavour indices). 
+
+If the parameter name does not match with any of the parameters or if at least one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the parameter \\
+\hline
+{\em val} & its value \\
+\hline
+{\em i} & first flavour index \\
+\hline
+{\em j} & second flavour index \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRGESolver_abd765cfec77255200600fd8151711c3f}\label{classRGESolver_abd765cfec77255200600fd8151711c3f}} 
+\index{RGESolver@{RGESolver}!SetCoefficient@{SetCoefficient}}
+\index{SetCoefficient@{SetCoefficient}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{SetCoefficient()}{SetCoefficient()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Set\+Coefficient (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{double}]{val,  }\item[{int}]{i,  }\item[{int}]{j,  }\item[{int}]{k,  }\item[{int}]{l }\end{DoxyParamCaption})}
+
+
+
+Setter function for 4F parameters (4 flavour indices). 
+
+If the parameter name does not match with any of the parameters or if at least one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, an error message is printed and no assignation is performed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the parameter \\
+\hline
+{\em val} & its value \\
+\hline
+{\em i} & first flavour index \\
+\hline
+{\em j} & second flavour index \\
+\hline
+{\em k} & third flavour index \\
+\hline
+{\em l} & fourth flavour index \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+G\+E\+Solver.\+h\item 
+R\+G\+E\+Solver.\+cc\item 
+Static\+Members.\+cc\item 
+Beta\+Function.\+cc\item 
+Setters\+And\+Getters.\+cc\end{DoxyCompactItemize}

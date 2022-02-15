@@ -409,7 +409,7 @@ public:
 
     /**
      * @brief Saves the current values of parameters in a file
-     * @details Currently, only "LHSA" format is implemented
+     * @details Currently, only "SLHA" format is implemented
      * @param filename Name of the output file 
      * @param format Format of the output file
      */
@@ -935,7 +935,7 @@ private:
      * 
      * @details This function is used only in the function
      * <tt>SaveOutputFile</tt>. 
-     * Currently only "LHSA" printing for WC1,WC2R/I,
+     * Currently only "SLHA" printing for WC1,WC2R/I,
      * WC5,WC6R/I,WC7R/I,WC8R/I is implemented. 
      * 
      * @param c coefficient

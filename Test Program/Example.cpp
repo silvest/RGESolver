@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
     auto duration = duration_cast<microseconds>(stop - start);
 
 
-   // S.SaveOutputFile("OutputSMEFTEvolution.txt", "LHSA");
+   // S.SaveOutputFile("OutputSMEFTEvolution.txt", "SLHA");
     std::cout << "Time taken by setting initial conditions and performing "
             "the evolution (mean over " << Nrep << " reps) : "
             << duration.count()*0.001 / Nrep << " ms" << std::endl;

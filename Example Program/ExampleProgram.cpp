@@ -17,7 +17,7 @@ int main() {
     std::cout << "Re[Yu(3,3)] : "
               << S.GetCoefficient("YuR", 2, 2) << std::endl;
 	
-    S.SaveOutputFile("OutputSMEFTEvolution.txt", "LHSA");
+    S.SaveOutputFile("OutputSMEFTEvolution.txt", "SLHA");
 	
 	return 0;
 }

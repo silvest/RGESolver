@@ -1341,9 +1341,9 @@ void RGESolver::SaveOutputFile(std::string filename,
         std::string format) {
     using namespace std;
 
-    if (format != "LHSA") {
+    if (format != "SLHA") {
         cout << "ERROR : FORMAT " << format << " NOT AVAILABLE" << endl;
-        cout << "Use \"LHSA\" or \"JSON\" " << endl;
+        cout << "Use \"SLHA\" or \"JSON\" " << endl;
         return;
     }
 
@@ -1351,7 +1351,7 @@ void RGESolver::SaveOutputFile(std::string filename,
     ofstream outf;
     outf.open(filename);
     int i, j;
-    if (format == "LHSA") {
+    if (format == "SLHA") {
         //SM print 
 
         int n = 1;
@@ -1595,7 +1595,7 @@ void RGESolver::Print(double* c, std::string name,
 
     int i, j, k, l;
 
-    if (format == "LHSA") {
+    if (format == "SLHA") {
         f << "Block " << name << endl;
         if (sym == "WC1") {
             for (i = 0; i < 3; i ++) {
