@@ -1,7 +1,8 @@
 PROJECT_NAME     = RGESolver
-INPUT            = RGESolver.cc RGESolver.h StaticMembers.cc BetaFunction.cc SettersAndGetters.cc 
+INPUT            = ../README.md RGESolver.cc RGESolver.h StaticMembers.cc BetaFunction.cc SettersAndGetters.cc 
+USE_MDFILE_AS_MAINPAGE = README.md
 WARNINGS         = YES
-TAGFILES         = qt.tag
+#TAGFILES         = qt.tag
 SEARCHENGINE     = NO
 USE_MATHJAX	 = YES
 HTML_OUTPUT	 = ../docs/
