@@ -3,7 +3,8 @@ INPUT            = RGESolver.cc RGESolver.h StaticMembers.cc BetaFunction.cc Set
 WARNINGS         = YES
 TAGFILES         = qt.tag
 SEARCHENGINE     = NO
-
+USE_MATHJAX	 = YES
+HTML_OUTPUT	 = ../docs/
 
 #EXTRACT_ALL            = YES
 #EXTRACT_PRIVATE        = YES
