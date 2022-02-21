@@ -8,10 +8,22 @@
 #include "StaticMembers.cc"
 
 #include "SettersAndGetters.cc"
+#include "SMInput.cc"
 
 RGESolver::RGESolver() {
     using namespace std;
     using namespace boost::placeholders;
+
+    c12 = cos(CKM_theta12);
+    s12 = sin(CKM_theta12);
+    c13 = cos(CKM_theta13);
+    s13 = sin(CKM_theta13);
+    c23 = cos(CKM_theta23);
+    s23 = sin(CKM_theta23);
+
+
+    //Build default CKM matrix from default parameters
+    UpdateCKM();
 
     //cout << "Constructor called" << endl;
     //cout << "epsabs : " << epsabs_ << "  epsrel : " << epsrel_ << endl;
@@ -24,6 +36,25 @@ RGESolver::RGESolver() {
         Operators0F["g3"] = & g3;
         Operators0F["mh2"] = & mh2;
         Operators0F["lambda"] = & lambda;
+
+        Operators0F["CKM_theta12"] = & CKM_theta12;
+        Operators0F["CKM_theta13"] = & CKM_theta13;
+        Operators0F["CKM_theta23"] = & CKM_theta23;
+        Operators0F["CKM_delta"] = & CKM_delta;
+
+        Operators0F["mu"] = & mu;
+        Operators0F["mc"] = & mc;
+        Operators0F["mt"] = & mt;
+
+        Operators0F["md"] = & md;
+        Operators0F["ms"] = & ms;
+        Operators0F["mb"] = & mb;
+
+        Operators0F["mel"] = & mel;
+        Operators0F["mmu"] = & mmu;
+        Operators0F["mtau"] = & mtau;
+
+
     }
 
 
@@ -1774,9 +1805,9 @@ double RGESolver::GetCoefficient(std::string name) {
 void RGESolver::SetCoefficient(std::string name, double val,
         int i, int j) {
     if ((i <= 2)&&(i >= 0)&&(j <= 2)&&(j >= 0)) {
-        
-            Setter2F.at(name)(i, j, val);
-       
+
+        Setter2F.at(name)(i, j, val);
+
     } else {
         std::cout << "ERROR : INDICES OUT OF RANGE [0:2]"
                 << std::endl;
@@ -1790,9 +1821,9 @@ double RGESolver::GetCoefficient(std::string name,
 
     double val = 0.;
     if ((i <= 2)&&(i >= 0)&&(j <= 2)&&(j >= 0)) {
-       
-            val = Getter2F.at(name)(i, j);
-        
+
+        val = Getter2F.at(name)(i, j);
+
     } else {
         std::cout << "ERROR : INDICES OUT OF RANGE [0:2]"
                 << std::endl;
@@ -1807,9 +1838,9 @@ void RGESolver::SetCoefficient(std::string name, double val,
     if ((i <= 2)&&(i >= 0)&&(j <= 2)&&(j >= 0)
             &&(k <= 2)&&(k >= 0)&&(l <= 2)&&(l >= 0)) {
 
-        
-            Setter4F.at(name)(i, j, k, l, val);
-       
+
+        Setter4F.at(name)(i, j, k, l, val);
+
     } else {
         std::cout << "ERROR : INDICES OUT OF RANGE [0:2]"
                 << std::endl;
@@ -1823,17 +1854,15 @@ double RGESolver::GetCoefficient(std::string name,
     if ((i <= 2)&&(i >= 0)&&(j <= 2)&&(j >= 0)
             &&(k <= 2)&&(k >= 0)&&(l <= 2)&&(l >= 0)) {
 
-       
-            val = Getter4F.at(name)(i, j, k, l);
-        
+
+        val = Getter4F.at(name)(i, j, k, l);
+
     } else {
         std::cout << "ERROR : INDICES OUT OF RANGE [0:2]"
                 << std::endl;
     }
     return val;
 }
-
-
 
 void RGESolver::Reset() {
 

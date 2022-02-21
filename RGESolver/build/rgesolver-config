@@ -1,2 +1,2 @@
 #!/bin/sh
-pkg-config $@ /home/oem/SMEFTRunner/RGESolver/build/RGESolver.pc
+pkg-config $@ /home/oem/EvolutoreStandalone/Programmi/V10_1/RGESolver/build/RGESolver.pc

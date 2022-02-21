@@ -1,8 +1,8 @@
-/home/oem/SMEFTRunner/RGESolver/build/CMakeFiles/install/strip.dir
-/home/oem/SMEFTRunner/RGESolver/build/CMakeFiles/install.dir
-/home/oem/SMEFTRunner/RGESolver/build/CMakeFiles/list_install_components.dir
-/home/oem/SMEFTRunner/RGESolver/build/CMakeFiles/rebuild_cache.dir
-/home/oem/SMEFTRunner/RGESolver/build/CMakeFiles/edit_cache.dir
-/home/oem/SMEFTRunner/RGESolver/build/CMakeFiles/uninstall.dir
-/home/oem/SMEFTRunner/RGESolver/build/CMakeFiles/install/local.dir
-/home/oem/SMEFTRunner/RGESolver/build/CMakeFiles/RGESolver.dir
+/home/oem/EvolutoreStandalone/Programmi/V10_1/RGESolver/build/CMakeFiles/install/strip.dir
+/home/oem/EvolutoreStandalone/Programmi/V10_1/RGESolver/build/CMakeFiles/install.dir
+/home/oem/EvolutoreStandalone/Programmi/V10_1/RGESolver/build/CMakeFiles/list_install_components.dir
+/home/oem/EvolutoreStandalone/Programmi/V10_1/RGESolver/build/CMakeFiles/rebuild_cache.dir
+/home/oem/EvolutoreStandalone/Programmi/V10_1/RGESolver/build/CMakeFiles/edit_cache.dir
+/home/oem/EvolutoreStandalone/Programmi/V10_1/RGESolver/build/CMakeFiles/uninstall.dir
+/home/oem/EvolutoreStandalone/Programmi/V10_1/RGESolver/build/CMakeFiles/install/local.dir
+/home/oem/EvolutoreStandalone/Programmi/V10_1/RGESolver/build/CMakeFiles/RGESolver.dir

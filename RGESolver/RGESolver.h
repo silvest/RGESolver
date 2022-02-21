@@ -17,6 +17,8 @@
 #include <boost/function.hpp>
 //#include <boost/bind/bind.hpp>
 
+#include "src/gslpp.h"
+
 /** 
  * @brief A class that performs renormalization group evolution in the context of the SMEFT
  * @details The class solves the Renormalization Group Equations (RGEs) both numerically and 
@@ -312,8 +314,8 @@ public:
     void Set_step(double step) {
         step_ = step;
     }
-    
-    
+
+
     //Setters for 0F,2F,4F
 
     /**
@@ -407,6 +409,58 @@ public:
     //Evolution from muI to muF with method = 1 (Num), 2 (LL)
 
 
+
+    /**
+     * @brief Generates the initial conditions 
+     * for Standard Model's parameters (gauge couplings,
+     * Yukawa coupling, quartic coupling and Higgs' boson mass).
+     * 
+     * @param mu Scale (in GeV) at which the initial conditions 
+     * are generated. If <tt>mu</tt> is different from
+     * the scale at which the input is given, <tt>RGESolver</tt>
+     * will use the pure SM RGEs to run the parameters 
+     * to the scale <tt>mu</tt>.
+     * @param basis Flavour basis (
+     * <tt>"UP"<tt> or <tt>"DOWN"</tt>)
+     * @param method Method used by <tt>RGESolver</tt>
+     * to run the SM parameters to the scale <tt>mu</tt> 
+     * (<tt>"Numeric"</tt> or <tt>"Leading-Log"</tt>) 
+     * @param inputCKM If set to <tt>true</tt> (default), the input 
+     * for the Yukawa matrices will be generated from the current value 
+     * of the CKM matrix and the masses of the fermions (default).  
+     */
+    void GenerateSMInitialConditions(double mu, std::string basis,
+            std::string method, bool inputCKM = true);
+
+    /**
+     * @brief Same as Evolve(std::string method, double muI, double muF), but only for the SM parameters. 
+     * The user should use this method instead of <tt>Evolve</tt> when 
+     * interested in pure SM running.  
+     * @param method
+     * @param muI
+     * @param muF
+     */
+    void EvolveSMOnly(std::string method, double muI, double muF);
+
+    /**
+     * @brief Setter method for the scale at which the method 
+     * <tt>GenerateSMInitialConditions</tt> takes the input values 
+     * for SM parameters.
+     * @param mu
+     */
+    void SetSMInputScale(double mu) {
+        InputScale_SM = mu;
+    };
+
+    /**
+     * @brief Getter method for the scale at which the method 
+     * <tt>GenerateSMInitialConditions</tt> takes the input values 
+     * for SM parameters.
+     */
+    double GetSMInputScale() {
+        return InputScale_SM;
+    }
+
     /**
      * @brief Saves the current values of parameters in a file
      * @details Currently, only "SLHA" format is implemented
@@ -416,7 +470,7 @@ public:
     void SaveOutputFile(std::string filename,
             std::string format);
 
-    
+
     /**
      * @brief Resets all the parameters to 0.
      * @details 
@@ -425,6 +479,83 @@ public:
 
 
 private:
+
+    //NEW ADD
+    /**
+     * @brief The CKM matrix
+     */
+    gslpp::matrix<gslpp::complex> CKM = gslpp::matrix<gslpp::complex>(3, 3, 0.);
+
+    /**
+     * @brief the scale at which the method 
+     * <tt>GenerateSMInitialConditions</tt> takes the input values 
+     * for SM parameters.
+     */
+    double InputScale_SM = 91.; //GeV
+
+    //CKM parameters
+    /**
+     * @brief @latexonly $\theta_{12}$ @endlatexonly of the CKM matrix (in radians). 
+     * The default value is ??? 
+     */
+    double CKM_theta12 = 0.2;
+    double CKM_theta13 = 0.1;
+    double CKM_theta23 = 0.3;
+    double CKM_delta = 3.14 / 4.;
+
+    /**
+     * @brief @latexonly $\cos \theta_{12}$ @endlatexonly 
+     */
+    double c12;
+    /**
+     * @brief @latexonly $\sin \theta_{12}$ @endlatexonly 
+     */
+    double s12;
+    /**
+     * @brief @latexonly $\cos \theta_{13}$ @endlatexonly 
+     */
+    double c13;
+    /**
+     * @brief @latexonly $\sin \theta_{13}$ @endlatexonly 
+     */
+    double s13;
+    /**
+     * @brief @latexonly $\cos \theta_{23}$ @endlatexonly 
+     */
+    double c23;
+    /**
+     * @brief @latexonly $\sin \theta_{23}$ @endlatexonly 
+     */
+    double s23;
+
+    
+    /**
+     * @brief @latexonly $m_u$ @endlatexonly, the mass of up quark in GeV 
+     * (default value ?????).
+     */
+    double mu = 0.002;
+    double mc = 1.2;
+    double mt = 170.;
+
+    double md = 0.006;
+    double ms = 0.05;
+    double mb = 5.2;
+
+    double mel = 0.0005;
+    double mmu = 0.100;
+    double mtau = 1.2;
+
+    void GoToBasisSMOnly(std::string basis);
+    //void GoToBasis(std::string basis);
+
+    static int funcSMOnly(double logmu, const double y[],
+            double f[], void* params);
+    void ExtractParametersFromCKM();
+    void UpdateCKM();
+    void InitSMOnly();
+    void UpdateSMOnly();
+    void FromMassesToYukawas(std::string basis);
+
 
     /**
      * @brief Inserts the initial values of the parameters in the array @p x 
@@ -448,6 +579,8 @@ private:
      */
     static int func(double logmu, const double y[],
             double f[], void* params);
+
+
 
     /**@name GSL Objects */
     ///@{ 
@@ -746,10 +879,10 @@ private:
     ///@{
     /** @brief @f$g_1@f$  */
     double g1, /** @brief @f$g_2@f$  */ g2, /**@brief @f$g_3@f$  */ g3,
-    /** @brief @f$m_h ^2 @f$ (Higgs boson mass squared) 
-      @details See https://arxiv.org/pdf/1308.2627.pdf for the normalization */ mh2,
-    /** @brief @f$ \lambda @f$ (Higgs quartic coupling)
-     *  @details See https://arxiv.org/pdf/1308.2627.pdf for the normalization  */ lambda;
+            /** @brief @f$m_h ^2 @f$ (Higgs boson mass squared) 
+              @details See https://arxiv.org/pdf/1308.2627.pdf for the normalization */ mh2 = 126. * 126.,
+            /** @brief @f$ \lambda @f$ (Higgs quartic coupling)
+             *  @details See https://arxiv.org/pdf/1308.2627.pdf for the normalization  */ lambda = 0.2;
     double yuR[3][3], yuI[3][3], ydR[3][3],
     ydI[3][3], yeR[3][3], yeI[3][3];
     ///@}

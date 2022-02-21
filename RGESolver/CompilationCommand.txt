@@ -1,0 +1,4 @@
+src/Expanded.cpp src/gslpp_complex.cpp src/gslpp_matrix_complex.cpp src/gslpp_matrix_double.cpp src/gslpp_rgerunner.cpp src/gslpp_special_functions.cpp src/gslpp_vector_complex.cpp src/gslpp_vector_double.cpp
+
+g++ -Wall -o app TestingNewFeatures.cpp RGESolver.cc src/Expanded.cpp src/gslpp_complex.cpp src/gslpp_matrix_complex.cpp src/gslpp_matrix_double.cpp src/gslpp_rgerunner.cpp src/gslpp_special_functions.cpp src/gslpp_vector_complex.cpp src/gslpp_vector_double.cpp -Wall -lm -lgsl -lgslcblas 
+
