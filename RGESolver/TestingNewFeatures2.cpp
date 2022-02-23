@@ -11,6 +11,17 @@ int main(int argc, char **argv) {
 
 
 
+    //[xxx0] ok
+    //[xx00] ok
+    //[x0x0] ok
+    //[0xx0] ok
+
+
+    //[xxxx] ok
+    //[xx0x] not ok
+    //[x0xx] not ok
+    //[0xxx] ok
+
 
 
     S.SetCoefficient("g3", 1.2);
@@ -22,10 +33,10 @@ int main(int argc, char **argv) {
 
 
 
-    S.SetCoefficient("CKM_theta12",1.);
-    S.SetCoefficient("CKM_theta13", 1.);
-    S.SetCoefficient("CKM_theta23", 1.);
-    S.SetCoefficient("CKM_delta",0.35);
+    S.SetCoefficient("CKM_theta12", 0.6);
+    S.SetCoefficient("CKM_theta13", 0.5);
+    S.SetCoefficient("CKM_theta23", 0.2);
+    S.SetCoefficient("CKM_delta", 1.);
     cout << "Angles and phase (input): "
             << S.GetCoefficient("CKM_theta12") << "\t"
             << S.GetCoefficient("CKM_theta13") << "\t"
@@ -63,5 +74,27 @@ int main(int argc, char **argv) {
         }
         cout << " " << endl;
     }
+    cout << "\n\n----------------------\n\n" << endl;
+
+
+    RGESolver S3;
+
+    double L = 10000.;
+    double L2 = L*L;
+    S3.SetCoefficient("CG", 1. / L2);
+    S3.SetCoefficient("g3", 1.4);
+    cout << "CG,g3 (after setting) " << S3.GetCoefficient("CG")
+            << ",\t" << S3.GetCoefficient("g3")
+            << ",\t" << endl;
+    S3.Evolve("Leading-Log", S3.GetSMInputScale(), L);
+    cout << "CG,g3 (after evolution) " << S3.GetCoefficient("CG")
+            << ",\t" << S3.GetCoefficient("g3")
+            << ",\t" << endl;
+    S3.Reset();
+    cout << "CG,g3 (after reset) " << S3.GetCoefficient("CG")
+            << ",\t" << S3.GetCoefficient("g3")
+            << ",\t" << endl;
+
+
     return 0;
 }

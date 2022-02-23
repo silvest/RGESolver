@@ -28,6 +28,22 @@ void \mbox{\hyperlink{classRGESolver_a25286cb7bd18f41e5d631a9a14be1cbf}{Set\+\_\
 \begin{DoxyCompactList}\small\item\em Setter for the absolute error used in the numerical integration. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_a51938deb00fbca684c8e4e5b10a239ad}{Set\+\_\+step}} (double \mbox{\hyperlink{classRGESolver_a3c47c6eedf33555875b32fda5166748b}{step}})
 \begin{DoxyCompactList}\small\item\em Setter for the step used in the numerical integration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGESolver_aa957597526897446c87dc2524d6a1c29}{Set\+C\+K\+M\+Theta12}} (double val)
+\begin{DoxyCompactList}\small\item\em Setter function for the C\+KM matrix angle  $\theta_{12}$. The assignation is completed only if  $\theta_{12}\in [0,\frac{\pi}{2}]$. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGESolver_a856a9f22c86a6a7a708ba7400bbd28e3}{Set\+C\+K\+M\+Theta13}} (double val)
+\begin{DoxyCompactList}\small\item\em Setter function for the C\+KM matrix angle  $\theta_{13}$. The assignation is completed only if  $\theta_{13}\in [0,\frac{\pi}{2}]$. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGESolver_a7918a8bfb212f91e1f095bd76990b319}{Set\+C\+K\+M\+Theta23}} (double val)
+\begin{DoxyCompactList}\small\item\em Setter function for the C\+KM matrix angle  $\theta_{23}$. The assignation is completed only if  $\theta_{23}\in [0,\frac{\pi}{2}]$. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGESolver_a74d1c5b7633de682a376204d1788b794}{Set\+C\+K\+M\+Phase}} (double val)
+\begin{DoxyCompactList}\small\item\em Setter function for the C\+KM matrix phase  $\delta$. The assignation is completed only if  $\delta\in (-\pi,\pi]$. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classRGESolver_a3077b1c4ac7850c581362ebe5aa8dfc7}{Get\+C\+K\+M\+Theta12}} ()
+\begin{DoxyCompactList}\small\item\em Getter function for the C\+KM matrix angle  $\theta_{12}$. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classRGESolver_abbc259bc35d72588fc52d83fa7005203}{Get\+C\+K\+M\+Theta13}} ()
+\begin{DoxyCompactList}\small\item\em Getter function for the C\+KM matrix angle  $\theta_{13}$. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classRGESolver_a727a80e20a43053a3e815f9b97b2eb35}{Get\+C\+K\+M\+Theta23}} ()
+\begin{DoxyCompactList}\small\item\em Getter function for the C\+KM matrix angle  $\theta_{23}$. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classRGESolver_a891564c063a942fbd01830b30fa8e6e1}{Get\+C\+K\+M\+Phase}} ()
+\begin{DoxyCompactList}\small\item\em Getter function for the C\+KM matrix delta  $\delta$. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_adc2b8a9a10216ec5285569c8f24cbed2}{Set\+Coefficient}} (std\+::string name, double val)
 \begin{DoxyCompactList}\small\item\em Setter function for scalar/0F parameters (no flavour indices). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_aec5d994dae1dccb52ece9e51c28b9f2e}{Set\+Coefficient}} (std\+::string name, double val, int i, int j)
@@ -54,7 +70,7 @@ double \mbox{\hyperlink{classRGESolver_a9b828a6908004f6680e519b393411f03}{Get\+S
 void \mbox{\hyperlink{classRGESolver_ab6a813bff78d9278d3b875ea9c2f5324}{Save\+Output\+File}} (std\+::string filename, std\+::string format)
 \begin{DoxyCompactList}\small\item\em Saves the current values of parameters in a file. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_a98473c7d53e598bfef878106a3715948}{Reset}} ()
-\begin{DoxyCompactList}\small\item\em Resets all the parameters to 0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Resets all the S\+M\+E\+FT coefficients to 0 and the SM parameters to their default value. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -69,6 +85,8 @@ void \mbox{\hyperlink{classRGESolver_ae4627f81f08d017572407eb51ee83a7c}{Init\+S\
 void \mbox{\hyperlink{classRGESolver_ac2268bf1e9a36b09b818d0737390e643}{Update\+S\+M\+Only}} ()
 \item 
 void \mbox{\hyperlink{classRGESolver_af03c5852b7b19c9f8b20f8d865f2392b}{From\+Masses\+To\+Yukawas}} (std\+::string basis)
+\item 
+void \mbox{\hyperlink{classRGESolver_a83e0224e1b2afd35dd439b17fffddb0a}{Set\+S\+M\+Default\+Input}} ()
 \item 
 void \mbox{\hyperlink{classRGESolver_ad60adabd8295f25738dc739d6c688bf2}{Init}} ()
 \begin{DoxyCompactList}\small\item\em Inserts the initial values of the parameters in the array {\ttfamily x}. \end{DoxyCompactList}\item 
@@ -144,15 +162,15 @@ static void \mbox{\hyperlink{classRGESolver_a3031df409297b5a63462fcaae6d263e8}{W
 \item 
 gslpp\+::matrix$<$ gslpp\+::complex $>$ \mbox{\hyperlink{classRGESolver_acec43c9189eb6b72dd0a2f32c30145a0}{C\+KM}} = gslpp\+::matrix$<$gslpp\+::complex$>$(3, 3, 0.)
 \begin{DoxyCompactList}\small\item\em The C\+KM matrix. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classRGESolver_ae8be71f3774f5d0d081ed16676b3b6ec}{Input\+Scale\+\_\+\+SM}} = 91.
+double \mbox{\hyperlink{classRGESolver_ae8be71f3774f5d0d081ed16676b3b6ec}{Input\+Scale\+\_\+\+SM}}
 \begin{DoxyCompactList}\small\item\em the scale at which the method {\ttfamily Generate\+S\+M\+Initial\+Conditions} takes the input values for SM parameters. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classRGESolver_a9d7bf886dc2fd8fee432d9ddfe6cd799}{C\+K\+M\+\_\+theta12}} = 0.\+2
+double \mbox{\hyperlink{classRGESolver_a9d7bf886dc2fd8fee432d9ddfe6cd799}{C\+K\+M\+\_\+theta12}}
 \begin{DoxyCompactList}\small\item\em  $\theta_{12}$  of the C\+KM matrix (in radians). The default value is ??? \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classRGESolver_ac92970b6e872a95df86b06fcc60c3d0b}{C\+K\+M\+\_\+theta13}} = 0.\+1
+double \mbox{\hyperlink{classRGESolver_ac92970b6e872a95df86b06fcc60c3d0b}{C\+K\+M\+\_\+theta13}}
 \item 
-double \mbox{\hyperlink{classRGESolver_a8c2071e5d821ccb3a9ed5d12780619f9}{C\+K\+M\+\_\+theta23}} = 0.\+3
+double \mbox{\hyperlink{classRGESolver_a8c2071e5d821ccb3a9ed5d12780619f9}{C\+K\+M\+\_\+theta23}}
 \item 
-double \mbox{\hyperlink{classRGESolver_af55aa369d8f118e5f4c68ab7422bad24}{C\+K\+M\+\_\+delta}} = 3.\+14 / 4.
+double \mbox{\hyperlink{classRGESolver_af55aa369d8f118e5f4c68ab7422bad24}{C\+K\+M\+\_\+delta}}
 \item 
 double \mbox{\hyperlink{classRGESolver_ae6700da6d02a117ed917d923dd8b4a2e}{c12}}
 \begin{DoxyCompactList}\small\item\em  $\cos \theta_{12}$  \end{DoxyCompactList}\item 
@@ -166,23 +184,23 @@ double \mbox{\hyperlink{classRGESolver_a8c80def5742e12c2e766fd6141567963}{c23}}
 \begin{DoxyCompactList}\small\item\em  $\cos \theta_{23}$  \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classRGESolver_a3a5f0b347590837a9f50dc06bf31c2ed}{s23}}
 \begin{DoxyCompactList}\small\item\em  $\sin \theta_{23}$  \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classRGESolver_a9e7af455e38bd784ce3ed59df9325ac0}{mu}} = 0.\+002
+double \mbox{\hyperlink{classRGESolver_a9e7af455e38bd784ce3ed59df9325ac0}{mu}}
 \begin{DoxyCompactList}\small\item\em  $m_u$ , the mass of up quark in GeV (default value ?????). \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classRGESolver_aa00ab0d33322ed818c91ce272cfa29ff}{mc}} = 1.\+2
+double \mbox{\hyperlink{classRGESolver_aa00ab0d33322ed818c91ce272cfa29ff}{mc}}
 \item 
-double \mbox{\hyperlink{classRGESolver_ad0c7c94e1f9078e973147e43ce1b92e6}{mt}} = 170.
+double \mbox{\hyperlink{classRGESolver_ad0c7c94e1f9078e973147e43ce1b92e6}{mt}}
 \item 
-double \mbox{\hyperlink{classRGESolver_aa69bab989592547a53f65e078c5c0db9}{md}} = 0.\+006
+double \mbox{\hyperlink{classRGESolver_aa69bab989592547a53f65e078c5c0db9}{md}}
 \item 
-double \mbox{\hyperlink{classRGESolver_a417ad179a6720990af22906952ff6b54}{ms}} = 0.\+05
+double \mbox{\hyperlink{classRGESolver_a417ad179a6720990af22906952ff6b54}{ms}}
 \item 
-double \mbox{\hyperlink{classRGESolver_a6f3a51d3368b1d2cd920e8731ce20c7a}{mb}} = 5.\+2
+double \mbox{\hyperlink{classRGESolver_a6f3a51d3368b1d2cd920e8731ce20c7a}{mb}}
 \item 
-double \mbox{\hyperlink{classRGESolver_a76ed93612dd7c5723290b054528f1112}{mel}} = 0.\+0005
+double \mbox{\hyperlink{classRGESolver_a76ed93612dd7c5723290b054528f1112}{mel}}
 \item 
-double \mbox{\hyperlink{classRGESolver_a81a90502959328b6647e2ad923126e23}{mmu}} = 0.\+100
+double \mbox{\hyperlink{classRGESolver_a81a90502959328b6647e2ad923126e23}{mmu}}
 \item 
-double \mbox{\hyperlink{classRGESolver_a30e83f1a2ebd7d6500176d4a7be5901c}{mtau}} = 1.\+2
+double \mbox{\hyperlink{classRGESolver_a30e83f1a2ebd7d6500176d4a7be5901c}{mtau}}
 \end{DoxyCompactItemize}
 \begin{Indent}\textbf{ G\+SL Objects}\par
 \begin{DoxyCompactItemize}
@@ -216,9 +234,9 @@ double \mbox{\hyperlink{classRGESolver_ac3a32031be25f690295c87520e866f25}{g2}}
 double \mbox{\hyperlink{classRGESolver_a665922dc204da17e4f0841ed3b5db7e7}{g3}}
 \begin{DoxyCompactList}\small\item\em $g_3$ ~\newline
  \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classRGESolver_acf5407098aa2901f6cd9e6fad71e151f}{mh2}} = 126. $\ast$ 126.
+double \mbox{\hyperlink{classRGESolver_acf5407098aa2901f6cd9e6fad71e151f}{mh2}}
 \begin{DoxyCompactList}\small\item\em $m_h ^2 $ (Higgs boson mass squared) \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classRGESolver_a99881aad35fb2f052b8050e3f651276b}{lambda}} = 0.\+2
+double \mbox{\hyperlink{classRGESolver_a99881aad35fb2f052b8050e3f651276b}{lambda}}
 \begin{DoxyCompactList}\small\item\em $ \lambda $ (Higgs quartic coupling) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classRGESolver_a2d59694602353a9a3453d36524091ecb}{yuR}} \mbox{[}3\mbox{]}\mbox{[}3\mbox{]}
 \item 
@@ -1046,6 +1064,58 @@ Generates the initial conditions for Standard Model\textquotesingle{}s parameter
  }}\\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classRGESolver_a891564c063a942fbd01830b30fa8e6e1}\label{classRGESolver_a891564c063a942fbd01830b30fa8e6e1}} 
+\index{RGESolver@{RGESolver}!GetCKMPhase@{GetCKMPhase}}
+\index{GetCKMPhase@{GetCKMPhase}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCKMPhase()}{GetCKMPhase()}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+Get\+C\+K\+M\+Phase (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Getter function for the C\+KM matrix delta  $\delta$. 
+
+\begin{DoxyReturn}{Returns}
+ $\delta$. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRGESolver_a3077b1c4ac7850c581362ebe5aa8dfc7}\label{classRGESolver_a3077b1c4ac7850c581362ebe5aa8dfc7}} 
+\index{RGESolver@{RGESolver}!GetCKMTheta12@{GetCKMTheta12}}
+\index{GetCKMTheta12@{GetCKMTheta12}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCKMTheta12()}{GetCKMTheta12()}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+Get\+C\+K\+M\+Theta12 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Getter function for the C\+KM matrix angle  $\theta_{12}$. 
+
+\begin{DoxyReturn}{Returns}
+ $\theta_{12}$. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRGESolver_abbc259bc35d72588fc52d83fa7005203}\label{classRGESolver_abbc259bc35d72588fc52d83fa7005203}} 
+\index{RGESolver@{RGESolver}!GetCKMTheta13@{GetCKMTheta13}}
+\index{GetCKMTheta13@{GetCKMTheta13}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCKMTheta13()}{GetCKMTheta13()}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+Get\+C\+K\+M\+Theta13 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Getter function for the C\+KM matrix angle  $\theta_{13}$. 
+
+\begin{DoxyReturn}{Returns}
+ $\theta_{13}$. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRGESolver_a727a80e20a43053a3e815f9b97b2eb35}\label{classRGESolver_a727a80e20a43053a3e815f9b97b2eb35}} 
+\index{RGESolver@{RGESolver}!GetCKMTheta23@{GetCKMTheta23}}
+\index{GetCKMTheta23@{GetCKMTheta23}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCKMTheta23()}{GetCKMTheta23()}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+Get\+C\+K\+M\+Theta23 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Getter function for the C\+KM matrix angle  $\theta_{23}$. 
+
+\begin{DoxyReturn}{Returns}
+ $\theta_{23}$. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classRGESolver_a23d5d847021421bc8a9ba03412d2674e}\label{classRGESolver_a23d5d847021421bc8a9ba03412d2674e}} 
 \index{RGESolver@{RGESolver}!GetCoefficient@{GetCoefficient}}
 \index{GetCoefficient@{GetCoefficient}!RGESolver@{RGESolver}}
@@ -1179,7 +1249,7 @@ This function is used only in the function {\ttfamily Save\+Output\+File}. Curre
 
 
 
-Resets all the parameters to 0. 
+Resets all the S\+M\+E\+FT coefficients to 0 and the SM parameters to their default value. 
 
 \mbox{\Hypertarget{classRGESolver_ab6a813bff78d9278d3b875ea9c2f5324}\label{classRGESolver_ab6a813bff78d9278d3b875ea9c2f5324}} 
 \index{RGESolver@{RGESolver}!SaveOutputFile@{SaveOutputFile}}
@@ -1228,6 +1298,66 @@ Setter for the relative error used in the numerical integration.
 
 Setter for the step used in the numerical integration. 
 
+\mbox{\Hypertarget{classRGESolver_a74d1c5b7633de682a376204d1788b794}\label{classRGESolver_a74d1c5b7633de682a376204d1788b794}} 
+\index{RGESolver@{RGESolver}!SetCKMPhase@{SetCKMPhase}}
+\index{SetCKMPhase@{SetCKMPhase}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{SetCKMPhase()}{SetCKMPhase()}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Set\+C\+K\+M\+Phase (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+
+
+Setter function for the C\+KM matrix phase  $\delta$. The assignation is completed only if  $\delta\in (-\pi,\pi]$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRGESolver_aa957597526897446c87dc2524d6a1c29}\label{classRGESolver_aa957597526897446c87dc2524d6a1c29}} 
+\index{RGESolver@{RGESolver}!SetCKMTheta12@{SetCKMTheta12}}
+\index{SetCKMTheta12@{SetCKMTheta12}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{SetCKMTheta12()}{SetCKMTheta12()}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Set\+C\+K\+M\+Theta12 (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+
+
+Setter function for the C\+KM matrix angle  $\theta_{12}$. The assignation is completed only if  $\theta_{12}\in [0,\frac{\pi}{2}]$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRGESolver_a856a9f22c86a6a7a708ba7400bbd28e3}\label{classRGESolver_a856a9f22c86a6a7a708ba7400bbd28e3}} 
+\index{RGESolver@{RGESolver}!SetCKMTheta13@{SetCKMTheta13}}
+\index{SetCKMTheta13@{SetCKMTheta13}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{SetCKMTheta13()}{SetCKMTheta13()}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Set\+C\+K\+M\+Theta13 (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+
+
+Setter function for the C\+KM matrix angle  $\theta_{13}$. The assignation is completed only if  $\theta_{13}\in [0,\frac{\pi}{2}]$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRGESolver_a7918a8bfb212f91e1f095bd76990b319}\label{classRGESolver_a7918a8bfb212f91e1f095bd76990b319}} 
+\index{RGESolver@{RGESolver}!SetCKMTheta23@{SetCKMTheta23}}
+\index{SetCKMTheta23@{SetCKMTheta23}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{SetCKMTheta23()}{SetCKMTheta23()}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Set\+C\+K\+M\+Theta23 (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+
+
+Setter function for the C\+KM matrix angle  $\theta_{23}$. The assignation is completed only if  $\theta_{23}\in [0,\frac{\pi}{2}]$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classRGESolver_adc2b8a9a10216ec5285569c8f24cbed2}\label{classRGESolver_adc2b8a9a10216ec5285569c8f24cbed2}} 
 \index{RGESolver@{RGESolver}!SetCoefficient@{SetCoefficient}}
 \index{SetCoefficient@{SetCoefficient}!RGESolver@{RGESolver}}
@@ -1293,6 +1423,12 @@ If the parameter name does not match with any of the parameters or if at least o
 {\em l} & fourth flavour index \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classRGESolver_a83e0224e1b2afd35dd439b17fffddb0a}\label{classRGESolver_a83e0224e1b2afd35dd439b17fffddb0a}} 
+\index{RGESolver@{RGESolver}!SetSMDefaultInput@{SetSMDefaultInput}}
+\index{SetSMDefaultInput@{SetSMDefaultInput}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{SetSMDefaultInput()}{SetSMDefaultInput()}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Set\+S\+M\+Default\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 \mbox{\Hypertarget{classRGESolver_ad47f4773fa7eaf4bb9bc3cb15de5b2c2}\label{classRGESolver_ad47f4773fa7eaf4bb9bc3cb15de5b2c2}} 
 \index{RGESolver@{RGESolver}!SetSMInputScale@{SetSMInputScale}}
 \index{SetSMInputScale@{SetSMInputScale}!RGESolver@{RGESolver}}
@@ -2111,13 +2247,13 @@ The C\+KM matrix.
 \index{RGESolver@{RGESolver}!CKM\_delta@{CKM\_delta}}
 \index{CKM\_delta@{CKM\_delta}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{CKM\_delta}{CKM\_delta}}
-{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+C\+K\+M\+\_\+delta = 3.\+14 / 4.\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+C\+K\+M\+\_\+delta\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\Hypertarget{classRGESolver_a9d7bf886dc2fd8fee432d9ddfe6cd799}\label{classRGESolver_a9d7bf886dc2fd8fee432d9ddfe6cd799}} 
 \index{RGESolver@{RGESolver}!CKM\_theta12@{CKM\_theta12}}
 \index{CKM\_theta12@{CKM\_theta12}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{CKM\_theta12}{CKM\_theta12}}
-{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+C\+K\+M\+\_\+theta12 = 0.\+2\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+C\+K\+M\+\_\+theta12\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -2127,13 +2263,13 @@ The C\+KM matrix.
 \index{RGESolver@{RGESolver}!CKM\_theta13@{CKM\_theta13}}
 \index{CKM\_theta13@{CKM\_theta13}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{CKM\_theta13}{CKM\_theta13}}
-{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+C\+K\+M\+\_\+theta13 = 0.\+1\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+C\+K\+M\+\_\+theta13\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\Hypertarget{classRGESolver_a8c2071e5d821ccb3a9ed5d12780619f9}\label{classRGESolver_a8c2071e5d821ccb3a9ed5d12780619f9}} 
 \index{RGESolver@{RGESolver}!CKM\_theta23@{CKM\_theta23}}
 \index{CKM\_theta23@{CKM\_theta23}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{CKM\_theta23}{CKM\_theta23}}
-{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+C\+K\+M\+\_\+theta23 = 0.\+3\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+C\+K\+M\+\_\+theta23\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\Hypertarget{classRGESolver_adb58557c5b65d576d0004c25358aed5e}\label{classRGESolver_adb58557c5b65d576d0004c25358aed5e}} 
 \index{RGESolver@{RGESolver}!cldI@{cldI}}
@@ -2952,7 +3088,7 @@ $g_3$ ~\newline
 \index{RGESolver@{RGESolver}!InputScale\_SM@{InputScale\_SM}}
 \index{InputScale\_SM@{InputScale\_SM}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{InputScale\_SM}{InputScale\_SM}}
-{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+Input\+Scale\+\_\+\+SM = 91.\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+Input\+Scale\+\_\+\+SM\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -2962,7 +3098,7 @@ the scale at which the method {\ttfamily Generate\+S\+M\+Initial\+Conditions} ta
 \index{RGESolver@{RGESolver}!lambda@{lambda}}
 \index{lambda@{lambda}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{lambda}{lambda}}
-{\footnotesize\ttfamily double R\+G\+E\+Solver\+::lambda = 0.\+2\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::lambda\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -2973,31 +3109,31 @@ See \href{https://arxiv.org/pdf/1308.2627.pdf}{\texttt{ https\+://arxiv.\+org/pd
 \index{RGESolver@{RGESolver}!mb@{mb}}
 \index{mb@{mb}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{mb}{mb}}
-{\footnotesize\ttfamily double R\+G\+E\+Solver\+::mb = 5.\+2\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::mb\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\Hypertarget{classRGESolver_aa00ab0d33322ed818c91ce272cfa29ff}\label{classRGESolver_aa00ab0d33322ed818c91ce272cfa29ff}} 
 \index{RGESolver@{RGESolver}!mc@{mc}}
 \index{mc@{mc}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{mc}{mc}}
-{\footnotesize\ttfamily double R\+G\+E\+Solver\+::mc = 1.\+2\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::mc\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\Hypertarget{classRGESolver_aa69bab989592547a53f65e078c5c0db9}\label{classRGESolver_aa69bab989592547a53f65e078c5c0db9}} 
 \index{RGESolver@{RGESolver}!md@{md}}
 \index{md@{md}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{md}{md}}
-{\footnotesize\ttfamily double R\+G\+E\+Solver\+::md = 0.\+006\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::md\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\Hypertarget{classRGESolver_a76ed93612dd7c5723290b054528f1112}\label{classRGESolver_a76ed93612dd7c5723290b054528f1112}} 
 \index{RGESolver@{RGESolver}!mel@{mel}}
 \index{mel@{mel}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{mel}{mel}}
-{\footnotesize\ttfamily double R\+G\+E\+Solver\+::mel = 0.\+0005\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::mel\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\Hypertarget{classRGESolver_acf5407098aa2901f6cd9e6fad71e151f}\label{classRGESolver_acf5407098aa2901f6cd9e6fad71e151f}} 
 \index{RGESolver@{RGESolver}!mh2@{mh2}}
 \index{mh2@{mh2}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{mh2}{mh2}}
-{\footnotesize\ttfamily double R\+G\+E\+Solver\+::mh2 = 126. $\ast$ 126.\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::mh2\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -3007,31 +3143,31 @@ See \href{https://arxiv.org/pdf/1308.2627.pdf}{\texttt{ https\+://arxiv.\+org/pd
 \index{RGESolver@{RGESolver}!mmu@{mmu}}
 \index{mmu@{mmu}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{mmu}{mmu}}
-{\footnotesize\ttfamily double R\+G\+E\+Solver\+::mmu = 0.\+100\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::mmu\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\Hypertarget{classRGESolver_a417ad179a6720990af22906952ff6b54}\label{classRGESolver_a417ad179a6720990af22906952ff6b54}} 
 \index{RGESolver@{RGESolver}!ms@{ms}}
 \index{ms@{ms}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{ms}{ms}}
-{\footnotesize\ttfamily double R\+G\+E\+Solver\+::ms = 0.\+05\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::ms\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\Hypertarget{classRGESolver_ad0c7c94e1f9078e973147e43ce1b92e6}\label{classRGESolver_ad0c7c94e1f9078e973147e43ce1b92e6}} 
 \index{RGESolver@{RGESolver}!mt@{mt}}
 \index{mt@{mt}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{mt}{mt}}
-{\footnotesize\ttfamily double R\+G\+E\+Solver\+::mt = 170.\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::mt\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\Hypertarget{classRGESolver_a30e83f1a2ebd7d6500176d4a7be5901c}\label{classRGESolver_a30e83f1a2ebd7d6500176d4a7be5901c}} 
 \index{RGESolver@{RGESolver}!mtau@{mtau}}
 \index{mtau@{mtau}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{mtau}{mtau}}
-{\footnotesize\ttfamily double R\+G\+E\+Solver\+::mtau = 1.\+2\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::mtau\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\Hypertarget{classRGESolver_a9e7af455e38bd784ce3ed59df9325ac0}\label{classRGESolver_a9e7af455e38bd784ce3ed59df9325ac0}} 
 \index{RGESolver@{RGESolver}!mu@{mu}}
 \index{mu@{mu}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{mu}{mu}}
-{\footnotesize\ttfamily double R\+G\+E\+Solver\+::mu = 0.\+002\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::mu\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

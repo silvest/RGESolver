@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.8.3)  21 FEB 2022 10:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.8.3)  23 FEB 2022 17:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -909,78 +909,74 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
 (Font)              scaled to size 8.09995pt on input line 16.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 44.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 32.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 6.29996pt on input line 44.
-LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <9> not available
-(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 46.
-LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
-(Font)              scaled to size 8.09995pt on input line 46.
+(Font)              scaled to size 6.29996pt on input line 32.
  [5]
+LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <9> not available
+(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 62.
+LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
+(Font)              scaled to size 8.09995pt on input line 62.
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <9> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 48.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 64.
 
-Underfull \hbox (badness 10000) in paragraph at lines 48--49
+Underfull \hbox (badness 10000) in paragraph at lines 64--65
 
  []
 
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 51.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 67.
+[6]
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 85.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 103.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 8.99994pt on input line 85.
-[6] [7]
-Underfull \hbox (badness 10000) in paragraph at lines 211--212
+(Font)              scaled to size 8.99994pt on input line 103.
+ [7]
+Underfull \hbox (badness 10000) in paragraph at lines 229--230
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 214--215
+Underfull \hbox (badness 10000) in paragraph at lines 232--233
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 217--218
+Underfull \hbox (badness 10000) in paragraph at lines 235--236
 
  []
 
 LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <10> not available
-(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 237.
+(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 255.
 LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
-(Font)              scaled to size 8.99994pt on input line 237.
+(Font)              scaled to size 8.99994pt on input line 255.
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <10> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 237.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 255.
 
-Underfull \hbox (badness 10000) in paragraph at lines 237--238
+Underfull \hbox (badness 10000) in paragraph at lines 255--256
 
  []
 
 [8] [9] [10] [11]
-Underfull \hbox (badness 10000) in paragraph at lines 463--465
+Underfull \hbox (badness 10000) in paragraph at lines 481--483
 
  []
 
 [12] [13] [14]
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 8.99994pt on input line 679.
+(Font)              scaled to size 8.99994pt on input line 697.
 
-Underfull \hbox (badness 10000) detected at line 679
+Underfull \hbox (badness 10000) detected at line 697
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 682
+Underfull \hbox (badness 10000) detected at line 700
 [][][]
  []
 
 [15]
-Overfull \hbox (19.01468pt too wide) in paragraph at lines 756--809
- [][] 
- []
-
-
-Overfull \hbox (49.85115pt too wide) in paragraph at lines 822--890
+Overfull \hbox (19.01468pt too wide) in paragraph at lines 774--827
  [][] 
  []
 
@@ -988,29 +984,60 @@ Overfull \hbox (49.85115pt too wide) in paragraph at lines 822--890
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [16]
-[17]
-LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 949.
-
-Underfull \hbox (badness 10000) in paragraph at lines 973--974
-
+Overfull \hbox (49.85115pt too wide) in paragraph at lines 840--908
+ [][] 
  []
 
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [17]
 [18]
-Underfull \hbox (badness 10000) detected at line 1018
-[][][]
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 967.
+
+Underfull \hbox (badness 10000) in paragraph at lines 991--992
+
  []
 
 [19]
-LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 7.19995pt on input line 1052.
- [20]
-Underfull \hbox (badness 10000) detected at line 1064
+Underfull \hbox (badness 10000) detected at line 1036
+[][][]
+ []
+
+[20]
+Underfull \hbox (badness 10000) detected at line 1077
+[][][]
+ []
+
+[21]
+Underfull \hbox (badness 10000) detected at line 1090
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 1087
+Underfull \hbox (badness 10000) detected at line 1103
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 1116
+[][][]
+ []
+
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 7.19995pt on input line 1122.
+
+Overfull \vbox (4.88675pt too high) has occurred while \output is active []
+
+
+[22]
+Underfull \hbox (badness 10000) detected at line 1134
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 1157
 [][][]
  []
 
@@ -1018,105 +1045,109 @@ Underfull \hbox (badness 10000) detected at line 1087
 Overfull \vbox (22.07965pt too high) has occurred while \output is active []
 
 
-[21]
-Underfull \hbox (badness 10000) detected at line 1114
+[23]
+Underfull \hbox (badness 10000) detected at line 1184
 [][][]
  []
 
-[22] [23] [24] [25] [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36]
-[37] [38] [39] [40]
-Overfull \hbox (16.5369pt too wide) in paragraph at lines 2104--2105
+[24] [25] [26]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [27]
+[28] [29] [30] [31] [32] [33] [34] [35] [36] [37] [38] [39] [40] [41] [42]
+[43]
+Overfull \hbox (16.5369pt too wide) in paragraph at lines 2240--2241
 \T1/pcr/m/n/8 gslpp[]::matrix$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 gslpp[]::complex$
 \OML/cmm/m/it/8 >$ \T1/pcr/m/n/8 R[]G[]E[]Solver[]::[]C[]KM = gslpp[]::matrix$\
 OML/cmm/m/it/8 <$\T1/pcr/m/n/8 gslpp[]::complex$\OML/cmm/m/it/8 >$\T1/pcr/m/n/8
  (3, 3, 0.) [private] 
  []
 
-[41] [42] [43] [44] [45] [46] [47] [48] [49] [50]
-Underfull \hbox (badness 10000) in paragraph at lines 2723--2724
+[44] [45] [46] [47] [48] [49] [50] [51] [52] [53]
+Underfull \hbox (badness 10000) in paragraph at lines 2859--2860
 \T1/pcr/m/n/8 const int R[]G[]E[]Solver[]::dim = ([] + [] + [] + [] + [] + [] +
  [] + [] + [] + [] +
  []
 
-[51] [52] [53]
-Underfull \hbox (badness 10000) in paragraph at lines 2855--2856
+[54] [55] [56]
+Underfull \hbox (badness 10000) in paragraph at lines 2991--2992
 \T1/pcr/m/n/8 const int R[]G[]E[]Solver[]::[]E8[]_[][]R[]R[]RR = 4 $\OMS/cmsy/m
 /n/8 ^^C$ \T1/pcr/m/n/8 ([] + []) + 2 $\OMS/cmsy/m/n/8 ^^C$ \T1/pcr/m/n/8 ([] +
  []) + 1 $\OMS/cmsy/m/n/8 ^^C$ \T1/pcr/m/n/8 ([] + [])
  []
 
-[54]
-Underfull \hbox (badness 10000) in paragraph at lines 2914--2915
+[57]
+Underfull \hbox (badness 10000) in paragraph at lines 3050--3051
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2925--2926
+Underfull \hbox (badness 10000) in paragraph at lines 3061--3062
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2936--2937
+Underfull \hbox (badness 10000) in paragraph at lines 3072--3073
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2943--2944
+Underfull \hbox (badness 10000) in paragraph at lines 3079--3080
 \T1/pcr/m/n/8 std[]::unordered[]_[]map$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 std[]::s
 tring, boost[]::function$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 double(int, int) $\OML
 /cmm/m/it/8 >$ $>$ \T1/pcr/m/n/8 R[]G[]E[]Solver[]::[]Getter2F
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2949--2950
+Underfull \hbox (badness 10000) in paragraph at lines 3085--3086
 \T1/pcr/m/n/8 std[]::unordered[]_[]map$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 std[]::s
 tring, boost[]::function$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 double(int, int, int, 
 int) $\OML/cmm/m/it/8 >$ $>$ \T1/pcr/m/n/8 R[]G[]E[]Solver[]::[]
  []
 
-[55] [56] [57] [58] [59] [60]
-Underfull \hbox (badness 10000) in paragraph at lines 3250--3251
+[58] [59] [60] [61] [62] [63]
+Underfull \hbox (badness 10000) in paragraph at lines 3386--3387
 \T1/pcr/m/n/8 std[]::unordered[]_[]map$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 std[]::s
 tring, boost[]::function$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 void(int, int, double)
  $\OML/cmm/m/it/8 >$ $>$ \T1/pcr/m/n/8 R[]G[]E[]Solver[]::[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3256--3257
+Underfull \hbox (badness 10000) in paragraph at lines 3392--3393
 \T1/pcr/m/n/8 std[]::unordered[]_[]map$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 std[]::s
 tring, boost[]::function$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 void(int, int, int, in
 t, double) $\OML/cmm/m/it/8 >$ $>$ \T1/pcr/m/n/8 R[]G[]E[]
  []
 
-[61] [62] [63] [64] [65] [66] [67] [68]) [69] [70
-
-]
+[64] [65] [66] [67] [68] [69] [70] [71]) [72]
 Chapter 4.
 (./BetaFunction_8cc.tex) (./RGESolver_8cc.tex) (./RGESolver_8h.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--13
 
  []
 
-) (./SettersAndGetters_8cc.tex) (./StaticMembers_8cc.tex) [71] [72
+) (./SettersAndGetters_8cc.tex) (./StaticMembers_8cc.tex) [73
+
+] [74
 
 ]
-(./refman.ind [73
+(./refman.ind [75
 
 
-] [74] [75] [76] [77] [78] [79] [80])
+] [76] [77] [78] [79] [80] [81] [82])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 196.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 196.
  (./refman.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 196.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 196.
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: 2FB28F84D9A6669657F4A10405D52E4F;48887.
+(rerunfilecheck)             Checksum: E1B5FE3840C9D99974F9F1E440FB7F10;50714.
  ) 
 Here is how much of TeX's memory you used:
- 17840 strings out of 481239
- 282442 string characters out of 5920378
- 607920 words of memory out of 5000000
- 32047 multiletter control sequences out of 15000+600000
+ 17886 strings out of 481239
+ 283816 string characters out of 5920378
+ 606663 words of memory out of 5000000
+ 32069 multiletter control sequences out of 15000+600000
  598000 words of font info for 115 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,19n,96p,1290b,663s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1143,10 +1174,10 @@ dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/urw/helvetic/uhvro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
 /wasy-type1/wasy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/wasy-ty
 pe1/wasy7.pfb>
-Output written on refman.pdf (90 pages, 396416 bytes).
+Output written on refman.pdf (92 pages, 404119 bytes).
 PDF statistics:
- 3658 PDF objects out of 4296 (max. 8388607)
- 3502 compressed objects within 36 object streams
- 714 named destinations out of 1000 (max. 500000)
- 2481 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3760 PDF objects out of 4296 (max. 8388607)
+ 3601 compressed objects within 37 object streams
+ 738 named destinations out of 1000 (max. 500000)
+ 2553 words of extra memory for PDF output out of 10000 (max. 10000000)
 

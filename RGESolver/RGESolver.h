@@ -309,11 +309,83 @@ public:
     }
 
     /**
-     * @brief Setter for the step used in the numerical integration
+     * @brief Setter  for the step used in the numerical integration
      */
     void Set_step(double step) {
         step_ = step;
     }
+
+
+    //Ad-hoc setters/getters for the CKM
+    
+    /**
+     * @brief Setter function for the CKM matrix angle 
+     * @latexonly $\theta_{12}$@endlatexonly. 
+     * The assignation is completed only if 
+     * @latexonly $\theta_{12}\in [0,\frac{\pi}{2}]$@endlatexonly
+     * @param val
+     */
+    void SetCKMTheta12(double val);
+    /**
+     * @brief Setter function for the CKM matrix angle 
+     * @latexonly $\theta_{13}$@endlatexonly. 
+     * The assignation is completed only if 
+     * @latexonly $\theta_{13}\in [0,\frac{\pi}{2}]$@endlatexonly
+     * @param val
+     */
+    void SetCKMTheta13(double val);
+    /**
+     * @brief Setter function for the CKM matrix angle 
+     * @latexonly $\theta_{23}$@endlatexonly. 
+     * The assignation is completed only if 
+     * @latexonly $\theta_{23}\in [0,\frac{\pi}{2}]$@endlatexonly
+     * @param val
+     */
+    void SetCKMTheta23(double val);
+
+    /**
+     * @brief Setter function for the CKM matrix phase 
+     * @latexonly $\delta$@endlatexonly. 
+     * The assignation is completed only if 
+     * @latexonly $\delta\in (-\pi,\pi]$@endlatexonly
+     * @param val
+     */
+    void SetCKMPhase(double val);
+
+    
+    
+    /**
+     * @brief Getter function for the CKM matrix angle 
+     * @latexonly $\theta_{12}$@endlatexonly. 
+     * @return @latexonly $\theta_{12}$@endlatexonly. 
+     */
+    double GetCKMTheta12() {
+        return CKM_theta12;
+    };
+/**
+     * @brief Getter function for the CKM matrix angle 
+     * @latexonly $\theta_{13}$@endlatexonly. 
+     * @return @latexonly $\theta_{13}$@endlatexonly. 
+     */
+    double GetCKMTheta13() {
+        return CKM_theta13;
+    };
+/**
+     * @brief Getter function for the CKM matrix angle 
+     * @latexonly $\theta_{23}$@endlatexonly. 
+     * @return @latexonly $\theta_{23}$@endlatexonly. 
+     */
+    double GetCKMTheta23() {
+        return CKM_theta23;
+    };
+/**
+     * @brief Getter function for the CKM matrix phase 
+     * @latexonly $\delta$@endlatexonly. 
+     * @return @latexonly $\delta$@endlatexonly. 
+     */
+    double GetCKMPhase() {
+        return CKM_delta;
+    };
 
 
     //Setters for 0F,2F,4F
@@ -472,7 +544,8 @@ public:
 
 
     /**
-     * @brief Resets all the parameters to 0.
+     * @brief Resets all the SMEFT coefficients to 0 and the 
+     * SM parameters to their default value.
      * @details 
      */
     void Reset();
@@ -491,17 +564,17 @@ private:
      * <tt>GenerateSMInitialConditions</tt> takes the input values 
      * for SM parameters.
      */
-    double InputScale_SM = 91.; //GeV
+    double InputScale_SM; //GeV
 
     //CKM parameters
     /**
      * @brief @latexonly $\theta_{12}$ @endlatexonly of the CKM matrix (in radians). 
      * The default value is ??? 
      */
-    double CKM_theta12 = 0.2;
-    double CKM_theta13 = 0.1;
-    double CKM_theta23 = 0.3;
-    double CKM_delta = 3.14 / 4.;
+    double CKM_theta12;
+    double CKM_theta13;
+    double CKM_theta23;
+    double CKM_delta;
 
     /**
      * @brief @latexonly $\cos \theta_{12}$ @endlatexonly 
@@ -528,26 +601,25 @@ private:
      */
     double s23;
 
-    
+
     /**
      * @brief @latexonly $m_u$ @endlatexonly, the mass of up quark in GeV 
      * (default value ?????).
      */
-    double mu = 0.002;
-    double mc = 1.2;
-    double mt = 170.;
+    double mu;
+    double mc;
+    double mt;
 
-    double md = 0.006;
-    double ms = 0.05;
-    double mb = 5.2;
+    double md;
+    double ms;
+    double mb;
 
-    double mel = 0.0005;
-    double mmu = 0.100;
-    double mtau = 1.2;
+    double mel;
+    double mmu;
+    double mtau;
 
     void GoToBasisSMOnly(std::string basis);
     //void GoToBasis(std::string basis);
-
     static int funcSMOnly(double logmu, const double y[],
             double f[], void* params);
     void ExtractParametersFromCKM();
@@ -555,7 +627,7 @@ private:
     void InitSMOnly();
     void UpdateSMOnly();
     void FromMassesToYukawas(std::string basis);
-
+    void SetSMDefaultInput();
 
     /**
      * @brief Inserts the initial values of the parameters in the array @p x 
@@ -879,10 +951,10 @@ private:
     ///@{
     /** @brief @f$g_1@f$  */
     double g1, /** @brief @f$g_2@f$  */ g2, /**@brief @f$g_3@f$  */ g3,
-            /** @brief @f$m_h ^2 @f$ (Higgs boson mass squared) 
-              @details See https://arxiv.org/pdf/1308.2627.pdf for the normalization */ mh2 = 126. * 126.,
-            /** @brief @f$ \lambda @f$ (Higgs quartic coupling)
-             *  @details See https://arxiv.org/pdf/1308.2627.pdf for the normalization  */ lambda = 0.2;
+    /** @brief @f$m_h ^2 @f$ (Higgs boson mass squared) 
+      @details See https://arxiv.org/pdf/1308.2627.pdf for the normalization */ mh2,
+    /** @brief @f$ \lambda @f$ (Higgs quartic coupling)
+     *  @details See https://arxiv.org/pdf/1308.2627.pdf for the normalization  */ lambda;
     double yuR[3][3], yuI[3][3], ydR[3][3],
     ydI[3][3], yeR[3][3], yeI[3][3];
     ///@}
