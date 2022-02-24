@@ -33,10 +33,10 @@ int main(int argc, char **argv) {
 
 
 
-    S.SetCoefficient("CKM_theta12", 0.6);
-    S.SetCoefficient("CKM_theta13", 0.5);
-    S.SetCoefficient("CKM_theta23", 0.2);
-    S.SetCoefficient("CKM_delta", 1.);
+    S.SetCoefficient("CKM_theta12", 0.4);
+    S.SetCoefficient("CKM_theta13", 0.32);
+    S.SetCoefficient("CKM_theta23", 0.1);
+    S.SetCoefficient("CKM_delta", .004);
     cout << "Angles and phase (input): "
             << S.GetCoefficient("CKM_theta12") << "\t"
             << S.GetCoefficient("CKM_theta13") << "\t"
@@ -74,15 +74,20 @@ int main(int argc, char **argv) {
         }
         cout << " " << endl;
     }
-    cout << "\n\n----------------------\n\n" << endl;
 
 
+
+
+    //Reset test
+    /*
     RGESolver S3;
 
     double L = 10000.;
     double L2 = L*L;
     S3.SetCoefficient("CG", 1. / L2);
     S3.SetCoefficient("g3", 1.4);
+        cout << "\n\n----------------------\n\n" << endl;
+
     cout << "CG,g3 (after setting) " << S3.GetCoefficient("CG")
             << ",\t" << S3.GetCoefficient("g3")
             << ",\t" << endl;
@@ -95,6 +100,6 @@ int main(int argc, char **argv) {
             << ",\t" << S3.GetCoefficient("g3")
             << ",\t" << endl;
 
-
+     */
     return 0;
 }

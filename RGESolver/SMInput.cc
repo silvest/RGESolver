@@ -65,36 +65,41 @@ void RGESolver::ExtractParametersFromCKM() {
             - c12 * c12 * s23 * s23 * s13 * s13) /
             (2. * s12 * c23 * c12 * s23 * s13);
     CKM_delta = (arccos(gslpp::complex(temp, 0.))).real();*/
-     
+
     //Second method 
     //delta in [-Pi,Pi]
-    /*gslpp::complex R = (CKM(0, 0) * CKM(1, 1)) /
-            (CKM(0, 1) * CKM(1, 0));
-    gslpp::complex temp2 = (- c12 * c12 * c23 - c23 * R * s12 * s12) /
-            (c12 * (R - 1.) * s12 * s13 * s23);
-    CKM_delta = (gslpp::complex(0., - 1.) * log(temp2)).real();*/
-
+    /* gslpp::complex R = (CKM(0, 0) * CKM(1, 1)) /
+             (CKM(0, 1) * CKM(1, 0));
+     gslpp::complex temp2 = (- c12 * c12 * c23 - c23 * R * s12 * s12) /
+             (c12 * (R - 1.) * s12 * s13 * s23);
+     CKM_delta = (gslpp::complex(0., - 1.) * log(temp2)).real();
+     std::cout << "R : " << R << std::endl;
+     std::cout << "temp2 : " << temp2 << std::endl;
+     std::cout << " CKM_delta : " << CKM_delta << std::endl;
+     */
     //Third method
     //delta in [-Pi,Pi]
     double gamma = (- (CKM(0, 0)*(CKM(0, 2)).conjugate()) /
             (CKM(1, 0)*(CKM(1, 2)).conjugate())).arg();
-    std::cout << "s12 and c12 : "
+
+    double a = (c12 * s13 * s23) / (s12 * c23);
+    /* std::cout << "s12 and c12 : "
             << s12 << "  " << c12 << std::endl;
     std::cout << "s13 and c13 : "
             << s13 << "  " << c13 << std::endl;
     std::cout << "s23 and c23 : "
             << s23 << "  " << c23 << std::endl;
-    double a = (c12 * s13 * s23) / (s12 * c23);
     std::cout << "a : " << a << std::endl;
-    std::cout << "gamma : " << gamma << std::endl;
+    std::cout << "gamma : " << gamma << std::endl;*/
 
     double pi = 3.14159265358979323846;
-
-
-    std::cout << "CKM : " << CKM << std::endl;
-
-
-    if (abs(gamma) < 0.0000000001) {
+    //It is a good practice to avoid using ==0 as condition 
+    //for no-integer numbers in C++
+    double tol = 0.000000000001;
+    if (abs(gamma) <= tol || abs(gamma - pi) <= tol ||
+            s12 <= tol || c12 <= tol ||
+            s13 <= tol || c13 <= tol ||
+            s23 <= tol || c23 <= tol) {
         CKM_delta = 0.;
     } else {
         double tan_g = tan(gamma);
@@ -103,19 +108,14 @@ void RGESolver::ExtractParametersFromCKM() {
                     (1. - sqrt(1. - (a * a - 1.) * tan_g * tan_g)) /
                     ((a - 1.) * tan_g)
                     );
-            std::cout << "argument of atan : "
-                    << (1. - sqrt(1. - (a * a - 1.) * tan_g * tan_g)) /
-                    ((a - 1.) * tan_g) << std::endl;
         } else {
             CKM_delta = 2. * atan(
                     (1. + sqrt(1. - (a * a - 1.) * tan_g * tan_g)) /
                     ((a - 1.) * tan_g)
                     );
-            std::cout << "argument of atan : "
-                    << (1. + sqrt(1. - (a * a - 1.) * tan_g * tan_g)) /
-                    ((a - 1.) * tan_g) << std::endl;
         }
     }
+
 
 }
 

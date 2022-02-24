@@ -1,0 +1,14 @@
+Using utfit formula 
+
+
+    //[xxx0] ok
+    //[xx00] ok
+    //[x0x0] ok
+    //[0xx0] ok
+
+
+    //[xxxx] ok
+    //[xx0x] not ok
+    //[x0xx] not ok
+    //[0xxx] ok
+
