@@ -17,7 +17,7 @@
 #include <boost/function.hpp>
 //#include <boost/bind/bind.hpp>
 
-#include "src/gslpp.h"
+#include "gslpp/src/gslpp.h"
 
 /** 
  * @brief A class that performs renormalization group evolution in the context of the SMEFT

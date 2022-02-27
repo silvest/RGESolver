@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/oem/EvolutoreStandalone/Programmi/V10_1/RGESolver
+CMAKE_SOURCE_DIR = /home/oem/EvolutoreStandalone/Programmi/V10_3/RGESolver
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/oem/EvolutoreStandalone/Programmi/V10_1/RGESolver/build
+CMAKE_BINARY_DIR = /home/oem/EvolutoreStandalone/Programmi/V10_3/RGESolver/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -126,9 +126,9 @@ install/local/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/oem/EvolutoreStandalone/Programmi/V10_1/RGESolver/build/CMakeFiles /home/oem/EvolutoreStandalone/Programmi/V10_1/RGESolver/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/oem/EvolutoreStandalone/Programmi/V10_3/RGESolver/build/CMakeFiles /home/oem/EvolutoreStandalone/Programmi/V10_3/RGESolver/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/oem/EvolutoreStandalone/Programmi/V10_1/RGESolver/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/oem/EvolutoreStandalone/Programmi/V10_3/RGESolver/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -182,6 +182,19 @@ RGESolver/fast:
 	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/build
 .PHONY : RGESolver/fast
 
+#=============================================================================
+# Target rules for targets named gslpp
+
+# Build rule for target.
+gslpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gslpp
+.PHONY : gslpp
+
+# fast build rule for target.
+gslpp/fast:
+	$(MAKE) -f gslpp/CMakeFiles/gslpp.dir/build.make gslpp/CMakeFiles/gslpp.dir/build
+.PHONY : gslpp/fast
+
 RGESolver.o: RGESolver.cc.o
 
 .PHONY : RGESolver.o
@@ -209,6 +222,222 @@ RGESolver.cc.s:
 	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/RGESolver.cc.s
 .PHONY : RGESolver.cc.s
 
+gslpp/src/Expanded.o: gslpp/src/Expanded.cpp.o
+
+.PHONY : gslpp/src/Expanded.o
+
+# target to build an object file
+gslpp/src/Expanded.cpp.o:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/Expanded.cpp.o
+.PHONY : gslpp/src/Expanded.cpp.o
+
+gslpp/src/Expanded.i: gslpp/src/Expanded.cpp.i
+
+.PHONY : gslpp/src/Expanded.i
+
+# target to preprocess a source file
+gslpp/src/Expanded.cpp.i:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/Expanded.cpp.i
+.PHONY : gslpp/src/Expanded.cpp.i
+
+gslpp/src/Expanded.s: gslpp/src/Expanded.cpp.s
+
+.PHONY : gslpp/src/Expanded.s
+
+# target to generate assembly for a file
+gslpp/src/Expanded.cpp.s:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/Expanded.cpp.s
+.PHONY : gslpp/src/Expanded.cpp.s
+
+gslpp/src/gslpp_complex.o: gslpp/src/gslpp_complex.cpp.o
+
+.PHONY : gslpp/src/gslpp_complex.o
+
+# target to build an object file
+gslpp/src/gslpp_complex.cpp.o:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_complex.cpp.o
+.PHONY : gslpp/src/gslpp_complex.cpp.o
+
+gslpp/src/gslpp_complex.i: gslpp/src/gslpp_complex.cpp.i
+
+.PHONY : gslpp/src/gslpp_complex.i
+
+# target to preprocess a source file
+gslpp/src/gslpp_complex.cpp.i:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_complex.cpp.i
+.PHONY : gslpp/src/gslpp_complex.cpp.i
+
+gslpp/src/gslpp_complex.s: gslpp/src/gslpp_complex.cpp.s
+
+.PHONY : gslpp/src/gslpp_complex.s
+
+# target to generate assembly for a file
+gslpp/src/gslpp_complex.cpp.s:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_complex.cpp.s
+.PHONY : gslpp/src/gslpp_complex.cpp.s
+
+gslpp/src/gslpp_matrix_complex.o: gslpp/src/gslpp_matrix_complex.cpp.o
+
+.PHONY : gslpp/src/gslpp_matrix_complex.o
+
+# target to build an object file
+gslpp/src/gslpp_matrix_complex.cpp.o:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_matrix_complex.cpp.o
+.PHONY : gslpp/src/gslpp_matrix_complex.cpp.o
+
+gslpp/src/gslpp_matrix_complex.i: gslpp/src/gslpp_matrix_complex.cpp.i
+
+.PHONY : gslpp/src/gslpp_matrix_complex.i
+
+# target to preprocess a source file
+gslpp/src/gslpp_matrix_complex.cpp.i:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_matrix_complex.cpp.i
+.PHONY : gslpp/src/gslpp_matrix_complex.cpp.i
+
+gslpp/src/gslpp_matrix_complex.s: gslpp/src/gslpp_matrix_complex.cpp.s
+
+.PHONY : gslpp/src/gslpp_matrix_complex.s
+
+# target to generate assembly for a file
+gslpp/src/gslpp_matrix_complex.cpp.s:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_matrix_complex.cpp.s
+.PHONY : gslpp/src/gslpp_matrix_complex.cpp.s
+
+gslpp/src/gslpp_matrix_double.o: gslpp/src/gslpp_matrix_double.cpp.o
+
+.PHONY : gslpp/src/gslpp_matrix_double.o
+
+# target to build an object file
+gslpp/src/gslpp_matrix_double.cpp.o:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_matrix_double.cpp.o
+.PHONY : gslpp/src/gslpp_matrix_double.cpp.o
+
+gslpp/src/gslpp_matrix_double.i: gslpp/src/gslpp_matrix_double.cpp.i
+
+.PHONY : gslpp/src/gslpp_matrix_double.i
+
+# target to preprocess a source file
+gslpp/src/gslpp_matrix_double.cpp.i:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_matrix_double.cpp.i
+.PHONY : gslpp/src/gslpp_matrix_double.cpp.i
+
+gslpp/src/gslpp_matrix_double.s: gslpp/src/gslpp_matrix_double.cpp.s
+
+.PHONY : gslpp/src/gslpp_matrix_double.s
+
+# target to generate assembly for a file
+gslpp/src/gslpp_matrix_double.cpp.s:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_matrix_double.cpp.s
+.PHONY : gslpp/src/gslpp_matrix_double.cpp.s
+
+gslpp/src/gslpp_rgerunner.o: gslpp/src/gslpp_rgerunner.cpp.o
+
+.PHONY : gslpp/src/gslpp_rgerunner.o
+
+# target to build an object file
+gslpp/src/gslpp_rgerunner.cpp.o:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_rgerunner.cpp.o
+.PHONY : gslpp/src/gslpp_rgerunner.cpp.o
+
+gslpp/src/gslpp_rgerunner.i: gslpp/src/gslpp_rgerunner.cpp.i
+
+.PHONY : gslpp/src/gslpp_rgerunner.i
+
+# target to preprocess a source file
+gslpp/src/gslpp_rgerunner.cpp.i:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_rgerunner.cpp.i
+.PHONY : gslpp/src/gslpp_rgerunner.cpp.i
+
+gslpp/src/gslpp_rgerunner.s: gslpp/src/gslpp_rgerunner.cpp.s
+
+.PHONY : gslpp/src/gslpp_rgerunner.s
+
+# target to generate assembly for a file
+gslpp/src/gslpp_rgerunner.cpp.s:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_rgerunner.cpp.s
+.PHONY : gslpp/src/gslpp_rgerunner.cpp.s
+
+gslpp/src/gslpp_special_functions.o: gslpp/src/gslpp_special_functions.cpp.o
+
+.PHONY : gslpp/src/gslpp_special_functions.o
+
+# target to build an object file
+gslpp/src/gslpp_special_functions.cpp.o:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_special_functions.cpp.o
+.PHONY : gslpp/src/gslpp_special_functions.cpp.o
+
+gslpp/src/gslpp_special_functions.i: gslpp/src/gslpp_special_functions.cpp.i
+
+.PHONY : gslpp/src/gslpp_special_functions.i
+
+# target to preprocess a source file
+gslpp/src/gslpp_special_functions.cpp.i:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_special_functions.cpp.i
+.PHONY : gslpp/src/gslpp_special_functions.cpp.i
+
+gslpp/src/gslpp_special_functions.s: gslpp/src/gslpp_special_functions.cpp.s
+
+.PHONY : gslpp/src/gslpp_special_functions.s
+
+# target to generate assembly for a file
+gslpp/src/gslpp_special_functions.cpp.s:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_special_functions.cpp.s
+.PHONY : gslpp/src/gslpp_special_functions.cpp.s
+
+gslpp/src/gslpp_vector_complex.o: gslpp/src/gslpp_vector_complex.cpp.o
+
+.PHONY : gslpp/src/gslpp_vector_complex.o
+
+# target to build an object file
+gslpp/src/gslpp_vector_complex.cpp.o:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_vector_complex.cpp.o
+.PHONY : gslpp/src/gslpp_vector_complex.cpp.o
+
+gslpp/src/gslpp_vector_complex.i: gslpp/src/gslpp_vector_complex.cpp.i
+
+.PHONY : gslpp/src/gslpp_vector_complex.i
+
+# target to preprocess a source file
+gslpp/src/gslpp_vector_complex.cpp.i:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_vector_complex.cpp.i
+.PHONY : gslpp/src/gslpp_vector_complex.cpp.i
+
+gslpp/src/gslpp_vector_complex.s: gslpp/src/gslpp_vector_complex.cpp.s
+
+.PHONY : gslpp/src/gslpp_vector_complex.s
+
+# target to generate assembly for a file
+gslpp/src/gslpp_vector_complex.cpp.s:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_vector_complex.cpp.s
+.PHONY : gslpp/src/gslpp_vector_complex.cpp.s
+
+gslpp/src/gslpp_vector_double.o: gslpp/src/gslpp_vector_double.cpp.o
+
+.PHONY : gslpp/src/gslpp_vector_double.o
+
+# target to build an object file
+gslpp/src/gslpp_vector_double.cpp.o:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_vector_double.cpp.o
+.PHONY : gslpp/src/gslpp_vector_double.cpp.o
+
+gslpp/src/gslpp_vector_double.i: gslpp/src/gslpp_vector_double.cpp.i
+
+.PHONY : gslpp/src/gslpp_vector_double.i
+
+# target to preprocess a source file
+gslpp/src/gslpp_vector_double.cpp.i:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_vector_double.cpp.i
+.PHONY : gslpp/src/gslpp_vector_double.cpp.i
+
+gslpp/src/gslpp_vector_double.s: gslpp/src/gslpp_vector_double.cpp.s
+
+.PHONY : gslpp/src/gslpp_vector_double.s
+
+# target to generate assembly for a file
+gslpp/src/gslpp_vector_double.cpp.s:
+	$(MAKE) -f CMakeFiles/RGESolver.dir/build.make CMakeFiles/RGESolver.dir/gslpp/src/gslpp_vector_double.cpp.s
+.PHONY : gslpp/src/gslpp_vector_double.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -223,9 +452,34 @@ help:
 	@echo "... uninstall"
 	@echo "... install/local"
 	@echo "... RGESolver"
+	@echo "... gslpp"
 	@echo "... RGESolver.o"
 	@echo "... RGESolver.i"
 	@echo "... RGESolver.s"
+	@echo "... gslpp/src/Expanded.o"
+	@echo "... gslpp/src/Expanded.i"
+	@echo "... gslpp/src/Expanded.s"
+	@echo "... gslpp/src/gslpp_complex.o"
+	@echo "... gslpp/src/gslpp_complex.i"
+	@echo "... gslpp/src/gslpp_complex.s"
+	@echo "... gslpp/src/gslpp_matrix_complex.o"
+	@echo "... gslpp/src/gslpp_matrix_complex.i"
+	@echo "... gslpp/src/gslpp_matrix_complex.s"
+	@echo "... gslpp/src/gslpp_matrix_double.o"
+	@echo "... gslpp/src/gslpp_matrix_double.i"
+	@echo "... gslpp/src/gslpp_matrix_double.s"
+	@echo "... gslpp/src/gslpp_rgerunner.o"
+	@echo "... gslpp/src/gslpp_rgerunner.i"
+	@echo "... gslpp/src/gslpp_rgerunner.s"
+	@echo "... gslpp/src/gslpp_special_functions.o"
+	@echo "... gslpp/src/gslpp_special_functions.i"
+	@echo "... gslpp/src/gslpp_special_functions.s"
+	@echo "... gslpp/src/gslpp_vector_complex.o"
+	@echo "... gslpp/src/gslpp_vector_complex.i"
+	@echo "... gslpp/src/gslpp_vector_complex.s"
+	@echo "... gslpp/src/gslpp_vector_double.o"
+	@echo "... gslpp/src/gslpp_vector_double.i"
+	@echo "... gslpp/src/gslpp_vector_double.s"
 .PHONY : help
 
 

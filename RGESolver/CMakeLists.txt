@@ -21,8 +21,13 @@
 #--------------------------------------------------------------------
 
 cmake_minimum_required(VERSION 3.1)
+set(LIBTYPE STATIC)
+
+
+cmake_policy(SET CMP0048 NEW)
+
 project(RGESolver VERSION 1.0 DESCRIPTION "C++ library to solve RGEs in the context of the SMEFT")
-add_library(RGESolver RGESolver.cc)
+#add_library(RGESolver RGESolver.cc)
 
 #set(LIBTYPE OBJECT)
 
@@ -138,12 +143,13 @@ if (HAS_FLAG)
     #set (CXX_STANDARD_REQUIRED ON)
 else()
     message(FATAL_ERROR "Required at least c++11") 
-endif()	
-	
-# specify the C++ standard
-#set(CMAKE_CXX_STANDARD 17)
-#set(CMAKE_CXX_STANDARD_REQUIRED True)
+endif()
 
+# Fix behavior of CMAKE_CXX_STANDARD when targeting macOS.
+if (POLICY CMP0025)
+    cmake_policy(SET CMP0025 NEW)
+endif ()	
+	
 
 #Printing the compiler flags
 message(STATUS "Compiler flags : ${CMAKE_CXX_FLAGS}")
@@ -151,7 +157,7 @@ message(STATUS "Compiler flags : ${CMAKE_CXX_FLAGS}")
  
  
 ######### make install ############### 
-INSTALL(TARGETS RGESolver DESTINATION lib COMPONENT library)
+
 
 INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/RGESolver.h 
         DESTINATION include COMPONENT header)
@@ -184,6 +190,57 @@ if(DEBUG_MODE)
 
 endif(DEBUG_MODE)
  
+#############################
+
+set(PROJECTLIST gslpp) 
+ 
+# sub-directories
+
+foreach(_project ${PROJECTLIST})
+   add_subdirectory(${_project})
+endforeach(_project)
+
+#RGESolver library libRGESolver.a
+if(${LIBTYPE} STREQUAL "OBJECT") 
+  # for CMake v2.8.8 or later
+
+  foreach(_project ${PROJECTLIST})
+    set(OBJECTLIST ${OBJECTLIST} $<TARGET_OBJECTS:${_project}>)
+  endforeach(_project)
+  add_library(RGESolver STATIC ${OBJECTLIST})
+else()
+  # for older CMake
+  set(CMAKE_CXX_FLAGS "-Wall ${GSL_CFLAGS}")
+  include_directories(${BOOST_INC})
+  #set(SOURCES RGESolver.cpp)
+
+  foreach(_project ${PROJECTLIST})
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/${_project}/src)
+    file(GLOB SOURCES ${_project}/src/*.cpp)
+
+    set(SRCLIST ${SRCLIST} ${SOURCES})
+  endforeach(_project)
+  add_library(RGESolver STATIC RGESolver.cc ${SRCLIST})
+endif()
+
+
+INSTALL(TARGETS RGESolver DESTINATION lib COMPONENT library)
+
+# RGESolver header file RGESolver.h 
+list(REVERSE PROJECTLIST)
+foreach(_project ${PROJECTLIST})
+  file(GLOB HEADERS ${_project}/src/*.h)
+  foreach(_header ${HEADERS})
+    get_filename_component(_tmp ${_header} NAME)
+  endforeach(_header)
+endforeach(_project)
+
+#INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/RGESolver.h 
+ #       DESTINATION include#/RGESolver
+  #       COMPONENT header)
+         
+#message(STATUS "{CMAKE_CURRENT_BINARY_DIR}: ${CMAKE_CURRENT_BINARY_DIR}}$") 
+# message(STATUS "{CMAKE_CURRENT_SOURCE_DIR}: ${CMAKE_CURRENT_SOURCE_DIR}$") 
  
 ###### make uninstall ###############
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
