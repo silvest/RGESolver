@@ -7,6 +7,7 @@ using namespace std::chrono;
 
 int main(int argc, char **argv) {
     using namespace std;
+
     RGESolver S;
 
 
@@ -32,16 +33,27 @@ int main(int argc, char **argv) {
     S.SetCoefficient("mh2", 126. * 126.);
 
 
+    S.SetCKMAngle("CKM_theta12", 0.4);
+    S.SetCKMAngle("CKM_theta13", 0.32);
+    S.SetCKMAngle("CKM_theta23", 0.1);
 
-    S.SetCoefficient("CKM_theta12", 0.4);
-    S.SetCoefficient("CKM_theta13", 0.32);
-    S.SetCoefficient("CKM_theta23", 0.1);
-    S.SetCoefficient("CKM_delta", .004);
+    S.SetCKMPhase(.004);
     cout << "Angles and phase (input): "
-            << S.GetCoefficient("CKM_theta12") << "\t"
-            << S.GetCoefficient("CKM_theta13") << "\t"
-            << S.GetCoefficient("CKM_theta23") << "\t"
-            << S.GetCoefficient("CKM_delta") << endl;
+            << S.GetCKMAngle("CKM_theta12") << "\t"
+            << S.GetCKMAngle("CKM_theta13") << "\t"
+            << S.GetCKMAngle("CKM_theta23") << "\t"
+            << S.GetCKMPhase() << endl;
+
+    cout << "Masses (input) : \n"
+            << S.GetFermionMass("mu") << "\t"
+            << S.GetFermionMass("mc") << "\t"
+            << S.GetFermionMass("mt") << "\n"
+            << S.GetFermionMass("md") << "\t"
+            << S.GetFermionMass("ms") << "\t"
+            << S.GetFermionMass("mb") << "\n"
+            << S.GetFermionMass("mel") << "\t"
+            << S.GetFermionMass("mmu") << "\t"
+            << S.GetFermionMass("mtau") << endl;
 
     double muIn = 200.;
     double muFin = 200.;
@@ -51,55 +63,44 @@ int main(int argc, char **argv) {
 
 
     cout << "Angles and phase (output): "
-            << S.GetCoefficient("CKM_theta12") << "\t"
-            << S.GetCoefficient("CKM_theta13") << "\t"
-            << S.GetCoefficient("CKM_theta23") << "\t"
-            << S.GetCoefficient("CKM_delta") << endl;
-    int i, j;
-    cout << "Yd : " << endl;
-    for (i = 0; i < 3; i ++) {
-        for (j = 0; j < 3; j ++) {
-            cout << S.GetCoefficient("YdR", i, j)
-                    << " + i*" << S.GetCoefficient("YdI", i, j)
-                    << "\t";
-        }
-        cout << " " << endl;
-    }
-    cout << "Yu : " << endl;
-    for (i = 0; i < 3; i ++) {
-        for (j = 0; j < 3; j ++) {
-            cout << S.GetCoefficient("YuR", i, j)
-                    << " + i*" << S.GetCoefficient("YuI", i, j)
-                    << "\t";
-        }
-        cout << " " << endl;
-    }
+            << S.GetCKMAngle("CKM_theta12") << "\t"
+            << S.GetCKMAngle("CKM_theta13") << "\t"
+            << S.GetCKMAngle("CKM_theta23") << "\t"
+            << S.GetCKMPhase() << endl;
+    cout << "Masses (output) : \n"
+            << S.GetFermionMass("mu") << "\t"
+            << S.GetFermionMass("mc") << "\t"
+            << S.GetFermionMass("mt") << "\n"
+            << S.GetFermionMass("md") << "\t"
+            << S.GetFermionMass("ms") << "\t"
+            << S.GetFermionMass("mb") << "\n"
+            << S.GetFermionMass("mel") << "\t"
+            << S.GetFermionMass("mmu") << "\t"
+            << S.GetFermionMass("mtau") << endl;
 
 
 
 
-    //Reset test
-    /*
-    RGESolver S3;
+    S.Evolve("Leading-Log", muFin, muFin *1.0002);
+    S.ComputeCKMAndFermionMasses();
+    cout << "Angles and phase (after evolve): "
+            << S.GetCKMAngle("CKM_theta12") << "\t"
+            << S.GetCKMAngle("CKM_theta13") << "\t"
+            << S.GetCKMAngle("CKM_theta23") << "\t"
+            << S.GetCKMPhase() << endl;
+    cout << "Masses (after evolve) : \n"
+            << S.GetFermionMass("mu") << "\t"
+            << S.GetFermionMass("mc") << "\t"
+            << S.GetFermionMass("mt") << "\n"
+            << S.GetFermionMass("md") << "\t"
+            << S.GetFermionMass("ms") << "\t"
+            << S.GetFermionMass("mb") << "\n"
+            << S.GetFermionMass("mel") << "\t"
+            << S.GetFermionMass("mmu") << "\t"
+            << S.GetFermionMass("mtau") << endl;
 
-    double L = 10000.;
-    double L2 = L*L;
-    S3.SetCoefficient("CG", 1. / L2);
-    S3.SetCoefficient("g3", 1.4);
-        cout << "\n\n----------------------\n\n" << endl;
 
-    cout << "CG,g3 (after setting) " << S3.GetCoefficient("CG")
-            << ",\t" << S3.GetCoefficient("g3")
-            << ",\t" << endl;
-    S3.Evolve("Leading-Log", S3.GetSMInputScale(), L);
-    cout << "CG,g3 (after evolution) " << S3.GetCoefficient("CG")
-            << ",\t" << S3.GetCoefficient("g3")
-            << ",\t" << endl;
-    S3.Reset();
-    cout << "CG,g3 (after reset) " << S3.GetCoefficient("CG")
-            << ",\t" << S3.GetCoefficient("g3")
-            << ",\t" << endl;
 
-     */
+
     return 0;
 }

@@ -5,7 +5,7 @@ TAGFILES         = qt.tag
 SEARCHENGINE     = NO
 
 
-EXTRACT_ALL            = YES
-EXTRACT_PRIVATE        = YES
-EXTRACT_STATIC        = YES
+#EXTRACT_ALL            = YES
+#EXTRACT_PRIVATE        = YES
+#EXTRACT_STATIC        = YES
 

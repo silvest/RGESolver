@@ -16,7 +16,7 @@ RGESolver::RGESolver() {
 
 
     SetSMDefaultInput();
-   
+
 
 
     //Build default CKM matrix from default parameters
@@ -26,6 +26,9 @@ RGESolver::RGESolver() {
     //cout << "epsabs : " << epsabs_ << "  epsrel : " << epsrel_ << endl;
     //cout << "step : " << step_ << endl;
 
+    
+
+
     //-----SM SCALAR PARAMETERS I/O----------
     {
         Operators0F["g1"] = & g1;
@@ -34,23 +37,23 @@ RGESolver::RGESolver() {
         Operators0F["mh2"] = & mh2;
         Operators0F["lambda"] = & lambda;
 
-        Operators0F["CKM_theta12"] = & CKM_theta12;
-        Operators0F["CKM_theta13"] = & CKM_theta13;
-        Operators0F["CKM_theta23"] = & CKM_theta23;
-        Operators0F["CKM_delta"] = & CKM_delta;
+       
 
-        Operators0F["mu"] = & mu;
-        Operators0F["mc"] = & mc;
-        Operators0F["mt"] = & mt;
+        FermionMasses["mu"] = & mu;
+        FermionMasses["mc"] = & mc;
+        FermionMasses["mt"] = & mt;
 
-        Operators0F["md"] = & md;
-        Operators0F["ms"] = & ms;
-        Operators0F["mb"] = & mb;
+        FermionMasses["md"] = & md;
+        FermionMasses["ms"] = & ms;
+        FermionMasses["mb"] = & mb;
 
-        Operators0F["mel"] = & mel;
-        Operators0F["mmu"] = & mmu;
-        Operators0F["mtau"] = & mtau;
+        FermionMasses["mel"] = & mel;
+        FermionMasses["mmu"] = & mmu;
+        FermionMasses["mtau"] = & mtau;
 
+        CKMAngles["CKM_theta12"] = & CKM_theta12;
+        CKMAngles["CKM_theta13"] = & CKM_theta13;
+        CKMAngles["CKM_theta23"] = & CKM_theta23;
 
     }
 

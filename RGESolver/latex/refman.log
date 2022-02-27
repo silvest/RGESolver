@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.8.3)  23 FEB 2022 17:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.8.3)  27 FEB 2022 19:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -861,8 +861,9 @@ File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 6.29996pt on input line 169.
- [1] [2] [3] [4]
-[5] [6] [7] [8]
+ [1] [2
+
+]
 Package hyperref Info: Option `pageanchor' set `true' on input line 171.
 
 Chapter 1.
@@ -883,15 +884,10 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 12.9599pt on input line 1.
 ) [1
 
-
 ] [2
 
 ]
 Chapter 2.
-(./files.tex) [3] [4
-
-]
-Chapter 3.
 (./classRGESolver.tex
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 10.79993pt on input line 12.
@@ -903,281 +899,162 @@ File: ts1phv.fd 2001/06/04 scalable font definitions for TS1/phv.
 LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
 (Font)              scaled to size 8.99994pt on input line 15.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.09995pt on input line 16.
+(Font)              scaled to size 8.09995pt on input line 17.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 16.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 17.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 8.09995pt on input line 16.
+(Font)              scaled to size 8.09995pt on input line 17.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 32.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 47.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 6.29996pt on input line 32.
- [5]
+(Font)              scaled to size 6.29996pt on input line 47.
 LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <9> not available
+(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 49.
+LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
+(Font)              scaled to size 8.09995pt on input line 49.
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--52
+
+ []
+
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 55.
+LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
+(Font)              scaled to size 8.99994pt on input line 55.
+
+Underfull \hbox (badness 10000) in paragraph at lines 57--58
+
+ []
+
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <10> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 62.
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 62.
+LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <10> not available
 (Font)              Font shape `TS1/phv/m/sl' tried instead on input line 62.
 LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
-(Font)              scaled to size 8.09995pt on input line 62.
-LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <9> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 64.
-
-Underfull \hbox (badness 10000) in paragraph at lines 64--65
-
- []
-
-LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 67.
-[6]
-LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 103.
-LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 8.99994pt on input line 103.
- [7]
-Underfull \hbox (badness 10000) in paragraph at lines 229--230
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 232--233
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 235--236
-
- []
-
-LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <10> not available
-(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 255.
-LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
-(Font)              scaled to size 8.99994pt on input line 255.
-LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <10> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 255.
-
-Underfull \hbox (badness 10000) in paragraph at lines 255--256
-
- []
-
-[8] [9] [10] [11]
-Underfull \hbox (badness 10000) in paragraph at lines 481--483
-
- []
-
-[12] [13] [14]
+(Font)              scaled to size 8.99994pt on input line 62.
+[3] [4]
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 8.99994pt on input line 697.
+(Font)              scaled to size 8.99994pt on input line 116.
 
-Underfull \hbox (badness 10000) detected at line 697
+Underfull \hbox (badness 10000) detected at line 116
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 700
+Underfull \hbox (badness 10000) detected at line 119
 [][][]
  []
 
-[15]
-Overfull \hbox (19.01468pt too wide) in paragraph at lines 774--827
+
+Underfull \vbox (badness 1454) has occurred while \output is active []
+
+ [5]
+Overfull \hbox (19.01468pt too wide) in paragraph at lines 216--270
+ [][] 
+ []
+
+
+Overfull \hbox (49.85115pt too wide) in paragraph at lines 283--351
  [][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [16]
-Overfull \hbox (49.85115pt too wide) in paragraph at lines 840--908
- [][] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [17]
-[18]
+ [6]
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 967.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 379.
 
-Underfull \hbox (badness 10000) in paragraph at lines 991--992
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 403--404
 
  []
 
-[19]
-Underfull \hbox (badness 10000) detected at line 1036
-[][][]
+
+Underfull \hbox (badness 10000) in paragraph at lines 425--426
+
  []
 
-[20]
-Underfull \hbox (badness 10000) detected at line 1077
-[][][]
- []
-
-[21]
-Underfull \hbox (badness 10000) detected at line 1090
+[8]
+Underfull \hbox (badness 10000) detected at line 449
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 1103
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 1116
+Underfull \hbox (badness 10000) detected at line 462
 [][][]
  []
 
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 7.19995pt on input line 1122.
-
-Overfull \vbox (4.88675pt too high) has occurred while \output is active []
-
-
-[22]
-Underfull \hbox (badness 10000) detected at line 1134
+(Font)              scaled to size 7.19995pt on input line 468.
+[9]
+Underfull \hbox (badness 10000) detected at line 480
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 1157
+Underfull \hbox (badness 10000) detected at line 503
+[][][]
+ []
+
+[10]
+Underfull \hbox (badness 10000) detected at line 530
 [][][]
  []
 
 
-Overfull \vbox (22.07965pt too high) has occurred while \output is active []
+Underfull \vbox (badness 3514) has occurred while \output is active []
 
-
-[23]
-Underfull \hbox (badness 10000) detected at line 1184
-[][][]
- []
-
-[24] [25] [26]
+ [11]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [27]
-[28] [29] [30] [31] [32] [33] [34] [35] [36] [37] [38] [39] [40] [41] [42]
-[43]
-Overfull \hbox (16.5369pt too wide) in paragraph at lines 2240--2241
-\T1/pcr/m/n/8 gslpp[]::matrix$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 gslpp[]::complex$
-\OML/cmm/m/it/8 >$ \T1/pcr/m/n/8 R[]G[]E[]Solver[]::[]C[]KM = gslpp[]::matrix$\
-OML/cmm/m/it/8 <$\T1/pcr/m/n/8 gslpp[]::complex$\OML/cmm/m/it/8 >$\T1/pcr/m/n/8
- (3, 3, 0.) [private] 
- []
-
-[44] [45] [46] [47] [48] [49] [50] [51] [52] [53]
-Underfull \hbox (badness 10000) in paragraph at lines 2859--2860
-\T1/pcr/m/n/8 const int R[]G[]E[]Solver[]::dim = ([] + [] + [] + [] + [] + [] +
- [] + [] + [] + [] +
- []
-
-[54] [55] [56]
-Underfull \hbox (badness 10000) in paragraph at lines 2991--2992
-\T1/pcr/m/n/8 const int R[]G[]E[]Solver[]::[]E8[]_[][]R[]R[]RR = 4 $\OMS/cmsy/m
-/n/8 ^^C$ \T1/pcr/m/n/8 ([] + []) + 2 $\OMS/cmsy/m/n/8 ^^C$ \T1/pcr/m/n/8 ([] +
- []) + 1 $\OMS/cmsy/m/n/8 ^^C$ \T1/pcr/m/n/8 ([] + [])
- []
-
-[57]
-Underfull \hbox (badness 10000) in paragraph at lines 3050--3051
-
- []
+ [12]
+[13]) [14] (./refman.ind [15
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3061--3062
-
- []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3072--3073
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 3079--3080
-\T1/pcr/m/n/8 std[]::unordered[]_[]map$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 std[]::s
-tring, boost[]::function$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 double(int, int) $\OML
-/cmm/m/it/8 >$ $>$ \T1/pcr/m/n/8 R[]G[]E[]Solver[]::[]Getter2F
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 3085--3086
-\T1/pcr/m/n/8 std[]::unordered[]_[]map$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 std[]::s
-tring, boost[]::function$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 double(int, int, int, 
-int) $\OML/cmm/m/it/8 >$ $>$ \T1/pcr/m/n/8 R[]G[]E[]Solver[]::[]
- []
-
-[58] [59] [60] [61] [62] [63]
-Underfull \hbox (badness 10000) in paragraph at lines 3386--3387
-\T1/pcr/m/n/8 std[]::unordered[]_[]map$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 std[]::s
-tring, boost[]::function$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 void(int, int, double)
- $\OML/cmm/m/it/8 >$ $>$ \T1/pcr/m/n/8 R[]G[]E[]Solver[]::[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 3392--3393
-\T1/pcr/m/n/8 std[]::unordered[]_[]map$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 std[]::s
-tring, boost[]::function$\OML/cmm/m/it/8 <$\T1/pcr/m/n/8 void(int, int, int, in
-t, double) $\OML/cmm/m/it/8 >$ $>$ \T1/pcr/m/n/8 R[]G[]E[]
- []
-
-[64] [65] [66] [67] [68] [69] [70] [71]) [72]
-Chapter 4.
-(./BetaFunction_8cc.tex) (./RGESolver_8cc.tex) (./RGESolver_8h.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--13
-
- []
-
-) (./SettersAndGetters_8cc.tex) (./StaticMembers_8cc.tex) [73
-
-] [74
-
-]
-(./refman.ind [75
-
-
-] [76] [77] [78] [79] [80] [81] [82])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 196.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 196.
+])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 188.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 188.
  (./refman.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 196.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 196.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 188.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 188.
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: E1B5FE3840C9D99974F9F1E440FB7F10;50714.
+(rerunfilecheck)             Checksum: F48C58139FBB953E43A8B8F6C003FB8F;4798.
  ) 
 Here is how much of TeX's memory you used:
- 17886 strings out of 481239
- 283816 string characters out of 5920378
- 606663 words of memory out of 5000000
- 32069 multiletter control sequences out of 15000+600000
- 598000 words of font info for 115 fonts, out of 8000000 for 9000
+ 16614 strings out of 481239
+ 242030 string characters out of 5920378
+ 540322 words of memory out of 5000000
+ 31471 multiletter control sequences out of 15000+600000
+ 593347 words of font info for 99 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,19n,96p,1290b,663s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,19n,96p,938b,663s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
-rw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/uc
-rr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/urw/helvetic/uhvro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/wasy-type1/wasy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/wasy-ty
-pe1/wasy7.pfb>
-Output written on refman.pdf (92 pages, 404119 bytes).
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+urw/courier/ucrro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic
+/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/wasy-type1/wasy7.pfb>
+Output written on refman.pdf (19 pages, 203879 bytes).
 PDF statistics:
- 3760 PDF objects out of 4296 (max. 8388607)
- 3601 compressed objects within 37 object streams
- 738 named destinations out of 1000 (max. 500000)
- 2553 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 451 PDF objects out of 1000 (max. 8388607)
+ 402 compressed objects within 5 object streams
+ 89 named destinations out of 1000 (max. 500000)
+ 193 words of extra memory for PDF output out of 10000 (max. 10000000)
 

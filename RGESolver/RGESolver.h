@@ -40,7 +40,7 @@
  */
 
 
-//Latex table with all the program names of the coefficients.
+//Latex table with all the names of the coefficients.
 
 /**
 \latexonly
@@ -48,8 +48,9 @@
  \begin{table}[H]
         \centering
         \renewcommand{\arraystretch}{1.5} % Default value: 1
+\begin{tabular}{cc}
 \begin{tabular}[t]{c|c} 
-Coefficient     & \multicolumn{1}{c}{Name}      \\ \hline 
+Parameter     & \multicolumn{1}{c}{Name}      \\ \hline 
 $g_1$         & \texttt{g1}      \\
 $g_2$         & \texttt{g2}      \\
 $g_3$         & \texttt{g3}      \\
@@ -61,9 +62,30 @@ $\Re(\mathcal{Y}_d)$         & \texttt{YdR}      \\
 $\Im(\mathcal{Y}_d)$         & \texttt{YdI}      \\
  $\Re(\mathcal{Y}_e)$         & \texttt{YeR}      \\
 $\Im(\mathcal{Y}_e)$         & \texttt{YeI}      
+\end{tabular} &
+\begin{tabular}[t]{c|c} 
+Parameter     & \multicolumn{1}{c}{Name}      \\ \hline 
+$\theta_{12}$         & \texttt{CKM\_theta12}      \\
+$\theta_{13}$         & \texttt{CKM\_theta13}      \\
+$\theta_{23}$         & \texttt{CKM\_theta23}      \\
+%$\delta$         & \texttt{CKM\_delta}      \\
+$m_u$ $[\mathrm{GeV}]$  & \texttt{mu}      \\
+$m_c$ $[\mathrm{GeV}]$  & \texttt{mc}      \\
+$m_t$ $[\mathrm{GeV}]$  & \texttt{mt}      \\
+ $m_d$ $[\mathrm{GeV}]$  & \texttt{md}      \\
+$m_s$ $[\mathrm{GeV}]$  & \texttt{ms}      \\
+$m_b$ $[\mathrm{GeV}]$  & \texttt{mb}      \\
+$m_{e}$ $[\mathrm{GeV}]$  & \texttt{mel}      \\
+$m_{\mu}$ $[\mathrm{GeV}]$  & \texttt{mmu}      \\
+$m_{\tau}$ $[\mathrm{GeV}]$  & \texttt{mtau}      \\
 \end{tabular}
+\end{tabular} 
 \vspace{3 pt}
-\caption{Standard Model parameters}
+\caption{Standard Model parameters. The parameters in the left column
+ must be set (and accessed) with SetCoefficient (and GetCoefficient) methods.
+ The ones in the right column must be set and accessed using 
+ other dedicated methods (see the specific documentation for input/output) 
+ }
 \label{SM}
 \end{table}
   
@@ -103,7 +125,8 @@ $C_{H\tilde{W}B}$ & \texttt{CHWtildeB}
 \end{tabular}
 \end{tabular}
 \vspace{3 pt}
-\caption{Scalar (and real) SMEFT operators.}
+\caption{Scalar (and real) SMEFT operators. They must be set and accessed 
+using SetCoefficient and GetCoefficient.}
 \label{0F}
 \end{table}
   
@@ -169,7 +192,8 @@ $\Im(C_{Hud})$ & \texttt{CHudI} & WC1
 \end{tabular}
 \end{tabular}
 \vspace{3 pt}
-\caption{2F SMEFT operators}
+\caption{2F SMEFT operators. They must be set and accessed 
+using SetCoefficient and GetCoefficient.}
 \label{2F}
 \end{table}
 
@@ -251,7 +275,8 @@ $\Im(C_{qd8})$ & \texttt{Cqd8I} & WC7I \\
 \end{tabular} 
 \end{tabular}
 
- \caption{4F SMEFT Operators.}
+ \caption{4F SMEFT Operators. They must be set and accessed 
+using SetCoefficient and GetCoefficient.}
  \label{4F}
  \end{table} 
   
@@ -272,6 +297,9 @@ public:
      */
     ~RGESolver() {
     }
+
+
+    /**@name Parameters related to the numeric integration. */
 
     /**
      * @brief Getter for the relative error used in the numerical integration
@@ -314,34 +342,139 @@ public:
     void Set_step(double step) {
         step_ = step;
     }
+    /** @name Evolution */
+    /**
+     * @brief Performs the RGE evolution
+     * @details RGEs are solved with the chosen method from @p muI to @p muF.
+     * Currently, the available methods are "Numeric" and "Leading-Log". @n 
+     * The evolutor takes as initial values the current values of the parameters, 
+     * set with the <tt>SetCoefficient(...)</tt> function. After completing the evolution
+     * the values of the parameters are updated and are accessible with the
+     * <tt>GetCoefficient(...)</tt> function.
+     * @param method resolution method
+     * @param muI initial energy scale 
+     * @param muF final energy scale 
+     */
+    void Evolve(std::string method, double muI, double muF);
+    //Evolution from muI to muF with method = 1 (Num), 2 (LL)
 
 
-    //Ad-hoc setters/getters for the CKM
-    
+
     /**
-     * @brief Setter function for the CKM matrix angle 
-     * @latexonly $\theta_{12}$@endlatexonly. 
-     * The assignation is completed only if 
-     * @latexonly $\theta_{12}\in [0,\frac{\pi}{2}]$@endlatexonly
+     * @brief Generates the initial conditions 
+     * for Standard Model's parameters (gauge couplings,
+     * Yukawa coupling, quartic coupling and Higgs' boson mass). 
+     *
+     * @details After evolving the SM parameters up to the scale 
+     * mu, CKM parameters and fermion masses are updated with the 
+     * new values. 
+     * If the flag CKMinput is set to <tt>true</tt> (default), the input 
+     * for the Yukawa matrices will be generated from the current value 
+     * of the CKM matrix and the masses of the fermions. If 
+     * set to false, the current values of the Yukawa matrices 
+     * will be used to generate the SM initial conditions at the chosen scale.  
+     *  
+     * @param mu Scale (in GeV) at which the initial conditions 
+     * are generated. If <tt>mu</tt> is different from
+     * the scale at which the input is given (SMInputScale), <tt>RGESolver</tt>
+     * will use the pure SM RGEs (at one-loop level) to run the parameters 
+     * to the scale <tt>mu</tt>.
+     * @param basis Flavour basis (
+     * <tt>"UP"<tt> or <tt>"DOWN"</tt>)
+     * @param method Method used by <tt>RGESolver</tt>
+     * to run the SM parameters to the scale <tt>mu</tt> 
+     * (<tt>"Numeric"</tt> or <tt>"Leading-Log"</tt>) 
+     * @param inputCKM If set to <tt>true</tt> (default), the input 
+     * for the Yukawa matrices will be generated from the current value 
+     * of the CKM matrix and the masses of the fermions.
+     */
+    void GenerateSMInitialConditions(double mu, std::string basis, std::string method, bool inputCKM = true);
+
+    /**
+     * @brief Same as \ref Evolve, but only for the SM parameters. 
+     * The user should use this method instead of \ref Evolve when 
+     * interested in pure SM running.  
+     * @param method
+     * @param muI
+     * @param muF
+     */
+    void EvolveSMOnly(std::string method, double muI, double muF);
+
+
+
+    /**@name Input/output  
+     * 
+     * @brief Documentation for the input/output handling.
+     * 
+     * @details All the SMEFT coefficients are set using the  
+     * SetCoefficient methods and 
+     * accessed with the GetCoefficient methods. 
+     * There exist three different signatures for each method, 
+     * depending on the number of flavour indices of the 
+     * parameter (0,2,4). @n
+     * These two routines must be used also for the SM parameters 
+     * @latexonly $g1,g2,g3,\lambda,m_h^2,$ @endlatexonly
+     *  @latexonly $\Re(\mathcal{Y}_u),\Im(\mathcal{Y}_u),$ @endlatexonly
+     *  @latexonly $\Re(\mathcal{Y}_d),\Im(\mathcal{Y}_d),$ @endlatexonly
+     *  @latexonly $\Re(\mathcal{Y}_e),\Im(\mathcal{Y}_e)$ @endlatexonly
+     *  (we follow https://arxiv.org/abs/1308.2627 for what concerns
+     * the conventions in the Higgs' sector). @n
+     * If the user is interested in using the \ref GenerateSMInitialConditions
+     * method, the input for the CKM matrix parameters and 
+     * the fermion masses must be given with the 
+     * methods 
+     * SetCKMAngle(std::string name, double val),
+     * SetCKMPhase(double val)
+     * SetFermionMass(std::string name, double val). @n
+     * A complete list of the keys that must be used to 
+     * correctly invoke setter/getter methods are given in 
+     * tables  @latexonly \ref{SM}, \ref{0F}, \ref{2F} and \ref{4F}@endlatexonly
+     */
+
+
+    /**
+     * @brief Compute CKM matrix and the mass of the fermions. 
+     * 
+     * @details The methods \ref Evolve and \ref EvolveSMOnly 
+     * do not updates the value of CKM parameters and fermion masses after the evolution.
+     * This process require the diagonalization of the Yukawa matrices and 
+     * may slow the evolution. @n
+     * If the user is interested in these parameters (accessible with 
+     * \ref GetCKMAngle, \ref GetCKMPhase, \ref GetFermionMass)
+     * must invoke this method after the evolution.
+     */
+    void ComputeCKMAndFermionMasses();
+
+
+    /**
+     * @brief Setter function for the mass of the 
+     * fermions. 
+     * Assignation is allowed only if the inserted 
+     * value is not negative.
      * @param val
      */
-    void SetCKMTheta12(double val);
+    void SetFermionMass(std::string name, double val);
     /**
-     * @brief Setter function for the CKM matrix angle 
-     * @latexonly $\theta_{13}$@endlatexonly. 
-     * The assignation is completed only if 
-     * @latexonly $\theta_{13}\in [0,\frac{\pi}{2}]$@endlatexonly
+     * @brief Getter function for the mass of the 
+     * fermions.
+     */
+    double GetFermionMass(std::string name);
+    /**
+     * @brief Setter function for the CKM matrix angles
+     * @latexonly $\theta_{12},\theta_{13},\theta_{23}$@endlatexonly. 
+     * The assignation is completed only if the inserted
+     * angle is @latexonly $\in [0,\frac{\pi}{2}]$@endlatexonly
      * @param val
      */
-    void SetCKMTheta13(double val);
+    void SetCKMAngle(std::string name, double val);
+
+
     /**
-     * @brief Setter function for the CKM matrix angle 
-     * @latexonly $\theta_{23}$@endlatexonly. 
-     * The assignation is completed only if 
-     * @latexonly $\theta_{23}\in [0,\frac{\pi}{2}]$@endlatexonly
-     * @param val
+     * @brief Getter function for the CKM matrix angles 
+     * @latexonly $\theta_{12},\theta_{13},\theta_{23}$@endlatexonly. 
+     * @return The selected CKM angle. 
      */
-    void SetCKMTheta23(double val);
+    double GetCKMAngle(std::string name);
 
     /**
      * @brief Setter function for the CKM matrix phase 
@@ -352,41 +485,34 @@ public:
      */
     void SetCKMPhase(double val);
 
-    
-    
+
     /**
-     * @brief Getter function for the CKM matrix angle 
-     * @latexonly $\theta_{12}$@endlatexonly. 
-     * @return @latexonly $\theta_{12}$@endlatexonly. 
-     */
-    double GetCKMTheta12() {
-        return CKM_theta12;
-    };
-/**
-     * @brief Getter function for the CKM matrix angle 
-     * @latexonly $\theta_{13}$@endlatexonly. 
-     * @return @latexonly $\theta_{13}$@endlatexonly. 
-     */
-    double GetCKMTheta13() {
-        return CKM_theta13;
-    };
-/**
-     * @brief Getter function for the CKM matrix angle 
-     * @latexonly $\theta_{23}$@endlatexonly. 
-     * @return @latexonly $\theta_{23}$@endlatexonly. 
-     */
-    double GetCKMTheta23() {
-        return CKM_theta23;
-    };
-/**
      * @brief Getter function for the CKM matrix phase 
      * @latexonly $\delta$@endlatexonly. 
      * @return @latexonly $\delta$@endlatexonly. 
      */
-    double GetCKMPhase() {
-        return CKM_delta;
+    double GetCKMPhase();
+
+    /**
+     * @brief Setter method for the scale at which the method 
+     * \ref GenerateSMInitialConditions
+     *  takes the input values 
+     * for SM parameters.
+     * @param mu
+     */
+    void SetSMInputScale(double mu) {
+        InputScale_SM = mu;
     };
 
+    /**
+     * @brief Getter method for the scale at which the method 
+     * \ref GenerateSMInitialConditions 
+     * takes the input values 
+     * for SM parameters.
+     */
+    double GetSMInputScale() {
+        return InputScale_SM;
+    }
 
     //Setters for 0F,2F,4F
 
@@ -466,72 +592,11 @@ public:
 
 
     /**
-     * @brief Command to perform the RGE evolution
-     * @details RGEs are solved with the chosen method from @p muI to @p muF.
-     * Currently, the available methods are "Numeric" and "Leading-Log". @n 
-     * The evolutor takes as initial values the current values of the parameters, 
-     * set with the <tt>SetCoefficient(...)</tt> function. After completing the evolution
-     * the values of the parameters are updated and are accessible with the
-     * <tt>GetCoefficient(...)</tt> function.
-     * @param method resolution method
-     * @param muI initial energy scale 
-     * @param muF final energy scale 
+     * @brief Resets all the SMEFT coefficients to 0 and the 
+     * SM parameters to their default value.
+     * @details 
      */
-    void Evolve(std::string method, double muI, double muF);
-    //Evolution from muI to muF with method = 1 (Num), 2 (LL)
-
-
-
-    /**
-     * @brief Generates the initial conditions 
-     * for Standard Model's parameters (gauge couplings,
-     * Yukawa coupling, quartic coupling and Higgs' boson mass).
-     * 
-     * @param mu Scale (in GeV) at which the initial conditions 
-     * are generated. If <tt>mu</tt> is different from
-     * the scale at which the input is given, <tt>RGESolver</tt>
-     * will use the pure SM RGEs to run the parameters 
-     * to the scale <tt>mu</tt>.
-     * @param basis Flavour basis (
-     * <tt>"UP"<tt> or <tt>"DOWN"</tt>)
-     * @param method Method used by <tt>RGESolver</tt>
-     * to run the SM parameters to the scale <tt>mu</tt> 
-     * (<tt>"Numeric"</tt> or <tt>"Leading-Log"</tt>) 
-     * @param inputCKM If set to <tt>true</tt> (default), the input 
-     * for the Yukawa matrices will be generated from the current value 
-     * of the CKM matrix and the masses of the fermions (default).  
-     */
-    void GenerateSMInitialConditions(double mu, std::string basis,
-            std::string method, bool inputCKM = true);
-
-    /**
-     * @brief Same as Evolve(std::string method, double muI, double muF), but only for the SM parameters. 
-     * The user should use this method instead of <tt>Evolve</tt> when 
-     * interested in pure SM running.  
-     * @param method
-     * @param muI
-     * @param muF
-     */
-    void EvolveSMOnly(std::string method, double muI, double muF);
-
-    /**
-     * @brief Setter method for the scale at which the method 
-     * <tt>GenerateSMInitialConditions</tt> takes the input values 
-     * for SM parameters.
-     * @param mu
-     */
-    void SetSMInputScale(double mu) {
-        InputScale_SM = mu;
-    };
-
-    /**
-     * @brief Getter method for the scale at which the method 
-     * <tt>GenerateSMInitialConditions</tt> takes the input values 
-     * for SM parameters.
-     */
-    double GetSMInputScale() {
-        return InputScale_SM;
-    }
+    void Reset();
 
     /**
      * @brief Saves the current values of parameters in a file
@@ -543,90 +608,63 @@ public:
             std::string format);
 
 
-    /**
-     * @brief Resets all the SMEFT coefficients to 0 and the 
-     * SM parameters to their default value.
-     * @details 
-     */
-    void Reset();
+
+
+
+
+
+
+
 
 
 private:
 
-    //NEW ADD
-    /**
-     * @brief The CKM matrix
-     */
-    gslpp::matrix<gslpp::complex> CKM = gslpp::matrix<gslpp::complex>(3, 3, 0.);
-
-    /**
-     * @brief the scale at which the method 
-     * <tt>GenerateSMInitialConditions</tt> takes the input values 
-     * for SM parameters.
-     */
-    double InputScale_SM; //GeV
-
-    //CKM parameters
-    /**
-     * @brief @latexonly $\theta_{12}$ @endlatexonly of the CKM matrix (in radians). 
-     * The default value is ??? 
-     */
-    double CKM_theta12;
-    double CKM_theta13;
-    double CKM_theta23;
-    double CKM_delta;
-
-    /**
-     * @brief @latexonly $\cos \theta_{12}$ @endlatexonly 
-     */
-    double c12;
-    /**
-     * @brief @latexonly $\sin \theta_{12}$ @endlatexonly 
-     */
-    double s12;
-    /**
-     * @brief @latexonly $\cos \theta_{13}$ @endlatexonly 
-     */
-    double c13;
-    /**
-     * @brief @latexonly $\sin \theta_{13}$ @endlatexonly 
-     */
-    double s13;
-    /**
-     * @brief @latexonly $\cos \theta_{23}$ @endlatexonly 
-     */
-    double c23;
-    /**
-     * @brief @latexonly $\sin \theta_{23}$ @endlatexonly 
-     */
-    double s23;
 
 
+
+    /** @name Flavour */
     /**
-     * @brief @latexonly $m_u$ @endlatexonly, the mass of up quark in GeV 
-     * (default value ?????).
+     * @brief Goes into the chosen basis. No back-rotation
+     * for SMEFT coefficients is performed. 
+     * @param basis : allowed options are "UP","DOWN"
      */
-    double mu;
-    double mc;
-    double mt;
-
-    double md;
-    double ms;
-    double mb;
-
-    double mel;
-    double mmu;
-    double mtau;
-
     void GoToBasisSMOnly(std::string basis);
     //void GoToBasis(std::string basis);
-    static int funcSMOnly(double logmu, const double y[],
-            double f[], void* params);
+
+    /**
+     * @brief Extracts from the CKM matrix the 4 
+     * physical parameters. 
+     */
     void ExtractParametersFromCKM();
-    void UpdateCKM();
-    void InitSMOnly();
-    void UpdateSMOnly();
+    /**
+     * @brief Starting from the current values of the 
+     * masses, Yukawa matrices are generated in the chosen basis. 
+     * @param basis
+     */
     void FromMassesToYukawas(std::string basis);
+    /**
+     * @brief Computes the CKM matrix with the 
+     * current values of the angles and phase
+     */
+    void UpdateCKM();
+    /**
+     * @brief Inserts the initial values of the SM parameters in the array @p x 
+     * @details Only used in @p EvolveSMOnly
+     */
+    /** @name Private functions to perform the evolution*/
+
+    void InitSMOnly();
+    /**
+     * @brief Saves the evolved values of the SM parameters from @p x  
+     * @details Only used in @p EvolveSMOnly
+     */
+    void UpdateSMOnly();
+
+
+    /**
+     * @brief Sets all the SM parameters (and the SMInputScale)
+     * at the default value and all the SMEFT coefficients to 0.
+     */
     void SetSMDefaultInput();
 
     /**
@@ -652,7 +690,16 @@ private:
     static int func(double logmu, const double y[],
             double f[], void* params);
 
-
+    /**
+     * @brief Computes the beta functions for the SM only.
+     * @param logmu value of the logarithm of the energy scale at which the beta functions are computed 
+     * @param y 1D array in which are stored the current values of the parameters
+     * @param f 1D array in which the beta functions for each parameters are saved
+     * @param params eventual additional parameters (not used)
+     * @return @p GSL_SUCCESS
+     */
+    static int funcSMOnly(double logmu, const double y[],
+            double f[], void* params);
 
     /**@name GSL Objects */
     ///@{ 
@@ -958,7 +1005,69 @@ private:
     double yuR[3][3], yuI[3][3], ydR[3][3],
     ydI[3][3], yeR[3][3], yeI[3][3];
     ///@}
+    /**
+     * @brief The CKM matrix
+     */
+    gslpp::matrix<gslpp::complex> CKM = gslpp::matrix<gslpp::complex>(3, 3, 0.);
 
+    /**
+     * @brief the scale at which the method 
+     * \ref GenerateSMInitialConditions
+     * for SM parameters.
+     */
+    double InputScale_SM; //GeV
+
+    //CKM parameters
+    /**
+     * @brief @latexonly $\theta_{12}$ @endlatexonly of the CKM matrix (in radians). 
+     * The default value is ??? 
+     */
+    double CKM_theta12;
+    double CKM_theta13;
+    double CKM_theta23;
+    double CKM_delta;
+
+    /**
+     * @brief @latexonly $\cos \theta_{12}$ @endlatexonly 
+     */
+    double c12;
+    /**
+     * @brief @latexonly $\sin \theta_{12}$ @endlatexonly 
+     */
+    double s12;
+    /**
+     * @brief @latexonly $\cos \theta_{13}$ @endlatexonly 
+     */
+    double c13;
+    /**
+     * @brief @latexonly $\sin \theta_{13}$ @endlatexonly 
+     */
+    double s13;
+    /**
+     * @brief @latexonly $\cos \theta_{23}$ @endlatexonly 
+     */
+    double c23;
+    /**
+     * @brief @latexonly $\sin \theta_{23}$ @endlatexonly 
+     */
+    double s23;
+
+
+    /**
+     * @brief @latexonly $m_u$ @endlatexonly, the mass of up quark in GeV 
+     * (default value ?????).
+     */
+    double mu;
+    double mc;
+    double mt;
+
+    double md;
+    double ms;
+    double mb;
+
+    double mel;
+    double mmu;
+    double mtau;
 
     /**@name SMEFT dimension-six operators 
      * By default, all SMEFT dimension-six operators' coefficients are set to 0. 
@@ -1123,6 +1232,8 @@ private:
      */
 
     ///@{
+    std::unordered_map<std::string, double*> FermionMasses;
+    std::unordered_map<std::string, double*> CKMAngles;
     std::unordered_map<std::string, double*> Operators0F;
     std::unordered_map<std::string, boost::function<void(int, int, double) >> Setter2F;
     std::unordered_map<std::string, boost::function<double(int, int) >> Getter2F;

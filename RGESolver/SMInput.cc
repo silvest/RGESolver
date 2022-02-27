@@ -8,40 +8,43 @@ void RGESolver::SetCKMPhase(double val) {
             && val>- 3.141592653589793) {
         CKM_delta = val;
     } else {
-        std::cout << "WARNING: CKM PHASE SHOULD BE IN THE INTERVAL (-pi,pi]"
+        std::cout << "ERROR: CKM PHASE SHOULD BE IN THE INTERVAL (-pi,pi]"
                 << std::endl;
     }
 }
 
-void RGESolver::SetCKMTheta12(double val) {
+void RGESolver::SetCKMAngle(std::string name, double val) {
     if (val <= 3.141592653589793 * 0.5
             && val >= 0.) {
-        CKM_theta12 = val;
+        *(CKMAngles.at(name)) = val;
     } else {
-        std::cout << "WARNING: CKM ANGLES SHOULD BE IN THE INTERVAL [0,pi/2]"
+        std::cout << "ERROR: CKM ANGLES SHOULD BE IN THE INTERVAL [0,pi/2]"
                 << std::endl;
     }
 }
 
-void RGESolver::SetCKMTheta13(double val) {
-    if (val <= 3.141592653589793 * 0.5
-            && val >= 0.) {
-        CKM_theta13 = val;
+double RGESolver::GetCKMAngle(std::string name) {
+    return * (CKMAngles.at(name));
+}
+
+double RGESolver::GetCKMPhase() {
+    return CKM_delta;
+}
+
+void RGESolver::SetFermionMass(std::string name, double val) {
+    if (val >= 0.) {
+        *(FermionMasses.at(name)) = val;
     } else {
-        std::cout << "WARNING: CKM ANGLES SHOULD BE IN THE INTERVAL [0,pi/2]"
+        std::cout << "ERROR: FERMION MASSES MUST BE NON-NEGATIVE"
                 << std::endl;
     }
 }
 
-void RGESolver::SetCKMTheta23(double val) {
-    if (val <= 3.141592653589793 * 0.5
-            && val >= 0.) {
-        CKM_theta23 = val;
-    } else {
-        std::cout << "WARNING: CKM ANGLES SHOULD BE IN THE INTERVAL [0,pi/2]"
-                << std::endl;
-    }
+double RGESolver::GetFermionMass(std::string name) {
+    return * (FermionMasses.at(name));
 }
+
+
 
 //Extracts the 4 parameters from the CKM 
 //affected by unphysical phases
@@ -58,26 +61,7 @@ void RGESolver::ExtractParametersFromCKM() {
     CKM_theta13 = (arcsin(gslpp::complex(s13, 0.))).real();
     CKM_theta23 = (arcsin(gslpp::complex(s23, 0.))).real();
 
-
-    //First method 
-    //delta in [0,Pi]
-    /*double temp = (CKM(1, 0).abs() * CKM(1, 0).abs() - s12 * s12 * c23 * c23
-            - c12 * c12 * s23 * s23 * s13 * s13) /
-            (2. * s12 * c23 * c12 * s23 * s13);
-    CKM_delta = (arccos(gslpp::complex(temp, 0.))).real();*/
-
-    //Second method 
-    //delta in [-Pi,Pi]
-    /* gslpp::complex R = (CKM(0, 0) * CKM(1, 1)) /
-             (CKM(0, 1) * CKM(1, 0));
-     gslpp::complex temp2 = (- c12 * c12 * c23 - c23 * R * s12 * s12) /
-             (c12 * (R - 1.) * s12 * s13 * s23);
-     CKM_delta = (gslpp::complex(0., - 1.) * log(temp2)).real();
-     std::cout << "R : " << R << std::endl;
-     std::cout << "temp2 : " << temp2 << std::endl;
-     std::cout << " CKM_delta : " << CKM_delta << std::endl;
-     */
-    //Third method
+    //See http://www.utfit.org/UTfit/Formalism
     //delta in [-Pi,Pi]
     double gamma = (- (CKM(0, 0)*(CKM(0, 2)).conjugate()) /
             (CKM(1, 0)*(CKM(1, 2)).conjugate())).arg();
@@ -93,13 +77,11 @@ void RGESolver::ExtractParametersFromCKM() {
     std::cout << "gamma : " << gamma << std::endl;*/
 
     double pi = 3.14159265358979323846;
-    //It is a good practice to avoid using ==0 as condition 
-    //for no-integer numbers in C++
-    double tol = 0.000000000001;
-    if (abs(gamma) <= tol || abs(gamma - pi) <= tol ||
-            s12 <= tol || c12 <= tol ||
-            s13 <= tol || c13 <= tol ||
-            s23 <= tol || c23 <= tol) {
+
+    if (abs(gamma) == 0 || gamma == pi ||
+            s12 == 0 || c12 == 0 ||
+            s13 == 0 || c13 == 0 ||
+            s23 == 0 || c23 == 0) {
         CKM_delta = 0.;
     } else {
         double tan_g = tan(gamma);
@@ -329,6 +311,27 @@ void RGESolver::GoToBasisSMOnly(std::string basis) {
     yu.singularvalue(Uu, Vu, Su);
     yd.singularvalue(Ud, Vd, Sd);
     ye.singularvalue(Re, Rl, Se);
+
+    //Updating fermion masses
+
+    //mf = yfdiag * v /sqrt(2)
+    //v = sqrt(mh2 / (2 lambda))
+    //v/sqrt(2) =  sqrt(mh2 / (4 lambda))
+    double vOverSqrt2 = sqrt(0.25 * mh2 / lambda);
+
+
+    mu = Su(0) * vOverSqrt2;
+    mc = Su(1) * vOverSqrt2;
+    mt = Su(2) * vOverSqrt2;
+
+    md = Sd(0) * vOverSqrt2;
+    ms = Sd(1) * vOverSqrt2;
+    mb = Sd(2) * vOverSqrt2;
+
+    mel = Se(0) * vOverSqrt2;
+    mmu = Se(1) * vOverSqrt2;
+    mtau = Se(2) * vOverSqrt2;
+
 
     //Matrix to rotate fields
     gslpp::matrix<gslpp::complex> Ru(3, 3, 0.);
@@ -767,6 +770,73 @@ void RGESolver::SetSMDefaultInput() {
 
 }
 
+void RGESolver::ComputeCKMAndFermionMasses() {
+    
+gslpp::matrix<gslpp::complex> Uu(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> Vu(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> yuDiag(3, 3, 0.);
+    gslpp::vector<double> Su(3, 0.);
+
+    gslpp::matrix<gslpp::complex> Ud(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> Vd(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> ydDiag(3, 3, 0.);
+    gslpp::vector<double> Sd(3, 0.);
+
+    gslpp::matrix<gslpp::complex> Re(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> Rl(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> Redag(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> Rldag(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> yeDiag(3, 3, 0.);
+    gslpp::vector<double> Se(3, 0.);
+
+    int i, j;
+    gslpp::matrix<gslpp::complex> yu(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> yd(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> ye(3, 3, 0.);
+
+    for (i = 0; i < 3; i ++) {
+        for (j = 0; j < 3; j ++) {
+            yu.assign(i, j, gslpp::complex(yuR[i][j], yuI[i][j], false));
+            yd.assign(i, j, gslpp::complex(ydR[i][j], ydI[i][j], false));
+            ye.assign(i, j, gslpp::complex(yeR[i][j], yeI[i][j], false));
+        }
+    }
+
+    using namespace std;
+
+    yu.singularvalue(Uu, Vu, Su);
+    yd.singularvalue(Ud, Vd, Sd);
+    ye.singularvalue(Re, Rl, Se);
+
+    //Updating fermion masses
+
+    //mf = yfdiag * v /sqrt(2)
+    //v = sqrt(mh2 / (2 lambda))
+    //v/sqrt(2) =  sqrt(mh2 / (4 lambda))
+    double vOverSqrt2 = sqrt(0.25 * mh2 / lambda);
+
+
+    mu = Su(0) * vOverSqrt2;
+    mc = Su(1) * vOverSqrt2;
+    mt = Su(2) * vOverSqrt2;
+
+    md = Sd(0) * vOverSqrt2;
+    ms = Sd(1) * vOverSqrt2;
+    mb = Sd(2) * vOverSqrt2;
+
+    mel = Se(0) * vOverSqrt2;
+    mmu = Se(1) * vOverSqrt2;
+    mtau = Se(2) * vOverSqrt2;
+
+
+    //Computing the CKM 
+    CKM = (Vu.hconjugate()) * Vd;
+    //Extract the 4 parameters from the raw CKM
+    ExtractParametersFromCKM();
+    //Build the CKM with the 4 parameters
+    UpdateCKM();
+
+}
 //Same as Reset(), probably slightly slower 
 //(but for sure cleaner...)
 
