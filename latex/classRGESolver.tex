@@ -17,7 +17,10 @@ A class that performs renormalization group evolution in the context of the S\+M
 \begin{DoxyCompactList}\small\item\em The default constructor. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classRGESolver_ab1edd7795c6a3dfd0ee1a13a0ae25361}\label{classRGESolver_ab1edd7795c6a3dfd0ee1a13a0ae25361}} 
 \mbox{\hyperlink{classRGESolver_ab1edd7795c6a3dfd0ee1a13a0ae25361}{$\sim$\+R\+G\+E\+Solver}} ()
-\begin{DoxyCompactList}\small\item\em The default destructor. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em The default destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Parameters related to the numeric integration.}\par
+\begin{DoxyCompactItemize}
+\item 
 \mbox{\Hypertarget{classRGESolver_a834b18f36a698038cbf574ea52fa2545}\label{classRGESolver_a834b18f36a698038cbf574ea52fa2545}} 
 double \mbox{\hyperlink{classRGESolver_a834b18f36a698038cbf574ea52fa2545}{epsrel}} ()
 \begin{DoxyCompactList}\small\item\em Getter for the relative error used in the numerical integration. \end{DoxyCompactList}\item 
@@ -35,7 +38,51 @@ void \mbox{\hyperlink{classRGESolver_a25286cb7bd18f41e5d631a9a14be1cbf}{Set\+\_\
 \begin{DoxyCompactList}\small\item\em Setter for the absolute error used in the numerical integration. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classRGESolver_a51938deb00fbca684c8e4e5b10a239ad}\label{classRGESolver_a51938deb00fbca684c8e4e5b10a239ad}} 
 void \mbox{\hyperlink{classRGESolver_a51938deb00fbca684c8e4e5b10a239ad}{Set\+\_\+step}} (double \mbox{\hyperlink{classRGESolver_a3c47c6eedf33555875b32fda5166748b}{step}})
-\begin{DoxyCompactList}\small\item\em Setter for the step used in the numerical integration. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Setter for the step used in the numerical integration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Evolution}\par
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} (std\+::string method, double muI, double muF)
+\begin{DoxyCompactList}\small\item\em Performs the R\+GE evolution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}{Generate\+S\+M\+Initial\+Conditions}} (double mu, std\+::string basis, std\+::string method, bool input\+C\+KM=true)
+\begin{DoxyCompactList}\small\item\em Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGESolver_a7c0c4303beb14f728a70542c8583b3a7}{Evolve\+S\+M\+Only}} (std\+::string method, double muI, double muF)
+\begin{DoxyCompactList}\small\item\em Same as \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}}, but only for the SM parameters. The user should use this method instead of \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} when interested in pure SM running. ~\newline
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Input/output}\par
+{\em Documentation for the input/output handling.
+
+~\newline
+
+
+All the S\+M\+E\+FT coefficients are set using the ~\newline
+ Set\+Coefficient methods and accessed with the Get\+Coefficient methods. There exist three different signatures for each method, depending on the number of flavour indices of the parameter (0,2,4). ~\newline
+These two routines must be used also for the SM parameters  $g1,g2,g3,\lambda,m_h^2,$   $\Re(\mathcal{Y}_u),\Im(\mathcal{Y}_u),$   $\Re(\mathcal{Y}_d),\Im(\mathcal{Y}_d),$   $\Re(\mathcal{Y}_e),\Im(\mathcal{Y}_e)$  (we follow \href{https://arxiv.org/abs/1308.2627}{\texttt{ https\+://arxiv.\+org/abs/1308.\+2627}} for what concerns the conventions in the Higgs\textquotesingle{} sector). ~\newline
+If the user is interested in using the \mbox{\hyperlink{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}{Generate\+S\+M\+Initial\+Conditions}} method, the input for the C\+KM matrix parameters and the fermion masses must be given with the methods \mbox{\hyperlink{classRGESolver_a7e045398572694648fded4253423705e}{Set\+C\+K\+M\+Angle(std\+::string name, double val)}}, \mbox{\hyperlink{classRGESolver_a74d1c5b7633de682a376204d1788b794}{Set\+C\+K\+M\+Phase(double val)}} \mbox{\hyperlink{classRGESolver_a063197d49e4878d86b2d9e5ab6b0b9f8}{Set\+Fermion\+Mass(std\+::string name, double val)}}. ~\newline
+A complete list of the keys that must be used to correctly invoke setter/getter methods are given in tables \ref{SM}, \ref{0F}, \ref{2F} and \ref{4F} }\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classRGESolver_ad499b4ef512ac892c4f5a71b9fa0daf4}{Compute\+C\+K\+M\+And\+Fermion\+Masses}} ()
+\begin{DoxyCompactList}\small\item\em Compute C\+KM matrix and the mass of the fermions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGESolver_a063197d49e4878d86b2d9e5ab6b0b9f8}{Set\+Fermion\+Mass}} (std\+::string name, double val)
+\begin{DoxyCompactList}\small\item\em Setter function for the mass of the fermions. Assignation is allowed only if the inserted value is not negative. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classRGESolver_a55375c02297501cc3ba0302f707a690d}\label{classRGESolver_a55375c02297501cc3ba0302f707a690d}} 
+double \mbox{\hyperlink{classRGESolver_a55375c02297501cc3ba0302f707a690d}{Get\+Fermion\+Mass}} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Getter function for the mass of the fermions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGESolver_a7e045398572694648fded4253423705e}{Set\+C\+K\+M\+Angle}} (std\+::string name, double val)
+\begin{DoxyCompactList}\small\item\em Setter function for the C\+KM matrix angles  $\theta_{12},\theta_{13},\theta_{23}$. The assignation is completed only if the inserted angle is $\in [0,\frac{\pi}{2}]$. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classRGESolver_a1bdc3a8209979b9f4c583b47fc4988d4}{Get\+C\+K\+M\+Angle}} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Getter function for the C\+KM matrix angles  $\theta_{12},\theta_{13},\theta_{23}$. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGESolver_a74d1c5b7633de682a376204d1788b794}{Set\+C\+K\+M\+Phase}} (double val)
+\begin{DoxyCompactList}\small\item\em Setter function for the C\+KM matrix phase  $\delta$. The assignation is completed only if  $\delta\in (-\pi,\pi]$. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classRGESolver_a891564c063a942fbd01830b30fa8e6e1}{Get\+C\+K\+M\+Phase}} ()
+\begin{DoxyCompactList}\small\item\em Getter function for the C\+KM matrix phase  $\delta$. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGESolver_ad47f4773fa7eaf4bb9bc3cb15de5b2c2}{Set\+S\+M\+Input\+Scale}} (double mu)
+\begin{DoxyCompactList}\small\item\em Setter method for the scale at which the method \mbox{\hyperlink{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}{Generate\+S\+M\+Initial\+Conditions}} takes the input values for SM parameters. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classRGESolver_a9b828a6908004f6680e519b393411f03}\label{classRGESolver_a9b828a6908004f6680e519b393411f03}} 
+double \mbox{\hyperlink{classRGESolver_a9b828a6908004f6680e519b393411f03}{Get\+S\+M\+Input\+Scale}} ()
+\begin{DoxyCompactList}\small\item\em Getter method for the scale at which the method \mbox{\hyperlink{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}{Generate\+S\+M\+Initial\+Conditions}} takes the input values for SM parameters. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_adc2b8a9a10216ec5285569c8f24cbed2}{Set\+Coefficient}} (std\+::string name, double val)
 \begin{DoxyCompactList}\small\item\em Setter function for scalar/0F parameters (no flavour indices). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_aec5d994dae1dccb52ece9e51c28b9f2e}{Set\+Coefficient}} (std\+::string name, double val, int i, int j)
@@ -48,13 +95,12 @@ double \mbox{\hyperlink{classRGESolver_a26a55e4d88d327756d9bd5999d4c6045}{Get\+C
 \begin{DoxyCompactList}\small\item\em Getter function for 2F parameters (2 flavour indices). \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classRGESolver_ab4da1b64edf881b585de6bcfd03a2ab5}{Get\+Coefficient}} (std\+::string name, int i, int j, int k, int l)
 \begin{DoxyCompactList}\small\item\em Getter function for 4F parameters (4 flavour indices). \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} (std\+::string method, double muI, double muF)
-\begin{DoxyCompactList}\small\item\em Command to perform the R\+GE evolution. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classRGESolver_ab6a813bff78d9278d3b875ea9c2f5324}{Save\+Output\+File}} (std\+::string filename, std\+::string format)
-\begin{DoxyCompactList}\small\item\em Saves the current values of parameters in a file. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classRGESolver_a98473c7d53e598bfef878106a3715948}\label{classRGESolver_a98473c7d53e598bfef878106a3715948}} 
 void \mbox{\hyperlink{classRGESolver_a98473c7d53e598bfef878106a3715948}{Reset}} ()
-\begin{DoxyCompactList}\small\item\em Resets all the parameters to 0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Resets all the S\+M\+E\+FT coefficients to 0 and the SM parameters to their default value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGESolver_ab6a813bff78d9278d3b875ea9c2f5324}{Save\+Output\+File}} (std\+::string filename, std\+::string format)
+\begin{DoxyCompactList}\small\item\em Saves the current values of parameters in a file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
 
 
 \doxysubsection{Detailed Description}
@@ -76,8 +122,9 @@ G\+NU General Public License
  \begin{table}[H]
         \centering
         \renewcommand{\arraystretch}{1.5} % Default value: 1
+\begin{tabular}{cc}
 \begin{tabular}[t]{c|c} 
-Coefficient     & \multicolumn{1}{c}{Name}      \\ \hline 
+Parameter     & \multicolumn{1}{c}{Name}      \\ \hline 
 $g_1$         & \texttt{g1}      \\
 $g_2$         & \texttt{g2}      \\
 $g_3$         & \texttt{g3}      \\
@@ -89,9 +136,30 @@ $\Re(\mathcal{Y}_d)$         & \texttt{YdR}      \\
 $\Im(\mathcal{Y}_d)$         & \texttt{YdI}      \\
  $\Re(\mathcal{Y}_e)$         & \texttt{YeR}      \\
 $\Im(\mathcal{Y}_e)$         & \texttt{YeI}      
+\end{tabular} &
+\begin{tabular}[t]{c|c} 
+Parameter     & \multicolumn{1}{c}{Name}      \\ \hline 
+$\theta_{12}$         & \texttt{CKM\_theta12}      \\
+$\theta_{13}$         & \texttt{CKM\_theta13}      \\
+$\theta_{23}$         & \texttt{CKM\_theta23}      \\
+%$\delta$         & \texttt{CKM\_delta}      \\
+$m_u$ $[\mathrm{GeV}]$  & \texttt{mu}      \\
+$m_c$ $[\mathrm{GeV}]$  & \texttt{mc}      \\
+$m_t$ $[\mathrm{GeV}]$  & \texttt{mt}      \\
+ $m_d$ $[\mathrm{GeV}]$  & \texttt{md}      \\
+$m_s$ $[\mathrm{GeV}]$  & \texttt{ms}      \\
+$m_b$ $[\mathrm{GeV}]$  & \texttt{mb}      \\
+$m_{e}$ $[\mathrm{GeV}]$  & \texttt{mel}      \\
+$m_{\mu}$ $[\mathrm{GeV}]$  & \texttt{mmu}      \\
+$m_{\tau}$ $[\mathrm{GeV}]$  & \texttt{mtau}      \\
 \end{tabular}
+\end{tabular} 
 \vspace{3 pt}
-\caption{Standard Model parameters}
+\caption{Standard Model parameters. The parameters in the left column
+ must be set (and accessed) with SetCoefficient (and GetCoefficient) methods.
+ The ones in the right column must be set and accessed using 
+ other dedicated methods (see the specific documentation for input/output) 
+ }
 \label{SM}
 \end{table}
   
@@ -131,7 +199,8 @@ $C_{H\tilde{W}B}$ & \texttt{CHWtildeB}
 \end{tabular}
 \end{tabular}
 \vspace{3 pt}
-\caption{Scalar (and real) SMEFT operators.}
+\caption{Scalar (and real) SMEFT operators. They must be set and accessed 
+using SetCoefficient and GetCoefficient.}
 \label{0F}
 \end{table}
   
@@ -197,7 +266,8 @@ $\Im(C_{Hud})$ & \texttt{CHudI} & WC1
 \end{tabular}
 \end{tabular}
 \vspace{3 pt}
-\caption{2F SMEFT operators}
+\caption{2F SMEFT operators. They must be set and accessed 
+using SetCoefficient and GetCoefficient.}
 \label{2F}
 \end{table}
 
@@ -279,7 +349,8 @@ $\Im(C_{qd8})$ & \texttt{Cqd8I} & WC7I \\
 \end{tabular} 
 \end{tabular}
 
- \caption{4F SMEFT Operators.}
+ \caption{4F SMEFT Operators. They must be set and accessed 
+using SetCoefficient and GetCoefficient.}
  \label{4F}
  \end{table} 
   
@@ -290,7 +361,18 @@ $\Im(C_{qd8})$ & \texttt{Cqd8I} & WC7I \\
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}\label{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}} 
+\mbox{\Hypertarget{classRGESolver_ad499b4ef512ac892c4f5a71b9fa0daf4}\label{classRGESolver_ad499b4ef512ac892c4f5a71b9fa0daf4}} 
+\index{RGESolver@{RGESolver}!ComputeCKMAndFermionMasses@{ComputeCKMAndFermionMasses}}
+\index{ComputeCKMAndFermionMasses@{ComputeCKMAndFermionMasses}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{ComputeCKMAndFermionMasses()}{ComputeCKMAndFermionMasses()}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Compute\+C\+K\+M\+And\+Fermion\+Masses (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Compute C\+KM matrix and the mass of the fermions. 
+
+The methods \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} and \mbox{\hyperlink{classRGESolver_a7c0c4303beb14f728a70542c8583b3a7}{Evolve\+S\+M\+Only}} do not updates the value of C\+KM parameters and fermion masses after the evolution. This process require the diagonalization of the Yukawa matrices and may slow the evolution. ~\newline
+If the user is interested in these parameters (accessible with \mbox{\hyperlink{classRGESolver_a1bdc3a8209979b9f4c583b47fc4988d4}{Get\+C\+K\+M\+Angle}}, \mbox{\hyperlink{classRGESolver_a891564c063a942fbd01830b30fa8e6e1}{Get\+C\+K\+M\+Phase}}, \mbox{\hyperlink{classRGESolver_a55375c02297501cc3ba0302f707a690d}{Get\+Fermion\+Mass}}) must invoke this method after the evolution. \mbox{\Hypertarget{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}\label{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}} 
 \index{RGESolver@{RGESolver}!Evolve@{Evolve}}
 \index{Evolve@{Evolve}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{Evolve()}{Evolve()}}
@@ -298,7 +380,7 @@ $\Im(C_{qd8})$ & \texttt{Cqd8I} & WC7I \\
 
 
 
-Command to perform the R\+GE evolution. 
+Performs the R\+GE evolution. 
 
 R\+G\+Es are solved with the chosen method from {\ttfamily muI} to {\ttfamily muF}. Currently, the available methods are \char`\"{}\+Numeric\char`\"{} and \char`\"{}\+Leading-\/\+Log\char`\"{}. ~\newline
  The evolutor takes as initial values the current values of the parameters, set with the {\ttfamily Set\+Coefficient(...)} function. After completing the evolution the values of the parameters are updated and are accessible with the {\ttfamily Get\+Coefficient(...)} function. 
@@ -310,6 +392,76 @@ R\+G\+Es are solved with the chosen method from {\ttfamily muI} to {\ttfamily mu
 {\em muF} & final energy scale \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classRGESolver_a7c0c4303beb14f728a70542c8583b3a7}\label{classRGESolver_a7c0c4303beb14f728a70542c8583b3a7}} 
+\index{RGESolver@{RGESolver}!EvolveSMOnly@{EvolveSMOnly}}
+\index{EvolveSMOnly@{EvolveSMOnly}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{EvolveSMOnly()}{EvolveSMOnly()}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Evolve\+S\+M\+Only (\begin{DoxyParamCaption}\item[{std\+::string}]{method,  }\item[{double}]{muI,  }\item[{double}]{muF }\end{DoxyParamCaption})}
+
+
+
+Same as \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}}, but only for the SM parameters. The user should use this method instead of \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} when interested in pure SM running. ~\newline
+ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em method} & \\
+\hline
+{\em muI} & \\
+\hline
+{\em muF} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}\label{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}} 
+\index{RGESolver@{RGESolver}!GenerateSMInitialConditions@{GenerateSMInitialConditions}}
+\index{GenerateSMInitialConditions@{GenerateSMInitialConditions}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GenerateSMInitialConditions()}{GenerateSMInitialConditions()}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Generate\+S\+M\+Initial\+Conditions (\begin{DoxyParamCaption}\item[{double}]{mu,  }\item[{std\+::string}]{basis,  }\item[{std\+::string}]{method,  }\item[{bool}]{input\+C\+KM = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass). 
+
+After evolving the SM parameters up to the scale mu, C\+KM parameters and fermion masses are updated with the new values. If the flag C\+K\+Minput is set to {\ttfamily true} (default), the input for the Yukawa matrices will be generated from the current value of the C\+KM matrix and the masses of the fermions. If set to false, the current values of the Yukawa matrices will be used to generate the SM initial conditions at the chosen scale. ~\newline
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em mu} & Scale (in GeV) at which the initial conditions are generated. If {\ttfamily mu} is different from the scale at which the input is given (S\+M\+Input\+Scale), {\ttfamily \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}}} will use the pure SM R\+G\+Es (at one-\/loop level) to run the parameters to the scale {\ttfamily mu}. \\
+\hline
+{\em basis} & Flavour basis ( {\ttfamily \char`\"{}\+U\+P\char`\"{}{\ttfamily  or {\ttfamily \char`\"{}\+D\+O\+W\+N\char`\"{}}) }}\\
+\hline
+{\em method} & {\ttfamily {\ttfamily Method used by {\ttfamily \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}}} to run the SM parameters to the scale {\ttfamily mu} ({\ttfamily \char`\"{}\+Numeric\char`\"{}} or {\ttfamily \char`\"{}\+Leading-\/\+Log\char`\"{}}) }}\\
+\hline
+{\em input\+C\+KM} & {\ttfamily {\ttfamily If set to {\ttfamily true} (default), the input for the Yukawa matrices will be generated from the current value of the C\+KM matrix and the masses of the fermions. }}\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRGESolver_a1bdc3a8209979b9f4c583b47fc4988d4}\label{classRGESolver_a1bdc3a8209979b9f4c583b47fc4988d4}} 
+\index{RGESolver@{RGESolver}!GetCKMAngle@{GetCKMAngle}}
+\index{GetCKMAngle@{GetCKMAngle}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCKMAngle()}{GetCKMAngle()}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+Get\+C\+K\+M\+Angle (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})}
+
+
+
+Getter function for the C\+KM matrix angles  $\theta_{12},\theta_{13},\theta_{23}$. 
+
+\begin{DoxyReturn}{Returns}
+The selected C\+KM angle. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRGESolver_a891564c063a942fbd01830b30fa8e6e1}\label{classRGESolver_a891564c063a942fbd01830b30fa8e6e1}} 
+\index{RGESolver@{RGESolver}!GetCKMPhase@{GetCKMPhase}}
+\index{GetCKMPhase@{GetCKMPhase}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCKMPhase()}{GetCKMPhase()}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+Get\+C\+K\+M\+Phase (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getter function for the C\+KM matrix phase  $\delta$. 
+
+\begin{DoxyReturn}{Returns}
+ $\delta$. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classRGESolver_a23d5d847021421bc8a9ba03412d2674e}\label{classRGESolver_a23d5d847021421bc8a9ba03412d2674e}} 
 \index{RGESolver@{RGESolver}!GetCoefficient@{GetCoefficient}}
 \index{GetCoefficient@{GetCoefficient}!RGESolver@{RGESolver}}
@@ -395,6 +547,36 @@ Currently, only \char`\"{}\+S\+L\+H\+A\char`\"{} format is implemented
 {\em format} & Format of the output file \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classRGESolver_a7e045398572694648fded4253423705e}\label{classRGESolver_a7e045398572694648fded4253423705e}} 
+\index{RGESolver@{RGESolver}!SetCKMAngle@{SetCKMAngle}}
+\index{SetCKMAngle@{SetCKMAngle}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{SetCKMAngle()}{SetCKMAngle()}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Set\+C\+K\+M\+Angle (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{double}]{val }\end{DoxyParamCaption})}
+
+
+
+Setter function for the C\+KM matrix angles  $\theta_{12},\theta_{13},\theta_{23}$. The assignation is completed only if the inserted angle is $\in [0,\frac{\pi}{2}]$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRGESolver_a74d1c5b7633de682a376204d1788b794}\label{classRGESolver_a74d1c5b7633de682a376204d1788b794}} 
+\index{RGESolver@{RGESolver}!SetCKMPhase@{SetCKMPhase}}
+\index{SetCKMPhase@{SetCKMPhase}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{SetCKMPhase()}{SetCKMPhase()}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Set\+C\+K\+M\+Phase (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+
+
+Setter function for the C\+KM matrix phase  $\delta$. The assignation is completed only if  $\delta\in (-\pi,\pi]$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classRGESolver_adc2b8a9a10216ec5285569c8f24cbed2}\label{classRGESolver_adc2b8a9a10216ec5285569c8f24cbed2}} 
 \index{RGESolver@{RGESolver}!SetCoefficient@{SetCoefficient}}
 \index{SetCoefficient@{SetCoefficient}!RGESolver@{RGESolver}}
@@ -458,6 +640,36 @@ If the parameter name does not match with any of the parameters or if at least o
 {\em k} & third flavour index \\
 \hline
 {\em l} & fourth flavour index \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRGESolver_a063197d49e4878d86b2d9e5ab6b0b9f8}\label{classRGESolver_a063197d49e4878d86b2d9e5ab6b0b9f8}} 
+\index{RGESolver@{RGESolver}!SetFermionMass@{SetFermionMass}}
+\index{SetFermionMass@{SetFermionMass}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{SetFermionMass()}{SetFermionMass()}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Set\+Fermion\+Mass (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{double}]{val }\end{DoxyParamCaption})}
+
+
+
+Setter function for the mass of the fermions. Assignation is allowed only if the inserted value is not negative. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRGESolver_ad47f4773fa7eaf4bb9bc3cb15de5b2c2}\label{classRGESolver_ad47f4773fa7eaf4bb9bc3cb15de5b2c2}} 
+\index{RGESolver@{RGESolver}!SetSMInputScale@{SetSMInputScale}}
+\index{SetSMInputScale@{SetSMInputScale}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{SetSMInputScale()}{SetSMInputScale()}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Set\+S\+M\+Input\+Scale (\begin{DoxyParamCaption}\item[{double}]{mu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Setter method for the scale at which the method \mbox{\hyperlink{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}{Generate\+S\+M\+Initial\+Conditions}} takes the input values for SM parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mu} & \\
 \hline
 \end{DoxyParams}
 
