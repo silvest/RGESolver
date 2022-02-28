@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.1)
 
-project(gslpp)
+project(gslpp VERSION 1.0 DESCRIPTION "C++ wrapper for the GSL library")
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)

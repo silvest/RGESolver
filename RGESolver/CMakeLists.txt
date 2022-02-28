@@ -24,7 +24,7 @@ cmake_minimum_required(VERSION 3.1)
 set(LIBTYPE STATIC)
 
 
-cmake_policy(SET CMP0048 NEW)
+
 
 project(RGESolver VERSION 1.0 DESCRIPTION "C++ library to solve RGEs in the context of the SMEFT")
 #add_library(RGESolver RGESolver.cc)
@@ -195,6 +195,8 @@ endif(DEBUG_MODE)
 set(PROJECTLIST gslpp) 
  
 # sub-directories
+
+#for the moment, gslpp is the only submodule.
 
 foreach(_project ${PROJECTLIST})
    add_subdirectory(${_project})
