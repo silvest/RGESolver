@@ -380,7 +380,7 @@ public:
      * will use the pure SM RGEs (at one-loop level) to run the parameters 
      * to the scale <tt>mu</tt>.
      * @param basis Flavour basis (
-     * <tt>"UP"<tt> or <tt>"DOWN"</tt>)
+     * <tt>"UP"</tt> or <tt>"DOWN"</tt>)
      * @param method Method used by <tt>RGESolver</tt>
      * to run the SM parameters to the scale <tt>mu</tt> 
      * (<tt>"Numeric"</tt> or <tt>"Leading-Log"</tt>) 
