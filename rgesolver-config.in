@@ -1,0 +1,21 @@
+#!/bin/sh
+usage()
+{
+    cat <<EOF
+Usage: rgesolver-config [OPTION]
+
+Known values for OPTION are:
+
+  --libs                print library linking information
+  --cflags              print pre-processor and compiler flags
+
+EOF
+
+    exit $1
+}
+
+if test $# -eq 0; then
+    usage 1
+fi
+
+pkg-config $@ @CMAKE_CURRENT_BINARY_DIR@/RGESolver.pc

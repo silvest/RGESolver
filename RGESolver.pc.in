@@ -1,0 +1,11 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+includedir=${prefix}/include
+libdir=${prefix}/lib
+bindir=${prefix}/bin
+
+Name: RGESolver
+Description: The RGESolver library
+Version: 1.0
+Requires: gsl 
+Cflags: -I${includedir} 
+Libs: -L${libdir} -lRGESolver 
