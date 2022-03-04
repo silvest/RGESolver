@@ -4,8 +4,10 @@ WARNINGS         = YES
 #TAGFILES         = qt.tag
 SEARCHENGINE     = NO
 USE_MATHJAX	 = YES
+MATHJAX_EXTENSIONS     = TeX/AMSmath TeX/AMSsymbols
 HTML_OUTPUT	 = docs
-
+INPUT                  = README.md
+USE_MDFILE_AS_MAINPAGE = README.md
 
 #EXTRACT_ALL            = YES
 #EXTRACT_PRIVATE        = YES

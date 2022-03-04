@@ -22,12 +22,12 @@
 /** 
  * @brief A class that performs renormalization group evolution in the context of the SMEFT
  * @details The class solves the Renormalization Group Equations (RGEs) both numerically and 
- * in the leading-log approximations. 
+ * in the leading-log approximation. 
  * Only operators up to dimension six that preserve  lepton and baryon numbers 
  * are considered. The operator basis is the Warsaw basis, defined in https://arxiv.org/abs/1008.4884. @n 
  * The user must set separately real and imaginary part of each complex parameter.  
- * In tables  @latexonly \ref{SM}, \ref{0F}, \ref{2F} and \ref{4F}@endlatexonly are listed all the 
- * parameters, together with their name (that must be used to correctly invoke getter and setter functions). @n
+ * In tables  \ref SM, \ref 0F, \ref 2F and \ref 4F we list all the 
+ * parameters, together with their names (that must be used to correctly invoke getter and setter functions). @n
  * The numerical integration is performed with an adaptive step-size routine 
  * (the Explicit embedded Runge-Kutta-Fehlberg method), using the
  * tools in the GNU Scientific Library. @n 
@@ -40,249 +40,223 @@
  */
 
 
-//Latex table with all the names of the coefficients.
+//tables with all the names of the coefficients.
 
 /**
-\latexonly
- ***************
- \begin{table}[H]
-        \centering
-        \renewcommand{\arraystretch}{1.5} % Default value: 1
-\begin{tabular}{cc}
-\begin{tabular}[t]{c|c} 
-Parameter     & \multicolumn{1}{c}{Name}      \\ \hline 
-$g_1$         & \texttt{g1}      \\
-$g_2$         & \texttt{g2}      \\
-$g_3$         & \texttt{g3}      \\
-$\lambda$         & \texttt{lambda}      \\
-$m_h^2$ $[\mathrm{GeV}^2]$  & \texttt{mh2}      \\
-$\Re(\mathcal{Y}_u)$         & \texttt{YuR}      \\
-$\Im(\mathcal{Y}_u)$         & \texttt{YuI}      \\
-$\Re(\mathcal{Y}_d)$         & \texttt{YdR}      \\
-$\Im(\mathcal{Y}_d)$         & \texttt{YdI}      \\
- $\Re(\mathcal{Y}_e)$         & \texttt{YeR}      \\
-$\Im(\mathcal{Y}_e)$         & \texttt{YeI}      
-\end{tabular} &
-\begin{tabular}[t]{c|c} 
-Parameter     & \multicolumn{1}{c}{Name}      \\ \hline 
-$\theta_{12}$         & \texttt{CKM\_theta12}      \\
-$\theta_{13}$         & \texttt{CKM\_theta13}      \\
-$\theta_{23}$         & \texttt{CKM\_theta23}      \\
-%$\delta$         & \texttt{CKM\_delta}      \\
-$m_u$ $[\mathrm{GeV}]$  & \texttt{mu}      \\
-$m_c$ $[\mathrm{GeV}]$  & \texttt{mc}      \\
-$m_t$ $[\mathrm{GeV}]$  & \texttt{mt}      \\
- $m_d$ $[\mathrm{GeV}]$  & \texttt{md}      \\
-$m_s$ $[\mathrm{GeV}]$  & \texttt{ms}      \\
-$m_b$ $[\mathrm{GeV}]$  & \texttt{mb}      \\
-$m_{e}$ $[\mathrm{GeV}]$  & \texttt{mel}      \\
-$m_{\mu}$ $[\mathrm{GeV}]$  & \texttt{mmu}      \\
-$m_{\tau}$ $[\mathrm{GeV}]$  & \texttt{mtau}      \\
-\end{tabular}
-\end{tabular} 
-\vspace{3 pt}
-\caption{Standard Model parameters. The parameters in the left column
+<table>
+<caption id="SM"> Standard Model parameters. The parameters in the left column
  must be set (and accessed) with SetCoefficient (and GetCoefficient) methods.
  The ones in the right column must be set and accessed using 
- other dedicated methods (see the specific documentation for input/output) 
- }
-\label{SM}
-\end{table}
+ other dedicated methods (see the specific documentation for input/output) </caption>
+<tr style="vertical-align:top">
+<td>
+<table>
+<tr> <th> Parameter     <th> Name  
+<tr> <td> \f$g_1\f$     <td> `g1`
+<tr><td> \f$g_2\f$          <td> `g2`
+<tr><td>\f$g_3\f$         <td> `g3`      
+<tr><td>\f$\lambda\f$         <td> `lambda`      
+<tr><td>\f$m_h^2\f$ \f$[\mathrm{GeV}^2]\f$  <td> `mh2`      
+<tr><td>\f$\mathrm{Re}(\mathcal{Y}_u)\f$         <td> `YuR`      
+<tr><td>\f$\mathrm{Im}(\mathcal{Y}_u)\f$         <td> `YuI`      
+<tr><td>\f$\mathrm{Re}(\mathcal{Y}_d)\f$         <td> `YdR`      
+<tr><td>\f$\mathrm{Im}(\mathcal{Y}_d)\f$         <td> `YdI`      
+<tr><td> \f$\mathrm{Re}(\mathcal{Y}_e)\f$         <td> `YeR`      
+<tr><td>\f$\mathrm{Im}(\mathcal{Y}_e)\f$         <td> `YeI`      
+</table> 
+<td>
+<table>
+<tr><th> Parameter     <th> Name        
+<tr><td>\f$\theta_{12}\f$         <td> `CKM_theta12`      
+<tr><td>\f$\theta_{13}\f$         <td> `CKM_theta13`      
+<tr><td>\f$\theta_{23}\f$         <td> `CKM_theta23`      
+<tr><td>\f$\delta\f$         <td> `CKM_delta`      
+<tr><td>\f$m_u\f$ \f$[\mathrm{GeV}]\f$  <td> `mu`      
+<tr><td>\f$m_c\f$ \f$[\mathrm{GeV}]\f$  <td> `mc`      
+<tr><td>\f$m_t\f$ \f$[\mathrm{GeV}]\f$  <td> `mt`      
+<tr><td>\f$m_d\f$ \f$[\mathrm{GeV}]\f$  <td> `md`      
+<tr><td>\f$m_s\f$ \f$[\mathrm{GeV}]\f$  <td> `ms`      
+<tr><td>\f$m_b\f$ \f$[\mathrm{GeV}]\f$  <td> `mb`      
+<tr><td>\f$m_{e}\f$ \f$[\mathrm{GeV}]\f$  <td> `mel`      
+<tr><td>\f$m_{\mu}\f$ \f$[\mathrm{GeV}]\f$  <td> `mmu`      
+<tr><td>\f$m_{\tau}\f$ \f$[\mathrm{GeV}]\f$  <td> `mtau`      
+</table>
+</table> 
   
  * 
  * 
  * 
  * 
  * 
-
  
-\begin{table}[H]
-        \centering
-        \renewcommand{\arraystretch}{1.5} % Default value: 1
-\begin{tabular}{cc}
-\begin{tabular}[t]{c|c}
- \multicolumn{2}{c}{Classes 1-3} \\ \hline 
-Coefficient     & \multicolumn{1}{c}{Name}      \\ \hline 
-$C_{G}$         & \texttt{CG}      \\
-$C_{\tilde{G}}$ & \texttt{CGtilde} \\
-$C_{W}$         & \texttt{CW}      \\
-$C_{\tilde{W}}$ & \texttt{CWtilde} \\
-$C_H$           & \texttt{CH}      \\
-$C_{H \Box} $   & \texttt{CHbox}   \\
-$C_{HD}$        & \texttt{CHD}    
-\end{tabular} & 
- \begin{tabular}[t]{c|c}
-\multicolumn{2}{c}{Class 4} \\ \hline 
-Coefficient     & \multicolumn{1}{c}{Name}         \\ \hline 
-$C_{HG}$         & \texttt{CHG}      \\
-$C_{H\tilde{G}}$ & \texttt{CHGtilde} \\
-$C_{HW}$         & \texttt{CHW}      \\
-$C_{H\tilde{W}}$ & \texttt{CHWtilde} \\
-$C_{HB}$         & \texttt{CHB}      \\
-$C_{H\tilde{B}}$ & \texttt{CHBtilde} \\
-$C_{HWB}$         & \texttt{CHWB}      \\
-$C_{H\tilde{W}B}$ & \texttt{CHWtildeB} 
-\end{tabular}
-\end{tabular}
-\vspace{3 pt}
-\caption{Scalar (and real) SMEFT operators. They must be set and accessed 
-using SetCoefficient and GetCoefficient.}
-\label{0F}
-\end{table}
+<table>
+<caption id="0F"> Scalar (and real) SMEFT operators. They must be set and accessed 
+using SetCoefficient and GetCoefficient. </caption>
+<tr style="vertical-align:top">
+<td>
+<table>
+<tr> <th colspan="2"> Classes 1-3
+<tr> <th> Coefficient     <th> Name        
+<tr><td>\f$C_{G}\f$         <td> `CG`      
+<tr><td>\f$C_{\tilde{G}}\f$ <td> `CGtilde` 
+<tr><td>\f$C_{W}\f$         <td> `CW`      
+<tr><td>\f$C_{\tilde{W}}\f$ <td> `CWtilde` 
+<tr><td>\f$C_H\f$           <td> `CH`      
+<tr><td>\f$C_{H \Box} \f$   <td> `CHbox`   
+<tr><td>\f$C_{HD}\f$        <td> `CHD`    
+</table> <td> 
+<table>
+<tr><th colspan="2"> Class 4   
+<tr><th> Coefficient     <th> Name           
+<tr><td>\f$C_{HG}\f$         <td> `CHG`      
+<tr><td>\f$C_{H\tilde{G}}\f$ <td> `CHGtilde` 
+<tr><td>\f$C_{HW}\f$         <td> `CHW`      
+<tr><td>\f$C_{H\tilde{W}}\f$ <td> `CHWtilde` 
+<tr><td>\f$C_{HB}\f$         <td> `CHB`      
+<tr><td>\f$C_{H\tilde{B}}\f$ <td> `CHBtilde` 
+<tr><td>\f$C_{HWB}\f$         <td> `CHWB`      
+<tr><td>\f$C_{H\tilde{W}B}\f$ <td> `CHWtildeB` 
+</table>
+</table>
   
  * 
  * 
  * 
  * 
  * 
-
-\begin{table}[H]
-        \centering
-        \renewcommand{\arraystretch}{1.5} % Default value: 1
-\begin{tabular}{ccc}
-\begin{tabular}[t]{c|c|c}
- \multicolumn{3}{c}{Class 5} \\ \hline 
-Coefficient     & Name   & Symmetry      \\ \hline 
-$\Re(C_{eH})$ & \texttt{CeHR} & \multicolumn{1}{c}{WC1}   \\ 
-$\Im(C_{eH})$ & \texttt{CeHI}  & \multicolumn{1}{c}{WC1}\\ 
-$\Re(C_{uH})$ & \texttt{CuHR}  & \multicolumn{1}{c}{WC1}\\ 
-$\Im(C_{uH})$ & \texttt{CuHI}  & \multicolumn{1}{c}{WC1}\\ 
-$\Re(C_{dH})$ & \texttt{CdHR}  & \multicolumn{1}{c}{WC1}\\ 
-$\Im(C_{dH})$ & \texttt{CdHI}  & \multicolumn{1}{c}{WC1}
-\end{tabular} & 
- \begin{tabular}[t]{c|c|c}
-\multicolumn{3}{c}{Class 6} \\ \hline 
-Coefficient     & Name  & Symmetry \\ \hline 
-$\Re(C_{eW})$ & \texttt{CeWR} & WC1 \\ 
-$\Im(C_{eW})$ & \texttt{CeWI} & WC1\\ 
-$\Re(C_{eB})$ & \texttt{CeBR} & WC1\\ 
-$\Im(C_{eB})$ & \texttt{CeBI} & WC1\\ 
-$\Re(C_{uG})$ & \texttt{CuGR} & WC1\\ 
-$\Im(C_{uG})$ & \texttt{CuGI} & WC1\\ 
-$\Re(C_{uW})$ & \texttt{CuWR} & WC1\\ 
-$\Im(C_{uW})$ & \texttt{CuWI} & WC1\\ 
-$\Re(C_{uB})$ & \texttt{CuBR} & WC1\\ 
-$\Im(C_{uB})$ & \texttt{CuBI} & WC1\\ 
-$\Re(C_{dG})$ & \texttt{CdGR} & WC1\\ 
-$\Im(C_{dG})$ & \texttt{CdGI} & WC1\\ 
-$\Re(C_{dW})$ & \texttt{CdWR} & WC1\\ 
-$\Im(C_{dW})$ & \texttt{CdWI} & WC1\\ 
-$\Re(C_{dB})$ & \texttt{CdBR} & WC1\\ 
-$\Im(C_{dB})$ & \texttt{CdBI} & WC1
-\end{tabular} &  
- \begin{tabular}[t]{c|c|c}
-\multicolumn{3}{c}{Class 7} \\ \hline 
-Coefficient     & Name & Symmetry \\ \hline
-$\Re(C_{Hl1})$ & \texttt{CHl1R}& WC2R \\ 
-$\Im(C_{Hl1})$ & \texttt{CHl1I} & WC2I\\ 
-$\Re(C_{Hl3})$ & \texttt{CHl3R} & WC2R\\ 
-$\Im(C_{Hl3})$ & \texttt{CHl3I} & WC2I\\ 
-$\Re(C_{He})$ & \texttt{CHeR} & WC2R\\ 
-$\Im(C_{He})$ & \texttt{CHeI} & WC2I\\ 
-$\Re(C_{Hq1})$ & \texttt{CHq1R} & WC2R\\ 
-$\Im(C_{Hq1})$ & \texttt{CHq1I} & WC2I\\ 
-$\Re(C_{Hq3})$ & \texttt{CHq3R}& WC2R \\ 
-$\Im(C_{Hq3})$ & \texttt{CHq3I} & WC2I\\ 
-$\Re(C_{Hu})$ & \texttt{CHuR} & WC2R\\ 
-$\Im(C_{Hu})$ & \texttt{CHuI} & WC2I\\ 
-$\Re(C_{Hd})$ & \texttt{CHdR} & WC2R\\ 
-$\Im(C_{Hd})$ & \texttt{CHdI} & WC2I\\
-$\Re(C_{Hud})$ & \texttt{CHudR} & WC1\\ 
-$\Im(C_{Hud})$ & \texttt{CHudI} & WC1  
-\end{tabular}
-\end{tabular}
-\vspace{3 pt}
-\caption{2F SMEFT operators. They must be set and accessed 
-using SetCoefficient and GetCoefficient.}
-\label{2F}
-\end{table}
+<table>
+<caption id="2F"> 2F SMEFT operators. They must be set and accessed 
+using SetCoefficient and GetCoefficient. </caption>
+<tr style="vertical-align:top"> <td>
+<table>
+<tr><th colspan="3"> Class 5   
+<tr> <th> Coefficient     <th> Name   <th> Symmetry        
+<tr><td>\f$\mathrm{Re}(C_{eH})\f$ <td> `CeHR` <td> WC1    
+<tr><td>\f$\mathrm{Im}(C_{eH})\f$ <td> `CeHI`  <td> WC1 
+<tr><td>\f$\mathrm{Re}(C_{uH})\f$ <td> `CuHR`  <td> WC1 
+<tr><td>\f$\mathrm{Im}(C_{uH})\f$ <td> `CuHI`  <td> WC1 
+<tr><td>\f$\mathrm{Re}(C_{dH})\f$ <td> `CdHR`  <td> WC1 
+<tr><td>\f$\mathrm{Im}(C_{dH})\f$ <td> `CdHI`  <td> WC1
+</table> <td> 
+<table>
+<tr><th colspan="3"> Class 6   
+<tr> <th> Coefficient     <th> Name  <th> Symmetry   
+<tr><td>\f$\mathrm{Re}(C_{eW})\f$ <td> `CeWR` <td> WC1  
+<tr><td>\f$\mathrm{Im}(C_{eW})\f$ <td> `CeWI` <td> WC1 
+<tr><td>\f$\mathrm{Re}(C_{eB})\f$ <td> `CeBR` <td> WC1 
+<tr><td>\f$\mathrm{Im}(C_{eB})\f$ <td> `CeBI` <td> WC1 
+<tr><td>\f$\mathrm{Re}(C_{uG})\f$ <td> `CuGR` <td> WC1 
+<tr><td>\f$\mathrm{Im}(C_{uG})\f$ <td> `CuGI` <td> WC1 
+<tr><td>\f$\mathrm{Re}(C_{uW})\f$ <td> `CuWR` <td> WC1 
+<tr><td>\f$\mathrm{Im}(C_{uW})\f$ <td> `CuWI` <td> WC1 
+<tr><td>\f$\mathrm{Re}(C_{uB})\f$ <td> `CuBR` <td> WC1 
+<tr><td>\f$\mathrm{Im}(C_{uB})\f$ <td> `CuBI` <td> WC1 
+<tr><td>\f$\mathrm{Re}(C_{dG})\f$ <td> `CdGR` <td> WC1 
+<tr><td>\f$\mathrm{Im}(C_{dG})\f$ <td> `CdGI` <td> WC1 
+<tr><td>\f$\mathrm{Re}(C_{dW})\f$ <td> `CdWR` <td> WC1 
+<tr><td>\f$\mathrm{Im}(C_{dW})\f$ <td> `CdWI` <td> WC1 
+<tr><td>\f$\mathrm{Re}(C_{dB})\f$ <td> `CdBR` <td> WC1 
+<tr><td>\f$\mathrm{Im}(C_{dB})\f$ <td> `CdBI` <td> WC1
+</table> <td>  
+<table> 
+<tr> <th colspan="3"> Class 7   
+<tr> <th> Coefficient     <th> Name <th> Symmetry  
+<tr><td>\f$\mathrm{Re}(C_{Hl1})\f$ <td> `CHl1R` <td> WC2R  
+<tr><td>\f$\mathrm{Im}(C_{Hl1})\f$ <td> `CHl1I` <td> WC2I 
+<tr><td>\f$\mathrm{Re}(C_{Hl3})\f$ <td> `CHl3R` <td> WC2R 
+<tr><td>\f$\mathrm{Im}(C_{Hl3})\f$ <td> `CHl3I` <td> WC2I 
+<tr><td>\f$\mathrm{Re}(C_{He})\f$ <td> `CHeR` <td> WC2R 
+<tr><td>\f$\mathrm{Im}(C_{He})\f$ <td> `CHeI` <td> WC2I 
+<tr><td>\f$\mathrm{Re}(C_{Hq1})\f$ <td> `CHq1R` <td> WC2R 
+<tr><td>\f$\mathrm{Im}(C_{Hq1})\f$ <td> `CHq1I` <td> WC2I 
+<tr><td>\f$\mathrm{Re}(C_{Hq3})\f$ <td> `CHq3R` <td> WC2R  
+<tr><td>\f$\mathrm{Im}(C_{Hq3})\f$ <td> `CHq3I` <td> WC2I 
+<tr><td>\f$\mathrm{Re}(C_{Hu})\f$ <td> `CHuR` <td> WC2R 
+<tr><td>\f$\mathrm{Im}(C_{Hu})\f$ <td> `CHuI` <td> WC2I 
+<tr><td>\f$\mathrm{Re}(C_{Hd})\f$ <td> `CHdR` <td> WC2R 
+<tr><td>\f$\mathrm{Im}(C_{Hd})\f$ <td> `CHdI` <td> WC2I
+<tr><td>\f$\mathrm{Re}(C_{Hud})\f$ <td> `CHudR` <td> WC1 
+<tr><td>\f$\mathrm{Im}(C_{Hud})\f$ <td> `CHudI` <td> WC1  
+</table>
+</table>
 
  * 
  * 
  * 
  *  
-
  
- \begin{table}[H]
-\centering
-        \renewcommand{\arraystretch}{1.5} % Default value: 1
- \begin{tabular}[t]{ccc}
-\begin{tabular}[t]{c|c|c}
-\multicolumn{3}{c}{Class 8 $(\bar{L}L)(\bar{L}L)$} \\ \hline
-Coefficient     & Name & Symmetry \\ \hline
-$\Re(C_{ll})$ & \texttt{CllR} & WC6R \\
-$\Im(C_{ll})$ & \texttt{CllI} & WC6I \\	
-$\Re(C_{qq1})$ & \texttt{Cqq1R} & WC6R \\
-$\Im(C_{qq1})$ & \texttt{Cqq1I} & WC6I \\	
-$\Re(C_{qq3})$ & \texttt{Cqq3R} & WC6R \\
-$\Im(C_{qq3})$ & \texttt{Cqq3I} & WC6I \\
-$\Re(C_{lq1})$ & \texttt{Clq1R} & WC7R \\
-$\Im(C_{lq1})$ & \texttt{Clq1I} & WC7I \\
-$\Re(C_{lq3})$ & \texttt{Clq3R} & WC7R \\
-$\Im(C_{lq3})$ & \texttt{Clq3I} & WC7I  \\ [7 pt]             
-\multicolumn{3}{c}{Class 8 $(\bar{L}R)(\bar{L}R)$} \\ \hline
-Coefficient     & Name & Symmetry \\ \hline
-$\Re(C_{quqd1})$ & \texttt{Cquqd1R} & WC5 \\
-$\Im(C_{quqd1})$ & \texttt{Cquqd1I} & WC5 \\
-$\Re(C_{quqd8})$ & \texttt{Cquqd8R} & WC5 \\
-$\Im(C_{quqd8})$ & \texttt{Cquqs8I} & WC5 \\
-$\Re(C_{lequ1})$ & \texttt{Clequ1R} & WC5 \\
-$\Im(C_{lequ1})$ & \texttt{Clequ1I} & WC5 \\	
-$\Re(C_{lequ3})$ & \texttt{Clequ3R} & WC5 \\
-$\Im(C_{lequ3})$ & \texttt{Clequ3I} & WC5		
-\end{tabular} &
-\begin{tabular}[t]{c|c|c} 
-\multicolumn{3}{c}{Class 8 $(\bar{R}R)(\bar{R}R)$} \\ \hline
-Coefficient     & Name & Symmetry \\ \hline
-$\Re(C_{ee})$ & \texttt{CeeR} & WC8R \\
-$\Im(C_{ee})$ & \texttt{CeeI} & WC8I \\
-$\Re(C_{uu})$ & \texttt{CuuR} & WC6R \\
-$\Im(C_{uu})$ & \texttt{CuuI} & WC6I \\
-$\Re(C_{dd})$ & \texttt{CddR} & WC6R \\
-$\Im(C_{dd})$ & \texttt{CddI} & WC6I \\	
-$\Re(C_{eu})$ & \texttt{CeuR} & WC7R \\
-$\Im(C_{eu})$ & \texttt{CeuI} & WC7I \\
-$\Re(C_{ed})$ & \texttt{CedR} & WC7R \\
-$\Im(C_{ed})$ & \texttt{CedI} & WC7I \\
-$\Re(C_{ud1})$ & \texttt{Cud1R} & WC7R \\
-$\Im(C_{ud1})$ & \texttt{Cud1I} & WC7I \\
-$\Re(C_{ud8})$ & \texttt{Cud8R} & WC7R \\
-$\Im(C_{ud8})$ & \texttt{Cud8I} & WC7I \\ [7 pt]             
-\multicolumn{3}{c}{Class 8 $(\bar{L}R)(\bar{R}L)$} \\ \hline
-Coefficient     & Name & Symmetry \\ \hline
-$\Re(C_{ledq})$ & \texttt{CledqR} & WC5 \\
-$\Im(C_{ledq})$ & \texttt{CledqI} & WC5 
-\end{tabular} & 
-\begin{tabular}[t]{c|c|c} 
-\multicolumn{3}{c}{Class 8 $(\bar{L}L)(\bar{R}R)$} \\ \hline
-Coefficient     & Name & Symmetry \\ \hline
-$\Re(C_{le})$ & \texttt{CleR} & WC7R \\
-$\Im(C_{le})$ & \texttt{CleI} & WC7I \\
-$\Re(C_{lu})$ & \texttt{CluR} & WC7R \\
-$\Im(C_{lu})$ & \texttt{CluI} & WC7I \\
-$\Re(C_{ld})$ & \texttt{CldR} & WC7R \\
-$\Im(C_{ld})$ & \texttt{CldI} & WC7I \\
-$\Re(C_{qe})$ & \texttt{CqeR} & WC7R \\
-$\Im(C_{qe})$ & \texttt{CqeI} & WC7I \\
-$\Re(C_{qu1})$ & \texttt{Cqu1R} & WC7R \\
-$\Im(C_{qu1})$ & \texttt{Cqu1I} & WC7I \\
-$\Re(C_{qu8})$ & \texttt{Cqu8R} & WC7R \\
-$\Im(C_{qu8})$ & \texttt{Cqu8I} & WC7I \\
-$\Re(C_{qd1})$ & \texttt{Cqd1R} & WC7R \\
-$\Im(C_{qd1})$ & \texttt{Cqd1I} & WC7I \\
-$\Re(C_{qd8})$ & \texttt{Cqd8R} & WC7R \\
-$\Im(C_{qd8})$ & \texttt{Cqd8I} & WC7I \\
-\end{tabular} 
-\end{tabular}
+<table>
+<caption id="4F"> 4F SMEFT Operators. They must be set and accessed 
+using SetCoefficient and GetCoefficient.</caption>
+<tr style="vertical-align:top"><td>
+<table>
+<tr> <th colspan="3"> Class 8 \f$(\bar{L}L)(\bar{L}L)\f$  
+<tr> <th> Coefficient     <th> Name <th> Symmetry  
+<tr><td>\f$\mathrm{Re}(C_{ll})\f$ <td> `CllR` <td> WC6R 
+<tr><td>\f$\mathrm{Im}(C_{ll})\f$ <td> `CllI` <td> WC6I 	
+<tr><td>\f$\mathrm{Re}(C_{qq1})\f$ <td> `Cqq1R` <td> WC6R 
+<tr><td>\f$\mathrm{Im}(C_{qq1})\f$ <td> `Cqq1I` <td> WC6I 	
+<tr><td>\f$\mathrm{Re}(C_{qq3})\f$ <td> `Cqq3R` <td> WC6R 
+<tr><td>\f$\mathrm{Im}(C_{qq3})\f$ <td> `Cqq3I` <td> WC6I 
+<tr><td>\f$\mathrm{Re}(C_{lq1})\f$ <td> `Clq1R` <td> WC7R 
+<tr><td>\f$\mathrm{Im}(C_{lq1})\f$ <td> `Clq1I` <td> WC7I 
+<tr><td>\f$\mathrm{Re}(C_{lq3})\f$ <td> `Clq3R` <td> WC7R 
+<tr><td>\f$\mathrm{Im}(C_{lq3})\f$ <td> `Clq3I` <td> WC7I             
+<tr><th colspan=3> Class 8 \f$(\bar{L}R)(\bar{L}R)\f$  
+<tr><th> Coefficient     <th> Name <th> Symmetry  
+<tr><td>\f$\mathrm{Re}(C_{quqd1})\f$ <td> `Cquqd1R` <td> WC5 
+<tr><td>\f$\mathrm{Im}(C_{quqd1})\f$ <td> `Cquqd1I` <td> WC5 
+<tr><td>\f$\mathrm{Re}(C_{quqd8})\f$ <td> `Cquqd8R` <td> WC5 
+<tr><td>\f$\mathrm{Im}(C_{quqd8})\f$ <td> `Cquqs8I` <td> WC5 
+<tr><td>\f$\mathrm{Re}(C_{lequ1})\f$ <td> `Clequ1R` <td> WC5 
+<tr><td>\f$\mathrm{Im}(C_{lequ1})\f$ <td> `Clequ1I` <td> WC5 	
+<tr><td>\f$\mathrm{Re}(C_{lequ3})\f$ <td> `Clequ3R` <td> WC5 
+<tr><td>\f$\mathrm{Im}(C_{lequ3})\f$ <td> `Clequ3I` <td> WC5		
+</table> <td>
+<table>
+<tr> <th colspan="3"> Class 8 \f$(\bar{R}R)(\bar{R}R)\f$  
+<tr> <th> Coefficient     <th> Name <th> Symmetry  
+<tr><td>\f$\mathrm{Re}(C_{ee})\f$ <td> `CeeR` <td> WC8R 
+<tr><td>\f$\mathrm{Im}(C_{ee})\f$ <td> `CeeI` <td> WC8I 
+<tr><td>\f$\mathrm{Re}(C_{uu})\f$ <td> `CuuR` <td> WC6R 
+<tr><td>\f$\mathrm{Im}(C_{uu})\f$ <td> `CuuI` <td> WC6I 
+<tr><td>\f$\mathrm{Re}(C_{dd})\f$ <td> `CddR` <td> WC6R 
+<tr><td>\f$\mathrm{Im}(C_{dd})\f$ <td> `CddI` <td> WC6I 	
+<tr><td>\f$\mathrm{Re}(C_{eu})\f$ <td> `CeuR` <td> WC7R 
+<tr><td>\f$\mathrm{Im}(C_{eu})\f$ <td> `CeuI` <td> WC7I 
+<tr><td>\f$\mathrm{Re}(C_{ed})\f$ <td> `CedR` <td> WC7R 
+<tr><td>\f$\mathrm{Im}(C_{ed})\f$ <td> `CedI` <td> WC7I 
+<tr><td>\f$\mathrm{Re}(C_{ud1})\f$ <td> `Cud1R` <td> WC7R 
+<tr><td>\f$\mathrm{Im}(C_{ud1})\f$ <td> `Cud1I` <td> WC7I 
+<tr><td>\f$\mathrm{Re}(C_{ud8})\f$ <td> `Cud8R` <td> WC7R 
+<tr><td>\f$\mathrm{Im}(C_{ud8})\f$ <td> `Cud8I` <td> WC7I             
+<tr><th colspan="3"> Class 8 \f$(\bar{L}R)(\bar{R}L)\f$  
+<tr><th> Coefficient     <th> Name <th> Symmetry  
+<tr><td>\f$\mathrm{Re}(C_{ledq})\f$ <td> `CledqR` <td> WC5 
+<tr><td>\f$\mathrm{Im}(C_{ledq})\f$ <td> `CledqI` <td> WC5 
+</table> <td> 
+<table> 
+<tr> <th colspan="3" >Class 8 \f$(\bar{L}L)(\bar{R}R)\f$  
+<tr> <th> Coefficient     <th> Name <th> Symmetry  
+<tr><td>\f$\mathrm{Re}(C_{le})\f$ <td> `CleR` <td> WC7R 
+<tr><td>\f$\mathrm{Im}(C_{le})\f$ <td> `CleI` <td> WC7I 
+<tr><td>\f$\mathrm{Re}(C_{lu})\f$ <td> `CluR` <td> WC7R 
+<tr><td>\f$\mathrm{Im}(C_{lu})\f$ <td> `CluI` <td> WC7I 
+<tr><td>\f$\mathrm{Re}(C_{ld})\f$ <td> `CldR` <td> WC7R 
+<tr><td>\f$\mathrm{Im}(C_{ld})\f$ <td> `CldI` <td> WC7I 
+<tr><td>\f$\mathrm{Re}(C_{qe})\f$ <td> `CqeR` <td> WC7R 
+<tr><td>\f$\mathrm{Im}(C_{qe})\f$ <td> `CqeI` <td> WC7I 
+<tr><td>\f$\mathrm{Re}(C_{qu1})\f$ <td> `Cqu1R` <td> WC7R 
+<tr><td>\f$\mathrm{Im}(C_{qu1})\f$ <td> `Cqu1I` <td> WC7I 
+<tr><td>\f$\mathrm{Re}(C_{qu8})\f$ <td> `Cqu8R` <td> WC7R 
+<tr><td>\f$\mathrm{Im}(C_{qu8})\f$ <td> `Cqu8I` <td> WC7I 
+<tr><td>\f$\mathrm{Re}(C_{qd1})\f$ <td> `Cqd1R` <td> WC7R 
+<tr><td>\f$\mathrm{Im}(C_{qd1})\f$ <td> `Cqd1I` <td> WC7I 
+<tr><td>\f$\mathrm{Re}(C_{qd8})\f$ <td> `Cqd8R` <td> WC7R 
+<tr><td>\f$\mathrm{Im}(C_{qd8})\f$ <td> `Cqd8I` <td> WC7I  
+</table>
+</table>
 
- \caption{4F SMEFT Operators. They must be set and accessed 
-using SetCoefficient and GetCoefficient.}
- \label{4F}
- \end{table} 
-  
- 
- ***************
-\endlatexonly
  */
 
 class RGESolver {
@@ -413,10 +387,10 @@ public:
      * depending on the number of flavour indices of the 
      * parameter (0,2,4). @n
      * These two routines must be used also for the SM parameters 
-     * @latexonly $g1,g2,g3,\lambda,m_h^2,$ @endlatexonly
-     *  @latexonly $\Re(\mathcal{Y}_u),\Im(\mathcal{Y}_u),$ @endlatexonly
-     *  @latexonly $\Re(\mathcal{Y}_d),\Im(\mathcal{Y}_d),$ @endlatexonly
-     *  @latexonly $\Re(\mathcal{Y}_e),\Im(\mathcal{Y}_e)$ @endlatexonly
+     *  \f$g1,g2,g3,\lambda,m_h^2,\f$ 
+     *   \f$\mathrm{Re}(\mathcal{Y}_u),\Im(\mathcal{Y}_u),\f$ 
+     *   \f$\mathrm{Re}(\mathcal{Y}_d),\Im(\mathcal{Y}_d),\f$ 
+     *   \f$\mathrm{Re}(\mathcal{Y}_e),\Im(\mathcal{Y}_e)\f$ 
      *  (we follow https://arxiv.org/abs/1308.2627 for what concerns
      * the conventions in the Higgs' sector). @n
      * If the user is interested in using the \ref GenerateSMInitialConditions
@@ -428,7 +402,7 @@ public:
      * SetFermionMass(std::string name, double val). @n
      * A complete list of the keys that must be used to 
      * correctly invoke setter/getter methods are given in 
-     * tables  @latexonly \ref{SM}, \ref{0F}, \ref{2F} and \ref{4F}@endlatexonly
+     * tables   \ref SM , \ref 0F , \ref 2F and \ref 4F 
      */
 
 
@@ -461,9 +435,9 @@ public:
     double GetFermionMass(std::string name);
     /**
      * @brief Setter function for the CKM matrix angles
-     * @latexonly $\theta_{12},\theta_{13},\theta_{23}$@endlatexonly. 
+     *  \f$\theta_{12},\theta_{13},\theta_{23}\f$. 
      * The assignation is completed only if the inserted
-     * angle is @latexonly $\in [0,\frac{\pi}{2}]$@endlatexonly
+     * angle is  \f$\in [0,\frac{\pi}{2}]\f$
      * @param val
      */
     void SetCKMAngle(std::string name, double val);
@@ -471,16 +445,16 @@ public:
 
     /**
      * @brief Getter function for the CKM matrix angles 
-     * @latexonly $\theta_{12},\theta_{13},\theta_{23}$@endlatexonly. 
+     *  \f$\theta_{12},\theta_{13},\theta_{23}\f$. 
      * @return The selected CKM angle. 
      */
     double GetCKMAngle(std::string name);
 
     /**
      * @brief Setter function for the CKM matrix phase 
-     * @latexonly $\delta$@endlatexonly. 
+     *  \f$\delta\f$. 
      * The assignation is completed only if 
-     * @latexonly $\delta\in (-\pi,\pi]$@endlatexonly
+     *  \f$\delta\in (-\pi,\pi]\f$
      * @param val
      */
     void SetCKMPhase(double val);
@@ -488,8 +462,8 @@ public:
 
     /**
      * @brief Getter function for the CKM matrix phase 
-     * @latexonly $\delta$@endlatexonly. 
-     * @return @latexonly $\delta$@endlatexonly. 
+     *  \f$\delta\f$. 
+     * @return  \f$\delta\f$. 
      */
     double GetCKMPhase();
 
@@ -1019,7 +993,7 @@ private:
 
     //CKM parameters
     /**
-     * @brief @latexonly $\theta_{12}$ @endlatexonly of the CKM matrix (in radians). 
+     * @brief \f$\theta_{12\f$  of the CKM matrix (in radians). 
      * The default value is ??? 
      */
     double CKM_theta12;
@@ -1028,33 +1002,33 @@ private:
     double CKM_delta;
 
     /**
-     * @brief @latexonly $\cos \theta_{12}$ @endlatexonly 
+     * @brief \f$\cos \theta_{12\f$  
      */
     double c12;
     /**
-     * @brief @latexonly $\sin \theta_{12}$ @endlatexonly 
+     * @brief \f$\sin \theta_{12\f$  
      */
     double s12;
     /**
-     * @brief @latexonly $\cos \theta_{13}$ @endlatexonly 
+     * @brief \f$\cos \theta_{13\f$  
      */
     double c13;
     /**
-     * @brief @latexonly $\sin \theta_{13}$ @endlatexonly 
+     * @brief \f$\sin \theta_{13\f$  
      */
     double s13;
     /**
-     * @brief @latexonly $\cos \theta_{23}$ @endlatexonly 
+     * @brief \f$\cos \theta_{23\f$  
      */
     double c23;
     /**
-     * @brief @latexonly $\sin \theta_{23}$ @endlatexonly 
+     * @brief \f$\sin \theta_{23\f$  
      */
     double s23;
 
 
     /**
-     * @brief @latexonly $m_u$ @endlatexonly, the mass of up quark in GeV 
+     * @brief \f$m_\f$ , the mass of up quark in GeV 
      * (default value ?????).
      */
     double mu;

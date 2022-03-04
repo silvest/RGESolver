@@ -5,13 +5,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>RGESolver: Main Page</title>
+<title>RGESolver: &lt;tt&gt;RGESolver&lt;/tt&gt;</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  extensions: ["tex2jax.js"],
+  extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
   jax: ["input/TeX","output/HTML-CSS"],
 });
 </script>
@@ -45,10 +45,49 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
-<div class="header">
-  <div class="headertitle"><div class="title">RGESolver Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title"><code>RGESolver</code> </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p ><a class="anchor" id="md_README"></a> A <code>C++</code> library to perform renormalization group evolution of SMEFT coefficients, both numerically and with the leading-log approximation. The general flavour case at dimension-six level is considered. Operators that violate lepton and/or baryon number conservation are not considered. The documentation for this library can be found <a href="https://silvest.github.io/RGESolver/annotated.html">here</a></p>
+<p ><code>RGESolver</code> is a free software under the copyright of the GNU General Public License.</p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Dependencies</h1>
+<ul>
+<li><code>BOOST</code> : BOOST is a C++ library which can be obtained from the <a href="https://www.boost.org/"><code>BOOST</code> website</a> or from Linux package managers or Mac ports. RGESolver only requires the BOOST headers, not the full libraries, so a header-only installation is sufficient.</li>
+<li><code>GSL</code> : The GNU Scientific Library (GSL) is a C library for numerical computations. It can be found on the <a href="https://www.gnu.org/software/gsl/"><code>GSL</code> website</a>. Most Linux package managers will have a stable version as will any ports for Mac.</li>
+<li><code>C++11</code> : The compilation forces the <code>C++</code> standard to 11.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Installation</h1>
+<p >The installation of <code>RGESolver</code> requires the availability of <code>CMake</code> in the system (version <code>3.1</code> or greater). A description of <code>CMake</code> and the instructions for its installation can be found in the <a href="https://cmake.org/"><code>CMake</code>website</a>.</p>
+<p >The installation can be performed writhing the following lines in a terminal session (in the <code>RGESolver</code> directory): </p><div class="fragment"><div class="line">mkdir build &amp;&amp; cd $_</div>
+<div class="line">cmake ..</div>
+<div class="line">make</div>
+<div class="line">make install</div>
+</div><!-- fragment --><p> Note that depending on the setting of installation prefix (see below) the user might need root privileges to be able to install <code>RGESolver</code> (so the should use <code>sudo make install</code> instead of <code>make install</code>).</p>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Command line options for the installation</h2>
+<ul>
+<li><code>-DLOCAL_INSTALL:BOOL=&lt;ON or OFF&gt;</code> : to install <code>RGESolver</code> in the directory <code>build/install</code> (default: <code>OFF</code>).</li>
+<li><code>-DCMAKE_INSTALL_PREFIX:PATH=&lt;RGESolver installation directory&gt;</code> : the directory in which <code>RGESolver</code> will be installed (default: <code>/usr/local</code>). This variable cannot be modified when <code>-DLOCAL INSTALL ALL=ON</code> is set.</li>
+<li><code>-DDEBUG_MODE:BOOL=&lt;ON or OFF&gt;</code> : to enable the debug mode (default: <code>OFF</code>).</li>
+<li><code>-DBOOST_INCLUDE_DIR:PATH=&lt;include path&gt;/boost/</code> : <code>CMake</code>checks for <code>BOOST</code> headers availability in the system and fails if they are not installed. Thus, if <code>BOOST</code> is not installed in the predefined search path, the user can specify where it is with this option. The path must end with the <code>boost/</code>directory which contains the headers.</li>
+<li><code>-DGSL_CONFIG_DIR:PATH=&lt;gsl-config directory&gt;</code> : <code>RGESolver</code> uses <code>gsl-config</code> to get the <code>GSL</code> parameters. If this is not in the predefined search path, the user can specify it with this option.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Usage</h1>
+<p >After the installation, the example program <code>ExampleProgram.cpp</code> (available in the <code>Example Program</code> directory) can be compiled with the command </p><div class="fragment"><div class="line">g++ -o app ExampleProgram.cpp -lRGESolver -lgsl -lgslcblas</div>
+</div><!-- fragment --><p> Mac users might need to add the flag <code>-std=c++11</code> (or greater). <br  />
+</p>
+<p >If the <code>RGESolver</code> library is not in the predefined search path (and usually is the case for local installation), it may be necessary to specify the path needed for compilation and linking against <code>RGESolver</code>. A <code>rgesolver-config</code> script is available in the <code>&lt;CMAKE_INSTALL_PREFIX&gt;/bin</code> directory, which can be invoked with the following options:</p><ul>
+<li><code>--cflags</code>: to obtain the include path needed for compilation against the <code>RGESolver</code>.</li>
+<li><code>--libs</code>: to obtain the flags needed for linking against the <code>RGESolver</code>.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md5"></a>
+Uninstall</h1>
+<p >The user can uninstall the library typing in a terminal session in the <code>build</code> directory: </p><div class="fragment"><div class="line">(sudo) make uninstall</div>
+</div><!-- fragment --> </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
