@@ -1,12 +1,11 @@
 PROJECT_NAME     = RGESolver
-INPUT            = Solver/src/RGESolver.cpp Solver/src/RGESolver.h Solver/src/StaticMembers.cpp Solver/src/BetaFunction.cpp Solver/src/SettersAndGetters.cpp 
+INPUT            = README.md Solver/src/RGESolver.cpp Solver/src/RGESolver.h Solver/src/StaticMembers.cpp Solver/src/BetaFunction.cpp Solver/src/SettersAndGetters.cpp 
 WARNINGS         = YES
 #TAGFILES         = qt.tag
 SEARCHENGINE     = NO
 USE_MATHJAX	 = YES
 MATHJAX_EXTENSIONS     = TeX/AMSmath TeX/AMSsymbols
 HTML_OUTPUT	 = docs
-INPUT                  = README.md
 USE_MDFILE_AS_MAINPAGE = README.md
 
 #EXTRACT_ALL            = YES
