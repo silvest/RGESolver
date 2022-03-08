@@ -21,7 +21,7 @@
 #--------------------------------------------------------------------
 
 cmake_minimum_required(VERSION 3.1)
-set(LIBTYPE OBJECT)
+#set(LIBTYPE OBJECT)
 
 
 
@@ -128,6 +128,7 @@ else()
   unset(GSL_CONFIG CACHE)
 endif()
 
+#######################################################
 
 #Compiler flags: optimization and warnings 
 set ( CMAKE_CXX_FLAGS "-O3 -Wall ${GSL_CFLAGS}")
@@ -159,8 +160,8 @@ message(STATUS "Compiler flags : ${CMAKE_CXX_FLAGS}")
 ######### make install ############### 
 
 
-INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/Solver/src/RGESolver.h 
-        DESTINATION include COMPONENT header)
+#INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/Solver/src/RGESolver.h ${CMAKE_CURRENT_SOURCE_DIR}/gslpp/src/gslpp.h
+#        DESTINATION include COMPONENT header)
 
  configure_file("${CMAKE_CURRENT_SOURCE_DIR}/RGESolver.pc.in" 
                  "${CMAKE_CURRENT_BINARY_DIR}/RGESolver.pc" @ONLY)
@@ -175,6 +176,7 @@ if(DEBUG_MODE)
   message("\nCache variables:")
   message("  CMAKE_CXX_COMPILER:FILEPATH = ${CMAKE_CXX_COMPILER}")
   message("  CMAKE_INSTALL_PREFIX:PATH = ${CMAKE_INSTALL_PREFIX}")
+  message("  CMAKE_CURRENT_SOURCE_DIR:PATH = ${CMAKE_CURRENT_SOURCE_DIR}")
   message("  DEBUG_MODE:BOOL = ${DEBUG_MODE}")
   message("  LOCAL_INSTALL:BOOL = ${LOCAL_INSTALL}")
   message("  BOOST_INCLUDE_DIR:PATH = ${BOOST_INCLUDE_DIR}")
@@ -192,39 +194,33 @@ endif(DEBUG_MODE)
  
 #############################
 
-set(PROJECTLIST gslpp Solver) 
+#set(PROJECTLIST gslpp Solver) 
  
 # sub-directories
 
-foreach(_project ${PROJECTLIST})
-   add_subdirectory(${_project})
-endforeach(_project)
+#foreach(_project ${PROJECTLIST})
+#   add_subdirectory(${_project})
+#endforeach(_project)
 
 #RGESolver library libRGESolver.a
 
-foreach(_project ${PROJECTLIST})
-  set(OBJECTLIST ${OBJECTLIST} $<TARGET_OBJECTS:${_project}>)
-endforeach(_project)
-add_library(RGESolver STATIC ${OBJECTLIST})
+file(GLOB srcs "${CMAKE_CURRENT_SOURCE_DIR}/gslpp/src/*.cpp")
+file(GLOB headers "${CMAKE_CURRENT_SOURCE_DIR}/gslpp/src/*.h")
+add_library(gslpp OBJECT ${srcs} )
+add_library(RGESolver $<TARGET_OBJECTS:gslpp>  "${CMAKE_CURRENT_SOURCE_DIR}/Solver/src/RGESolver.cpp" )
+target_include_directories(RGESolver PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/gslpp/src/)
+set_target_properties(RGESolver PROPERTIES LINKER_LANGUAGE CXX)
 
-INSTALL(TARGETS RGESolver DESTINATION lib COMPONENT library)
+#add_library(RGESolver STATIC $<TARGET_OBJECTS:gslpp> $<TARGET_OBJECTS:Solver>)
 
-# RGESolver header file RGESolver.h 
-list(REVERSE PROJECTLIST)
-foreach(_project ${PROJECTLIST})
-  file(GLOB HEADERS ${_project}/src/*.h)
-  foreach(_header ${HEADERS})
-    get_filename_component(_tmp ${_header} NAME)
-  endforeach(_header)
-endforeach(_project)
+set_target_properties(RGESolver PROPERTIES PUBLIC_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/Solver/src/RGESolver.h;${headers}")
 
-#INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/RGESolver.h 
- #       DESTINATION include#/RGESolver
-  #       COMPONENT header)
-         
-#message(STATUS "{CMAKE_CURRENT_BINARY_DIR}: ${CMAKE_CURRENT_BINARY_DIR}}$") 
-# message(STATUS "{CMAKE_CURRENT_SOURCE_DIR}: ${CMAKE_CURRENT_SOURCE_DIR}$") 
- 
+#INSTALL(TARGETS RGESolver DESTINATION lib COMPONENT library DESTINATION include COMPONENT public_header)
+INSTALL(TARGETS RGESolver 
+        LIBRARY DESTINATION lib
+        PUBLIC_HEADER DESTINATION include
+)
+
 ###### make uninstall ###############
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
              "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake" @ONLY)
