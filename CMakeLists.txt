@@ -134,18 +134,6 @@ endif()
 set ( CMAKE_CXX_FLAGS "-O3 -Wall ${GSL_CFLAGS}")
 include_directories(${BOOST_INC})
 
-#Searches if "-std=c++11" flag is supported. If yes, 
-#is added to the compilation 
-include(CheckCXXCompilerFlag)
-CHECK_CXX_COMPILER_FLAG("-std=c++11" HAS_FLAG)
-if (HAS_FLAG)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-    #set (CMAKE_CXX_STANDARD 11)
-    #set (CXX_STANDARD_REQUIRED ON)
-else()
-    message(FATAL_ERROR "Required at least c++11") 
-endif()
-
 # Fix behavior of CMAKE_CXX_STANDARD when targeting macOS.
 if (POLICY CMP0025)
     cmake_policy(SET CMP0025 NEW)
@@ -156,20 +144,6 @@ endif ()
 message(STATUS "Compiler flags : ${CMAKE_CXX_FLAGS}")
  
  
- 
-######### make install ############### 
-
-
-#INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/Solver/src/RGESolver.h ${CMAKE_CURRENT_SOURCE_DIR}/gslpp/src/gslpp.h
-#        DESTINATION include COMPONENT header)
-
- configure_file("${CMAKE_CURRENT_SOURCE_DIR}/RGESolver.pc.in" 
-                 "${CMAKE_CURRENT_BINARY_DIR}/RGESolver.pc" @ONLY)
-  configure_file("${CMAKE_CURRENT_SOURCE_DIR}/rgesolver-config.in" 
-                 "${CMAKE_CURRENT_BINARY_DIR}/rgesolver-config" @ONLY)
-  INSTALL(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/rgesolver-config ${CMAKE_CURRENT_BINARY_DIR}/RGESolver.pc 
-          DESTINATION bin COMPONENT rgesolver-config)
-
  
 ##########  DEBUG  ##########
 if(DEBUG_MODE)
@@ -209,11 +183,23 @@ file(GLOB headers "${CMAKE_CURRENT_SOURCE_DIR}/gslpp/src/*.h")
 add_library(gslpp OBJECT ${srcs} )
 add_library(RGESolver $<TARGET_OBJECTS:gslpp>  "${CMAKE_CURRENT_SOURCE_DIR}/Solver/src/RGESolver.cpp" )
 target_include_directories(RGESolver PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/gslpp/src/)
-set_target_properties(RGESolver PROPERTIES LINKER_LANGUAGE CXX)
+target_compile_features(RGESolver PUBLIC cxx_std_11)
+
+include(CMakePrintHelpers)
+cmake_print_properties(TARGETS RGESolver PROPERTIES
+                       INTERFACE_COMPILE_FEATURES CXX_STANDARD)
+get_target_property(pippo RGESolver CXX_STANDARD)
+if(NOT ${pippo} STREQUAL "pippo-NOTFOUND")
+  set(stdflag "-std=c++${pippo}")
+else()
+  set(stdflag "")
+endif()
 
 #add_library(RGESolver STATIC $<TARGET_OBJECTS:gslpp> $<TARGET_OBJECTS:Solver>)
 
 set_target_properties(RGESolver PROPERTIES PUBLIC_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/Solver/src/RGESolver.h;${headers}")
+
+######### make install ############### 
 
 #INSTALL(TARGETS RGESolver DESTINATION lib COMPONENT library DESTINATION include COMPONENT public_header)
 INSTALL(TARGETS RGESolver 
@@ -221,6 +207,17 @@ INSTALL(TARGETS RGESolver
         PUBLIC_HEADER DESTINATION include
 )
 
+#INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/Solver/src/RGESolver.h ${CMAKE_CURRENT_SOURCE_DIR}/gslpp/src/gslpp.h
+#        DESTINATION include COMPONENT header)
+
+ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/RGESolver.pc.in" 
+                 "${CMAKE_CURRENT_BINARY_DIR}/RGESolver.pc" @ONLY)
+  configure_file("${CMAKE_CURRENT_SOURCE_DIR}/rgesolver-config.in" 
+                 "${CMAKE_CURRENT_BINARY_DIR}/rgesolver-config" @ONLY)
+  INSTALL(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/rgesolver-config ${CMAKE_CURRENT_BINARY_DIR}/RGESolver.pc 
+          DESTINATION bin COMPONENT rgesolver-config)
+
+ 
 ###### make uninstall ###############
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
              "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake" @ONLY)
