@@ -185,9 +185,9 @@ add_library(RGESolver $<TARGET_OBJECTS:gslpp>  "${CMAKE_CURRENT_SOURCE_DIR}/Solv
 target_include_directories(RGESolver PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/gslpp/src/)
 target_compile_features(RGESolver PUBLIC cxx_std_11)
 
-include(CMakePrintHelpers)
-cmake_print_properties(TARGETS RGESolver PROPERTIES
-                       INTERFACE_COMPILE_FEATURES CXX_STANDARD)
+#include(CMakePrintHelpers)
+#cmake_print_properties(TARGETS RGESolver PROPERTIES
+#                       INTERFACE_COMPILE_FEATURES CXX_STANDARD)
 get_target_property(pippo RGESolver CXX_STANDARD)
 if(NOT ${pippo} STREQUAL "pippo-NOTFOUND")
   set(stdflag "-std=c++${pippo}")

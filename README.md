@@ -19,10 +19,10 @@ The installation can be performed writhing the following lines in a terminal ses
 ```
 mkdir build && cd $_
 cmake .. <options>
-make
-make install
+cmake --build .
+cmake --install .
 ```
-Note that depending on the setting of installation prefix (see below) the user might need root privileges to be able to install `RGESolver` (so the  user should use `sudo make install` instead of `make install`).
+Note that depending on the setting of installation prefix (see below) the user might need root privileges to be able to install `RGESolver`.
 
 ### Command line options for the installation
 
@@ -34,12 +34,6 @@ Note that depending on the setting of installation prefix (see below) the user m
 
 ## Usage
 
-After the installation, the example program `ExampleProgram.cpp` (available in the `Example Program` directory) can be compiled with the command 
- ```
- g++ -o app ExampleProgram.cpp `rgesolver-config --cflags` `rgesolver-config --libs`
- ```
- Mac users might need to add the flag `-std=c++11` (or greater).  
- 
 The `rgesolver-config` script is available in the `<CMAKE_INSTALL_PREFIX>/bin` directory (default: `/usr/local`), which can be invoked with the following options:
 * `--cflags`: to obtain the include path needed for compilation against the `RGESolver`.
 * `--libs`:  to obtain the flags needed for linking against the `RGESolver`.
@@ -47,12 +41,17 @@ The `rgesolver-config` script is available in the `<CMAKE_INSTALL_PREFIX>/bin` d
 If the path `<CMAKE_INSTALL_PREFIX>/bin` is not in the predefined search path, the compilation will (most likely) fail. if the user wants to use the compilation command above, it is suggested to add `<CMAKE_INSTALL_PREFIX>/bin` to the `$PATH` variable. 
 Alternatively, the script can be invoked from a terminal session in `<CMAKE_INSTALL_PREFIX>/bin` to visualize the paths to the library and to the headers.
 
+After the installation, the example program `ExampleProgram.cpp` (available in the `Example Program` directory) can be compiled with the command 
+ ```
+ g++ -o app ExampleProgram.cpp `rgesolver-config --cflags` `rgesolver-config --libs`
+ ```
+
 ## Uninstall
 
 The user can uninstall the library typing in a terminal session in the `build` directory:
  ```
-make uninstall
+cmake --build . --target uninstall
  ```
-Also in this case, depending on the setting of installation prefix, the user might need root privileges to be able to uninstall `RGESolver` (so should be used `sudo make uninstall` instead of `make uninstall`).
+Also in this case, depending on the setting of installation prefix, the user might need root privileges to be able to uninstall `RGESolver`.
 
 
