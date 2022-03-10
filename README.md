@@ -1,3 +1,4 @@
+
 # `RGESolver`
 
 A `C++` library to perform renormalization group evolution of SMEFT coefficients, both numerically and with the leading-log approximation. 
@@ -9,8 +10,7 @@ A `C++` library to perform renormalization group evolution of SMEFT coefficients
 
 * `BOOST`  : BOOST is a C++ library which can be obtained from the [`BOOST` website](https://www.boost.org/) or from Linux package managers or Mac ports. RGESolver only requires the BOOST headers, not the full libraries, so a header-only installation is sufficient.
 * `GSL` : The GNU Scientific Library (GSL) is a C library for numerical computations. It can be found on the [`GSL` website](https://www.gnu.org/software/gsl/). Most Linux package managers will have a stable version as will any ports for Mac. 
-* `C++11` : The compilation forces the `C++` standard to 11. 
-
+* `C++11` : A compiler that supports at least `C++11` standard is required.
 ## Installation
 
 The installation of `RGESolver` requires the availability of `CMake` in the system (version `3.1` or greater). A description of `CMake` and the instructions for its installation can be found in the [`CMake`website](https://cmake.org/).
@@ -18,11 +18,11 @@ The installation of `RGESolver` requires the availability of `CMake` in the syst
 The installation can be performed writhing the following lines in a terminal session (in the `RGESolver` directory):
 ```
 mkdir build && cd $_
-cmake ..
+cmake .. <options>
 make
 make install
 ```
-Note that depending on the setting of installation prefix (see below) the user might need root privileges to be able to install `RGESolver` (so the should use `sudo make install` instead of `make install`).
+Note that depending on the setting of installation prefix (see below) the user might need root privileges to be able to install `RGESolver` (so the  user should use `sudo make install` instead of `make install`).
 
 ### Command line options for the installation
 
@@ -36,18 +36,23 @@ Note that depending on the setting of installation prefix (see below) the user m
 
 After the installation, the example program `ExampleProgram.cpp` (available in the `Example Program` directory) can be compiled with the command 
  ```
- g++ -o app ExampleProgram.cpp -lRGESolver -lgsl -lgslcblas
+ g++ -o app ExampleProgram.cpp `rgesolver-config --cflags` `rgesolver-config --libs`
  ```
  Mac users might need to add the flag `-std=c++11` (or greater).  
  
- If the `RGESolver` library is not in the predefined search path (and usually is the case for local installation), it may be necessary to specify the path needed for compilation and linking against `RGESolver`. A `rgesolver-config` script is available in the `<CMAKE_INSTALL_PREFIX>/bin` directory, which can be invoked with the following options:
+The `rgesolver-config` script is available in the `<CMAKE_INSTALL_PREFIX>/bin` directory (default: `/usr/local`), which can be invoked with the following options:
 * `--cflags`: to obtain the include path needed for compilation against the `RGESolver`.
 * `--libs`:  to obtain the flags needed for linking against the `RGESolver`.
+
+If the path `<CMAKE_INSTALL_PREFIX>/bin` is not in the predefined search path, the compilation will (most likely) fail. if the user wants to use the compilation command above, it is suggested to add `<CMAKE_INSTALL_PREFIX>/bin` to the `$PATH` variable. 
+Alternatively, the script can be invoked from a terminal session in `<CMAKE_INSTALL_PREFIX>/bin` to visualize the paths to the library and to the headers.
 
 ## Uninstall
 
 The user can uninstall the library typing in a terminal session in the `build` directory:
  ```
-(sudo) make uninstall
+make uninstall
  ```
+Also in this case, depending on the setting of installation prefix, the user might need root privileges to be able to uninstall `RGESolver` (so should be used `sudo make uninstall` instead of `make uninstall`).
+
 
