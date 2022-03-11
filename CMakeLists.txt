@@ -183,6 +183,7 @@ file(GLOB headers "${CMAKE_CURRENT_SOURCE_DIR}/gslpp/src/*.h")
 add_library(gslpp OBJECT ${srcs} )
 add_library(RGESolver $<TARGET_OBJECTS:gslpp>  "${CMAKE_CURRENT_SOURCE_DIR}/Solver/src/RGESolver.cpp" )
 target_include_directories(RGESolver PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/gslpp/src/)
+target_compile_features(gslpp PUBLIC cxx_std_11)
 target_compile_features(RGESolver PUBLIC cxx_std_11)
 
 #include(CMakePrintHelpers)
