@@ -1,0 +1,51 @@
+\label{index_md_README}%
+\Hypertarget{index_md_README}%
+ A {\ttfamily C++} library to perform renormalization group evolution of S\+M\+E\+FT coefficients, both numerically and with the leading-\/log approximation. The general flavour case at dimension-\/six level is considered. Operators that violate lepton and/or baryon number conservation are not considered. The documentation for this library can be found \href{https://silvest.github.io/RGESolver/annotated.html}{\texttt{ here}}
+
+{\ttfamily \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}}} is a free software under the copyright of the G\+NU General Public License.\hypertarget{index_autotoc_md1}{}\doxysection{Dependencies}\label{index_autotoc_md1}
+
+\begin{DoxyItemize}
+\item {\ttfamily B\+O\+O\+ST} \+: B\+O\+O\+ST is a C++ library which can be obtained from the \href{https://www.boost.org/}{\texttt{ {\ttfamily B\+O\+O\+ST} website}} or from Linux package managers or Mac ports. \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}} only requires the B\+O\+O\+ST headers, not the full libraries, so a header-\/only installation is sufficient.
+\item {\ttfamily G\+SL} \+: The G\+NU Scientific Library (G\+SL) is a C library for numerical computations. It can be found on the \href{https://www.gnu.org/software/gsl/}{\texttt{ {\ttfamily G\+SL} website}}. Most Linux package managers will have a stable version as will any ports for Mac.
+\item {\ttfamily C++11} \+: A compiler that supports at least {\ttfamily C++11} standard is required. 
+\end{DoxyItemize}\hypertarget{index_autotoc_md2}{}\doxysection{Installation}\label{index_autotoc_md2}
+The installation of {\ttfamily \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}}} requires the availability of {\ttfamily C\+Make} in the system (version {\ttfamily 3.\+1} or greater). A description of {\ttfamily C\+Make} and the instructions for its installation can be found in the \href{https://cmake.org/}{\texttt{ {\ttfamily C\+Make}website}}.
+
+The installation can be performed writhing the following lines in a terminal session (in the {\ttfamily \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}}} directory)\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mkdir build \&\& cd \$\_}
+\DoxyCodeLine{cmake .. <options>}
+\DoxyCodeLine{cmake -\/-\/build .}
+\DoxyCodeLine{cmake -\/-\/install .}
+\end{DoxyCode}
+
+
+Note that depending on the setting of installation prefix (see below) the user might need root privileges to be able to install {\ttfamily \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}}}.\hypertarget{index_autotoc_md3}{}\doxysubsection{Command line options for the installation}\label{index_autotoc_md3}
+
+\begin{DoxyItemize}
+\item {\ttfamily -\/D\+L\+O\+C\+A\+L\+\_\+\+I\+N\+S\+T\+A\+LL\+:B\+O\+OL=$<$ON or O\+FF$>$} \+: to install {\ttfamily \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}}} in the directory {\ttfamily build/install} (default\+: {\ttfamily O\+FF}).
+\item {\ttfamily -\/D\+C\+M\+A\+K\+E\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+P\+R\+E\+F\+IX\+:P\+A\+TH=$<$\mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}} installation directory$>$} \+: the directory in which {\ttfamily \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}}} will be installed (default\+: {\ttfamily /usr/local}). This variable cannot be modified when {\ttfamily -\/D\+L\+O\+C\+AL I\+N\+S\+T\+A\+LL A\+LL=ON} is set.
+\item {\ttfamily -\/D\+D\+E\+B\+U\+G\+\_\+\+M\+O\+DE\+:B\+O\+OL=$<$ON or O\+FF$>$} \+: to enable the debug mode (default\+: {\ttfamily O\+FF}).
+\item {\ttfamily -\/D\+B\+O\+O\+S\+T\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+D\+IR\+:P\+A\+TH=$<$include path$>$/boost/} \+: {\ttfamily C\+Make}checks for {\ttfamily B\+O\+O\+ST} headers availability in the system and fails if they are not installed. Thus, if {\ttfamily B\+O\+O\+ST} is not installed in the predefined search path, the user can specify where it is with this option. The path must end with the {\ttfamily boost/}directory which contains the headers.
+\item {\ttfamily -\/D\+G\+S\+L\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+D\+IR\+:P\+A\+TH=$<$gsl-\/config directory$>$} \+: {\ttfamily \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}}} uses {\ttfamily gsl-\/config} to get the {\ttfamily G\+SL} parameters. If this is not in the predefined search path, the user can specify it with this option.
+\end{DoxyItemize}\hypertarget{index_autotoc_md4}{}\doxysection{Usage}\label{index_autotoc_md4}
+The {\ttfamily rgesolver-\/config} script is available in the {\ttfamily $<$C\+M\+A\+K\+E\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+P\+R\+E\+F\+IX$>$/bin} directory (default\+: {\ttfamily /usr/local}), which can be invoked with the following options\+:
+\begin{DoxyItemize}
+\item {\ttfamily -\/-\/cflags}\+: to obtain the include path needed for compilation against the {\ttfamily \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}}}.
+\item {\ttfamily -\/-\/libs}\+: to obtain the flags needed for linking against the {\ttfamily \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}}}.
+\end{DoxyItemize}
+
+If the path {\ttfamily $<$C\+M\+A\+K\+E\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+P\+R\+E\+F\+IX$>$/bin} is not in the predefined search path, the compilation will (most likely) fail. if the user wants to use the compilation command above, it is suggested to add {\ttfamily $<$C\+M\+A\+K\+E\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+P\+R\+E\+F\+IX$>$/bin} to the {\ttfamily \$\+P\+A\+TH} variable. Alternatively, the script can be invoked from a terminal session in {\ttfamily $<$C\+M\+A\+K\+E\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+P\+R\+E\+F\+IX$>$/bin} to visualize the paths to the library and to the headers.
+
+After the installation, the example program {\ttfamily Example\+Program.\+cpp} (available in the {\ttfamily Example Program} directory) can be compiled with the command 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{g++ -\/o app ExampleProgram.cpp `rgesolver-\/config -\/-\/cflags` `rgesolver-\/config -\/-\/libs`}
+\end{DoxyCode}
+\hypertarget{index_autotoc_md5}{}\doxysection{Uninstall}\label{index_autotoc_md5}
+The user can uninstall the library typing in a terminal session in the {\ttfamily build} directory\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake -\/-\/build . -\/-\/target uninstall}
+\end{DoxyCode}
+
+
+Also in this case, depending on the setting of installation prefix, the user might need root privileges to be able to uninstall {\ttfamily \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}}}. 

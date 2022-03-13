@@ -29,7 +29,7 @@
  * In tables  \ref SM, \ref 0F, \ref 2F and \ref 4F we list all the 
  * parameters, together with their names (that must be used to correctly invoke getter and setter functions). @n
  * The numerical integration is performed with an adaptive step-size routine 
- * (the Explicit embedded Runge-Kutta-Fehlberg method), using the
+ * (the explicit embedded Runge-Kutta-Fehlberg method), using the
  * tools in the GNU Scientific Library. @n 
  * See https://www.gnu.org/software/gsl/doc/html/ode-initval.html for all the details. @n
  * The accuracy level of the numerical integration can be tuned selecting the parameters 
