@@ -378,7 +378,7 @@ public:
      * @brief Generates the initial conditions 
      * for Standard Model's parameters (gauge couplings,
      * Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale 
-     * <tt>mu</tt>, using one-loop pure SM beta functions. 
+     * <tt>mu</tt> (in GeV), using one-loop pure SM beta functions. 
      *
      * @details If the flag CKMinput is set to <tt>true</tt> (default), the input 
      * for the Yukawa matrices will be generated from the current values 
@@ -495,7 +495,7 @@ public:
     /**
      * @brief Setter method for the scale at which the method 
      * \ref GenerateSMInitialConditions
-     *  takes the input values (in GeV).
+     *  takes the input values (in GeV)
      * for SM parameters.
      * @param mu 
      */
@@ -518,16 +518,15 @@ public:
 
     /**
      * @brief Setter function for scalar/0F parameters (no flavour indices).
-     * @details If the parameter name does not match with any of the parameters, 
-     * an error message is printed and no assignation is performed.
      * @param name name of the parameter (see table \ref 0F)
      * @param val its value
      */
     void SetCoefficient(std::string name, double val);
     /**
      * @brief Setter function for 2F parameters (2 flavour indices).
-     * @details If the parameter name does not match with any of the parameters or if at least 
+     * @details If at least 
      * one of the inserted indices is outside the [0:2] range, 
+     * an error message is printed and no assignation is performed.
      * @param name name of the parameter (see table \ref 2F)
      * @param val its value
      * @param i first flavour index
@@ -536,7 +535,7 @@ public:
     void SetCoefficient(std::string name, double val, int i, int j);
     /**
      * @brief Setter function for 4F parameters (4 flavour indices).
-     * @details If the parameter name does not match with any of the parameters or if at least 
+     * @details If at least 
      * one of the inserted indices is outside the [0:2] range, 
      * an error message is printed and no assignation is performed.
      * 
@@ -555,17 +554,15 @@ public:
     //Getters for 0F,2F,4F
     /**
      * @brief Getter function for scalar/0F parameters (no flavour indices).
-     * @details If the parameter name does not match with any of the parameters, 
-     * an error message is printed and the value 0 is returned.
      * @param name name of the parameter (see table \ref 0F)
      * @return the requested parameter 
      */
     double GetCoefficient(std::string name);
     /**
      * @brief Getter function for 2F parameters (2 flavour indices).
-     * @details If the parameter name does not match with any of the parameters 
-     * or if at least one of the inserted indices is outside the [0:2] range,  
-     * an error message is printed and the value 0 is returned. 
+     * @details If at least 
+     * one of the inserted indices is outside the [0:2] range, 
+     * an error message is printed and the value 0 is returned.
      * @param name name of the parameter (see table \ref 2F)
      * @param i first flavour index
      * @param j second flavour index
@@ -575,9 +572,8 @@ public:
 
     /**
      * @brief Getter function for 4F parameters (4 flavour indices).
-     * @details If the parameter name does not match with any of the parameters 
-     * or if at least one of the inserted indices is outside the [0:2] range,  
-     * an error message is printed and the value 0 is returned. 
+     * one of the inserted indices is outside the [0:2] range, 
+     * an error message is printed and the value 0 is returned.
      * @param name name of the parameter (see table \ref 4F)
      * @param i first flavour index
      * @param j second flavour index
