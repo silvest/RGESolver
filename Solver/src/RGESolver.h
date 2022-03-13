@@ -45,7 +45,7 @@
 /**
 <table>
 <caption id="SM"> Standard Model parameters. The parameters in the left column
- must be set (and accessed) with SetCoefficient (and GetCoefficient) methods.
+ must be set (and accessed) with \ref SetCoefficient (and \ref GetCoefficient) methods.
  The ones in the right column must be set and accessed using 
  other dedicated methods (see the specific documentation for input/output) </caption>
 <tr style="vertical-align:top">
@@ -91,7 +91,7 @@
  
 <table>
 <caption id="0F"> Scalar (and real) SMEFT operators. They must be set and accessed 
-using SetCoefficient and GetCoefficient. </caption>
+using \ref SetCoefficient and \ref GetCoefficient. </caption>
 <tr style="vertical-align:top">
 <td>
 <table>
@@ -126,7 +126,7 @@ using SetCoefficient and GetCoefficient. </caption>
  * 
 <table>
 <caption id="2F"> 2F SMEFT operators. They must be set and accessed 
-using SetCoefficient and GetCoefficient. </caption>
+using \ref SetCoefficient and \ref GetCoefficient. </caption>
 <tr style="vertical-align:top"> <td>
 <table>
 <tr><th colspan="3"> Class 5   
@@ -187,7 +187,7 @@ using SetCoefficient and GetCoefficient. </caption>
  
 <table>
 <caption id="4F"> 4F SMEFT Operators. They must be set and accessed 
-using SetCoefficient and GetCoefficient.</caption>
+using \ref SetCoefficient and \ref GetCoefficient.</caption>
 <tr style="vertical-align:top"><td>
 <table>
 <tr> <th colspan="3"> Class 8 \f$(\bar{L}L)(\bar{L}L)\f$  
@@ -322,9 +322,9 @@ public:
      * @details RGEs are solved with the chosen method from @p muI to @p muF.
      * Currently, the available methods are "Numeric" and "Leading-Log". @n 
      * The evolutor takes as initial values the current values of the parameters, 
-     * set with the <tt>SetCoefficient(...)</tt> function. After completing the evolution
+     * set with the \ref SetCoefficient functions. After completing the evolution
      * the values of the parameters are updated and are accessible with the
-     * <tt>GetCoefficient(...)</tt> function.
+     * \ref GetCoefficients function.
      * @param method resolution method
      * @param muI initial energy scale 
      * @param muF final energy scale 
@@ -350,12 +350,12 @@ public:
      *  
      * @param mu Scale (in GeV) at which the initial conditions 
      * are generated. If <tt>mu</tt> is different from
-     * the scale at which the input is given (SMInputScale), <tt>RGESolver</tt>
+     * the scale at which the input is given (SMInputScale), \ref RGESolver
      * will use the pure SM RGEs (at one-loop level) to run the parameters 
      * to the scale <tt>mu</tt>.
      * @param basis Flavour basis (
      * <tt>"UP"</tt> or <tt>"DOWN"</tt>)
-     * @param method Method used by <tt>RGESolver</tt>
+     * @param method Method used by \ref RGESolver
      * to run the SM parameters to the scale <tt>mu</tt> 
      * (<tt>"Numeric"</tt> or <tt>"Leading-Log"</tt>) 
      * @param inputCKM If set to <tt>true</tt> (default), the input 
@@ -368,37 +368,37 @@ public:
      * @brief Same as \ref Evolve, but only for the SM parameters. 
      * The user should use this method instead of \ref Evolve when 
      * interested in pure SM running.  
-     * @param method
-     * @param muI
-     * @param muF
+     * @param method resolution method
+     * @param muI initial energy scale 
+     * @param muF final energy scale 
      */
     void EvolveSMOnly(std::string method, double muI, double muF);
 
 
 
-     /** @name Input/output   */
-     /** 
+    /** @name Input/output   */
+    /** 
      * @brief Documentation for the input/output handling.
      * 
-     * @details All the SMEFT coefficients are set using the SetCoefficient methods and 
-     * accessed with the GetCoefficient methods. 
+     * @details All the SMEFT coefficients are set using the \ref SetCoefficient methods and 
+     * accessed with the \ref GetCoefficient methods. 
      * There exist three different signatures for each method, 
      * depending on the number of flavour indices of the 
      * parameter (0,2,4). @n
      * These two routines must be used also for the SM parameters 
      *  \f$g_1,g_2,g_3,\lambda,m_h^2,\f$ 
-     *   \f$\mathrm{Re}(\mathcal{Y}_u),\Im(\mathcal{Y}_u),\f$ 
-     *   \f$\mathrm{Re}(\mathcal{Y}_d),\Im(\mathcal{Y}_d),\f$ 
-     *   \f$\mathrm{Re}(\mathcal{Y}_e),\Im(\mathcal{Y}_e)\f$ 
+     *   \f$\mathrm{Re}(\mathcal{Y}_u),\mathrm{Im}(\mathcal{Y}_u),\f$ 
+     *   \f$\mathrm{Re}(\mathcal{Y}_d),\mathrm{Im}(\mathcal{Y}_d),\f$ 
+     *   \f$\mathrm{Re}(\mathcal{Y}_e),\mathrm{Im}(\mathcal{Y}_e)\f$ 
      *  (we follow https://arxiv.org/abs/1308.2627 for what concerns
      * the conventions in the Higgs' sector). @n
      * If the user is interested in using the \ref GenerateSMInitialConditions
      * method, the input for the CKM matrix parameters and 
      * the fermion masses must be given with the 
      * methods 
-     * SetCKMAngle(std::string name, double val),
-     * SetCKMPhase(double val)
-     * SetFermionMass(std::string name, double val). @n
+     * \ref SetCKMAngle,
+     * \ref SetCKMPhase
+     * \ref SetFermionMass. @n
      * A complete list of the keys that must be used to 
      * correctly invoke setter/getter methods are given in 
      * tables   \ref SM , \ref 0F , \ref 2F and \ref 4F 
@@ -409,7 +409,7 @@ public:
      * @brief Compute CKM matrix and the mass of the fermions. 
      * 
      * @details The methods \ref Evolve and \ref EvolveSMOnly 
-     * do not updates the value of CKM parameters and fermion masses after the evolution.
+     * do not update the value of CKM parameters and fermion masses after the evolution.
      * This process require the diagonalization of the Yukawa matrices and 
      * may slow the evolution. @n
      * If the user is interested in these parameters (accessible with 
@@ -419,32 +419,41 @@ public:
     void ComputeCKMAndFermionMasses();
 
 
+    
+    
     /**
      * @brief Setter function for the mass of the 
      * fermions. 
      * Assignation is allowed only if the inserted 
      * value is not negative.
+     * @param name name of the fermion (see table \ref SM)
      * @param val
      */
     void SetFermionMass(std::string name, double val);
     /**
      * @brief Getter function for the mass of the 
      * fermions.
+     * @param name name of the fermion (see table \ref SM)
      */
     double GetFermionMass(std::string name);
+    
+    
+    
+    
     /**
      * @brief Setter function for the CKM matrix angles
      *  \f$\theta_{12},\theta_{13},\theta_{23}\f$. 
      * The assignation is completed only if the inserted
      * angle is  \f$\in [0,\frac{\pi}{2}]\f$
+     * @param name of the angle (see table \ref SM)
      * @param val
      */
     void SetCKMAngle(std::string name, double val);
 
-
     /**
      * @brief Getter function for the CKM matrix angles 
      *  \f$\theta_{12},\theta_{13},\theta_{23}\f$. 
+     * @param name of the angle (see table \ref SM)
      * @return The selected CKM angle. 
      */
     double GetCKMAngle(std::string name);
@@ -482,6 +491,7 @@ public:
      * \ref GenerateSMInitialConditions 
      * takes the input values 
      * for SM parameters.
+     * @return <tt>InputScale_SM</tt>
      */
     double GetSMInputScale() {
         return InputScale_SM;
@@ -493,7 +503,7 @@ public:
      * @brief Setter function for scalar/0F parameters (no flavour indices).
      * @details If the parameter name does not match with any of the parameters, 
      * an error message is printed and no assignation is performed.
-     * @param name name of the parameter
+     * @param name name of the parameter (see table \ref 0F)
      * @param val its value
      */
     void SetCoefficient(std::string name, double val);
@@ -501,7 +511,7 @@ public:
      * @brief Setter function for 2F parameters (2 flavour indices).
      * @details If the parameter name does not match with any of the parameters or if at least 
      * one of the inserted indices is outside the [0:2] range, 
-     * @param name name of the parameter
+     * @param name name of the parameter (see table \ref 2F)
      * @param val its value
      * @param i first flavour index
      * @param j second flavour index
@@ -513,7 +523,7 @@ public:
      * one of the inserted indices is outside the [0:2] range, 
      * an error message is printed and no assignation is performed.
      * 
-     * @param name name of the parameter
+     * @param name name of the parameter (see table \ref 4F)
      * @param val its value
      * @param i first flavour index
      * @param j second flavour index
@@ -523,16 +533,14 @@ public:
     void SetCoefficient(std::string name, double val, int i, int j,
             int k, int l);
 
-    //Setters passing directly the array (for 2F and 4F)
-    //void SetCoefficient(std::string name, double C[]);
-
+   
 
     //Getters for 0F,2F,4F
     /**
      * @brief Getter function for scalar/0F parameters (no flavour indices).
      * @details If the parameter name does not match with any of the parameters, 
      * an error message is printed and the value 0 is returned.
-     * @param name name of the parameter
+     * @param name name of the parameter (see table \ref 0F)
      * @return the requested parameter (if it exists), otherwise returns 0. 
      */
     double GetCoefficient(std::string name);
@@ -541,7 +549,7 @@ public:
      * @details If the parameter name does not match with any of the parameters 
      * or if at least one of the inserted indices is outside the [0:2] range,  
      * an error message is printed and the value 0 is returned. 
-     * @param name name of the parameter
+     * @param name name of the parameter (see table \ref 2F)
      * @param i first flavour index
      * @param j second flavour index
      * @return the requested parameter (if it exists), otherwise returns 0. 
@@ -553,7 +561,7 @@ public:
      * @details If the parameter name does not match with any of the parameters 
      * or if at least one of the inserted indices is outside the [0:2] range,  
      * an error message is printed and the value 0 is returned. 
-     * @param name name of the parameter
+     * @param name name of the parameter (see table \ref 4F)
      * @param i first flavour index
      * @param j second flavour index
      * @param k third flavour index
@@ -1072,123 +1080,123 @@ private:
 
 
 
-    /** @brief @f$ \Re \left[ C_{eH } \right]@f$ (class 5, WC1) */
+    /** @brief @f$ \mathrm{Re} \left[ C_{eH } \right]@f$ (class 5, WC1) */
     double ceHR[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{eH } \right]@f$ (class 5, WC1) */
+    /** @brief @f$ \mathrm{Im} \left[ C_{eH } \right]@f$ (class 5, WC1) */
     double ceHI[3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{uH } \right]@f$ (class 5, WC1) */
+    /** @brief @f$ \mathrm{Re} \left[ C_{uH } \right]@f$ (class 5, WC1) */
     double cuHR[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{uH } \right]@f$ (class 5, WC1) */
+    /** @brief @f$ \mathrm{Im} \left[ C_{uH } \right]@f$ (class 5, WC1) */
     double cuHI[3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{dH } \right]@f$ (class 5, WC1) */
+    /** @brief @f$ \mathrm{Re} \left[ C_{dH } \right]@f$ (class 5, WC1) */
     double cdHR[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{dH } \right]@f$ (class 5, WC1) */
+    /** @brief @f$ \mathrm{Im} \left[ C_{dH } \right]@f$ (class 5, WC1) */
     double cdHI[3 * 3] = {0.};
 
 
-    /** @brief @f$ \Re \left[ C_{eW } \right]@f$ (class 6, WC1) */ double ceWR[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{eW } \right]@f$ (class 6, WC1) */ double ceWI[3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{eB } \right]@f$ (class 6, WC1) */ double ceBR[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{eB } \right]@f$ (class 6, WC1) */ double ceBI[3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{uG } \right]@f$ (class 6, WC1) */double cuGR[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{uG } \right]@f$ (class 6, WC1) */double cuGI[3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{uW } \right]@f$ (class 6, WC1) */double cuWR[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{uW } \right]@f$ (class 6, WC1) */double cuWI[3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{uB } \right]@f$ (class 6, WC1) */double cuBR[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{uB } \right]@f$ (class 6, WC1) */double cuBI[3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{dG } \right]@f$ (class 6, WC1) */double cdGR[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{dG } \right]@f$ (class 6, WC1) */double cdGI[3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{dW } \right]@f$ (class 6, WC1) */double cdWR[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{dW } \right]@f$ (class 6, WC1) */double cdWI[3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{dB } \right]@f$ (class 6, WC1) */double cdBR[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{dW } \right]@f$ (class 6, WC1) */double cdBI[3 * 3];
+    /** @brief @f$ \mathrm{Re} \left[ C_{eW } \right]@f$ (class 6, WC1) */ double ceWR[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{eW } \right]@f$ (class 6, WC1) */ double ceWI[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{eB } \right]@f$ (class 6, WC1) */ double ceBR[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{eB } \right]@f$ (class 6, WC1) */ double ceBI[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{uG } \right]@f$ (class 6, WC1) */double cuGR[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{uG } \right]@f$ (class 6, WC1) */double cuGI[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{uW } \right]@f$ (class 6, WC1) */double cuWR[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{uW } \right]@f$ (class 6, WC1) */double cuWI[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{uB } \right]@f$ (class 6, WC1) */double cuBR[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{uB } \right]@f$ (class 6, WC1) */double cuBI[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{dG } \right]@f$ (class 6, WC1) */double cdGR[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{dG } \right]@f$ (class 6, WC1) */double cdGI[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{dW } \right]@f$ (class 6, WC1) */double cdWR[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{dW } \right]@f$ (class 6, WC1) */double cdWI[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{dB } \right]@f$ (class 6, WC1) */double cdBR[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{dW } \right]@f$ (class 6, WC1) */double cdBI[3 * 3];
 
 
 
 
-    /** @brief @f$ \Re \left[ C_{Hl1} \right]@f$ (class 7, WC2R) */ double cHl1R[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{Hl1} \right]@f$ (class 7, WC2I) */ double cHl1I[3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{Hl3} \right]@f$ (class 7, WC2R) */double cHl3R[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{Hl3} \right]@f$ (class 7, WC2I) */double cHl3I[3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{He} \right]@f$ (class 7, WC2R) */double cHeR[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{He} \right]@f$ (class 7, WC2I) */double cHeI[3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{Hq1} \right]@f$ (class 7, WC2R) */double cHq1R[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{Hq1} \right]@f$ (class 7, WC2I) */double cHq1I[3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{Hq3} \right]@f$ (class 7, WC2R) */double cHq3R[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{Hq3} \right]@f$ (class 7, WC2I) */double cHq3I[3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{Hu} \right]@f$ (class 7, WC2R) */double cHuR[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{Hu} \right]@f$ (class 7, WC2I) */double cHuI[3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{Hd} \right]@f$ (class 7, WC2R) */double cHdR[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{Hd} \right]@f$ (class 7, WC2I) */double cHdI[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{Hl1} \right]@f$ (class 7, WC2R) */ double cHl1R[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{Hl1} \right]@f$ (class 7, WC2I) */ double cHl1I[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{Hl3} \right]@f$ (class 7, WC2R) */double cHl3R[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{Hl3} \right]@f$ (class 7, WC2I) */double cHl3I[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{He} \right]@f$ (class 7, WC2R) */double cHeR[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{He} \right]@f$ (class 7, WC2I) */double cHeI[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{Hq1} \right]@f$ (class 7, WC2R) */double cHq1R[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{Hq1} \right]@f$ (class 7, WC2I) */double cHq1I[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{Hq3} \right]@f$ (class 7, WC2R) */double cHq3R[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{Hq3} \right]@f$ (class 7, WC2I) */double cHq3I[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{Hu} \right]@f$ (class 7, WC2R) */double cHuR[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{Hu} \right]@f$ (class 7, WC2I) */double cHuI[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{Hd} \right]@f$ (class 7, WC2R) */double cHdR[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{Hd} \right]@f$ (class 7, WC2I) */double cHdI[3 * 3] = {0.};
 
-    /** @brief @f$ \Re \left[ C_{Hud} \right]@f$ (class 7, WC1) */double cHudR[3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{Hud} \right]@f$ (class 7, WC1) */double cHudI[3 * 3] = {0.};
-
-
-
-
-    /** @brief @f$ \Re \left[ C_{ll} \right]@f$ (class 8-[LL][LL], WC6R) */double cllR[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{ll} \right]@f$ (class 8-[LL][LL], WC6I) */double cllI[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{qq1} \right]@f$ (class 8-[LL][LL], WC6R) */double cqq1R[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{qq1} \right]@f$ (class 8-[LL][LL], WC6I) */double cqq1I[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{qq3} \right]@f$ (class 8-[LL][LL], WC6R) */double cqq3R[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{qq3} \right]@f$ (class 8-[LL][LL], WC6I) */double cqq3I[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{lq1} \right]@f$ (class 8-[LL][LL], WC7R) */double clq1R[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{lq1} \right]@f$ (class 8-[LL][LL], WC7I) */double clq1I[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{lq3} \right]@f$ (class 8-[LL][LL], WC7R) */double clq3R[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{lq3} \right]@f$ (class 8-[LL][LL], WC7I) */double clq3I[3 * 3 * 3 * 3] = {0.};
-
-
-    /** @brief @f$ \Re \left[ C_{uu} \right]@f$ (class 8-[RR][RR], WC6R) */double cuuR[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{uu} \right]@f$ (class 8-[RR][RR], WC6I) */double cuuI[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{dd} \right]@f$ (class 8-[RR][RR], WC6R) */double cddR[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{dd} \right]@f$ (class 8-[RR][RR], WC6I) */double cddI[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{ee} \right]@f$ (class 8-[RR][RR], WC8R) */double ceeR[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{ee} \right]@f$ (class 8-[RR][RR], WC8I) */double ceeI[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{eu} \right]@f$ (class 8-[RR][RR], WC7R) */double ceuR[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{eu} \right]@f$ (class 8-[RR][RR], WC7I) */double ceuI[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{ed} \right]@f$ (class 8-[RR][RR], WC7R) */double cedR[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{ed} \right]@f$ (class 8-[RR][RR], WC7I) */ double cedI[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{ud1} \right]@f$ (class 8-[RR][RR], WC7R) */double cud1R[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{ud1} \right]@f$ (class 8-[RR][RR], WC7I) */double cud1I[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{ud8} \right]@f$ (class 8-[RR][RR], WC7R) */double cud8R[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{ud1} \right]@f$ (class 8-[RR][RR], WC7I) */double cud8I[3 * 3 * 3 * 3] = {0.};
-
-
-
-    /** @brief @f$ \Re \left[ C_{le} \right]@f$ (class 8-[LL][RR], WC7R) */double cleR[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{le} \right]@f$ (class 8-[LL][RR], WC7I) */double cleI[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{lu} \right]@f$ (class 8-[LL][RR], WC7R) */double cluR[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{lu} \right]@f$ (class 8-[LL][RR], WC7I) */double cluI[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{ld} \right]@f$ (class 8-[LL][RR], WC7R) */double cldR[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{ld} \right]@f$ (class 8-[LL][RR], WC7I) */double cldI[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{qe} \right]@f$ (class 8-[LL][RR], WC7R) */double cqeR[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{qe} \right]@f$ (class 8-[LL][RR], WC7I) */double cqeI[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{qu1} \right]@f$ (class 8-[LL][RR], WC7R) */double cqu1R[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{qu1} \right]@f$ (class 8-[LL][RR], WC7I) */double cqu1I[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{qu8} \right]@f$ (class 8-[LL][RR], WC7R) */double cqu8R[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{qu8} \right]@f$ (class 8-[LL][RR], WC7I) */double cqu8I[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{qd1} \right]@f$ (class 8-[LL][RR], WC7R) */double cqd1R[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{qd1} \right]@f$ (class 8-[LL][RR], WC7I) */ double cqd1I[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{qd8} \right]@f$ (class 8-[LL][RR], WC7R) */double cqd8R[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{qd8} \right]@f$ (class 8-[LL][RR], WC7I) */ double cqd8I[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{Hud} \right]@f$ (class 7, WC1) */double cHudR[3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{Hud} \right]@f$ (class 7, WC1) */double cHudI[3 * 3] = {0.};
 
 
 
 
-    /** @brief @f$ \Re \left[ C_{ledq} \right]@f$ (class 8-[LR][RL], WC5) */ double cledqR[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{ledq} \right]@f$ (class 8-[LR][RL], WC5) */double cledqI[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{ll} \right]@f$ (class 8-[LL][LL], WC6R) */double cllR[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{ll} \right]@f$ (class 8-[LL][LL], WC6I) */double cllI[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{qq1} \right]@f$ (class 8-[LL][LL], WC6R) */double cqq1R[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{qq1} \right]@f$ (class 8-[LL][LL], WC6I) */double cqq1I[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{qq3} \right]@f$ (class 8-[LL][LL], WC6R) */double cqq3R[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{qq3} \right]@f$ (class 8-[LL][LL], WC6I) */double cqq3I[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{lq1} \right]@f$ (class 8-[LL][LL], WC7R) */double clq1R[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{lq1} \right]@f$ (class 8-[LL][LL], WC7I) */double clq1I[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{lq3} \right]@f$ (class 8-[LL][LL], WC7R) */double clq3R[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{lq3} \right]@f$ (class 8-[LL][LL], WC7I) */double clq3I[3 * 3 * 3 * 3] = {0.};
+
+
+    /** @brief @f$ \mathrm{Re} \left[ C_{uu} \right]@f$ (class 8-[RR][RR], WC6R) */double cuuR[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{uu} \right]@f$ (class 8-[RR][RR], WC6I) */double cuuI[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{dd} \right]@f$ (class 8-[RR][RR], WC6R) */double cddR[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{dd} \right]@f$ (class 8-[RR][RR], WC6I) */double cddI[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{ee} \right]@f$ (class 8-[RR][RR], WC8R) */double ceeR[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{ee} \right]@f$ (class 8-[RR][RR], WC8I) */double ceeI[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{eu} \right]@f$ (class 8-[RR][RR], WC7R) */double ceuR[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{eu} \right]@f$ (class 8-[RR][RR], WC7I) */double ceuI[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{ed} \right]@f$ (class 8-[RR][RR], WC7R) */double cedR[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{ed} \right]@f$ (class 8-[RR][RR], WC7I) */ double cedI[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{ud1} \right]@f$ (class 8-[RR][RR], WC7R) */double cud1R[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{ud1} \right]@f$ (class 8-[RR][RR], WC7I) */double cud1I[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{ud8} \right]@f$ (class 8-[RR][RR], WC7R) */double cud8R[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{ud1} \right]@f$ (class 8-[RR][RR], WC7I) */double cud8I[3 * 3 * 3 * 3] = {0.};
 
 
 
-    /** @brief @f$ \Re \left[ C_{lequ1} \right]@f$ (class 8-[LR][LR], WC5) */double clequ1R[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{lequ1} \right]@f$ (class 8-[LR][LR], WC5) */double clequ1I[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{lequ3} \right]@f$ (class 8-[LR][LR], WC5) */double clequ3R[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{lequ3} \right]@f$ (class 8-[LR][LR], WC5) */double clequ3I[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{quqd1} \right]@f$ (class 8-[LR][LR], WC5) */double cquqd1R[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{quqd1} \right]@f$ (class 8-[LR][LR], WC5) */double cquqd1I[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Re \left[ C_{quqd8} \right]@f$ (class 8-[LR][LR], WC5) */double cquqd8R[3 * 3 * 3 * 3] = {0.};
-    /** @brief @f$ \Im \left[ C_{quqd8} \right]@f$ (class 8-[LR][LR], WC5) */double cquqd8I[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{le} \right]@f$ (class 8-[LL][RR], WC7R) */double cleR[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{le} \right]@f$ (class 8-[LL][RR], WC7I) */double cleI[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{lu} \right]@f$ (class 8-[LL][RR], WC7R) */double cluR[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{lu} \right]@f$ (class 8-[LL][RR], WC7I) */double cluI[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{ld} \right]@f$ (class 8-[LL][RR], WC7R) */double cldR[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{ld} \right]@f$ (class 8-[LL][RR], WC7I) */double cldI[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{qe} \right]@f$ (class 8-[LL][RR], WC7R) */double cqeR[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{qe} \right]@f$ (class 8-[LL][RR], WC7I) */double cqeI[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{qu1} \right]@f$ (class 8-[LL][RR], WC7R) */double cqu1R[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{qu1} \right]@f$ (class 8-[LL][RR], WC7I) */double cqu1I[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{qu8} \right]@f$ (class 8-[LL][RR], WC7R) */double cqu8R[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{qu8} \right]@f$ (class 8-[LL][RR], WC7I) */double cqu8I[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{qd1} \right]@f$ (class 8-[LL][RR], WC7R) */double cqd1R[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{qd1} \right]@f$ (class 8-[LL][RR], WC7I) */ double cqd1I[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{qd8} \right]@f$ (class 8-[LL][RR], WC7R) */double cqd8R[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{qd8} \right]@f$ (class 8-[LL][RR], WC7I) */ double cqd8I[3 * 3 * 3 * 3] = {0.};
+
+
+
+
+    /** @brief @f$ \mathrm{Re} \left[ C_{ledq} \right]@f$ (class 8-[LR][RL], WC5) */ double cledqR[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{ledq} \right]@f$ (class 8-[LR][RL], WC5) */double cledqI[3 * 3 * 3 * 3] = {0.};
+
+
+
+    /** @brief @f$ \mathrm{Re} \left[ C_{lequ1} \right]@f$ (class 8-[LR][LR], WC5) */double clequ1R[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{lequ1} \right]@f$ (class 8-[LR][LR], WC5) */double clequ1I[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{lequ3} \right]@f$ (class 8-[LR][LR], WC5) */double clequ3R[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{lequ3} \right]@f$ (class 8-[LR][LR], WC5) */double clequ3I[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{quqd1} \right]@f$ (class 8-[LR][LR], WC5) */double cquqd1R[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{quqd1} \right]@f$ (class 8-[LR][LR], WC5) */double cquqd1I[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Re} \left[ C_{quqd8} \right]@f$ (class 8-[LR][LR], WC5) */double cquqd8R[3 * 3 * 3 * 3] = {0.};
+    /** @brief @f$ \mathrm{Im} \left[ C_{quqd8} \right]@f$ (class 8-[LR][LR], WC5) */double cquqd8I[3 * 3 * 3 * 3] = {0.};
     ///@}
 
     //-----------------------------------------------------------------------------
@@ -1223,7 +1231,7 @@ private:
      * @brief Prints on file the coefficient @p c
      * 
      * @details This function is used only in the function
-     * <tt>SaveOutputFile</tt>. 
+     * \ref SaveOutputFile. 
      * Currently only "SLHA" printing for WC1,WC2R/I,
      * WC5,WC6R/I,WC7R/I,WC8R/I is implemented. 
      * 
