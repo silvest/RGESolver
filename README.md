@@ -12,9 +12,11 @@ A `C++` library to perform renormalization group evolution of SMEFT coefficients
 * `GSL` : The GNU Scientific Library (GSL) is a C library for numerical computations. It can be found on the [`GSL` website](https://www.gnu.org/software/gsl/). Most Linux package managers will have a stable version as will any ports for Mac. 
 * `C++11` : A compiler that supports at least `C++11` standard is required.
 ## Installation
-
 The installation of `RGESolver` requires the availability of `CMake` in the system (version `3.1` or greater). A description of `CMake` and the instructions for its installation can be found in the [`CMake`website](https://cmake.org/).
-
+Clone the repository with 
+```
+git clone https://github.com/silvest/RGESolver --recursively
+```
 The installation can be performed writhing the following lines in a terminal session (in the `RGESolver` directory):
 ```
 mkdir build && cd $_

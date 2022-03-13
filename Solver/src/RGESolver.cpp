@@ -15,7 +15,7 @@ RGESolver::RGESolver() {
     using namespace boost::placeholders;
 
 
-    SetSMDefaultInput();
+    //SetSMDefaultInput();
 
 
 

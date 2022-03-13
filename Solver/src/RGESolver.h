@@ -380,7 +380,11 @@ public:
      * Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale 
      * <tt>mu</tt> (in GeV), using one-loop pure SM beta functions. 
      *
-     * @details If the flag CKMinput is set to <tt>true</tt> (default), the input 
+     * @details The low energy input values for the SM parameters 
+     * usde by this method is given at the scale <tt>SMInputScale</tt> 
+     * (default value = 91.05 GeV). The user can change this low-energy scale via 
+     * \ref SetSMInputScale.
+     * If the flag CKMinput is set to <tt>true</tt> (default), the input 
      * for the Yukawa matrices will be generated from the current values 
      * of the CKM matrix and the masses of the fermions. If 
      * set to false, the current values of the Yukawa matrices 
@@ -390,7 +394,8 @@ public:
      * largest mass for the 3rd generation and no mass degeneracy) and with 
      * non-zero CKM matrix angles. @n
      * For more particular cases, the user should set CKMinput=<tt>false</tt>
-     * and set the input in terms of the Yukawa matrices.
+     * and set the input in terms of the Yukawa matrices. @n 
+     * To set the masses of the fermions and the CKM matrix parameters, use 
      *  
      * @param mu Scale (in GeV) at which the initial conditions 
      * are generate

@@ -46,7 +46,7 @@ void \mbox{\hyperlink{classRGESolver_a51938deb00fbca684c8e4e5b10a239ad}{Set\+\_\
 void \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} (std\+::string method, double muI, double muF)
 \begin{DoxyCompactList}\small\item\em Performs the R\+GE evolution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}{Generate\+S\+M\+Initial\+Conditions}} (double mu, std\+::string basis, std\+::string method, bool input\+C\+KM=true)
-\begin{DoxyCompactList}\small\item\em Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu}, using one-\/loop pure SM beta functions. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_a7c0c4303beb14f728a70542c8583b3a7}{Evolve\+S\+M\+Only}} (std\+::string method, double muI, double muF)
 \begin{DoxyCompactList}\small\item\em Same as \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}}, but only for the SM parameters. The user should use this method instead of \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} when interested in pure SM running. Using this function is the same of using \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} with all the S\+M\+E\+FT coefficients set to 0, but it is faster since it does compute only the evolution for the SM parameters. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_ad499b4ef512ac892c4f5a71b9fa0daf4}{Compute\+C\+K\+M\+And\+Fermion\+Masses}} ()
@@ -69,7 +69,7 @@ void \mbox{\hyperlink{classRGESolver_a74d1c5b7633de682a376204d1788b794}{Set\+C\+
 double \mbox{\hyperlink{classRGESolver_a891564c063a942fbd01830b30fa8e6e1}{Get\+C\+K\+M\+Phase}} ()
 \begin{DoxyCompactList}\small\item\em Getter function for the C\+KM matrix phase $\delta$. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_ad47f4773fa7eaf4bb9bc3cb15de5b2c2}{Set\+S\+M\+Input\+Scale}} (double mu)
-\begin{DoxyCompactList}\small\item\em Setter method for the scale at which the method \mbox{\hyperlink{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}{Generate\+S\+M\+Initial\+Conditions}} takes the input values (in GeV). for SM parameters. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Setter method for the scale at which the method \mbox{\hyperlink{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}{Generate\+S\+M\+Initial\+Conditions}} takes the input values (in GeV) for SM parameters. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classRGESolver_a9b828a6908004f6680e519b393411f03}{Get\+S\+M\+Input\+Scale}} ()
 \begin{DoxyCompactList}\small\item\em Getter method for the scale at which the method \mbox{\hyperlink{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}{Generate\+S\+M\+Initial\+Conditions}} takes the input values for SM parameters. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_adc2b8a9a10216ec5285569c8f24cbed2}{Set\+Coefficient}} (std\+::string name, double val)
@@ -83,7 +83,7 @@ double \mbox{\hyperlink{classRGESolver_a23d5d847021421bc8a9ba03412d2674e}{Get\+C
 double \mbox{\hyperlink{classRGESolver_a26a55e4d88d327756d9bd5999d4c6045}{Get\+Coefficient}} (std\+::string name, int i, int j)
 \begin{DoxyCompactList}\small\item\em Getter function for 2F parameters (2 flavour indices). \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classRGESolver_ab4da1b64edf881b585de6bcfd03a2ab5}{Get\+Coefficient}} (std\+::string name, int i, int j, int k, int l)
-\begin{DoxyCompactList}\small\item\em Getter function for 4F parameters (4 flavour indices). \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Getter function for 4F parameters (4 flavour indices). one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, an error message is printed and the value 0 is returned. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classRGESolver_a98473c7d53e598bfef878106a3715948}\label{classRGESolver_a98473c7d53e598bfef878106a3715948}} 
 void \mbox{\hyperlink{classRGESolver_a98473c7d53e598bfef878106a3715948}{Reset}} ()
 \begin{DoxyCompactList}\small\item\em Resets all the S\+M\+E\+FT coefficients to 0 and the SM parameters to their default value. \end{DoxyCompactList}\item 
@@ -477,11 +477,12 @@ Same as \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolv
 
 
 
-Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu}, using one-\/loop pure SM beta functions. 
+Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. 
 
-If the flag C\+K\+Minput is set to {\ttfamily true} (default), the input for the Yukawa matrices will be generated from the current values of the C\+KM matrix and the masses of the fermions. If set to false, the current values of the Yukawa matrices will be used to generate the SM initial conditions at the chosen scale. ~\newline
+The low energy input values for the SM parameters usde by this method is given at the scale {\ttfamily S\+M\+Input\+Scale} (default value = 91.\+05 GeV). The user can change this low-\/energy scale via \mbox{\hyperlink{classRGESolver_ad47f4773fa7eaf4bb9bc3cb15de5b2c2}{Set\+S\+M\+Input\+Scale}}. If the flag C\+K\+Minput is set to {\ttfamily true} (default), the input for the Yukawa matrices will be generated from the current values of the C\+KM matrix and the masses of the fermions. If set to false, the current values of the Yukawa matrices will be used to generate the SM initial conditions at the chosen scale. ~\newline
 The usage of this method with C\+K\+Minput={\ttfamily true} should be restricted to realistic cases, with usual fermion mass hierarchy (smallest mass for the 1st generation and largest mass for the 3rd generation and no mass degeneracy) and with non-\/zero C\+KM matrix angles. ~\newline
-For more particular cases, the user should set C\+K\+Minput={\ttfamily false} and set the input in terms of the Yukawa matrices.
+For more particular cases, the user should set C\+K\+Minput={\ttfamily false} and set the input in terms of the Yukawa matrices. ~\newline
+ To set the masses of the fermions and the C\+KM matrix parameters, use
 
 
 \begin{DoxyParams}{Parameters}
@@ -535,7 +536,7 @@ The C\+KM matrix phase $\delta$.
 
 Getter function for scalar/0F parameters (no flavour indices). 
 
-If the parameter name does not match with any of the parameters, an error message is printed and the value 0 is returned. 
+
 \begin{DoxyParams}{Parameters}
 {\em name} & name of the parameter (see table \doxytablelink{classRGESolver_0F}{0F}) \\
 \hline
@@ -553,8 +554,7 @@ the requested parameter
 
 Getter function for 2F parameters (2 flavour indices). 
 
-If the parameter name does not match with any of the parameters or if at least one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, ~\newline
- an error message is printed and the value 0 is returned. 
+If at least one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, an error message is printed and the value 0 is returned. 
 \begin{DoxyParams}{Parameters}
 {\em name} & name of the parameter (see table \doxytablelink{classRGESolver_2F}{2F}) \\
 \hline
@@ -574,10 +574,9 @@ the requested parameter
 
 
 
-Getter function for 4F parameters (4 flavour indices). 
+Getter function for 4F parameters (4 flavour indices). one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, an error message is printed and the value 0 is returned. 
 
-If the parameter name does not match with any of the parameters or if at least one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, ~\newline
- an error message is printed and the value 0 is returned. 
+
 \begin{DoxyParams}{Parameters}
 {\em name} & name of the parameter (see table \doxytablelink{classRGESolver_4F}{4F}) \\
 \hline
@@ -684,7 +683,7 @@ Setter function for the C\+KM matrix phase $\delta$. The assignation is complete
 
 Setter function for scalar/0F parameters (no flavour indices). 
 
-If the parameter name does not match with any of the parameters, an error message is printed and no assignation is performed. 
+
 \begin{DoxyParams}{Parameters}
 {\em name} & name of the parameter (see table \doxytablelink{classRGESolver_0F}{0F}) \\
 \hline
@@ -701,7 +700,7 @@ If the parameter name does not match with any of the parameters, an error messag
 
 Setter function for 2F parameters (2 flavour indices). 
 
-If the parameter name does not match with any of the parameters or if at least one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, 
+If at least one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, an error message is printed and no assignation is performed. 
 \begin{DoxyParams}{Parameters}
 {\em name} & name of the parameter (see table \doxytablelink{classRGESolver_2F}{2F}) \\
 \hline
@@ -722,7 +721,7 @@ If the parameter name does not match with any of the parameters or if at least o
 
 Setter function for 4F parameters (4 flavour indices). 
 
-If the parameter name does not match with any of the parameters or if at least one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, an error message is printed and no assignation is performed.
+If at least one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, an error message is printed and no assignation is performed.
 
 
 \begin{DoxyParams}{Parameters}
@@ -764,7 +763,7 @@ Setter function for the mass of the fermions (in GeV). Assignation is allowed on
 
 
 
-Setter method for the scale at which the method \mbox{\hyperlink{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}{Generate\+S\+M\+Initial\+Conditions}} takes the input values (in GeV). for SM parameters. 
+Setter method for the scale at which the method \mbox{\hyperlink{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}{Generate\+S\+M\+Initial\+Conditions}} takes the input values (in GeV) for SM parameters. 
 
 
 \begin{DoxyParams}{Parameters}

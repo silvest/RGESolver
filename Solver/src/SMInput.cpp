@@ -187,7 +187,7 @@ void RGESolver::GenerateSMInitialConditions(
                 "Available methods: Numeric, Leading-Log"
                 << std::endl;
     }
-
+    SetSMDefaultInput();
 
     //Before evolving, eventual changes 
     //in the input values of CKM angles must be 
@@ -771,8 +771,8 @@ void RGESolver::SetSMDefaultInput() {
 }
 
 void RGESolver::ComputeCKMAndFermionMasses() {
-    
-gslpp::matrix<gslpp::complex> Uu(3, 3, 0.);
+
+    gslpp::matrix<gslpp::complex> Uu(3, 3, 0.);
     gslpp::matrix<gslpp::complex> Vu(3, 3, 0.);
     gslpp::matrix<gslpp::complex> yuDiag(3, 3, 0.);
     gslpp::vector<double> Su(3, 0.);
@@ -854,82 +854,81 @@ void RGESolver::ResetParameters() {
 
 void RGESolver::Reset() {
 
-    double Zero[2558] = {0.};
     int n = 0;
     int a, i, j, k, l;
-    g2 = Zero[0];
-    g1 = Zero[1];
-    g3 = Zero[2];
+    g2 = 0;
+    g1 = 0;
+    g3 = 0;
     n += 3;
-    lambda = Zero[n];
+    lambda = 0;
     n ++;
-    mh2 = Zero[n];
+    mh2 = 0;
     n ++;
 
     for (i = 0; i < NG; i ++) {
         for (j = 0; j < NG; j ++) {
             a = 0;
-            yuR[i][j] = Zero[n + a * DF];
+            yuR[i][j] = 0;
             a ++;
-            yuI[i][j] = Zero[n + a * DF];
+            yuI[i][j] = 0;
             a ++;
-            ydR[i][j] = Zero[n + a * DF];
+            ydR[i][j] = 0;
             a ++;
-            ydI[i][j] = Zero[n + a * DF];
+            ydI[i][j] = 0;
             a ++;
-            yeR[i][j] = Zero[n + a * DF];
+            yeR[i][j] = 0;
             a ++;
-            yeI[i][j] = Zero[n + a * DF];
+            yeI[i][j] = 0;
             a ++;
             n ++;
         }
     }
     n += (2. * Nyukawa - 1.) * DF;
 
-    cG = Zero[n];
+    cG = 0;
     n ++;
-    cGT = Zero[n];
+    cGT = 0;
     n ++;
-    cW = Zero[n];
+    cW = 0;
     n ++;
-    cWT = Zero[n];
+    cWT = 0;
     n ++;
-    cH = Zero[n];
+    cH = 0;
     n ++;
-    cHBOX = Zero[n];
+    cHBOX = 0;
     n ++;
-    cHD = Zero[n];
+    cHD = 0;
     n ++;
 
-    cHG = Zero[n];
+    cHG = 0;
     n ++;
-    cHB = Zero[n];
+    cHB = 0;
     n ++;
-    cHW = Zero[n];
+    cHW = 0;
     n ++;
-    cHWB = Zero[n];
+    cHWB = 0;
     n ++;
-    cHGT = Zero[n];
+    cHGT = 0;
     n ++;
-    cHBT = Zero[n];
+    cHBT = 0;
     n ++;
-    cHWT = Zero[n];
+    cHWT = 0;
     n ++;
-    cHWBT = Zero[n];
+    cHWBT = 0;
     n ++;
 
     //class 5
     for (i = 0; i < NG; i ++) {
         for (j = 0; j < NG; j ++) {
             a = 0;
-            WC1_set(cuHR, i, j, Zero[n + 2 * a * DF]);
-            WC1_set(cuHI, i, j, Zero[n + (2 * a + 1) * DF]);
+            WC1_set(cuHR, i, j, 0);
+            WC1_set(cuHI, i, j, 0);
             a ++;
-            WC1_set(cdHR, i, j, Zero[n + 2 * a * DF]);
-            WC1_set(cdHI, i, j, Zero[n + (2 * a + 1) * DF]);
+            WC1_set(cdHR, i, j, 0);
+            WC1_set(cdHI, i, j, 0);
             a ++;
-            WC1_set(ceHR, i, j, Zero[n + 2 * a * DF]);
-            WC1_set(ceHI, i, j, Zero[n + (2 * a + 1) * DF]);
+            WC1_set(ceHR, i, j, 0);
+            WC1_set(ceHI, i, j, 0);
             a ++;
             n ++;
         }
@@ -941,37 +940,37 @@ void RGESolver::Reset() {
     for (i = 0; i < NG; i ++) {
         for (j = 0; j < NG; j ++) {
             a = 0;
-            WC1_set(ceWR, i, j, Zero[n + a * DF]);
+            WC1_set(ceWR, i, j, 0);
             a ++;
-            WC1_set(ceWI, i, j, Zero[n + a * DF]);
+            WC1_set(ceWI, i, j, 0);
             a ++;
-            WC1_set(ceBR, i, j, Zero[n + a * DF]);
+            WC1_set(ceBR, i, j, 0);
             a ++;
-            WC1_set(ceBI, i, j, Zero[n + a * DF]);
+            WC1_set(ceBI, i, j, 0);
             a ++;
-            WC1_set(cuGR, i, j, Zero[n + a * DF]);
+            WC1_set(cuGR, i, j, 0);
             a ++;
-            WC1_set(cuGI, i, j, Zero[n + a * DF]);
+            WC1_set(cuGI, i, j, 0);
             a ++;
-            WC1_set(cuWR, i, j, Zero[n + a * DF]);
+            WC1_set(cuWR, i, j, 0);
             a ++;
-            WC1_set(cuWI, i, j, Zero[n + a * DF]);
+            WC1_set(cuWI, i, j, 0);
             a ++;
-            WC1_set(cuBR, i, j, Zero[n + a * DF]);
+            WC1_set(cuBR, i, j, 0);
             a ++;
-            WC1_set(cuBI, i, j, Zero[n + a * DF]);
+            WC1_set(cuBI, i, j, 0);
             a ++;
-            WC1_set(cdGR, i, j, Zero[n + a * DF]);
+            WC1_set(cdGR, i, j, 0);
             a ++;
-            WC1_set(cdGI, i, j, Zero[n + a * DF]);
+            WC1_set(cdGI, i, j, 0);
             a ++;
-            WC1_set(cdWR, i, j, Zero[n + a * DF]);
+            WC1_set(cdWR, i, j, 0);
             a ++;
-            WC1_set(cdWI, i, j, Zero[n + a * DF]);
+            WC1_set(cdWI, i, j, 0);
             a ++;
-            WC1_set(cdBR, i, j, Zero[n + a * DF]);
+            WC1_set(cdBR, i, j, 0);
             a ++;
-            WC1_set(cdBI, i, j, Zero[n + a * DF]);
+            WC1_set(cdBI, i, j, 0);
             a ++;
             n ++;
         }
@@ -981,74 +980,74 @@ void RGESolver::Reset() {
     //class 7
     {
         for (i = 0; i < DWC2R; i ++) {
-            WC2R_set(cHl1R, WC2R_indices[i][0], WC2R_indices[i][1], Zero[n]);
+            WC2R_set(cHl1R, WC2R_indices[i][0], WC2R_indices[i][1], 0);
             n ++;
         }
         for (i = 0; i < DWC2I; i ++) {
-            WC2I_set(cHl1I, WC2I_indices[i][0], WC2I_indices[i][1], Zero[n]);
+            WC2I_set(cHl1I, WC2I_indices[i][0], WC2I_indices[i][1], 0);
             n ++;
         }
         for (i = 0; i < DWC2R; i ++) {
-            WC2R_set(cHl3R, WC2R_indices[i][0], WC2R_indices[i][1], Zero[n]);
+            WC2R_set(cHl3R, WC2R_indices[i][0], WC2R_indices[i][1], 0);
             n ++;
         }
         for (i = 0; i < DWC2I; i ++) {
-            WC2I_set(cHl3I, WC2I_indices[i][0], WC2I_indices[i][1], Zero[n]);
+            WC2I_set(cHl3I, WC2I_indices[i][0], WC2I_indices[i][1], 0);
             n ++;
         }
         for (i = 0; i < DWC2R; i ++) {
-            WC2R_set(cHeR, WC2R_indices[i][0], WC2R_indices[i][1], Zero[n]);
+            WC2R_set(cHeR, WC2R_indices[i][0], WC2R_indices[i][1], 0);
             n ++;
         }
         for (i = 0; i < DWC2I; i ++) {
-            WC2I_set(cHeI, WC2I_indices[i][0], WC2I_indices[i][1], Zero[n]);
+            WC2I_set(cHeI, WC2I_indices[i][0], WC2I_indices[i][1], 0);
             n ++;
         }
 
         for (i = 0; i < DWC2R; i ++) {
-            WC2R_set(cHq1R, WC2R_indices[i][0], WC2R_indices[i][1], Zero[n]);
+            WC2R_set(cHq1R, WC2R_indices[i][0], WC2R_indices[i][1], 0);
             n ++;
         }
         for (i = 0; i < DWC2I; i ++) {
-            WC2I_set(cHq1I, WC2I_indices[i][0], WC2I_indices[i][1], Zero[n]);
+            WC2I_set(cHq1I, WC2I_indices[i][0], WC2I_indices[i][1], 0);
             n ++;
         }
         for (i = 0; i < DWC2R; i ++) {
-            WC2R_set(cHq3R, WC2R_indices[i][0], WC2R_indices[i][1], Zero[n]);
+            WC2R_set(cHq3R, WC2R_indices[i][0], WC2R_indices[i][1], 0);
             n ++;
         }
         for (i = 0; i < DWC2I; i ++) {
-            WC2I_set(cHq3I, WC2I_indices[i][0], WC2I_indices[i][1], Zero[n]);
+            WC2I_set(cHq3I, WC2I_indices[i][0], WC2I_indices[i][1], 0);
             n ++;
         }
 
         for (i = 0; i < DWC2R; i ++) {
-            WC2R_set(cHuR, WC2R_indices[i][0], WC2R_indices[i][1], Zero[n]);
+            WC2R_set(cHuR, WC2R_indices[i][0], WC2R_indices[i][1], 0);
             n ++;
         }
         for (i = 0; i < DWC2I; i ++) {
-            WC2I_set(cHuI, WC2I_indices[i][0], WC2I_indices[i][1], Zero[n]);
+            WC2I_set(cHuI, WC2I_indices[i][0], WC2I_indices[i][1], 0);
             n ++;
         }
 
         for (i = 0; i < DWC2R; i ++) {
-            WC2R_set(cHdR, WC2R_indices[i][0], WC2R_indices[i][1], Zero[n]);
+            WC2R_set(cHdR, WC2R_indices[i][0], WC2R_indices[i][1], 0);
             n ++;
         }
         for (i = 0; i < DWC2I; i ++) {
-            WC2I_set(cHdI, WC2I_indices[i][0], WC2I_indices[i][1], Zero[n]);
+            WC2I_set(cHdI, WC2I_indices[i][0], WC2I_indices[i][1], 0);
             n ++;
         }
 
         for (i = 0; i < NG; i ++) {
             for (j = 0; j < NG; j ++) {
-                WC1_set(cHudR, i, j, Zero[n]);
+                WC1_set(cHudR, i, j, 0);
                 n ++;
             }
         }
         for (i = 0; i < NG; i ++) {
             for (j = 0; j < NG; j ++) {
-                WC1_set(cHudI, i, j, Zero[n]);
+                WC1_set(cHudI, i, j, 0);
                 n ++;
             }
         }
@@ -1059,53 +1058,53 @@ void RGESolver::Reset() {
     {
         for (a = 0; a < DWC6R; a ++) {
             WC6R_set(cllR, WC6R_indices[a][0], WC6R_indices[a][1],
-                    WC6R_indices[a][2], WC6R_indices[a][3], Zero[n]);
+                    WC6R_indices[a][2], WC6R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC6I; a ++) {
             WC6I_set(cllI, WC6I_indices[a][0], WC6I_indices[a][1],
-                    WC6I_indices[a][2], WC6I_indices[a][3], Zero[n]);
+                    WC6I_indices[a][2], WC6I_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC6R; a ++) {
             WC6R_set(cqq1R, WC6R_indices[a][0], WC6R_indices[a][1],
-                    WC6R_indices[a][2], WC6R_indices[a][3], Zero[n]);
+                    WC6R_indices[a][2], WC6R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC6I; a ++) {
             WC6I_set(cqq1I, WC6I_indices[a][0], WC6I_indices[a][1],
-                    WC6I_indices[a][2], WC6I_indices[a][3], Zero[n]);
+                    WC6I_indices[a][2], WC6I_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC6R; a ++) {
             WC6R_set(cqq3R, WC6R_indices[a][0], WC6R_indices[a][1],
-                    WC6R_indices[a][2], WC6R_indices[a][3], Zero[n]);
+                    WC6R_indices[a][2], WC6R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC6I; a ++) {
             WC6I_set(cqq3I, WC6I_indices[a][0], WC6I_indices[a][1],
-                    WC6I_indices[a][2], WC6I_indices[a][3], Zero[n]);
+                    WC6I_indices[a][2], WC6I_indices[a][3], 0);
             n ++;
         }
 
         for (a = 0; a < DWC7R; a ++) {
             WC7R_set(clq1R, WC7R_indices[a][0], WC7R_indices[a][1],
-                    WC7R_indices[a][2], WC7R_indices[a][3], Zero[n]);
+                    WC7R_indices[a][2], WC7R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7I; a ++) {
             WC7I_set(clq1I, WC7I_indices[a][0], WC7I_indices[a][1],
-                    WC7I_indices[a][2], WC7I_indices[a][3], Zero[n]);
+                    WC7I_indices[a][2], WC7I_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7R; a ++) {
             WC7R_set(clq3R, WC7R_indices[a][0], WC7R_indices[a][1],
-                    WC7R_indices[a][2], WC7R_indices[a][3], Zero[n]);
+                    WC7R_indices[a][2], WC7R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7I; a ++) {
             WC7I_set(clq3I, WC7I_indices[a][0], WC7I_indices[a][1],
-                    WC7I_indices[a][2], WC7I_indices[a][3], Zero[n]);
+                    WC7I_indices[a][2], WC7I_indices[a][3], 0);
             n ++;
         }
 
@@ -1114,75 +1113,75 @@ void RGESolver::Reset() {
     {
         for (a = 0; a < DWC8R; a ++) {
             WC8R_set(ceeR, WC8R_indices[a][0], WC8R_indices[a][1],
-                    WC8R_indices[a][2], WC8R_indices[a][3], Zero[n]);
+                    WC8R_indices[a][2], WC8R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC8I; a ++) {
             WC8I_set(ceeI, WC8I_indices[a][0], WC8I_indices[a][1],
-                    WC8I_indices[a][2], WC8I_indices[a][3], Zero[n]);
+                    WC8I_indices[a][2], WC8I_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC6R; a ++) {
             WC6R_set(cuuR, WC6R_indices[a][0], WC6R_indices[a][1],
-                    WC6R_indices[a][2], WC6R_indices[a][3], Zero[n]);
+                    WC6R_indices[a][2], WC6R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC6I; a ++) {
             WC6I_set(cuuI, WC6I_indices[a][0], WC6I_indices[a][1],
-                    WC6I_indices[a][2], WC6I_indices[a][3], Zero[n]);
+                    WC6I_indices[a][2], WC6I_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC6R; a ++) {
             WC6R_set(cddR, WC6R_indices[a][0], WC6R_indices[a][1],
-                    WC6R_indices[a][2], WC6R_indices[a][3], Zero[n]);
+                    WC6R_indices[a][2], WC6R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC6I; a ++) {
             WC6I_set(cddI, WC6I_indices[a][0], WC6I_indices[a][1],
-                    WC6I_indices[a][2], WC6I_indices[a][3], Zero[n]);
+                    WC6I_indices[a][2], WC6I_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7R; a ++) {
             WC7R_set(ceuR, WC7R_indices[a][0], WC7R_indices[a][1],
-                    WC7R_indices[a][2], WC7R_indices[a][3], Zero[n]);
+                    WC7R_indices[a][2], WC7R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7I; a ++) {
             WC7I_set(ceuI, WC7I_indices[a][0], WC7I_indices[a][1],
-                    WC7I_indices[a][2], WC7I_indices[a][3], Zero[n]);
+                    WC7I_indices[a][2], WC7I_indices[a][3], 0);
             n ++;
         }
 
 
         for (a = 0; a < DWC7R; a ++) {
             WC7R_set(cedR, WC7R_indices[a][0], WC7R_indices[a][1],
-                    WC7R_indices[a][2], WC7R_indices[a][3], Zero[n]);
+                    WC7R_indices[a][2], WC7R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7I; a ++) {
             WC7I_set(cedI, WC7I_indices[a][0], WC7I_indices[a][1],
-                    WC7I_indices[a][2], WC7I_indices[a][3], Zero[n]);
+                    WC7I_indices[a][2], WC7I_indices[a][3], 0);
             n ++;
         }
 
         for (a = 0; a < DWC7R; a ++) {
             WC7R_set(cud1R, WC7R_indices[a][0], WC7R_indices[a][1],
-                    WC7R_indices[a][2], WC7R_indices[a][3], Zero[n]);
+                    WC7R_indices[a][2], WC7R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7I; a ++) {
             WC7I_set(cud1I, WC7I_indices[a][0], WC7I_indices[a][1],
-                    WC7I_indices[a][2], WC7I_indices[a][3], Zero[n]);
+                    WC7I_indices[a][2], WC7I_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7R; a ++) {
             WC7R_set(cud8R, WC7R_indices[a][0], WC7R_indices[a][1],
-                    WC7R_indices[a][2], WC7R_indices[a][3], Zero[n]);
+                    WC7R_indices[a][2], WC7R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7I; a ++) {
             WC7I_set(cud8I, WC7I_indices[a][0], WC7I_indices[a][1],
-                    WC7I_indices[a][2], WC7I_indices[a][3], Zero[n]);
+                    WC7I_indices[a][2], WC7I_indices[a][3], 0);
             n ++;
         }
 
@@ -1193,64 +1192,64 @@ void RGESolver::Reset() {
     {
         for (a = 0; a < DWC7R; a ++) {
             WC7R_set(cleR, WC7R_indices[a][0], WC7R_indices[a][1],
-                    WC7R_indices[a][2], WC7R_indices[a][3], Zero[n]);
+                    WC7R_indices[a][2], WC7R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7I; a ++) {
             WC7I_set(cleI, WC7I_indices[a][0], WC7I_indices[a][1],
-                    WC7I_indices[a][2], WC7I_indices[a][3], Zero[n]);
+                    WC7I_indices[a][2], WC7I_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7R; a ++) {
             WC7R_set(cluR, WC7R_indices[a][0], WC7R_indices[a][1],
-                    WC7R_indices[a][2], WC7R_indices[a][3], Zero[n]);
+                    WC7R_indices[a][2], WC7R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7I; a ++) {
             WC7I_set(cluI, WC7I_indices[a][0], WC7I_indices[a][1],
-                    WC7I_indices[a][2], WC7I_indices[a][3], Zero[n]);
+                    WC7I_indices[a][2], WC7I_indices[a][3], 0);
             n ++;
         }
 
         for (a = 0; a < DWC7R; a ++) {
             WC7R_set(cldR, WC7R_indices[a][0], WC7R_indices[a][1],
-                    WC7R_indices[a][2], WC7R_indices[a][3], Zero[n]);
+                    WC7R_indices[a][2], WC7R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7I; a ++) {
             WC7I_set(cldI, WC7I_indices[a][0], WC7I_indices[a][1],
-                    WC7I_indices[a][2], WC7I_indices[a][3], Zero[n]);
+                    WC7I_indices[a][2], WC7I_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7R; a ++) {
             WC7R_set(cqeR, WC7R_indices[a][0], WC7R_indices[a][1],
-                    WC7R_indices[a][2], WC7R_indices[a][3], Zero[n]);
+                    WC7R_indices[a][2], WC7R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7I; a ++) {
             WC7I_set(cqeI, WC7I_indices[a][0], WC7I_indices[a][1],
-                    WC7I_indices[a][2], WC7I_indices[a][3], Zero[n]);
+                    WC7I_indices[a][2], WC7I_indices[a][3], 0);
             n ++;
         }
 
         for (a = 0; a < DWC7R; a ++) {
             WC7R_set(cqu1R, WC7R_indices[a][0], WC7R_indices[a][1],
-                    WC7R_indices[a][2], WC7R_indices[a][3], Zero[n]);
+                    WC7R_indices[a][2], WC7R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7I; a ++) {
             WC7I_set(cqu1I, WC7I_indices[a][0], WC7I_indices[a][1],
-                    WC7I_indices[a][2], WC7I_indices[a][3], Zero[n]);
+                    WC7I_indices[a][2], WC7I_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7R; a ++) {
             WC7R_set(cqu8R, WC7R_indices[a][0], WC7R_indices[a][1],
-                    WC7R_indices[a][2], WC7R_indices[a][3], Zero[n]);
+                    WC7R_indices[a][2], WC7R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7I; a ++) {
             WC7I_set(cqu8I, WC7I_indices[a][0], WC7I_indices[a][1],
-                    WC7I_indices[a][2], WC7I_indices[a][3], Zero[n]);
+                    WC7I_indices[a][2], WC7I_indices[a][3], 0);
             n ++;
         }
 
@@ -1258,22 +1257,22 @@ void RGESolver::Reset() {
 
         for (a = 0; a < DWC7R; a ++) {
             WC7R_set(cqd1R, WC7R_indices[a][0], WC7R_indices[a][1],
-                    WC7R_indices[a][2], WC7R_indices[a][3], Zero[n]);
+                    WC7R_indices[a][2], WC7R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7I; a ++) {
             WC7I_set(cqd1I, WC7I_indices[a][0], WC7I_indices[a][1],
-                    WC7I_indices[a][2], WC7I_indices[a][3], Zero[n]);
+                    WC7I_indices[a][2], WC7I_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7R; a ++) {
             WC7R_set(cqd8R, WC7R_indices[a][0], WC7R_indices[a][1],
-                    WC7R_indices[a][2], WC7R_indices[a][3], Zero[n]);
+                    WC7R_indices[a][2], WC7R_indices[a][3], 0);
             n ++;
         }
         for (a = 0; a < DWC7I; a ++) {
             WC7I_set(cqd8I, WC7I_indices[a][0], WC7I_indices[a][1],
-                    WC7I_indices[a][2], WC7I_indices[a][3], Zero[n]);
+                    WC7I_indices[a][2], WC7I_indices[a][3], 0);
             n ++;
         }
 
@@ -1285,8 +1284,8 @@ void RGESolver::Reset() {
         for (j = 0; j < NG; j ++) {
             for (k = 0; k < NG; k ++) {
                 for (l = 0; l < NG; l ++) {
-                    WC5_set(cledqR, i, j, k, l, Zero[n]);
-                    WC5_set(cledqI, i, j, k, l, Zero[n + NG * NG * NG * NG]);
+                    WC5_set(cledqR, i, j, k, l, 0);
+                    WC5_set(cledqI, i, j, k, l, 0);
                     n ++;
                 }
             }
@@ -1301,21 +1300,21 @@ void RGESolver::Reset() {
             for (k = 0; k < NG; k ++) {
                 for (l = 0; l < NG; l ++) {
                     a = 0;
-                    WC5_set(cquqd1R, i, j, k, l, Zero[n + a * NG * NG * NG * NG]);
+                    WC5_set(cquqd1R, i, j, k, l, 0);
                     a ++;
-                    WC5_set(cquqd1I, i, j, k, l, Zero[n + a * NG * NG * NG * NG]);
+                    WC5_set(cquqd1I, i, j, k, l, 0);
                     a ++;
-                    WC5_set(cquqd8R, i, j, k, l, Zero[n + a * NG * NG * NG * NG]);
+                    WC5_set(cquqd8R, i, j, k, l, 0);
                     a ++;
-                    WC5_set(cquqd8I, i, j, k, l, Zero[n + a * NG * NG * NG * NG]);
+                    WC5_set(cquqd8I, i, j, k, l, 0);
                     a ++;
-                    WC5_set(clequ1R, i, j, k, l, Zero[n + a * NG * NG * NG * NG]);
+                    WC5_set(clequ1R, i, j, k, l, 0);
                     a ++;
-                    WC5_set(clequ1I, i, j, k, l, Zero[n + a * NG * NG * NG * NG]);
+                    WC5_set(clequ1I, i, j, k, l, 0);
                     a ++;
-                    WC5_set(clequ3R, i, j, k, l, Zero[n + a * NG * NG * NG * NG]);
+                    WC5_set(clequ3R, i, j, k, l, 0);
                     a ++;
-                    WC5_set(clequ3I, i, j, k, l, Zero[n + a * NG * NG * NG * NG]);
+                    WC5_set(clequ3I, i, j, k, l, 0);
                     a ++;
                     n ++;
                 }
@@ -1327,7 +1326,7 @@ void RGESolver::Reset() {
 
     //After setting everything to 0, 
     //we reset to default SM parameters
-    SetSMDefaultInput();
+    //SetSMDefaultInput();
 
 }
 
