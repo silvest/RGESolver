@@ -187,7 +187,6 @@ void RGESolver::GenerateSMInitialConditions(
                 "Available methods: Numeric, Leading-Log"
                 << std::endl;
     }
-    SetSMDefaultInput();
 
     //Before evolving, eventual changes 
     //in the input values of CKM angles must be 
@@ -1326,7 +1325,7 @@ void RGESolver::Reset() {
 
     //After setting everything to 0, 
     //we reset to default SM parameters
-    //SetSMDefaultInput();
+    SetSMDefaultInput();
 
 }
 

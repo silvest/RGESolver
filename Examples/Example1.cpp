@@ -14,14 +14,42 @@ int main() {
 
     double Lambda = 10000; //Lambda = 10 TeV
     double muLow = 250.;
+    int i, j;
+    i = 0;
+    j = 1;
 
+
+
+    /*
+    S.SetSMInputScale(250.);
+
+    S.SetCoefficient("g1", 0.3);
+    S.SetCoefficient("g2", 0.6);
+    S.SetCoefficient("g3", 1.2);
+    S.SetCoefficient("lambda", 0.2);
+    S.SetCoefficient("mh2", 16000.);
+
+    S.SetCKMAngle("CKM_theta12", 0.1);
+    S.SetCKMAngle("CKM_theta13", 0.2);
+    S.SetCKMAngle("CKM_theta23", 0.3);
+    S.SetCKMPhase(0.1);
+
+    S.SetFermionMass("mu", 0.002);
+    S.SetFermionMass("mc", 1.2);
+    S.SetFermionMass("mt", 1.2);
+
+    S.SetFermionMass("md", 0.002);
+    S.SetFermionMass("ms", 1.2);
+    S.SetFermionMass("mb", 1.2);
+
+    S.SetFermionMass("mel", 0.006;);
+    S.SetFermionMass("mmu", 0.100);
+    S.SetFermionMass("mtau", 1.2);
+     */
 
     //Generate SM initial conditions using the default input parameters. 
     S.GenerateSMInitialConditions(Lambda, "DOWN", "Numeric");
 
-    int i, j;
-    i = 0;
-    j = 1;
 
     //Initial conditions for SMEFT coefficients
     S.SetCoefficient("CG", 1. / (Lambda * Lambda));
@@ -51,8 +79,13 @@ int main() {
 
     cout << "md(" << muLow << " GeV) : " << S.GetFermionMass("md") << " GeV" << endl;
     cout << "CKM_theta13(" << muLow << " GeV) : " << S.GetCKMAngle("CKM_theta13") << " rad" << endl;
-
     cout << "-----------------------------------------" << endl;
+
+
+
+    S.Reset();
+
+
 
 
     return 0;
