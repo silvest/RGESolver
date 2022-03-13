@@ -380,14 +380,13 @@ public:
      /** 
      * @brief Documentation for the input/output handling.
      * 
-     * @details All the SMEFT coefficients are set using the  
-     * SetCoefficient methods and 
+     * @details All the SMEFT coefficients are set using the SetCoefficient methods and 
      * accessed with the GetCoefficient methods. 
      * There exist three different signatures for each method, 
      * depending on the number of flavour indices of the 
      * parameter (0,2,4). @n
      * These two routines must be used also for the SM parameters 
-     *  \f$g1,g2,g3,\lambda,m_h^2,\f$ 
+     *  \f$g_1,g_2,g_3,\lambda,m_h^2,\f$ 
      *   \f$\mathrm{Re}(\mathcal{Y}_u),\Im(\mathcal{Y}_u),\f$ 
      *   \f$\mathrm{Re}(\mathcal{Y}_d),\Im(\mathcal{Y}_d),\f$ 
      *   \f$\mathrm{Re}(\mathcal{Y}_e),\Im(\mathcal{Y}_e)\f$ 

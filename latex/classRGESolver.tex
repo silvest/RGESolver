@@ -391,9 +391,8 @@ $\mathrm{Im}(C_{qd8})$ &{\ttfamily Cqd8I} &W\+C7I ~\newline
 
 Documentation for the input/output handling. 
 
-All the S\+M\+E\+FT coefficients are set using the ~\newline
- Set\+Coefficient methods and accessed with the Get\+Coefficient methods. There exist three different signatures for each method, depending on the number of flavour indices of the parameter (0,2,4). ~\newline
-These two routines must be used also for the SM parameters $g1,g2,g3,\lambda,m_h^2,$ $\mathrm{Re}(\mathcal{Y}_u),\Im(\mathcal{Y}_u),$ $\mathrm{Re}(\mathcal{Y}_d),\Im(\mathcal{Y}_d),$ $\mathrm{Re}(\mathcal{Y}_e),\Im(\mathcal{Y}_e)$ (we follow \href{https://arxiv.org/abs/1308.2627}{\texttt{ https\+://arxiv.\+org/abs/1308.\+2627}} for what concerns the conventions in the Higgs\textquotesingle{} sector). ~\newline
+All the S\+M\+E\+FT coefficients are set using the Set\+Coefficient methods and accessed with the Get\+Coefficient methods. There exist three different signatures for each method, depending on the number of flavour indices of the parameter (0,2,4). ~\newline
+These two routines must be used also for the SM parameters $g_1,g_2,g_3,\lambda,m_h^2,$ $\mathrm{Re}(\mathcal{Y}_u),\Im(\mathcal{Y}_u),$ $\mathrm{Re}(\mathcal{Y}_d),\Im(\mathcal{Y}_d),$ $\mathrm{Re}(\mathcal{Y}_e),\Im(\mathcal{Y}_e)$ (we follow \href{https://arxiv.org/abs/1308.2627}{\texttt{ https\+://arxiv.\+org/abs/1308.\+2627}} for what concerns the conventions in the Higgs\textquotesingle{} sector). ~\newline
 If the user is interested in using the \mbox{\hyperlink{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}{Generate\+S\+M\+Initial\+Conditions}} method, the input for the C\+KM matrix parameters and the fermion masses must be given with the methods \mbox{\hyperlink{classRGESolver_a7e045398572694648fded4253423705e}{Set\+C\+K\+M\+Angle(std\+::string name, double val)}}, \mbox{\hyperlink{classRGESolver_a74d1c5b7633de682a376204d1788b794}{Set\+C\+K\+M\+Phase(double val)}} \mbox{\hyperlink{classRGESolver_a063197d49e4878d86b2d9e5ab6b0b9f8}{Set\+Fermion\+Mass(std\+::string name, double val)}}. ~\newline
 A complete list of the keys that must be used to correctly invoke setter/getter methods are given in tables \doxytablelink{classRGESolver_SM}{SM} , \doxytablelink{classRGESolver_0F}{0F} , \doxytablelink{classRGESolver_2F}{2F} and \doxytablelink{classRGESolver_4F}{4F}
 
