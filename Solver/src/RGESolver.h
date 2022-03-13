@@ -55,14 +55,15 @@
  * \ref SetFermionMass. @n
  * A complete list of the keys that must be used to 
  * correctly invoke setter/getter methods are given in 
- * tables \ref SM, \ref 0F, \ref 2F and \ref 4F. 
+ * tables \ref SM, \ref 0F, \ref 2F and \ref 4F. @n
+ * A summary of the operators symmetry classes is given in table \ref Sym. 
  
 
 
 
-* @author S. Di Noi, L. Silvestrini.
-* @copyright GNU General Public License
-*/
+ * @author S. Di Noi, L. Silvestrini.
+ * @copyright GNU General Public License
+ */
 
 
 //tables with all the names of the coefficients.
@@ -181,7 +182,7 @@
 <table> 
 <tr> <th colspan="3"> Class 7   
 <tr> <th> Coefficient     <th> Name <th> Symmetry  
-<tr><td>\f$\mathrm{Re}(C_{Hl1})\f$ <td> `CHl1R` <td> WC2R  
+<tr><td>\f$\mathrm{Re}(C_{Hl1})\f$ <td> `CHtal1R` <td> WC2R  
 <tr><td>\f$\mathrm{Im}(C_{Hl1})\f$ <td> `CHl1I` <td> WC2I 
 <tr><td>\f$\mathrm{Re}(C_{Hl3})\f$ <td> `CHl3R` <td> WC2R 
 <tr><td>\f$\mathrm{Im}(C_{Hl3})\f$ <td> `CHl3I` <td> WC2I 
@@ -275,7 +276,28 @@
 <tr><td>\f$\mathrm{Im}(C_{qd8})\f$ <td> `Cqd8I` <td> WC7I  
 </table>
 </table>
+ * 
 
+<table>
+<caption id="Sym">Symmetry categories for operators in the SMEFT. nF indicates the number of
+flavour indices for each category.
+</caption>
+
+<tr> <th> Parameter     <th> Name  
+<tr><td> 0    <td> 0F scalar object
+<tr><td> WC1    <td> 2F generic real matrix
+<tr><td> WC2R   <td> 2F Hermitian matrix (real part)      
+<tr><td> WC2I         <td> 2F Hermitian matrix (imaginary part)     
+<tr><td> WC5         <td> 4F generic real object 
+<tr><td> WC6R        <td> 4F two identical \f$ \bar{\psi} \psi \f$ currents (real part)    
+<tr><td> WC6I        <td> 4F two identical \f$ \bar{\psi} \psi \f$ currents (imaginary part)   
+<tr><td> WC7R       <td> 4F two independent \f$ \bar{\psi} \psi \f$ currents (real part)    
+<tr><td> WC7I         <td>4F two independent \f$ \bar{\psi} \psi \f$ currents (imaginary part)   
+<tr><td> WC8R        <td> \f$ \mathcal{C}_{ee}\f$ (real part)   
+<tr><td> WC8I         <td> \f$ \mathcal{C}_{ee}\f$ (imaginary part)    
+</table> 
+ * 
+ * 
  */
 
 class RGESolver {
@@ -394,8 +416,8 @@ public:
      * @param muF final energy scale (in GeV)
      */
     void EvolveSMOnly(std::string method, double muI, double muF);
-    
-    
+
+
     /**
      * @brief Compute CKM matrix and the mass of the fermions. 
      * 
@@ -411,11 +433,11 @@ public:
 
 
     /** @name Input/output   */
-  
 
 
-    
-    
+
+
+
     /**
      * @brief Setter function for the mass of the 
      * fermions (in GeV). 
@@ -432,10 +454,10 @@ public:
      * @return the requested fermion mass  
      */
     double GetFermionMass(std::string name);
-    
-    
-    
-    
+
+
+
+
     /**
      * @brief Setter function for the CKM matrix angles
      *  \f$\theta_{12},\theta_{13},\theta_{23}\f$. 
@@ -528,7 +550,7 @@ public:
     void SetCoefficient(std::string name, double val, int i, int j,
             int k, int l);
 
-   
+
 
     //Getters for 0F,2F,4F
     /**

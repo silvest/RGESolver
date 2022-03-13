@@ -98,12 +98,13 @@ A class that performs renormalization group evolution in the context of the S\+M
 The class solves the Renormalization Group Equations (R\+G\+Es) both numerically and in the leading-\/log approximation. Only operators up to dimension six that preserve lepton and baryon numbers are considered. The operator basis is the Warsaw basis, defined in \href{https://arxiv.org/abs/1008.4884}{\texttt{ https\+://arxiv.\+org/abs/1008.\+4884}}. The class splits real and imaginary part of each complex parameter. ~\newline
  ~\newline
  The numerical integration is performed with an adaptive step-\/size routine (the explicit embedded Runge-\/\+Kutta-\/\+Fehlberg method), using the tools in the G\+NU Scientific Library. See \href{https://www.gnu.org/software/gsl/doc/html/ode-initval.html}{\texttt{ https\+://www.\+gnu.\+org/software/gsl/doc/html/ode-\/initval.\+html}} for all the details. ~\newline
- The accuracy level of the numerical integration can be tuned selecting the parameters $\epsilon_{rel}, \epsilon_{abs}$ and the integration step using the dedicated setter functions. ~\newline
+The accuracy level of the numerical integration can be tuned selecting the parameters $\epsilon_{rel}, \epsilon_{abs}$ and the integration step using the dedicated setter functions. ~\newline
  ~\newline
  All the S\+M\+E\+FT coefficients are set using the \mbox{\hyperlink{classRGESolver_adc2b8a9a10216ec5285569c8f24cbed2}{Set\+Coefficient}} methods and accessed with the \mbox{\hyperlink{classRGESolver_a23d5d847021421bc8a9ba03412d2674e}{Get\+Coefficient}} methods. There exist three different signatures for each method, depending on the number of flavour indices of the parameter (0,2,4). ~\newline
  These two routines must be used also for the SM parameters $g_1,g_2,g_3,\lambda,m_h^2,$ $\mathrm{Re}(\mathcal{Y}_u),\mathrm{Im}(\mathcal{Y}_u),$ $\mathrm{Re}(\mathcal{Y}_d),\mathrm{Im}(\mathcal{Y}_d),$ $\mathrm{Re}(\mathcal{Y}_e),\mathrm{Im}(\mathcal{Y}_e)$ (we follow \href{https://arxiv.org/abs/1308.2627}{\texttt{ https\+://arxiv.\+org/abs/1308.\+2627}} for what concerns the conventions in the Higgs\textquotesingle{} sector). ~\newline
- If the user is interested in using the \mbox{\hyperlink{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}{Generate\+S\+M\+Initial\+Conditions}} method, the input for the C\+KM matrix parameters and the fermion masses must be given with the methods \mbox{\hyperlink{classRGESolver_a7e045398572694648fded4253423705e}{Set\+C\+K\+M\+Angle}}, \mbox{\hyperlink{classRGESolver_a74d1c5b7633de682a376204d1788b794}{Set\+C\+K\+M\+Phase}} \mbox{\hyperlink{classRGESolver_a063197d49e4878d86b2d9e5ab6b0b9f8}{Set\+Fermion\+Mass}}. ~\newline
- A complete list of the keys that must be used to correctly invoke setter/getter methods are given in tables \doxytablelink{classRGESolver_SM}{SM}, \doxytablelink{classRGESolver_0F}{0F}, \doxytablelink{classRGESolver_2F}{2F} and \doxytablelink{classRGESolver_4F}{4F}.
+If the user is interested in using the \mbox{\hyperlink{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}{Generate\+S\+M\+Initial\+Conditions}} method, the input for the C\+KM matrix parameters and the fermion masses must be given with the methods \mbox{\hyperlink{classRGESolver_a7e045398572694648fded4253423705e}{Set\+C\+K\+M\+Angle}}, \mbox{\hyperlink{classRGESolver_a74d1c5b7633de682a376204d1788b794}{Set\+C\+K\+M\+Phase}} \mbox{\hyperlink{classRGESolver_a063197d49e4878d86b2d9e5ab6b0b9f8}{Set\+Fermion\+Mass}}. ~\newline
+A complete list of the keys that must be used to correctly invoke setter/getter methods are given in tables \doxytablelink{classRGESolver_SM}{SM}, \doxytablelink{classRGESolver_0F}{0F}, \doxytablelink{classRGESolver_2F}{2F} and \doxytablelink{classRGESolver_4F}{4F}. ~\newline
+A summary of the operators symmetry classes is given in table \doxytablelink{classRGESolver_Sym}{Sym}.
 
 \begin{DoxyAuthor}{Author}
 S. Di Noi, L. Silvestrini. 
@@ -263,7 +264,7 @@ $\mathrm{Im}(C_{dB})$ &{\ttfamily Cd\+BI} &W\+C1 \\\cline{1-3}
  }}\\\cline{1-3}
 \cellcolor{\tableheadbgcolor}\textbf{ Coefficient }&\cellcolor{\tableheadbgcolor}\textbf{ Name }&\cellcolor{\tableheadbgcolor}\textbf{ Symmetry ~\newline
  }\\\cline{1-3}
-$\mathrm{Re}(C_{Hl1})$ &{\ttfamily C\+Hl1R} &W\+C2R ~\newline
+$\mathrm{Re}(C_{Hl1})$ &{\ttfamily C\+Htal1R} &W\+C2R ~\newline
  \\\cline{1-3}
 $\mathrm{Im}(C_{Hl1})$ &{\ttfamily C\+Hl1I} &W\+C2I \\\cline{1-3}
 $\mathrm{Re}(C_{Hl3})$ &{\ttfamily C\+Hl3R} &W\+C2R \\\cline{1-3}
@@ -377,6 +378,42 @@ $\mathrm{Im}(C_{qd8})$ &{\ttfamily Cqd8I} &W\+C7I ~\newline
  \\\cline{1-3}
 \end{tabularx}}
 \\\cline{1-3}
+\end{longtabu}
+
+
+\hypertarget{classRGESolver_Sym}{}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\caption{Symmetry categories for operators in the S\+M\+E\+FT. nF indicates the number of flavour indices for each category. }\label{classRGESolver_Sym}\\
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Parameter }&\cellcolor{\tableheadbgcolor}\textbf{ Name ~\newline
+ }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Parameter }&\cellcolor{\tableheadbgcolor}\textbf{ Name ~\newline
+ }\\\cline{1-2}
+\endhead
+0 &0F scalar object \\\cline{1-2}
+W\+C1 &2F generic real matrix \\\cline{1-2}
+W\+C2R &2F Hermitian matrix (real part) ~\newline
+ \\\cline{1-2}
+W\+C2I &2F Hermitian matrix (imaginary part) ~\newline
+ \\\cline{1-2}
+W\+C5 &4F generic real object \\\cline{1-2}
+W\+C6R &4F two identical $ \bar{\psi} \psi $ currents (real part) ~\newline
+ \\\cline{1-2}
+W\+C6I &4F two identical $ \bar{\psi} \psi $ currents (imaginary part) ~\newline
+ \\\cline{1-2}
+W\+C7R &4F two independent $ \bar{\psi} \psi $ currents (real part) ~\newline
+ \\\cline{1-2}
+W\+C7I &4F two independent $ \bar{\psi} \psi $ currents (imaginary part) ~\newline
+ \\\cline{1-2}
+W\+C8R &$ \mathcal{C}_{ee}$ (real part) ~\newline
+ \\\cline{1-2}
+W\+C8I &$ \mathcal{C}_{ee}$ (imaginary part) ~\newline
+ \\\cline{1-2}
 \end{longtabu}
 
 

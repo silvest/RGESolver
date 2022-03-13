@@ -165,12 +165,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>The class solves the Renormalization Group Equations (RGEs) both numerically and in the leading-log approximation. Only operators up to dimension six that preserve lepton and baryon numbers are considered. The operator basis is the Warsaw basis, defined in <a href="https://arxiv.org/abs/1008.4884">https://arxiv.org/abs/1008.4884</a>. The class splits real and imaginary part of each complex parameter. <br  />
  <br  />
  The numerical integration is performed with an adaptive step-size routine (the explicit embedded Runge-Kutta-Fehlberg method), using the tools in the GNU Scientific Library. See <a href="https://www.gnu.org/software/gsl/doc/html/ode-initval.html">https://www.gnu.org/software/gsl/doc/html/ode-initval.html</a> for all the details. <br  />
- The accuracy level of the numerical integration can be tuned selecting the parameters \(\epsilon_{rel}, \epsilon_{abs}\) and the integration step using the dedicated setter functions. <br  />
+The accuracy level of the numerical integration can be tuned selecting the parameters \(\epsilon_{rel}, \epsilon_{abs}\) and the integration step using the dedicated setter functions. <br  />
  <br  />
  All the SMEFT coefficients are set using the <a class="el" href="classRGESolver.html#adc2b8a9a10216ec5285569c8f24cbed2">SetCoefficient</a> methods and accessed with the <a class="el" href="classRGESolver.html#a23d5d847021421bc8a9ba03412d2674e">GetCoefficient</a> methods. There exist three different signatures for each method, depending on the number of flavour indices of the parameter (0,2,4). <br  />
  These two routines must be used also for the SM parameters \(g_1,g_2,g_3,\lambda,m_h^2,\) \(\mathrm{Re}(\mathcal{Y}_u),\mathrm{Im}(\mathcal{Y}_u),\) \(\mathrm{Re}(\mathcal{Y}_d),\mathrm{Im}(\mathcal{Y}_d),\) \(\mathrm{Re}(\mathcal{Y}_e),\mathrm{Im}(\mathcal{Y}_e)\) (we follow <a href="https://arxiv.org/abs/1308.2627">https://arxiv.org/abs/1308.2627</a> for what concerns the conventions in the Higgs' sector). <br  />
- If the user is interested in using the <a class="el" href="classRGESolver.html#a7b6c7701ddfa1bd3f6f34e7794fc1dca">GenerateSMInitialConditions</a> method, the input for the CKM matrix parameters and the fermion masses must be given with the methods <a class="el" href="classRGESolver.html#a7e045398572694648fded4253423705e">SetCKMAngle</a>, <a class="el" href="classRGESolver.html#a74d1c5b7633de682a376204d1788b794">SetCKMPhase</a> <a class="el" href="classRGESolver.html#a063197d49e4878d86b2d9e5ab6b0b9f8">SetFermionMass</a>. <br  />
- A complete list of the keys that must be used to correctly invoke setter/getter methods are given in tables <a class="el" href="classRGESolver.html#SM">SM</a>, <a class="el" href="classRGESolver.html#0F">0F</a>, <a class="el" href="classRGESolver.html#2F">2F</a> and <a class="el" href="classRGESolver.html#4F">4F</a>.</p>
+If the user is interested in using the <a class="el" href="classRGESolver.html#a7b6c7701ddfa1bd3f6f34e7794fc1dca">GenerateSMInitialConditions</a> method, the input for the CKM matrix parameters and the fermion masses must be given with the methods <a class="el" href="classRGESolver.html#a7e045398572694648fded4253423705e">SetCKMAngle</a>, <a class="el" href="classRGESolver.html#a74d1c5b7633de682a376204d1788b794">SetCKMPhase</a> <a class="el" href="classRGESolver.html#a063197d49e4878d86b2d9e5ab6b0b9f8">SetFermionMass</a>. <br  />
+A complete list of the keys that must be used to correctly invoke setter/getter methods are given in tables <a class="el" href="classRGESolver.html#SM">SM</a>, <a class="el" href="classRGESolver.html#0F">0F</a>, <a class="el" href="classRGESolver.html#2F">2F</a> and <a class="el" href="classRGESolver.html#4F">4F</a>. <br  />
+A summary of the operators symmetry classes is given in table <a class="el" href="classRGESolver.html#Sym">Sym</a>.</p>
 <dl class="section author"><dt>Author</dt><dd>S. Di Noi, L. Silvestrini. </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GNU General Public License <a class="anchor" id="SM"></a>
 <table class="doxtable">
@@ -394,7 +395,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <th>Coefficient </th><th>Name </th><th>Symmetry <br  />
  </th></tr>
 <tr>
-<td>\(\mathrm{Re}(C_{Hl1})\) </td><td><code>CHl1R</code> </td><td>WC2R <br  />
+<td>\(\mathrm{Re}(C_{Hl1})\) </td><td><code>CHtal1R</code> </td><td>WC2R <br  />
  </td></tr>
 <tr>
 <td>\(\mathrm{Im}(C_{Hl1})\) </td><td><code>CHl1I</code> </td><td>WC2I </td></tr>
@@ -580,6 +581,43 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
  </td></tr>
 </table>
 </td></tr>
+</table>
+<a class="anchor" id="Sym"></a>
+<table class="doxtable">
+<caption>Symmetry categories for operators in the SMEFT. nF indicates the number of flavour indices for each category. </caption>
+<tr>
+<th>Parameter </th><th>Name <br  />
+ </th></tr>
+<tr>
+<td>0 </td><td>0F scalar object </td></tr>
+<tr>
+<td>WC1 </td><td>2F generic real matrix </td></tr>
+<tr>
+<td>WC2R </td><td>2F Hermitian matrix (real part) <br  />
+ </td></tr>
+<tr>
+<td>WC2I </td><td>2F Hermitian matrix (imaginary part) <br  />
+ </td></tr>
+<tr>
+<td>WC5 </td><td>4F generic real object </td></tr>
+<tr>
+<td>WC6R </td><td>4F two identical \( \bar{\psi} \psi \) currents (real part) <br  />
+ </td></tr>
+<tr>
+<td>WC6I </td><td>4F two identical \( \bar{\psi} \psi \) currents (imaginary part) <br  />
+ </td></tr>
+<tr>
+<td>WC7R </td><td>4F two independent \( \bar{\psi} \psi \) currents (real part) <br  />
+ </td></tr>
+<tr>
+<td>WC7I </td><td>4F two independent \( \bar{\psi} \psi \) currents (imaginary part) <br  />
+ </td></tr>
+<tr>
+<td>WC8R </td><td>\( \mathcal{C}_{ee}\) (real part) <br  />
+ </td></tr>
+<tr>
+<td>WC8I </td><td>\( \mathcal{C}_{ee}\) (imaginary part) <br  />
+ </td></tr>
 </table>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad499b4ef512ac892c4f5a71b9fa0daf4"></a>
