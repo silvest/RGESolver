@@ -15,9 +15,6 @@ RGESolver::RGESolver() {
     using namespace boost::placeholders;
 
 
-    SetSMDefaultInput();
-
-
 
     //Build default CKM matrix from default parameters
     UpdateCKM();

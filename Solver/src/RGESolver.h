@@ -45,18 +45,12 @@
  *   \f$\mathrm{Re}(\mathcal{Y}_d),\mathrm{Im}(\mathcal{Y}_d),\f$ 
  *   \f$\mathrm{Re}(\mathcal{Y}_e),\mathrm{Im}(\mathcal{Y}_e)\f$ 
  *  (we follow https://arxiv.org/abs/1308.2627 for what concerns
- * the conventions in the Higgs' sector). @n
- * If the user is interested in using the \ref GenerateSMInitialConditions
- * method, the input for the CKM matrix parameters and 
- * the fermion masses must be given with the 
- * methods 
- * \ref SetCKMAngle,
- * \ref SetCKMPhase
- * \ref SetFermionMass. @n
+ * the conventions in the Higgs' sector). @n 
  * A complete list of the keys that must be used to 
  * correctly invoke setter/getter methods are given in 
  * tables \ref SM, \ref 0F, \ref 2F and \ref 4F. @n
- * A summary of the operators symmetry classes is given in table \ref Sym. 
+ * A summary of the operators symmetry classes is given in table \ref Sym. @n @n 
+ * We follow http://www.utfit.org/UTfit/Formalism for what concerns the conventions for the CKM matrix.
  
 
 
@@ -380,35 +374,58 @@ public:
      * Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale 
      * <tt>mu</tt> (in GeV), using one-loop pure SM beta functions. 
      *
-     * @details The low energy input values for the SM parameters 
-     * usde by this method is given at the scale <tt>SMInputScale</tt> 
-     * (default value = 91.05 GeV). The user can change this low-energy scale via 
-     * \ref SetSMInputScale.
-     * If the flag CKMinput is set to <tt>true</tt> (default), the input 
-     * for the Yukawa matrices will be generated from the current values 
-     * of the CKM matrix and the masses of the fermions. If 
-     * set to false, the current values of the Yukawa matrices 
-     * will be used to generate the SM initial conditions at the chosen scale. @n
-     * The usage of this method with CKMinput=<tt>true</tt> should be restricted to realistic cases, 
-     * with usual fermion mass hierarchy (smallest mass for the 1st generation and 
-     * largest mass for the 3rd generation and no mass degeneracy) and with 
-     * non-zero CKM matrix angles. @n
-     * For more particular cases, the user should set CKMinput=<tt>false</tt>
-     * and set the input in terms of the Yukawa matrices. @n 
-     * To set the masses of the fermions and the CKM matrix parameters, use 
-     *  
+     * @details The initial conditions are generated at the scale <tt>mu</tt> starting from the values 
+     * at \f$\mu = ??? \f$ GeV in table \ref ???. 
      * @param mu Scale (in GeV) at which the initial conditions 
-     * are generate
+     * are generated
      * @param basis Flavour basis (
      * <tt>"UP"</tt> or <tt>"DOWN"</tt>)
      * @param method Method used by \ref RGESolver
      * to run the SM parameters to the scale <tt>mu</tt> 
      * (<tt>"Numeric"</tt> or <tt>"Leading-Log"</tt>) 
-     * @param inputCKM If set to <tt>true</tt> (default), the input 
-     * for the Yukawa matrices will be generated from the current value 
-     * of the CKM matrix and the masses of the fermions.
      */
-    void GenerateSMInitialConditions(double mu, std::string basis, std::string method, bool inputCKM = true);
+    void GenerateSMInitialConditions(double mu, std::string basis, std::string method);
+
+
+    /** 
+     * @brief Generates the initial conditions 
+     * for Standard Model's parameters (gauge couplings,
+     * Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale 
+     * <tt>mu</tt> (in GeV), using one-loop pure SM beta functions. 
+     * 
+     * @details The initial conditions are generated at the scale <tt>muFin</tt> starting from the 
+     * inserted parameters at the scale <tt>muIn</tt>. This method should be used with usual fermion hierarchy 
+     * (smallest mass for the 1st generation and greatest mass for the 3rd withoud mass degeneracy 
+     * for all up and down quarks and for charged leptons). 
+     * The generation of the initial conditions is performed only if all the masses are non-negative and 
+     * if \f$ \theta_{12},\theta_{13},\theta_{23} \in [0, \pi/2] \f$, \f$\delta \in (\pi,\pi]\f$.
+     * @param muIn Low-energy input scale (in GeV)
+     * @param muIn  Scale (in GeV) at which the initial conditions 
+     * are generated
+     * @param basis Flavour basis (
+     * <tt>"UP"</tt> or <tt>"DOWN"</tt>)
+     * @param method Method used by \ref RGESolver
+     * to run the SM parameters to the scale <tt>mu</tt> 
+     * (<tt>"Numeric"</tt> or <tt>"Leading-Log"</tt>) 
+     * @param g1in \f$g_1 \f$ 
+     * @param g2in \f$g_2 \f$ 
+     * @param g3in \f$g_3 \f$ 
+     * @param lambdain \f$ \lambda \f$
+     * @param mh2in \f$ m_h^2 \f$ (in GeV^2) 
+     * @param Muin Array containing the masses of the up-type quarks in GeV in the order \f$(m_u,m_c,m_t)\f$ 
+     * @param Mdin Array containing the masses of the down-type quarks in GeV in the order \f$(m_d,m_s,m_b)\f$ 
+     * @param Mein Array containing the masses of the charged leptons in GeV in the order \f$(m_{e},m_{\mu},m_{\tau})\f$
+     * @param t12in The CKM matrix angle \f$ \theta_{12} \f$ 
+     * @param t13in The CKM matrix angle \f$ \theta_{13} \f$ 
+     * @param t23in The CKM matrix angle \f$ \theta_{23} \f$ 
+     * @param deltain The CKM matrix phase \f$ \delta \f$ 
+
+     */
+    void GenerateSMInitialConditions(double muIn, double muFin, std::string basis, std::string method,
+            double g1in, double g2in, double g3in, double lambdain, double mh2in,
+            double Muin[3], double Mdin[3], double Mein[3],
+            double t12in, double t13in, double t23in, double deltain);
+
 
     /**
      * @brief Same as \ref Evolve, but only for the SM parameters. 
@@ -443,15 +460,7 @@ public:
 
 
 
-    /**
-     * @brief Setter function for the mass of the 
-     * fermions (in GeV). 
-     * Assignation is allowed only if the inserted 
-     * value is not negative.
-     * @param name name of the fermion (see table \ref SM)
-     * @param val its value
-     */
-    void SetFermionMass(std::string name, double val);
+
     /**
      * @brief Getter function for the mass of the 
      * fermions (in GeV).
@@ -463,15 +472,6 @@ public:
 
 
 
-    /**
-     * @brief Setter function for the CKM matrix angles
-     *  \f$\theta_{12},\theta_{13},\theta_{23}\f$. 
-     * The assignation is completed only if the inserted
-     * angle is  \f$\in [0,\frac{\pi}{2}]\f$
-     * @param name of the angle (see table \ref SM)
-     * @param val its value
-     */
-    void SetCKMAngle(std::string name, double val);
 
     /**
      * @brief Getter function for the CKM matrix angles 
@@ -481,14 +481,6 @@ public:
      */
     double GetCKMAngle(std::string name);
 
-    /**
-     * @brief Setter function for the CKM matrix phase 
-     *  \f$\delta\f$. 
-     * The assignation is completed only if 
-     *  \f$\delta\in (-\pi,\pi]\f$
-     * @param val its value
-     */
-    void SetCKMPhase(double val);
 
 
     /**
@@ -497,27 +489,7 @@ public:
      */
     double GetCKMPhase();
 
-    /**
-     * @brief Setter method for the scale at which the method 
-     * \ref GenerateSMInitialConditions
-     *  takes the input values (in GeV)
-     * for SM parameters.
-     * @param mu 
-     */
-    void SetSMInputScale(double mu) {
-        InputScale_SM = mu;
-    };
 
-    /**
-     * @brief Getter method for the scale at which the method 
-     * \ref GenerateSMInitialConditions 
-     * takes the input values 
-     * for SM parameters.
-     * @return <tt>InputScale_SM</tt> (in GeV).
-     */
-    double GetSMInputScale() {
-        return InputScale_SM;
-    }
 
     //Setters for 0F,2F,4F
 

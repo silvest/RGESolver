@@ -3,6 +3,7 @@
 #include "gsl/gsl_complex.h"
 #include "gsl/gsl_complex_math.h"
 
+/*
 void RGESolver::SetCKMPhase(double val) {
     if (val <= 3.141592653589793
             && val>- 3.141592653589793) {
@@ -16,12 +17,12 @@ void RGESolver::SetCKMPhase(double val) {
 void RGESolver::SetCKMAngle(std::string name, double val) {
     if (val <= 3.141592653589793 * 0.5
             && val >= 0.) {
-        *(CKMAngles.at(name)) = val;
+ *(CKMAngles.at(name)) = val;
     } else {
         std::cout << "ERROR: CKM ANGLES SHOULD BE IN THE INTERVAL [0,pi/2]"
                 << std::endl;
     }
-}
+}*/
 
 double RGESolver::GetCKMAngle(std::string name) {
     return * (CKMAngles.at(name));
@@ -31,14 +32,15 @@ double RGESolver::GetCKMPhase() {
     return CKM_delta;
 }
 
+/*
 void RGESolver::SetFermionMass(std::string name, double val) {
     if (val >= 0.) {
-        *(FermionMasses.at(name)) = val;
+ *(FermionMasses.at(name)) = val;
     } else {
         std::cout << "ERROR: FERMION MASSES MUST BE NON-NEGATIVE"
                 << std::endl;
     }
-}
+}*/
 
 double RGESolver::GetFermionMass(std::string name) {
     return * (FermionMasses.at(name));
@@ -180,14 +182,13 @@ void RGESolver::UpdateCKM() {
 
 void RGESolver::GenerateSMInitialConditions(
         double mu, std::string basis,
-        std::string method,
-        bool inputCKM) {
-    if (method != "Numeric" && method != "Leading-Log") {
+        std::string method) {
+    /*if (method != "Numeric" && method != "Leading-Log") {
         std::cout << "WARNING : invalid method\n"
                 "Available methods: Numeric, Leading-Log"
                 << std::endl;
-    }
-
+    }*/
+    SetSMDefaultInput();
     //Before evolving, eventual changes 
     //in the input values of CKM angles must be 
     //translated 
@@ -199,13 +200,73 @@ void RGESolver::GenerateSMInitialConditions(
     s23 = sin(CKM_theta23);
 
 
-    if (inputCKM == true) {
-        UpdateCKM();
-        FromMassesToYukawas(basis);
-    }
+    //if (inputCKM == true) {
+    UpdateCKM();
+    FromMassesToYukawas(basis);
+    // }
 
     EvolveSMOnly(method, InputScale_SM, mu);
     GoToBasisSMOnly(basis);
+}
+
+void RGESolver::GenerateSMInitialConditions(double muIn, double muFin, std::string basis, std::string method,
+        double g1in, double g2in, double g3in, double lambdain, double mh2in,
+        double Muin[3], double Mdin[3], double Mein[3],
+        double t12in, double t13in, double t23in, double deltain) {
+
+
+    double pihalf = 3.141592653589793;
+
+    if (Muin[0] > 0. && Muin[1] > 0. && Muin[2] > 0. &&
+            Mdin[0] > 0. && Mdin[1] > 0. && Mdin[2] > 0. &&
+            Mein[0] > 0. && Mein[1] > 0. && Mein[2] > 0. &&
+            t12in <= pihalf && t12in >= 0. &&
+            t13in <= pihalf && t13in >= 0. &&
+            t23in <= pihalf && t23in >= 0. &&
+            deltain <= 3.141592653589793 && deltain > - 3.141592653589793
+            ) {
+
+        g1 = g1in;
+        g2 = g2in;
+        g3 = g3in;
+
+        mh2 = mh2in;
+        lambda = lambdain;
+
+        mu = Muin[0];
+        mc = Muin[1];
+        mt = Muin[2];
+
+        md = Mdin[0];
+        ms = Mdin[1];
+        mb = Mdin[2];
+
+        mel = Mein[0];
+        mmu = Mein[1];
+        mtau = Mein[2];
+
+        CKM_theta12 = t12in;
+        CKM_theta13 = t13in;
+        CKM_theta23 = t23in;
+        CKM_delta = deltain;
+
+
+        c12 = cos(CKM_theta12);
+        s12 = sin(CKM_theta12);
+        c13 = cos(CKM_theta13);
+        s13 = sin(CKM_theta13);
+        c23 = cos(CKM_theta23);
+        s23 = sin(CKM_theta23);
+
+
+        UpdateCKM();
+        FromMassesToYukawas(basis);
+
+        EvolveSMOnly(method, muIn, muFin);
+        GoToBasisSMOnly(basis);
+    } else {
+        std::cout << "WARNING : Invalid parameters. Generation of initial conditions not completed." << std::endl;
+    }
 }
 
 void RGESolver::EvolveSMOnly(std::string method, double muI, double muF) {
@@ -1323,9 +1384,6 @@ void RGESolver::Reset() {
     n += NG * NG * NG * NG * (2 * N8_LRLR - 1);
 
 
-    //After setting everything to 0, 
-    //we reset to default SM parameters
-    SetSMDefaultInput();
 
 }
 

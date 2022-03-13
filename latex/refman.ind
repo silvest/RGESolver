@@ -15,14 +15,12 @@
   \item {GenerateSMInitialConditions}
     \subitem {RGESolver}, \hyperpage{12}
   \item {GetCKMAngle}
-    \subitem {RGESolver}, \hyperpage{12}
-  \item {GetCKMPhase}
     \subitem {RGESolver}, \hyperpage{13}
-  \item {GetCoefficient}
-    \subitem {RGESolver}, \hyperpage{13, 14}
-  \item {GetFermionMass}
+  \item {GetCKMPhase}
     \subitem {RGESolver}, \hyperpage{14}
-  \item {GetSMInputScale}
+  \item {GetCoefficient}
+    \subitem {RGESolver}, \hyperpage{14, 15}
+  \item {GetFermionMass}
     \subitem {RGESolver}, \hyperpage{15}
 
   \indexspace
@@ -32,31 +30,18 @@
     \subitem {Evolve}, \hyperpage{11}
     \subitem {EvolveSMOnly}, \hyperpage{11}
     \subitem {GenerateSMInitialConditions}, \hyperpage{12}
-    \subitem {GetCKMAngle}, \hyperpage{12}
-    \subitem {GetCKMPhase}, \hyperpage{13}
-    \subitem {GetCoefficient}, \hyperpage{13, 14}
-    \subitem {GetFermionMass}, \hyperpage{14}
-    \subitem {GetSMInputScale}, \hyperpage{15}
-    \subitem {SaveOutputFile}, \hyperpage{15}
-    \subitem {SetCKMAngle}, \hyperpage{15}
-    \subitem {SetCKMPhase}, \hyperpage{16}
+    \subitem {GetCKMAngle}, \hyperpage{13}
+    \subitem {GetCKMPhase}, \hyperpage{14}
+    \subitem {GetCoefficient}, \hyperpage{14, 15}
+    \subitem {GetFermionMass}, \hyperpage{15}
+    \subitem {SaveOutputFile}, \hyperpage{16}
     \subitem {SetCoefficient}, \hyperpage{16, 17}
-    \subitem {SetFermionMass}, \hyperpage{17}
-    \subitem {SetSMInputScale}, \hyperpage{18}
 
   \indexspace
 
   \item {SaveOutputFile}
-    \subitem {RGESolver}, \hyperpage{15}
-  \item {SetCKMAngle}
-    \subitem {RGESolver}, \hyperpage{15}
-  \item {SetCKMPhase}
     \subitem {RGESolver}, \hyperpage{16}
   \item {SetCoefficient}
     \subitem {RGESolver}, \hyperpage{16, 17}
-  \item {SetFermionMass}
-    \subitem {RGESolver}, \hyperpage{17}
-  \item {SetSMInputScale}
-    \subitem {RGESolver}, \hyperpage{18}
 
 \end{theindex}

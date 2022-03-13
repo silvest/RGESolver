@@ -20,36 +20,29 @@ int main() {
 
 
 
-    /*
-    S.SetSMInputScale(250.);
-
-    S.SetCoefficient("g1", 0.3);
-    S.SetCoefficient("g2", 0.6);
-    S.SetCoefficient("g3", 1.2);
-    S.SetCoefficient("lambda", 0.2);
-    S.SetCoefficient("mh2", 16000.);
-
-    S.SetCKMAngle("CKM_theta12", 0.1);
-    S.SetCKMAngle("CKM_theta13", 0.2);
-    S.SetCKMAngle("CKM_theta23", 0.3);
-    S.SetCKMPhase(0.1);
-
-    S.SetFermionMass("mu", 0.002);
-    S.SetFermionMass("mc", 1.2);
-    S.SetFermionMass("mt", 1.2);
-
-    S.SetFermionMass("md", 0.002);
-    S.SetFermionMass("ms", 1.2);
-    S.SetFermionMass("mb", 1.2);
-
-    S.SetFermionMass("mel", 0.006;);
-    S.SetFermionMass("mmu", 0.100);
-    S.SetFermionMass("mtau", 1.2);
-     */
 
     //Generate SM initial conditions using the default input parameters. 
-    S.GenerateSMInitialConditions(Lambda, "DOWN", "Numeric");
+   // S.GenerateSMInitialConditions(Lambda, "DOWN", "Numeric");
 
+    //Generate SM initial conditions using a custom low-energy input.
+    double Muin[3] = {.002, 1.2, 170.};
+    double Mdin[3] = {.006, .05, 5.2};
+    double Mein[3] = {.005, .1, 1.2};
+
+    double g1in = .31;
+    double g2in = .6;
+    double g3in = 1.2;
+    double lambdain = 0.2;
+    double mh2in = 126. * 126.;
+    double t12in = 0.2;
+    double t13in = .1;
+    double t23in = .3;
+    double deltain = 3.14 / 4.;
+
+    S.GenerateSMInitialConditions(91., Lambda, "DOWN", "Numeric",
+            g1in, g2in, g3in, lambdain, mh2in,
+            Muin, Mdin, Mein,
+            t12in, t13in, t23in, deltain);
 
     //Initial conditions for SMEFT coefficients
     S.SetCoefficient("CG", 1. / (Lambda * Lambda));
