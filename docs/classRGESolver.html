@@ -98,11 +98,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:aedc6f80d9a01de09d4ddf1e5b670c690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs the RGE evolution.  <a href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">More...</a><br /></td></tr>
 <tr class="separator:aedc6f80d9a01de09d4ddf1e5b670c690"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b6c7701ddfa1bd3f6f34e7794fc1dca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#a7b6c7701ddfa1bd3f6f34e7794fc1dca">GenerateSMInitialConditions</a> (double mu, std::string basis, std::string method, bool inputCKM=true)</td></tr>
-<tr class="memdesc:a7b6c7701ddfa1bd3f6f34e7794fc1dca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu&lt;</code>, using one-loop pure SM beta functions.  <a href="classRGESolver.html#a7b6c7701ddfa1bd3f6f34e7794fc1dca">More...</a><br /></td></tr>
+<tr class="memdesc:a7b6c7701ddfa1bd3f6f34e7794fc1dca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code>, using one-loop pure SM beta functions.  <a href="classRGESolver.html#a7b6c7701ddfa1bd3f6f34e7794fc1dca">More...</a><br /></td></tr>
 <tr class="separator:a7b6c7701ddfa1bd3f6f34e7794fc1dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c0c4303beb14f728a70542c8583b3a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#a7c0c4303beb14f728a70542c8583b3a7">EvolveSMOnly</a> (std::string method, double muI, double muF)</td></tr>
-<tr class="memdesc:a7c0c4303beb14f728a70542c8583b3a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a>, but only for the SM parameters. The user should use this method instead of <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a> when interested in pure SM running. <br  />
-  <a href="classRGESolver.html#a7c0c4303beb14f728a70542c8583b3a7">More...</a><br /></td></tr>
+<tr class="memdesc:a7c0c4303beb14f728a70542c8583b3a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a>, but only for the SM parameters. The user should use this method instead of <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a> when interested in pure SM running. Using this function is the same of using <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a> with all the SMEFT coefficients set to 0, but it is faster since it does compute only the evolution for the SM parameters.  <a href="classRGESolver.html#a7c0c4303beb14f728a70542c8583b3a7">More...</a><br /></td></tr>
 <tr class="separator:a7c0c4303beb14f728a70542c8583b3a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad499b4ef512ac892c4f5a71b9fa0daf4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#ad499b4ef512ac892c4f5a71b9fa0daf4">ComputeCKMAndFermionMasses</a> ()</td></tr>
 <tr class="memdesc:ad499b4ef512ac892c4f5a71b9fa0daf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute CKM matrix and the mass of the fermions.  <a href="classRGESolver.html#ad499b4ef512ac892c4f5a71b9fa0daf4">More...</a><br /></td></tr>
@@ -115,7 +114,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:a063197d49e4878d86b2d9e5ab6b0b9f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Documentation for the input/output handling.  <a href="classRGESolver.html#a063197d49e4878d86b2d9e5ab6b0b9f8">More...</a><br /></td></tr>
 <tr class="separator:a063197d49e4878d86b2d9e5ab6b0b9f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55375c02297501cc3ba0302f707a690d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#a55375c02297501cc3ba0302f707a690d">GetFermionMass</a> (std::string name)</td></tr>
-<tr class="memdesc:a55375c02297501cc3ba0302f707a690d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter function for the mass of the fermions.  <a href="classRGESolver.html#a55375c02297501cc3ba0302f707a690d">More...</a><br /></td></tr>
+<tr class="memdesc:a55375c02297501cc3ba0302f707a690d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter function for the mass of the fermions (in GeV).  <a href="classRGESolver.html#a55375c02297501cc3ba0302f707a690d">More...</a><br /></td></tr>
 <tr class="separator:a55375c02297501cc3ba0302f707a690d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e045398572694648fded4253423705e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#a7e045398572694648fded4253423705e">SetCKMAngle</a> (std::string name, double val)</td></tr>
 <tr class="memdesc:a7e045398572694648fded4253423705e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter function for the CKM matrix angles \(\theta_{12},\theta_{13},\theta_{23}\). The assignation is completed only if the inserted angle is \(\in [0,\frac{\pi}{2}]\).  <a href="classRGESolver.html#a7e045398572694648fded4253423705e">More...</a><br /></td></tr>
@@ -130,7 +129,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:a891564c063a942fbd01830b30fa8e6e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter function for the CKM matrix phase \(\delta\).  <a href="classRGESolver.html#a891564c063a942fbd01830b30fa8e6e1">More...</a><br /></td></tr>
 <tr class="separator:a891564c063a942fbd01830b30fa8e6e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad47f4773fa7eaf4bb9bc3cb15de5b2c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#ad47f4773fa7eaf4bb9bc3cb15de5b2c2">SetSMInputScale</a> (double mu)</td></tr>
-<tr class="memdesc:ad47f4773fa7eaf4bb9bc3cb15de5b2c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter method for the scale at which the method <a class="el" href="classRGESolver.html#a7b6c7701ddfa1bd3f6f34e7794fc1dca">GenerateSMInitialConditions</a> takes the input values for SM parameters.  <a href="classRGESolver.html#ad47f4773fa7eaf4bb9bc3cb15de5b2c2">More...</a><br /></td></tr>
+<tr class="memdesc:ad47f4773fa7eaf4bb9bc3cb15de5b2c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter method for the scale at which the method <a class="el" href="classRGESolver.html#a7b6c7701ddfa1bd3f6f34e7794fc1dca">GenerateSMInitialConditions</a> takes the input values (in GeV). for SM parameters.  <a href="classRGESolver.html#ad47f4773fa7eaf4bb9bc3cb15de5b2c2">More...</a><br /></td></tr>
 <tr class="separator:ad47f4773fa7eaf4bb9bc3cb15de5b2c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b828a6908004f6680e519b393411f03"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#a9b828a6908004f6680e519b393411f03">GetSMInputScale</a> ()</td></tr>
 <tr class="memdesc:a9b828a6908004f6680e519b393411f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter method for the scale at which the method <a class="el" href="classRGESolver.html#a7b6c7701ddfa1bd3f6f34e7794fc1dca">GenerateSMInitialConditions</a> takes the input values for SM parameters.  <a href="classRGESolver.html#a9b828a6908004f6680e519b393411f03">More...</a><br /></td></tr>
@@ -638,8 +637,9 @@ If the user is interested in these parameters (accessible with <a class="el" hre
  The evolutor takes as initial values the current values of the parameters, set with the <a class="el" href="classRGESolver.html#adc2b8a9a10216ec5285569c8f24cbed2">SetCoefficient</a> functions. After completing the evolution the values of the parameters are updated and are accessible with the GetCoefficients function. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">method</td><td>resolution method </td></tr>
-    <tr><td class="paramname">muI</td><td>initial energy scale </td></tr>
-    <tr><td class="paramname">muF</td><td>final energy scale </td></tr>
+    <tr><td class="paramname">muI</td><td>initial energy scale (in GeV) </td></tr>
+    <tr><td class="paramname">muF</td><td>final energy scale (in GeV) <br  />
+ </td></tr>
   </table>
   </dd>
 </dl>
@@ -678,13 +678,12 @@ If the user is interested in these parameters (accessible with <a class="el" hre
       </table>
 </div><div class="memdoc">
 
-<p>Same as <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a>, but only for the SM parameters. The user should use this method instead of <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a> when interested in pure SM running. <br  />
- </p>
+<p>Same as <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a>, but only for the SM parameters. The user should use this method instead of <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a> when interested in pure SM running. Using this function is the same of using <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a> with all the SMEFT coefficients set to 0, but it is faster since it does compute only the evolution for the SM parameters. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">method</td><td>resolution method </td></tr>
-    <tr><td class="paramname">muI</td><td>initial energy scale </td></tr>
-    <tr><td class="paramname">muF</td><td>final energy scale </td></tr>
+    <tr><td class="paramname">muI</td><td>initial energy scale (in GeV) </td></tr>
+    <tr><td class="paramname">muF</td><td>final energy scale (in GeV) </td></tr>
   </table>
   </dd>
 </dl>
@@ -729,9 +728,10 @@ If the user is interested in these parameters (accessible with <a class="el" hre
       </table>
 </div><div class="memdoc">
 
-<p>Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu&lt;</code>, using one-loop pure SM beta functions. </p>
-<p>After evolving the SM parameters up to the scale mu, CKM parameters and fermion masses are updated with the new values. If the flag CKMinput is set to <code>true</code> (default), the input for the Yukawa matrices will be generated from the current values of the CKM matrix and the masses of the fermions. If set to false, the current values of the Yukawa matrices will be used to generate the SM initial conditions at the chosen scale. <br  />
-The usage of this method with CKMinput=<code>true</code> should be restricted to realistic cases, with usual fermion mass hierarchy (smallest mass for the 1st generation and largest mass for the 3rd generation and no mass degeneracy) and with non-zero CKM matrix angles.</p>
+<p>Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code>, using one-loop pure SM beta functions. </p>
+<p>If the flag CKMinput is set to <code>true</code> (default), the input for the Yukawa matrices will be generated from the current values of the CKM matrix and the masses of the fermions. If set to false, the current values of the Yukawa matrices will be used to generate the SM initial conditions at the chosen scale. <br  />
+The usage of this method with CKMinput=<code>true</code> should be restricted to realistic cases, with usual fermion mass hierarchy (smallest mass for the 1st generation and largest mass for the 3rd generation and no mass degeneracy) and with non-zero CKM matrix angles. <br  />
+For more particular cases, the user should set CKMinput=<code>false</code> and set the input in terms of the Yukawa matrices.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mu</td><td>Scale (in GeV) at which the initial conditions are generate </td></tr>
@@ -940,7 +940,7 @@ The usage of this method with CKMinput=<code>true</code> should be restricted to
       </table>
 </div><div class="memdoc">
 
-<p>Getter function for the mass of the fermions. </p>
+<p>Getter function for the mass of the fermions (in GeV). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>name of the fermion (see table <a class="el" href="classRGESolver.html#SM">SM</a>) </td></tr>
@@ -976,7 +976,7 @@ The usage of this method with CKMinput=<code>true</code> should be restricted to
 </div><div class="memdoc">
 
 <p>Getter method for the scale at which the method <a class="el" href="classRGESolver.html#a7b6c7701ddfa1bd3f6f34e7794fc1dca">GenerateSMInitialConditions</a> takes the input values for SM parameters. </p>
-<dl class="section return"><dt>Returns</dt><dd><code>InputScale_SM</code> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>InputScale_SM</code> (in GeV). </dd></dl>
 
 </div>
 </div>
@@ -1265,7 +1265,7 @@ The usage of this method with CKMinput=<code>true</code> should be restricted to
 These two routines must be used also for the SM parameters \(g_1,g_2,g_3,\lambda,m_h^2,\) \(\mathrm{Re}(\mathcal{Y}_u),\mathrm{Im}(\mathcal{Y}_u),\) \(\mathrm{Re}(\mathcal{Y}_d),\mathrm{Im}(\mathcal{Y}_d),\) \(\mathrm{Re}(\mathcal{Y}_e),\mathrm{Im}(\mathcal{Y}_e)\) (we follow <a href="https://arxiv.org/abs/1308.2627">https://arxiv.org/abs/1308.2627</a> for what concerns the conventions in the Higgs' sector). <br  />
 If the user is interested in using the <a class="el" href="classRGESolver.html#a7b6c7701ddfa1bd3f6f34e7794fc1dca">GenerateSMInitialConditions</a> method, the input for the CKM matrix parameters and the fermion masses must be given with the methods <a class="el" href="classRGESolver.html#a7e045398572694648fded4253423705e">SetCKMAngle</a>, <a class="el" href="classRGESolver.html#a74d1c5b7633de682a376204d1788b794">SetCKMPhase</a> <a class="el" href="classRGESolver.html#a063197d49e4878d86b2d9e5ab6b0b9f8">SetFermionMass</a>. <br  />
 A complete list of the keys that must be used to correctly invoke setter/getter methods are given in tables <a class="el" href="classRGESolver.html#SM">SM</a> , <a class="el" href="classRGESolver.html#0F">0F</a> , <a class="el" href="classRGESolver.html#2F">2F</a> and <a class="el" href="classRGESolver.html#4F">4F</a></p>
-<p>Setter function for the mass of the fermions. Assignation is allowed only if the inserted value is not negative. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Setter function for the mass of the fermions (in GeV). Assignation is allowed only if the inserted value is not negative. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>name of the fermion (see table <a class="el" href="classRGESolver.html#SM">SM</a>) </td></tr>
     <tr><td class="paramname">val</td><td>its value </td></tr>
@@ -1299,7 +1299,7 @@ A complete list of the keys that must be used to correctly invoke setter/getter 
 </table>
 </div><div class="memdoc">
 
-<p>Setter method for the scale at which the method <a class="el" href="classRGESolver.html#a7b6c7701ddfa1bd3f6f34e7794fc1dca">GenerateSMInitialConditions</a> takes the input values for SM parameters. </p>
+<p>Setter method for the scale at which the method <a class="el" href="classRGESolver.html#a7b6c7701ddfa1bd3f6f34e7794fc1dca">GenerateSMInitialConditions</a> takes the input values (in GeV). for SM parameters. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mu</td><td></td></tr>
