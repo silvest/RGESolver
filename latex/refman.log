@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.8.3)  13 MAR 2022 12:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.8.3)  13 MAR 2022 13:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -950,17 +950,19 @@ LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <9> not available
 (Font)              Font shape `TS1/phv/m/sl' tried instead on input line 49.
 LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
 (Font)              scaled to size 8.09995pt on input line 49.
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <9> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 49.
 
 Underfull \hbox (badness 10000) in paragraph at lines 51--52
 
  []
 
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 55.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 57.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 8.99994pt on input line 55.
+(Font)              scaled to size 8.99994pt on input line 57.
 
-Underfull \hbox (badness 10000) in paragraph at lines 55--56
+Underfull \hbox (badness 10000) in paragraph at lines 57--58
 
  []
 
@@ -1437,64 +1439,63 @@ Overfull \hbox (5.56325pt too wide) in paragraph at lines 378--378
 []$[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 C[]\OT1/cmr/m/n/10 )$|  
  []
 
-[9] [10]
+[9]
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 404.
-
-Underfull \hbox (badness 10000) in paragraph at lines 428--429
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 397.
+ [10]
+Underfull \hbox (badness 10000) in paragraph at lines 421--422
 
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [11]
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 444.
-
-Underfull \hbox (badness 10000) in paragraph at lines 450--451
-
- []
-
-
-Underfull \hbox (badness 10000) detected at line 479
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 437.
+[11]
+Underfull \hbox (badness 10000) detected at line 472
 [][][]
  []
 
-[12]
-Underfull \hbox (badness 10000) detected at line 492
+
+Underfull \hbox (badness 10000) detected at line 485
 [][][]
  []
 
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 7.19995pt on input line 498.
-
-Underfull \hbox (badness 10000) detected at line 510
+(Font)              scaled to size 7.19995pt on input line 491.
+[12] [13]
+Underfull \hbox (badness 10000) detected at line 503
 [][][]
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \hbox (badness 10000) detected at line 526
+[][][]
+ []
 
- [13]
-Underfull \hbox (badness 10000) detected at line 533
+[14]
+Underfull \hbox (badness 10000) detected at line 553
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 560
+Underfull \hbox (badness 10000) detected at line 571
 [][][]
  []
 
 
-Underfull \vbox (badness 2689) has occurred while \output is active []
+Underfull \hbox (badness 10000) in paragraph at lines 572--573
 
- [14]
-Underfull \hbox (badness 10000) detected at line 588
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 585
 [][][]
  []
 
-[15] [16] [17]) [18] (./refman.ind [19
+[15] [16]
+Overfull \vbox (19.49901pt too high) has occurred while \output is active []
+
+
+[17]) [18] (./refman.ind [19
 
 
 
@@ -1509,11 +1510,11 @@ Package rerunfilecheck Info: File `refman.out' has not changed.
 (rerunfilecheck)             Checksum: 5B4194F15C66C9BCB99E6548E304D63E;6181.
  ) 
 Here is how much of TeX's memory you used:
- 16681 strings out of 481239
- 243005 string characters out of 5920378
+ 16684 strings out of 481239
+ 243038 string characters out of 5920378
  592994 words of memory out of 5000000
- 31509 multiletter control sequences out of 15000+600000
- 599487 words of font info for 119 fonts, out of 8000000 for 9000
+ 31511 multiletter control sequences out of 15000+600000
+ 600224 words of font info for 121 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,27n,96p,938b,815s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
@@ -1535,10 +1536,10 @@ a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/public/wasy-type1/wasy7.pfb>
-Output written on refman.pdf (23 pages, 225184 bytes).
+Output written on refman.pdf (23 pages, 225269 bytes).
 PDF statistics:
- 584 PDF objects out of 1000 (max. 8388607)
- 509 compressed objects within 6 object streams
+ 583 PDF objects out of 1000 (max. 8388607)
+ 510 compressed objects within 6 object streams
  114 named destinations out of 1000 (max. 500000)
  257 words of extra memory for PDF output out of 10000 (max. 10000000)
 

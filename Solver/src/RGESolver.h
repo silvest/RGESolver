@@ -326,33 +326,33 @@ public:
      * the values of the parameters are updated and are accessible with the
      * \ref GetCoefficients function.
      * @param method resolution method
-     * @param muI initial energy scale 
-     * @param muF final energy scale 
+     * @param muI initial energy scale (in GeV)
+     * @param muF final energy scale (in GeV)  
      */
     void Evolve(std::string method, double muI, double muF);
-    //Evolution from muI to muF with method = 1 (Num), 2 (LL)
 
 
 
     /**
      * @brief Generates the initial conditions 
      * for Standard Model's parameters (gauge couplings,
-     * Yukawa coupling, quartic coupling and Higgs' boson mass). 
+     * Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale 
+     * <tt>mu</tt>, using one-loop pure SM beta functions. 
      *
-     * @details After evolving the SM parameters up to the scale 
-     * mu, CKM parameters and fermion masses are updated with the 
-     * new values. 
-     * If the flag CKMinput is set to <tt>true</tt> (default), the input 
-     * for the Yukawa matrices will be generated from the current value 
+     * @details If the flag CKMinput is set to <tt>true</tt> (default), the input 
+     * for the Yukawa matrices will be generated from the current values 
      * of the CKM matrix and the masses of the fermions. If 
      * set to false, the current values of the Yukawa matrices 
-     * will be used to generate the SM initial conditions at the chosen scale.  
+     * will be used to generate the SM initial conditions at the chosen scale. @n
+     * The usage of this method with CKMinput=<tt>true</tt> should be restricted to realistic cases, 
+     * with usual fermion mass hierarchy (smallest mass for the 1st generation and 
+     * largest mass for the 3rd generation and no mass degeneracy) and with 
+     * non-zero CKM matrix angles. @n
+     * For more particular cases, the user should set CKMinput=<tt>false</tt>
+     * and set the input in terms of the Yukawa matrices.
      *  
      * @param mu Scale (in GeV) at which the initial conditions 
-     * are generated. If <tt>mu</tt> is different from
-     * the scale at which the input is given (SMInputScale), \ref RGESolver
-     * will use the pure SM RGEs (at one-loop level) to run the parameters 
-     * to the scale <tt>mu</tt>.
+     * are generate
      * @param basis Flavour basis (
      * <tt>"UP"</tt> or <tt>"DOWN"</tt>)
      * @param method Method used by \ref RGESolver
@@ -367,13 +367,28 @@ public:
     /**
      * @brief Same as \ref Evolve, but only for the SM parameters. 
      * The user should use this method instead of \ref Evolve when 
-     * interested in pure SM running.  
+     * interested in pure SM running. Using this function is the same of 
+     * using \ref Evolve with all the SMEFT coefficients set to 0, but it is faster since 
+     * it does compute only the evolution for the SM parameters.
      * @param method resolution method
-     * @param muI initial energy scale 
-     * @param muF final energy scale 
+     * @param muI initial energy scale (in GeV)
+     * @param muF final energy scale (in GeV)
      */
     void EvolveSMOnly(std::string method, double muI, double muF);
-
+    
+    
+    /**
+     * @brief Compute CKM matrix and the mass of the fermions. 
+     * 
+     * @details The methods \ref Evolve and \ref EvolveSMOnly 
+     * do not update the value of CKM parameters and fermion masses after the evolution.
+     * This process require the diagonalization of the Yukawa matrices and 
+     * may slow down the evolution. @n
+     * If the user is interested in these parameters (accessible with 
+     * \ref GetCKMAngle, \ref GetCKMPhase, \ref GetFermionMass)
+     * must invoke this method after the evolution.
+     */
+    void ComputeCKMAndFermionMasses();
 
 
     /** @name Input/output   */
@@ -405,35 +420,25 @@ public:
      */
 
 
-    /**
-     * @brief Compute CKM matrix and the mass of the fermions. 
-     * 
-     * @details The methods \ref Evolve and \ref EvolveSMOnly 
-     * do not update the value of CKM parameters and fermion masses after the evolution.
-     * This process require the diagonalization of the Yukawa matrices and 
-     * may slow the evolution. @n
-     * If the user is interested in these parameters (accessible with 
-     * \ref GetCKMAngle, \ref GetCKMPhase, \ref GetFermionMass)
-     * must invoke this method after the evolution.
-     */
-    void ComputeCKMAndFermionMasses();
+    
 
 
     
     
     /**
      * @brief Setter function for the mass of the 
-     * fermions. 
+     * fermions (in GeV). 
      * Assignation is allowed only if the inserted 
      * value is not negative.
      * @param name name of the fermion (see table \ref SM)
-     * @param val
+     * @param val its value
      */
     void SetFermionMass(std::string name, double val);
     /**
      * @brief Getter function for the mass of the 
-     * fermions.
+     * fermions (in GeV).
      * @param name name of the fermion (see table \ref SM)
+     * @return the requested fermion mass  
      */
     double GetFermionMass(std::string name);
     
@@ -446,7 +451,7 @@ public:
      * The assignation is completed only if the inserted
      * angle is  \f$\in [0,\frac{\pi}{2}]\f$
      * @param name of the angle (see table \ref SM)
-     * @param val
+     * @param val its value
      */
     void SetCKMAngle(std::string name, double val);
 
@@ -463,24 +468,23 @@ public:
      *  \f$\delta\f$. 
      * The assignation is completed only if 
      *  \f$\delta\in (-\pi,\pi]\f$
-     * @param val
+     * @param val its value
      */
     void SetCKMPhase(double val);
 
 
     /**
-     * @brief Getter function for the CKM matrix phase 
-     *  \f$\delta\f$. 
-     * @return  \f$\delta\f$. 
+     * @brief Getter function for the CKM matrix phase \f$\delta\f$.
+     * @return  The CKM matrix phase \f$\delta\f$. 
      */
     double GetCKMPhase();
 
     /**
      * @brief Setter method for the scale at which the method 
      * \ref GenerateSMInitialConditions
-     *  takes the input values 
+     *  takes the input values (in GeV).
      * for SM parameters.
-     * @param mu
+     * @param mu 
      */
     void SetSMInputScale(double mu) {
         InputScale_SM = mu;
@@ -491,7 +495,7 @@ public:
      * \ref GenerateSMInitialConditions 
      * takes the input values 
      * for SM parameters.
-     * @return <tt>InputScale_SM</tt>
+     * @return <tt>InputScale_SM</tt> (in GeV).
      */
     double GetSMInputScale() {
         return InputScale_SM;
@@ -541,7 +545,7 @@ public:
      * @details If the parameter name does not match with any of the parameters, 
      * an error message is printed and the value 0 is returned.
      * @param name name of the parameter (see table \ref 0F)
-     * @return the requested parameter (if it exists), otherwise returns 0. 
+     * @return the requested parameter 
      */
     double GetCoefficient(std::string name);
     /**
@@ -552,7 +556,7 @@ public:
      * @param name name of the parameter (see table \ref 2F)
      * @param i first flavour index
      * @param j second flavour index
-     * @return the requested parameter (if it exists), otherwise returns 0. 
+     * @return the requested parameter
      */
     double GetCoefficient(std::string name, int i, int j);
 
@@ -566,7 +570,7 @@ public:
      * @param j second flavour index
      * @param k third flavour index
      * @param l fourth flavour index
-     * @return the requested parameter (if it exists), otherwise returns 0. 
+     * @return the requested parameter 
      */
     double GetCoefficient(std::string name, int i, int j,
             int k, int l);
