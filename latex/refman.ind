@@ -19,11 +19,11 @@
   \item {GetCKMPhase}
     \subitem {RGESolver}, \hyperpage{12}
   \item {GetCoefficient}
-    \subitem {RGESolver}, \hyperpage{12}, \hyperpage{14}
+    \subitem {RGESolver}, \hyperpage{12, 13}
   \item {GetFermionMass}
-    \subitem {RGESolver}, \hyperpage{15}
+    \subitem {RGESolver}, \hyperpage{14}
   \item {GetSMInputScale}
-    \subitem {RGESolver}, \hyperpage{15}
+    \subitem {RGESolver}, \hyperpage{14}
 
   \indexspace
 
@@ -34,29 +34,29 @@
     \subitem {GenerateSMInitialConditions}, \hyperpage{11}
     \subitem {GetCKMAngle}, \hyperpage{12}
     \subitem {GetCKMPhase}, \hyperpage{12}
-    \subitem {GetCoefficient}, \hyperpage{12}, \hyperpage{14}
-    \subitem {GetFermionMass}, \hyperpage{15}
-    \subitem {GetSMInputScale}, \hyperpage{15}
-    \subitem {SaveOutputFile}, \hyperpage{15}
-    \subitem {SetCKMAngle}, \hyperpage{16}
-    \subitem {SetCKMPhase}, \hyperpage{16}
-    \subitem {SetCoefficient}, \hyperpage{16, 17}
-    \subitem {SetFermionMass}, \hyperpage{18}
-    \subitem {SetSMInputScale}, \hyperpage{18}
+    \subitem {GetCoefficient}, \hyperpage{12, 13}
+    \subitem {GetFermionMass}, \hyperpage{14}
+    \subitem {GetSMInputScale}, \hyperpage{14}
+    \subitem {SaveOutputFile}, \hyperpage{14}
+    \subitem {SetCKMAngle}, \hyperpage{15}
+    \subitem {SetCKMPhase}, \hyperpage{15}
+    \subitem {SetCoefficient}, \hyperpage{15, 16}
+    \subitem {SetFermionMass}, \hyperpage{17}
+    \subitem {SetSMInputScale}, \hyperpage{17}
 
   \indexspace
 
   \item {SaveOutputFile}
-    \subitem {RGESolver}, \hyperpage{15}
+    \subitem {RGESolver}, \hyperpage{14}
   \item {SetCKMAngle}
-    \subitem {RGESolver}, \hyperpage{16}
+    \subitem {RGESolver}, \hyperpage{15}
   \item {SetCKMPhase}
-    \subitem {RGESolver}, \hyperpage{16}
+    \subitem {RGESolver}, \hyperpage{15}
   \item {SetCoefficient}
-    \subitem {RGESolver}, \hyperpage{16, 17}
+    \subitem {RGESolver}, \hyperpage{15, 16}
   \item {SetFermionMass}
-    \subitem {RGESolver}, \hyperpage{18}
+    \subitem {RGESolver}, \hyperpage{17}
   \item {SetSMInputScale}
-    \subitem {RGESolver}, \hyperpage{18}
+    \subitem {RGESolver}, \hyperpage{17}
 
 \end{theindex}

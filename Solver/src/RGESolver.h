@@ -24,30 +24,52 @@
  * @details The class solves the Renormalization Group Equations (RGEs) both numerically and 
  * in the leading-log approximation. 
  * Only operators up to dimension six that preserve  lepton and baryon numbers 
- * are considered. The operator basis is the Warsaw basis, defined in https://arxiv.org/abs/1008.4884. @n 
- * The user must set separately real and imaginary part of each complex parameter.  
- * In tables  \ref SM, \ref 0F, \ref 2F and \ref 4F we list all the 
- * parameters, together with their names (that must be used to correctly invoke getter and setter functions). @n
+ * are considered. The operator basis is the Warsaw basis, 
+ * defined in https://arxiv.org/abs/1008.4884.
+ * The class splits real and imaginary part of each complex parameter. @n @n 
  * The numerical integration is performed with an adaptive step-size routine 
  * (the explicit embedded Runge-Kutta-Fehlberg method), using the
- * tools in the GNU Scientific Library. @n 
+ * tools in the GNU Scientific Library. 
  * See https://www.gnu.org/software/gsl/doc/html/ode-initval.html for all the details. @n
  * The accuracy level of the numerical integration can be tuned selecting the parameters 
- * @f$\epsilon_{rel}, \epsilon_{abs}@f$ and the integration step using the dedicated setter functions. 
- * 
- * @author S. Di Noi, L. Silvestrini.
- * @copyright GNU General Public License
- */
+ * @f$\epsilon_{rel}, \epsilon_{abs}@f$ and the integration step using the
+ *  dedicated setter functions. @n @n 
+ * All the SMEFT coefficients are set using the \ref SetCoefficient methods and 
+ * accessed with the \ref GetCoefficient methods. 
+ * There exist three different signatures for each method, 
+ * depending on the number of flavour indices of the 
+ * parameter (0,2,4). @n 
+ * These two routines must be used also for the SM parameters 
+ *  \f$g_1,g_2,g_3,\lambda,m_h^2,\f$ 
+ *   \f$\mathrm{Re}(\mathcal{Y}_u),\mathrm{Im}(\mathcal{Y}_u),\f$ 
+ *   \f$\mathrm{Re}(\mathcal{Y}_d),\mathrm{Im}(\mathcal{Y}_d),\f$ 
+ *   \f$\mathrm{Re}(\mathcal{Y}_e),\mathrm{Im}(\mathcal{Y}_e)\f$ 
+ *  (we follow https://arxiv.org/abs/1308.2627 for what concerns
+ * the conventions in the Higgs' sector). @n
+ * If the user is interested in using the \ref GenerateSMInitialConditions
+ * method, the input for the CKM matrix parameters and 
+ * the fermion masses must be given with the 
+ * methods 
+ * \ref SetCKMAngle,
+ * \ref SetCKMPhase
+ * \ref SetFermionMass. @n
+ * A complete list of the keys that must be used to 
+ * correctly invoke setter/getter methods are given in 
+ * tables \ref SM, \ref 0F, \ref 2F and \ref 4F. 
+ 
+
+
+
+* @author S. Di Noi, L. Silvestrini.
+* @copyright GNU General Public License
+*/
 
 
 //tables with all the names of the coefficients.
 
 /**
 <table>
-<caption id="SM"> Standard Model parameters. The parameters in the left column
- must be set (and accessed) with \ref SetCoefficient (and \ref GetCoefficient) methods.
- The ones in the right column must be set and accessed using 
- other dedicated methods (see the specific documentation for input/output) </caption>
+<caption id="SM"> Standard Model parameters. </caption>
 <tr style="vertical-align:top">
 <td>
 <table>
@@ -90,8 +112,7 @@
  * 
  
 <table>
-<caption id="0F"> Scalar (and real) SMEFT operators. They must be set and accessed 
-using \ref SetCoefficient and \ref GetCoefficient. </caption>
+<caption id="0F"> Scalar (and real) SMEFT operators. </caption>
 <tr style="vertical-align:top">
 <td>
 <table>
@@ -125,8 +146,7 @@ using \ref SetCoefficient and \ref GetCoefficient. </caption>
  * 
  * 
 <table>
-<caption id="2F"> 2F SMEFT operators. They must be set and accessed 
-using \ref SetCoefficient and \ref GetCoefficient. </caption>
+<caption id="2F"> 2F SMEFT operators.  </caption>
 <tr style="vertical-align:top"> <td>
 <table>
 <tr><th colspan="3"> Class 5   
@@ -186,8 +206,7 @@ using \ref SetCoefficient and \ref GetCoefficient. </caption>
  *  
  
 <table>
-<caption id="4F"> 4F SMEFT Operators. They must be set and accessed 
-using \ref SetCoefficient and \ref GetCoefficient.</caption>
+<caption id="4F"> 4F SMEFT Operators.</caption>
 <tr style="vertical-align:top"><td>
 <table>
 <tr> <th colspan="3"> Class 8 \f$(\bar{L}L)(\bar{L}L)\f$  
@@ -392,35 +411,7 @@ public:
 
 
     /** @name Input/output   */
-    /** 
-     * @brief Documentation for the input/output handling.
-     * 
-     * @details All the SMEFT coefficients are set using the \ref SetCoefficient methods and 
-     * accessed with the \ref GetCoefficient methods. 
-     * There exist three different signatures for each method, 
-     * depending on the number of flavour indices of the 
-     * parameter (0,2,4). @n
-     * These two routines must be used also for the SM parameters 
-     *  \f$g_1,g_2,g_3,\lambda,m_h^2,\f$ 
-     *   \f$\mathrm{Re}(\mathcal{Y}_u),\mathrm{Im}(\mathcal{Y}_u),\f$ 
-     *   \f$\mathrm{Re}(\mathcal{Y}_d),\mathrm{Im}(\mathcal{Y}_d),\f$ 
-     *   \f$\mathrm{Re}(\mathcal{Y}_e),\mathrm{Im}(\mathcal{Y}_e)\f$ 
-     *  (we follow https://arxiv.org/abs/1308.2627 for what concerns
-     * the conventions in the Higgs' sector). @n
-     * If the user is interested in using the \ref GenerateSMInitialConditions
-     * method, the input for the CKM matrix parameters and 
-     * the fermion masses must be given with the 
-     * methods 
-     * \ref SetCKMAngle,
-     * \ref SetCKMPhase
-     * \ref SetFermionMass. @n
-     * A complete list of the keys that must be used to 
-     * correctly invoke setter/getter methods are given in 
-     * tables   \ref SM , \ref 0F , \ref 2F and \ref 4F 
-     */
-
-
-    
+  
 
 
     
