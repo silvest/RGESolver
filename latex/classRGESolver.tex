@@ -52,19 +52,11 @@ void \mbox{\hyperlink{classRGESolver_a7c0c4303beb14f728a70542c8583b3a7}{Evolve\+
  \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Input/output}\par
-{\em Documentation for the input/output handling.
-
-~\newline
-
-
-All the S\+M\+E\+FT coefficients are set using the ~\newline
- Set\+Coefficient methods and accessed with the Get\+Coefficient methods. There exist three different signatures for each method, depending on the number of flavour indices of the parameter (0,2,4). ~\newline
-These two routines must be used also for the SM parameters $g1,g2,g3,\lambda,m_h^2,$ $\mathrm{Re}(\mathcal{Y}_u),\Im(\mathcal{Y}_u),$ $\mathrm{Re}(\mathcal{Y}_d),\Im(\mathcal{Y}_d),$ $\mathrm{Re}(\mathcal{Y}_e),\Im(\mathcal{Y}_e)$ (we follow \href{https://arxiv.org/abs/1308.2627}{\texttt{ https\+://arxiv.\+org/abs/1308.\+2627}} for what concerns the conventions in the Higgs\textquotesingle{} sector). ~\newline
-If the user is interested in using the \mbox{\hyperlink{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}{Generate\+S\+M\+Initial\+Conditions}} method, the input for the C\+KM matrix parameters and the fermion masses must be given with the methods \mbox{\hyperlink{classRGESolver_a7e045398572694648fded4253423705e}{Set\+C\+K\+M\+Angle(std\+::string name, double val)}}, \mbox{\hyperlink{classRGESolver_a74d1c5b7633de682a376204d1788b794}{Set\+C\+K\+M\+Phase(double val)}} \mbox{\hyperlink{classRGESolver_a063197d49e4878d86b2d9e5ab6b0b9f8}{Set\+Fermion\+Mass(std\+::string name, double val)}}. ~\newline
-A complete list of the keys that must be used to correctly invoke setter/getter methods are given in tables \doxytablelink{classRGESolver_SM}{SM} , \doxytablelink{classRGESolver_0F}{0F} , \doxytablelink{classRGESolver_2F}{2F} and \doxytablelink{classRGESolver_4F}{4F} }\begin{DoxyCompactItemize}
+{\em ~\newline
+ }\begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classRGESolver_ad499b4ef512ac892c4f5a71b9fa0daf4}{Compute\+C\+K\+M\+And\+Fermion\+Masses}} ()
-\begin{DoxyCompactList}\small\item\em Compute C\+KM matrix and the mass of the fermions. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Documentation for the input/output handling. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_a063197d49e4878d86b2d9e5ab6b0b9f8}{Set\+Fermion\+Mass}} (std\+::string name, double val)
 \begin{DoxyCompactList}\small\item\em Setter function for the mass of the fermions. Assignation is allowed only if the inserted value is not negative. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classRGESolver_a55375c02297501cc3ba0302f707a690d}\label{classRGESolver_a55375c02297501cc3ba0302f707a690d}} 
@@ -111,10 +103,10 @@ The class solves the Renormalization Group Equations (R\+G\+Es) both numerically
  In tables \doxytablelink{classRGESolver_SM}{SM}, \doxytablelink{classRGESolver_0F}{0F}, \doxytablelink{classRGESolver_2F}{2F} and \doxytablelink{classRGESolver_4F}{4F} we list all the parameters, together with their names (that must be used to correctly invoke getter and setter functions). ~\newline
 The numerical integration is performed with an adaptive step-\/size routine (the explicit embedded Runge-\/\+Kutta-\/\+Fehlberg method), using the tools in the G\+NU Scientific Library. ~\newline
  See \href{https://www.gnu.org/software/gsl/doc/html/ode-initval.html}{\texttt{ https\+://www.\+gnu.\+org/software/gsl/doc/html/ode-\/initval.\+html}} for all the details. ~\newline
-The accuracy level of the numerical integration can be tuned selecting the parameters $\epsilon_{rel}, \epsilon_{abs}$ and the integration step using the dedicated getter functions.
+The accuracy level of the numerical integration can be tuned selecting the parameters $\epsilon_{rel}, \epsilon_{abs}$ and the integration step using the dedicated setter functions.
 
 \begin{DoxyAuthor}{Author}
-H\+E\+Pfit Collaboration 
+S. Di Noi, L. Silvestrini. 
 \end{DoxyAuthor}
 \begin{DoxyCopyright}{Copyright}
 G\+NU General Public License \hypertarget{classRGESolver_SM}{}
@@ -397,7 +389,15 @@ $\mathrm{Im}(C_{qd8})$ &{\ttfamily Cqd8I} &W\+C7I ~\newline
 
 
 
-Compute C\+KM matrix and the mass of the fermions. 
+Documentation for the input/output handling. 
+
+All the S\+M\+E\+FT coefficients are set using the ~\newline
+ Set\+Coefficient methods and accessed with the Get\+Coefficient methods. There exist three different signatures for each method, depending on the number of flavour indices of the parameter (0,2,4). ~\newline
+These two routines must be used also for the SM parameters $g1,g2,g3,\lambda,m_h^2,$ $\mathrm{Re}(\mathcal{Y}_u),\Im(\mathcal{Y}_u),$ $\mathrm{Re}(\mathcal{Y}_d),\Im(\mathcal{Y}_d),$ $\mathrm{Re}(\mathcal{Y}_e),\Im(\mathcal{Y}_e)$ (we follow \href{https://arxiv.org/abs/1308.2627}{\texttt{ https\+://arxiv.\+org/abs/1308.\+2627}} for what concerns the conventions in the Higgs\textquotesingle{} sector). ~\newline
+If the user is interested in using the \mbox{\hyperlink{classRGESolver_a7b6c7701ddfa1bd3f6f34e7794fc1dca}{Generate\+S\+M\+Initial\+Conditions}} method, the input for the C\+KM matrix parameters and the fermion masses must be given with the methods \mbox{\hyperlink{classRGESolver_a7e045398572694648fded4253423705e}{Set\+C\+K\+M\+Angle(std\+::string name, double val)}}, \mbox{\hyperlink{classRGESolver_a74d1c5b7633de682a376204d1788b794}{Set\+C\+K\+M\+Phase(double val)}} \mbox{\hyperlink{classRGESolver_a063197d49e4878d86b2d9e5ab6b0b9f8}{Set\+Fermion\+Mass(std\+::string name, double val)}}. ~\newline
+A complete list of the keys that must be used to correctly invoke setter/getter methods are given in tables \doxytablelink{classRGESolver_SM}{SM} , \doxytablelink{classRGESolver_0F}{0F} , \doxytablelink{classRGESolver_2F}{2F} and \doxytablelink{classRGESolver_4F}{4F}
+
+Compute C\+KM matrix and the mass of the fermions.
 
 The methods \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} and \mbox{\hyperlink{classRGESolver_a7c0c4303beb14f728a70542c8583b3a7}{Evolve\+S\+M\+Only}} do not updates the value of C\+KM parameters and fermion masses after the evolution. This process require the diagonalization of the Yukawa matrices and may slow the evolution. ~\newline
 If the user is interested in these parameters (accessible with \mbox{\hyperlink{classRGESolver_a1bdc3a8209979b9f4c583b47fc4988d4}{Get\+C\+K\+M\+Angle}}, \mbox{\hyperlink{classRGESolver_a891564c063a942fbd01830b30fa8e6e1}{Get\+C\+K\+M\+Phase}}, \mbox{\hyperlink{classRGESolver_a55375c02297501cc3ba0302f707a690d}{Get\+Fermion\+Mass}}) must invoke this method after the evolution. \mbox{\Hypertarget{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}\label{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}} 

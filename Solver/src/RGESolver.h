@@ -33,9 +33,9 @@
  * tools in the GNU Scientific Library. @n 
  * See https://www.gnu.org/software/gsl/doc/html/ode-initval.html for all the details. @n
  * The accuracy level of the numerical integration can be tuned selecting the parameters 
- * @f$\epsilon_{rel}, \epsilon_{abs}@f$ and the integration step using the dedicated getter functions. 
+ * @f$\epsilon_{rel}, \epsilon_{abs}@f$ and the integration step using the dedicated setter functions. 
  * 
- * @author HEPfit Collaboration
+ * @author S. Di Noi, L. Silvestrini.
  * @copyright GNU General Public License
  */
 
@@ -376,8 +376,8 @@ public:
 
 
 
-    /**@name Input/output  
-     * 
+     /** @name Input/output   */
+     /** 
      * @brief Documentation for the input/output handling.
      * 
      * @details All the SMEFT coefficients are set using the  

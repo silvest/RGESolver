@@ -105,17 +105,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   <a href="classRGESolver.html#a7c0c4303beb14f728a70542c8583b3a7">More...</a><br /></td></tr>
 <tr class="separator:a7c0c4303beb14f728a70542c8583b3a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Input/output</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p>Documentation for the input/output handling.</p>
-<p><br  />
-</p>
-<p>All the SMEFT coefficients are set using the <br  />
- SetCoefficient methods and accessed with the GetCoefficient methods. There exist three different signatures for each method, depending on the number of flavour indices of the parameter (0,2,4). <br  />
-These two routines must be used also for the SM parameters \(g1,g2,g3,\lambda,m_h^2,\) \(\mathrm{Re}(\mathcal{Y}_u),\Im(\mathcal{Y}_u),\) \(\mathrm{Re}(\mathcal{Y}_d),\Im(\mathcal{Y}_d),\) \(\mathrm{Re}(\mathcal{Y}_e),\Im(\mathcal{Y}_e)\) (we follow <a href="https://arxiv.org/abs/1308.2627">https://arxiv.org/abs/1308.2627</a> for what concerns the conventions in the Higgs' sector). <br  />
-If the user is interested in using the <a class="el" href="classRGESolver.html#a7b6c7701ddfa1bd3f6f34e7794fc1dca">GenerateSMInitialConditions</a> method, the input for the CKM matrix parameters and the fermion masses must be given with the methods <a class="el" href="classRGESolver.html#a7e045398572694648fded4253423705e" title="Setter function for the CKM matrix angles . The assignation is completed only if the inserted angle i...">SetCKMAngle(std::string name, double val)</a>, <a class="el" href="classRGESolver.html#a74d1c5b7633de682a376204d1788b794" title="Setter function for the CKM matrix phase . The assignation is completed only if .">SetCKMPhase(double val)</a> <a class="el" href="classRGESolver.html#a063197d49e4878d86b2d9e5ab6b0b9f8" title="Setter function for the mass of the fermions. Assignation is allowed only if the inserted value is no...">SetFermionMass(std::string name, double val)</a>. <br  />
-A complete list of the keys that must be used to correctly invoke setter/getter methods are given in tables <a class="el" href="classRGESolver.html#SM">SM</a> , <a class="el" href="classRGESolver.html#0F">0F</a> , <a class="el" href="classRGESolver.html#2F">2F</a> and <a class="el" href="classRGESolver.html#4F">4F</a> </p>
+<tr><td colspan="2"><div class="groupText"><p><br  />
+ </p>
 </div></td></tr>
 <tr class="memitem:ad499b4ef512ac892c4f5a71b9fa0daf4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#ad499b4ef512ac892c4f5a71b9fa0daf4">ComputeCKMAndFermionMasses</a> ()</td></tr>
-<tr class="memdesc:ad499b4ef512ac892c4f5a71b9fa0daf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute CKM matrix and the mass of the fermions.  <a href="classRGESolver.html#ad499b4ef512ac892c4f5a71b9fa0daf4">More...</a><br /></td></tr>
+<tr class="memdesc:ad499b4ef512ac892c4f5a71b9fa0daf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Documentation for the input/output handling.  <a href="classRGESolver.html#ad499b4ef512ac892c4f5a71b9fa0daf4">More...</a><br /></td></tr>
 <tr class="separator:ad499b4ef512ac892c4f5a71b9fa0daf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a063197d49e4878d86b2d9e5ab6b0b9f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#a063197d49e4878d86b2d9e5ab6b0b9f8">SetFermionMass</a> (std::string name, double val)</td></tr>
 <tr class="memdesc:a063197d49e4878d86b2d9e5ab6b0b9f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter function for the mass of the fermions. Assignation is allowed only if the inserted value is not negative.  <a href="classRGESolver.html#a063197d49e4878d86b2d9e5ab6b0b9f8">More...</a><br /></td></tr>
@@ -176,8 +170,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
  In tables <a class="el" href="classRGESolver.html#SM">SM</a>, <a class="el" href="classRGESolver.html#0F">0F</a>, <a class="el" href="classRGESolver.html#2F">2F</a> and <a class="el" href="classRGESolver.html#4F">4F</a> we list all the parameters, together with their names (that must be used to correctly invoke getter and setter functions). <br  />
 The numerical integration is performed with an adaptive step-size routine (the explicit embedded Runge-Kutta-Fehlberg method), using the tools in the GNU Scientific Library. <br  />
  See <a href="https://www.gnu.org/software/gsl/doc/html/ode-initval.html">https://www.gnu.org/software/gsl/doc/html/ode-initval.html</a> for all the details. <br  />
-The accuracy level of the numerical integration can be tuned selecting the parameters \(\epsilon_{rel}, \epsilon_{abs}\) and the integration step using the dedicated getter functions.</p>
-<dl class="section author"><dt>Author</dt><dd>HEPfit Collaboration </dd></dl>
+The accuracy level of the numerical integration can be tuned selecting the parameters \(\epsilon_{rel}, \epsilon_{abs}\) and the integration step using the dedicated setter functions.</p>
+<dl class="section author"><dt>Author</dt><dd>S. Di Noi, L. Silvestrini. </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GNU General Public License <a class="anchor" id="SM"></a>
 <table class="doxtable">
 <caption>Standard Model parameters. The parameters in the left column must be set (and accessed) with SetCoefficient (and GetCoefficient) methods. The ones in the right column must be set and accessed using other dedicated methods (see the specific documentation for input/output) </caption>
@@ -603,7 +597,13 @@ The accuracy level of the numerical integration can be tuned selecting the param
       </table>
 </div><div class="memdoc">
 
-<p>Compute CKM matrix and the mass of the fermions. </p>
+<p>Documentation for the input/output handling. </p>
+<p>All the SMEFT coefficients are set using the <br  />
+ SetCoefficient methods and accessed with the GetCoefficient methods. There exist three different signatures for each method, depending on the number of flavour indices of the parameter (0,2,4). <br  />
+These two routines must be used also for the SM parameters \(g1,g2,g3,\lambda,m_h^2,\) \(\mathrm{Re}(\mathcal{Y}_u),\Im(\mathcal{Y}_u),\) \(\mathrm{Re}(\mathcal{Y}_d),\Im(\mathcal{Y}_d),\) \(\mathrm{Re}(\mathcal{Y}_e),\Im(\mathcal{Y}_e)\) (we follow <a href="https://arxiv.org/abs/1308.2627">https://arxiv.org/abs/1308.2627</a> for what concerns the conventions in the Higgs' sector). <br  />
+If the user is interested in using the <a class="el" href="classRGESolver.html#a7b6c7701ddfa1bd3f6f34e7794fc1dca">GenerateSMInitialConditions</a> method, the input for the CKM matrix parameters and the fermion masses must be given with the methods <a class="el" href="classRGESolver.html#a7e045398572694648fded4253423705e" title="Setter function for the CKM matrix angles . The assignation is completed only if the inserted angle i...">SetCKMAngle(std::string name, double val)</a>, <a class="el" href="classRGESolver.html#a74d1c5b7633de682a376204d1788b794" title="Setter function for the CKM matrix phase . The assignation is completed only if .">SetCKMPhase(double val)</a> <a class="el" href="classRGESolver.html#a063197d49e4878d86b2d9e5ab6b0b9f8" title="Setter function for the mass of the fermions. Assignation is allowed only if the inserted value is no...">SetFermionMass(std::string name, double val)</a>. <br  />
+A complete list of the keys that must be used to correctly invoke setter/getter methods are given in tables <a class="el" href="classRGESolver.html#SM">SM</a> , <a class="el" href="classRGESolver.html#0F">0F</a> , <a class="el" href="classRGESolver.html#2F">2F</a> and <a class="el" href="classRGESolver.html#4F">4F</a></p>
+<p>Compute CKM matrix and the mass of the fermions.</p>
 <p>The methods <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a> and <a class="el" href="classRGESolver.html#a7c0c4303beb14f728a70542c8583b3a7">EvolveSMOnly</a> do not updates the value of CKM parameters and fermion masses after the evolution. This process require the diagonalization of the Yukawa matrices and may slow the evolution. <br  />
 If the user is interested in these parameters (accessible with <a class="el" href="classRGESolver.html#a1bdc3a8209979b9f4c583b47fc4988d4">GetCKMAngle</a>, <a class="el" href="classRGESolver.html#a891564c063a942fbd01830b30fa8e6e1">GetCKMPhase</a>, <a class="el" href="classRGESolver.html#a55375c02297501cc3ba0302f707a690d">GetFermionMass</a>) must invoke this method after the evolution. </p>
 
