@@ -595,46 +595,46 @@ int RGESolver::funcSMOnly(double logmu, const double y[], double f[], void* para
 
     double gammaH = 0.; //Higgs wavefunction normalization  
     double H = 0.; //scalar yukawa-trace dependent appearing in lambda RGE
-    /*double gqR[NG][NG] = {0.}; //wavefunction ren. const. of q 
-    double gqI[NG][NG] = {0.};
-    double glR[NG][NG] = {0.}; //wavefunction ren. const. of l 
-    double glI[NG][NG] = {0.};
-    double guR[NG][NG] = {0.}; //wavefunction ren. const. of u
-    double guI[NG][NG] = {0.};
-    double gdR[NG][NG] = {0.}; //wavefunction ren. const. of d 
-    double gdI[NG][NG] = {0.};
-    double geR[NG][NG] = {0.}; //wavefunction ren. const. of e 
-    double geI[NG][NG] = {0.};*/
-    double yudyuR[NG][NG] = {0.}; //yu^dag yu 
-    double yudyuI[NG][NG] = {0.};
-    double yddydR[NG][NG] = {0.}; //yd^dag yd 
-    double yddydI[NG][NG] = {0.};
-    double yedyeR[NG][NG] = {0.}; //ye^dag ye 
-    double yedyeI[NG][NG] = {0.};
-    double ydyudR[NG][NG] = {0.}; //yd yu^dag
-    double ydyudI[NG][NG] = {0.};
-    //double yuyddR[NG][NG] = {0.}; //yu yd^dag
-    //double yuyddI[NG][NG] = {0.};
+    /*double gqR[NG][NG] = {{0.}}; //wavefunction ren. const. of q 
+    double gqI[NG][NG] = {{0.}};
+    double glR[NG][NG] = {{0.}}; //wavefunction ren. const. of l 
+    double glI[NG][NG] = {{0.}};
+    double guR[NG][NG] = {{0.}}; //wavefunction ren. const. of u
+    double guI[NG][NG] = {{0.}};
+    double gdR[NG][NG] = {{0.}}; //wavefunction ren. const. of d 
+    double gdI[NG][NG] = {{0.}};
+    double geR[NG][NG] = {{0.}}; //wavefunction ren. const. of e 
+    double geI[NG][NG] = {{0.}};*/
+    double yudyuR[NG][NG] = {{0.}}; //yu^dag yu 
+    double yudyuI[NG][NG] = {{0.}};
+    double yddydR[NG][NG] = {{0.}}; //yd^dag yd 
+    double yddydI[NG][NG] = {{0.}};
+    double yedyeR[NG][NG] = {{0.}}; //ye^dag ye 
+    double yedyeI[NG][NG] = {{0.}};
+    double ydyudR[NG][NG] = {{0.}}; //yd yu^dag
+    double ydyudI[NG][NG] = {{0.}};
+    //double yuyddR[NG][NG] = {{0.}}; //yu yd^dag
+    //double yuyddI[NG][NG] = {{0.}};
 
     //3 Yukawa matrices product
     /*
-    double yuyudyuR[NG][NG] = {0.}; //yu yu^dag yu
-    double yuyudyuI[NG][NG] = {0.};
-    double yudyuyudR[NG][NG] = {0.}; //yu^dag yu yu^dag
-    double yudyuyudI[NG][NG] = {0.};
-    double ydyddydR[NG][NG] = {0.}; //yd yd^dag yd
-    double ydyddydI[NG][NG] = {0.};
-    double yddydyddR[NG][NG] = {0.}; //yd^dag yd yd^dag
-    double yddydyddI[NG][NG] = {0.};
-    double yeyedyeR[NG][NG] = {0.}; //ye ye^dag ye
-    double yeyedyeI[NG][NG] = {0.};
-    double yedyeyedR[NG][NG] = {0.}; //ye^dag ye ye^dag
-    double yedyeyedI[NG][NG] = {0.};
+    double yuyudyuR[NG][NG] = {{0.}}; //yu yu^dag yu
+    double yuyudyuI[NG][NG] = {{0.}};
+    double yudyuyudR[NG][NG] = {{0.}}; //yu^dag yu yu^dag
+    double yudyuyudI[NG][NG] = {{0.}};
+    double ydyddydR[NG][NG] = {{0.}}; //yd yd^dag yd
+    double ydyddydI[NG][NG] = {{0.}};
+    double yddydyddR[NG][NG] = {{0.}}; //yd^dag yd yd^dag
+    double yddydyddI[NG][NG] = {{0.}};
+    double yeyedyeR[NG][NG] = {{0.}}; //ye ye^dag ye
+    double yeyedyeI[NG][NG] = {{0.}};
+    double yedyeyedR[NG][NG] = {{0.}}; //ye^dag ye ye^dag
+    double yedyeyedI[NG][NG] = {{0.}};
 
-    double yddydyudR[NG][NG] = {0.}; // yd^dag yd yu^dag
-    double yddydyudI[NG][NG] = {0.};
-    double yudyuyddR[NG][NG] = {0.}; // yu^dag yu yd^dag
-    double yudyuyddI[NG][NG] = {0.};*/
+    double yddydyudR[NG][NG] = {{0.}}; // yd^dag yd yu^dag
+    double yddydyudI[NG][NG] = {{0.}};
+    double yudyuyddR[NG][NG] = {{0.}}; // yu^dag yu yd^dag
+    double yudyuyddI[NG][NG] = {{0.}};*/
 
 
     //Products of Yukawas 

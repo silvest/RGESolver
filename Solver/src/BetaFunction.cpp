@@ -1,131 +1,3 @@
-//#include "Declarations.h"
-//#include <iostream>
-/*
-#define TWO_THIRDS (2./3.)
-#define FOUR_THIRDS (4./3.)
-#define EIGHT_THIRDS (8./3.)
-#define ONE_THIRD (1./3.)
-#define ONE_SIXTH (1./6.)
-#define TEN_THIRDS (10./3.)
-*/
-
-
-/*
-#define NC 3. //Number of colors 
-#define NC2 9. //Number of colors squared 
-//They are double because are used in the RGEs
-
-#define NG 3 //Number of generations
-#define DF 9 //Dimension of matrices in flavour space
-#define DFs (NG*NG+NG)/2 //Independent parameters of a NGxNG real sym matrix
-#define DFa (NG*NG-NG)/2 //Independent parameters of a NGxNG real antisym matrix
-
-#define b01 double(-1./6.-NG*20./9.)
-#define b02 double(43./6. -4.*NG/3.)
-#define b03  double(11. -4.*NG/3.)
-
-//Casimirs
-#define cA2 double(2.)
-#define cA3 double(NC)
-#define cF2 double(3./4.)
-#define cF3 double(0.5*(NC*NC-1)/NC)
-
-//Hypercharges (and product of hypercharges)
-//We use Q = T3 + Y (the other possibility 
-//is Q = T3 + Y/2) as in https://arxiv.org/abs/1308.2627
-#define Yh double(0.5)
-#define Yh2 Yh*Yh
-
-#define Yq double(1./6.)
-#define Yq2 Yq*Yq
-#define Yl double(-0.5)
-#define Yl2 Yl*Yl
-
-#define Yu double(2./3.)
-#define Yu2 Yu*Yu
-#define Yd double(-1./3.) 
-#define Yd2 Yd*Yd
-#define Ye double(-1.)
- #define Ye2 Ye*Ye
- 
- #define YhYu Yh*Yu
- #define YhYd Yh*Yd
- #define YhYe Yh*Ye
- #define YhYq Yh*Yq
- #define YhYl Yh*Yl
- 
- #define YuYd Yu*Yd
- #define YuYe Yu*Ye
- #define YuYq Yu*Yq
- #define YuYl Yu*Yl
- 
- #define YdYe Yd*Ye
- #define YdYq Yd*Yq
- #define YdYl Yd*Yl
- 
- #define YeYq Ye*Yq
- #define YeYl Ye*Yl
- 
- #define YlYq Yl*Yq
- */
-
-
-
-/*
- //SM 
- #define Ngauge 3 
- #define Nh 2
- #define Nyukawa 3 
- #define Eyuk (Nyukawa*2*DF) 
- //each Yukawa is a complex matrix, so there are 2*DF 
- //entries for each matrix
- 
- //SMEFT
- //For each class N is the number of operators and 
- //E the number of independent entries. When E is not explicitely
- //defined is E=N (no flavour structure)
- #define N1 4 
- #define N23 3 
- #define N4 8 
- 
- #define N5 3
- #define E5 (N5*2*DF) //Total independent entries. Each Class 5 op. is a complex matrix
- 
- #define N6 8 
- #define E6 (N6*2*DF) //Total independent entries. Each Class 6 op. is a complex matrix
- 
- #define N7 8
- #define N7H 7 //Hermitian operators in class 7
- #define N7NH 1 //Non-hermitian operators in class 7
- #define E7 (N7H*(DWC2R+DWC2I) + N7NH*2*DF)  //Total independent entries.
- 
- #define N8_LLLL 5 //Number of operators in 8_LLLL subclass
- #define E8_LLLL 2*(DWC7R+DWC7I)+3*(DWC6R+DWC6I)
- //Total independent entries.
- //In this subclass there are WC7 and WC6
- 
- #define N8_RRRR 7 //Number of operators in 8_RRRR subclass
- #define E8_RRRR 4*(DWC7R+DWC7I)+2*(DWC6R+DWC6I)+1*(DWC8R+DWC8I)
- //In this subclass there are WC7 and WC6. O_ee is the only WC8
- 
- #define N8_LLRR 8 //Number of operators in 8_LLRR subclass
- #define E8_LLRR 8*(DWC7R+DWC7I)//Total independent entries. Each operator in 
- //subclass 8_LLRR op. is WC7
- 
- #define N8_LRRL 1 //Number of operators in 8_LRRL subclass 
- #define E8_LRRL 2*NG*NG*NG*NG*N8_LRRL  //Total independent entries. Each operator in 
- //subclass 8_LRRL op. is a generic NG^4 tensor (WC5)
- 
- #define N8_LRLR 4 //Number of operators in 8_LRLR subclass 
- #define E8_LRLR 2*NG*NG*NG*NG*N8_LRLR //Total independent entries. Each operator in 
- //subclass 8_LRLR op. is a generic NG^4 tensor (WC5)
- 
- //Dimension of the system
- #define dim  (Ngauge+Nh+Eyuk+N1+N23+N4+E5+E6+E7+E8_LLLL+E8_RRRR+E8_LLRR+E8_LRRL+E8_LRLR)
- 
- */
-
-
 
 
 int RGESolver::func(double logmu, const double y[], double f[], void* params) {
@@ -692,46 +564,46 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
 
 	double gammaH = 0.; //Higgs wavefunction normalization  
 	double H = 0.; //scalar yukawa-trace dependent appearing in lambda RGE
-	double gqR[NG][NG] = {0.}; //wavefunction ren. const. of q 
-	double gqI[NG][NG] = {0.};
-	double glR[NG][NG] = {0.}; //wavefunction ren. const. of l 
-	double glI[NG][NG] = {0.};
-	double guR[NG][NG] = {0.}; //wavefunction ren. const. of u
-	double guI[NG][NG] = {0.};
-	double gdR[NG][NG] = {0.}; //wavefunction ren. const. of d 
-	double gdI[NG][NG] = {0.};
-	double geR[NG][NG] = {0.}; //wavefunction ren. const. of e 
-	double geI[NG][NG] = {0.};
-	double yudyuR[NG][NG] = {0.}; //yu^dag yu 
-	double yudyuI[NG][NG] = {0.};
-	double yddydR[NG][NG] = {0.}; //yd^dag yd 
-	double yddydI[NG][NG] = {0.};
-	double yedyeR[NG][NG] = {0.}; //ye^dag ye 
-	double yedyeI[NG][NG] = {0.};
-	double ydyudR[NG][NG] = {0.}; //yd yu^dag
-	double ydyudI[NG][NG] = {0.};
-	double yuyddR[NG][NG] = {0.}; //yu yd^dag
-	double yuyddI[NG][NG] = {0.};
+	double gqR[NG][NG] = {{0.}}; //wavefunction ren. const. of q 
+	double gqI[NG][NG] = {{0.}};
+	double glR[NG][NG] = {{0.}}; //wavefunction ren. const. of l 
+	double glI[NG][NG] = {{0.}};
+	double guR[NG][NG] = {{0.}}; //wavefunction ren. const. of u
+	double guI[NG][NG] = {{0.}};
+	double gdR[NG][NG] = {{0.}}; //wavefunction ren. const. of d 
+	double gdI[NG][NG] = {{0.}};
+	double geR[NG][NG] = {{0.}}; //wavefunction ren. const. of e 
+	double geI[NG][NG] = {{0.}};
+	double yudyuR[NG][NG] = {{{0.}}}; //yu^dag yu 
+	double yudyuI[NG][NG] = {{0.}};
+	double yddydR[NG][NG] = {{0.}}; //yd^dag yd 
+	double yddydI[NG][NG] = {{0.}};
+	double yedyeR[NG][NG] = {{0.}}; //ye^dag ye 
+	double yedyeI[NG][NG] = {{0.}};
+	double ydyudR[NG][NG] = {{0.}}; //yd yu^dag
+	double ydyudI[NG][NG] = {{0.}};
+	double yuyddR[NG][NG] = {{0.}}; //yu yd^dag
+	double yuyddI[NG][NG] = {{0.}};
 
 	//3 Yukawa matrices product
 
-	double yuyudyuR[NG][NG] = {0.}; //yu yu^dag yu
-	double yuyudyuI[NG][NG] = {0.};
-	double yudyuyudR[NG][NG] = {0.}; //yu^dag yu yu^dag
-	double yudyuyudI[NG][NG] = {0.};
-	double ydyddydR[NG][NG] = {0.}; //yd yd^dag yd
-	double ydyddydI[NG][NG] = {0.};
-	double yddydyddR[NG][NG] = {0.}; //yd^dag yd yd^dag
-	double yddydyddI[NG][NG] = {0.};
-	double yeyedyeR[NG][NG] = {0.}; //ye ye^dag ye
-	double yeyedyeI[NG][NG] = {0.};
-	double yedyeyedR[NG][NG] = {0.}; //ye^dag ye ye^dag
-	double yedyeyedI[NG][NG] = {0.};
+	double yuyudyuR[NG][NG] = {{0.}}; //yu yu^dag yu
+	double yuyudyuI[NG][NG] = {{0.}};
+	double yudyuyudR[NG][NG] = {{0.}}; //yu^dag yu yu^dag
+	double yudyuyudI[NG][NG] = {{0.}};
+	double ydyddydR[NG][NG] = {{0.}}; //yd yd^dag yd
+	double ydyddydI[NG][NG] = {{0.}};
+	double yddydyddR[NG][NG] = {{0.}}; //yd^dag yd yd^dag
+	double yddydyddI[NG][NG] = {{0.}};
+	double yeyedyeR[NG][NG] = {{0.}}; //ye ye^dag ye
+	double yeyedyeI[NG][NG] = {{0.}};
+	double yedyeyedR[NG][NG] = {{0.}}; //ye^dag ye ye^dag
+	double yedyeyedI[NG][NG] = {{0.}};
 
-	double yddydyudR[NG][NG] = {0.}; // yd^dag yd yu^dag
-	double yddydyudI[NG][NG] = {0.};
-	double yudyuyddR[NG][NG] = {0.}; // yu^dag yu yd^dag
-	double yudyuyddI[NG][NG] = {0.};
+	double yddydyudR[NG][NG] = {{0.}}; // yd^dag yd yu^dag
+	double yddydyudI[NG][NG] = {{0.}};
+	double yudyuyddR[NG][NG] = {{0.}}; // yu^dag yu yd^dag
+	double yudyuyddI[NG][NG] = {{0.}};
 
 
 	//Real numbers defined in (A.3) https://arxiv.org/abs/1310.4838 
@@ -742,12 +614,12 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
 	double eta5 = 0.;
 
 	//Complex matrices defined in (A.4) https://arxiv.org/abs/1310.4838 
-	double xieR[NG][NG] = {0.};
-	double xieI[NG][NG] = {0.};
-	double xiuR[NG][NG] = {0.};
-	double xiuI[NG][NG] = {0.};
-	double xidR[NG][NG] = {0.};
-	double xidI[NG][NG] = {0.};
+	double xieR[NG][NG] = {{0.}};
+	double xieI[NG][NG] = {{0.}};
+	double xiuR[NG][NG] = {{0.}};
+	double xiuI[NG][NG] = {{0.}};
+	double xidR[NG][NG] = {{0.}};
+	double xidI[NG][NG] = {{0.}};
 
 
 	//Products of Yukawas 
@@ -1174,7 +1046,6 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
 						+ NC * (WC5(CledqR, j, i, a, b) * ydR[a][b] + WC5(CledqI, j, i, a, b) * ydI[a][b])
 						- NC * (WC5(Clequ1R, j, i, a, b) * yuR[b][a] - WC5(Clequ1I, j, i, a, b) * yuI[b][a])
 						) * mh2;
-					count++;
 					//yeI
 					f[c + 5 * DF] += (
 						-2. * (WC7R(CleR, a, j, i, b) * yeI[b][a] + WC7I(CleI, a, j, i, b) * yeR[b][a])

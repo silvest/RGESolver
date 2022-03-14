@@ -131,7 +131,7 @@ endif()
 #######################################################
 
 #Compiler flags: optimization and warnings 
-set ( CMAKE_CXX_FLAGS "-O3 -Wall ${GSL_CFLAGS}")
+set ( CMAKE_CXX_FLAGS "-O3 -Wall -Wmissing-braces -pedantic ${GSL_CFLAGS}")
 include_directories(${BOOST_INC})
 
 # Fix behavior of CMAKE_CXX_STANDARD when targeting macOS.

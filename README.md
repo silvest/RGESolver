@@ -43,9 +43,9 @@ The `rgesolver-config` script is available in the `<CMAKE_INSTALL_PREFIX>/bin` d
 If the path `<CMAKE_INSTALL_PREFIX>/bin` is not in the predefined search path, the compilation will (most likely) fail. if the user wants to use the compilation command above, it is suggested to add `<CMAKE_INSTALL_PREFIX>/bin` to the `$PATH` variable. 
 Alternatively, the script can be invoked from a terminal session in `<CMAKE_INSTALL_PREFIX>/bin` to visualize the paths to the library and to the headers.
 
-After the installation, the example program `ExampleProgram.cpp` (available in the `Example Program` directory) can be compiled with the command 
+After the installation, the example program `Example1.cpp` (available in the `Examples` directory) can be compiled with the command 
  ```
- g++ -o app ExampleProgram.cpp `rgesolver-config --cflags` `rgesolver-config --libs`
+ g++ -o app Example1.cpp `rgesolver-config --cflags` `rgesolver-config --libs`
  ```
 
 ## Uninstall
