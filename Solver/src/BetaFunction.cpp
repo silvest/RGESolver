@@ -574,7 +574,7 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
 	double gdI[NG][NG] = {{0.}};
 	double geR[NG][NG] = {{0.}}; //wavefunction ren. const. of e 
 	double geI[NG][NG] = {{0.}};
-	double yudyuR[NG][NG] = {{{0.}}}; //yu^dag yu 
+	double yudyuR[NG][NG] = {{0.}}; //yu^dag yu 
 	double yudyuI[NG][NG] = {{0.}};
 	double yddydR[NG][NG] = {{0.}}; //yd^dag yd 
 	double yddydI[NG][NG] = {{0.}};
