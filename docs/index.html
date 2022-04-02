@@ -82,7 +82,7 @@ Usage</h1>
 <li><code>--libs</code>: to obtain the flags needed for linking against the <code><a class="el" href="classRGESolver.html" title="A class that performs renormalization group evolution in the context of the SMEFT.">RGESolver</a></code>.</li>
 </ul>
 <p>If the path <code>&lt;CMAKE_INSTALL_PREFIX&gt;/bin</code> is not in the predefined search path, the compilation will (most likely) fail. if the user wants to use the compilation command above, it is suggested to add <code>&lt;CMAKE_INSTALL_PREFIX&gt;/bin</code> to the <code>$PATH</code> variable. Alternatively, the script can be invoked from a terminal session in <code>&lt;CMAKE_INSTALL_PREFIX&gt;/bin</code> to visualize the paths to the library and to the headers.</p>
-<p>After the installation, the example program <code>ExampleProgram.cpp</code> (available in the <code>Example Program</code> directory) can be compiled with the command </p><div class="fragment"><div class="line">g++ -o app ExampleProgram.cpp `rgesolver-config --cflags` `rgesolver-config --libs`</div>
+<p>After the installation, the example program <code>Example1.cpp</code> (available in the <code>Examples</code> directory) can be compiled with the command </p><div class="fragment"><div class="line">g++ -o app Example1.cpp `rgesolver-config --cflags` `rgesolver-config --libs`</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md5"></a>
 Uninstall</h1>
 <p>The user can uninstall the library typing in a terminal session in the <code>build</code> directory: </p><div class="fragment"><div class="line">cmake --build . --target uninstall</div>

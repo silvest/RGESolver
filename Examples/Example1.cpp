@@ -22,7 +22,7 @@ int main() {
 
 
     //Generate SM initial conditions using the default input parameters. 
-   // S.GenerateSMInitialConditions(Lambda, "DOWN", "Numeric");
+    // S.GenerateSMInitialConditions(Lambda, "DOWN", "Numeric");
 
     //Generate SM initial conditions using a custom low-energy input.
     double Muin[3] = {.002, 1.2, 170.};
@@ -57,7 +57,7 @@ int main() {
     cout << "-----------------------------------------\n" << endl;
 
     //Evolution from Lambda to muLow (solving numerically the RGEs)
-    S.Evolve("Numeric", Lambda, muLow);
+    S.EvolveToBasis("Numeric", Lambda, muLow, "UP");
 
     cout << "-------- AFTER THE EVOLUTION --------" << endl;
     cout << "g3(" << muLow << " GeV) : " << S.GetCoefficient("g3") << endl;
@@ -67,19 +67,34 @@ int main() {
 
     //Compute the masses of the fermions and the CKM matrix
     //parameters.
-    S.ComputeCKMAndFermionMasses();
 
 
     cout << "md(" << muLow << " GeV) : " << S.GetFermionMass("md") << " GeV" << endl;
     cout << "CKM_theta13(" << muLow << " GeV) : " << S.GetCKMAngle("CKM_theta13") << " rad" << endl;
+
     cout << "-----------------------------------------" << endl;
 
 
+    cout << "yd(" << muLow << " GeV) : " << endl;
+    for (i = 0; i < 3; i ++) {
+        for (j = 0; j < 3; j ++) {
+            cout << S.GetCoefficient("YdR", i, j) << " + I * " <<
+                    S.GetCoefficient("YdI", i, j) << "\t";
+        }
+        cout << "" << endl;
+    }
 
+    cout << "yu(" << muLow << " GeV) : " << endl;
+    for (i = 0; i < 3; i ++) {
+        for (j = 0; j < 3; j ++) {
+            cout << S.GetCoefficient("YuR", i, j) << " + I * " <<
+                    S.GetCoefficient("YuI", i, j) << "\t";
+        }
+        cout << "" << endl;
+    }
+    
+    
     S.Reset();
-
-
-
 
     return 0;
 }

@@ -41,9 +41,9 @@ The {\ttfamily rgesolver-\/config} script is available in the {\ttfamily $<$C\+M
 
 If the path {\ttfamily $<$C\+M\+A\+K\+E\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+P\+R\+E\+F\+IX$>$/bin} is not in the predefined search path, the compilation will (most likely) fail. if the user wants to use the compilation command above, it is suggested to add {\ttfamily $<$C\+M\+A\+K\+E\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+P\+R\+E\+F\+IX$>$/bin} to the {\ttfamily \$\+P\+A\+TH} variable. Alternatively, the script can be invoked from a terminal session in {\ttfamily $<$C\+M\+A\+K\+E\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+P\+R\+E\+F\+IX$>$/bin} to visualize the paths to the library and to the headers.
 
-After the installation, the example program {\ttfamily Example\+Program.\+cpp} (available in the {\ttfamily Example Program} directory) can be compiled with the command 
+After the installation, the example program {\ttfamily Example1.\+cpp} (available in the {\ttfamily Examples} directory) can be compiled with the command 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{g++ -\/o app ExampleProgram.cpp `rgesolver-\/config -\/-\/cflags` `rgesolver-\/config -\/-\/libs`}
+\DoxyCodeLine{g++ -\/o app Example1.cpp `rgesolver-\/config -\/-\/cflags` `rgesolver-\/config -\/-\/libs`}
 \end{DoxyCode}
 \hypertarget{index_autotoc_md5}{}\doxysection{Uninstall}\label{index_autotoc_md5}
 The user can uninstall the library typing in a terminal session in the {\ttfamily build} directory\+: 

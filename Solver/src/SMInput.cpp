@@ -605,14 +605,30 @@ int RGESolver::funcSMOnly(double logmu, const double y[], double f[], void* para
     double gdI[NG][NG] = {{0.}};
     double geR[NG][NG] = {{0.}}; //wavefunction ren. const. of e 
     double geI[NG][NG] = {{0.}};*/
-    double yudyuR[NG][NG] = {{0.}}; //yu^dag yu 
-    double yudyuI[NG][NG] = {{0.}};
-    double yddydR[NG][NG] = {{0.}}; //yd^dag yd 
-    double yddydI[NG][NG] = {{0.}};
-    double yedyeR[NG][NG] = {{0.}}; //ye^dag ye 
-    double yedyeI[NG][NG] = {{0.}};
-    double ydyudR[NG][NG] = {{0.}}; //yd yu^dag
-    double ydyudI[NG][NG] = {{0.}};
+    double yudyuR[NG][NG] = {
+        {0.}
+    }; //yu^dag yu 
+    double yudyuI[NG][NG] = {
+        {0.}
+    };
+    double yddydR[NG][NG] = {
+        {0.}
+    }; //yd^dag yd 
+    double yddydI[NG][NG] = {
+        {0.}
+    };
+    double yedyeR[NG][NG] = {
+        {0.}
+    }; //ye^dag ye 
+    double yedyeI[NG][NG] = {
+        {0.}
+    };
+    double ydyudR[NG][NG] = {
+        {0.}
+    }; //yd yu^dag
+    double ydyudI[NG][NG] = {
+        {0.}
+    };
     //double yuyddR[NG][NG] = {{0.}}; //yu yd^dag
     //double yuyddI[NG][NG] = {{0.}};
 
@@ -830,6 +846,7 @@ void RGESolver::SetSMDefaultInput() {
 
 }
 
+/*
 void RGESolver::ComputeCKMAndFermionMasses() {
 
     gslpp::matrix<gslpp::complex> Uu(3, 3, 0.);
@@ -896,21 +913,10 @@ void RGESolver::ComputeCKMAndFermionMasses() {
     //Build the CKM with the 4 parameters
     UpdateCKM();
 
-}
-//Same as Reset(), probably slightly slower 
-//(but for sure cleaner...)
-
-/*
-void RGESolver::ResetParameters() {
-
-    memset(x, 0., sizeof (x));
-    Update();
-    SetSMDefaultInput();
+} */
 
 
 
-
-}*/
 
 void RGESolver::Reset() {
 
@@ -1387,7 +1393,7 @@ void RGESolver::Reset() {
 
 }
 
-/*void RGESolver::GoToBasis(std::string basis) {
+void RGESolver::GoToBasis(std::string basis) {
 
     gslpp::matrix<gslpp::complex> Uu(3, 3, 0.);
     gslpp::matrix<gslpp::complex> Vu(3, 3, 0.);
@@ -1406,7 +1412,7 @@ void RGESolver::Reset() {
     gslpp::matrix<gslpp::complex> yeDiag(3, 3, 0.);
     gslpp::vector<double> Se(3, 0.);
 
-    int i, j, k, l;
+    int i, j;
     gslpp::matrix<gslpp::complex> yu(3, 3, 0.);
     gslpp::matrix<gslpp::complex> yd(3, 3, 0.);
     gslpp::matrix<gslpp::complex> ye(3, 3, 0.);
@@ -1418,12 +1424,33 @@ void RGESolver::Reset() {
             ye.assign(i, j, gslpp::complex(yeR[i][j], yeI[i][j], false));
         }
     }
+
+    using namespace std;
+
     yu.singularvalue(Uu, Vu, Su);
-    std::cout << Su << std::endl;
     yd.singularvalue(Ud, Vd, Sd);
-    std::cout << Sd << std::endl;
     ye.singularvalue(Re, Rl, Se);
-    std::cout << Se << std::endl;
+
+    //Updating fermion masses
+
+    //mf = yfdiag * v /sqrt(2)
+    //v = sqrt(mh2 / (2 lambda))
+    //v/sqrt(2) =  sqrt(mh2 / (4 lambda))
+    double vOverSqrt2 = sqrt(0.25 * mh2 / lambda);
+
+
+    mu = Su(0) * vOverSqrt2;
+    mc = Su(1) * vOverSqrt2;
+    mt = Su(2) * vOverSqrt2;
+
+    md = Sd(0) * vOverSqrt2;
+    ms = Sd(1) * vOverSqrt2;
+    mb = Sd(2) * vOverSqrt2;
+
+    mel = Se(0) * vOverSqrt2;
+    mmu = Se(1) * vOverSqrt2;
+    mtau = Se(2) * vOverSqrt2;
+
 
     //Matrix to rotate fields
     gslpp::matrix<gslpp::complex> Ru(3, 3, 0.);
@@ -1433,11 +1460,14 @@ void RGESolver::Reset() {
     gslpp::matrix<gslpp::complex> Rq(3, 3, 0.);
     gslpp::matrix<gslpp::complex> Rqdag(3, 3, 0.);
 
-
-    CKM = Vu * (Vd.hconjugate());
+    //Computing the CKM 
+    CKM = (Vu.hconjugate()) * Vd;
+    //Extract the 4 parameters from the raw CKM
     ExtractParametersFromCKM();
+    //Build the CKM with the 4 parameters
     UpdateCKM();
 
+    //Reset the Yukawas to 0
     for (i = 0; i < 3; i ++) {
         for (j = 0; j < 3; j ++) {
             yuR[i][j] = 0;
@@ -1448,24 +1478,30 @@ void RGESolver::Reset() {
             yeI[i][j] = 0;
         }
     }
+
     if (basis == "UP") {
+        //In UP basis: 
+        //yu = diag(.,.,.)
+        //yd = diag(.,.,.) CKM^dagger 
         Ru = Uu;
         Rd = Ud;
         Rq = Vu;
-        gslpp::matrix<gslpp::complex> CKMdag = CKM.hconjugate();
 
         for (i = 0; i < 3; i ++) {
             yuR[i][i] = Su(i);
             yeR[i][i] = Se(i);
             for (j = 0; j < 3; j ++) {
-                ydR[i][j] = Sd(i)*(CKMdag(i, j)).real();
-                ydI[i][j] = Sd(i)*(CKMdag(i, j)).imag();
+                ydR[i][j] = Sd(i)*(CKM(j, i)).real();
+                ydI[i][j] = - Sd(i)*(CKM(j, i)).imag();
             }
         }
 
 
     }
     if (basis == "DOWN") {
+        //In DOWN basis: 
+        //yd = diag(.,.,.)
+        //yu = diag(.,.,.) CKM 
         Ru = Uu;
         Rd = Ud;
         Rq = Vd;
@@ -1482,60 +1518,226 @@ void RGESolver::Reset() {
 
     }
 
-    Rqdag = Rq.hconjugate();
+
+    //I save the hermitian conjugates of the rotation 
+    //matrix to be more efficient. 
     Rudag = Ru.hconjugate();
     Rddag = Rd.hconjugate();
+    Rqdag = Rq.hconjugate();
 
-    Rldag = Rl.hconjugate();
     Redag = Re.hconjugate();
+    Rldag = Rl.hconjugate();
 
 
 
 
-    double ceHRtmp[3 * 3];
-    double ceHItmp[3 * 3];
-    double cuHRtmp[3 * 3];
-    double cuHItmp[3 * 3];
-    double cdHRtmp[3 * 3];
-    double cdHItmp[3 * 3];
+
+    int a, b, n;
+    gslpp::complex z;
 
 
-    //Class 5 rotations 
-    for (i = 0; i < 3; i ++) {
-        for (j = 0; j < 3; j ++) {
-            WC1_set(ceHRtmp, i, j, WC1(ceHR, i, j));
-            WC1_set(ceHItmp, i, j, WC1(ceHI, i, j));
-            WC1_set(ceHR, i, j, 0.);
-            WC1_set(ceHI, i, j, 0.);
 
-            WC1_set(cuHRtmp, i, j, WC1(cuHR, i, j));
-            WC1_set(cuHItmp, i, j, WC1(cuHI, i, j));
-            WC1_set(cuHR, i, j, 0.);
-            WC1_set(cuHI, i, j, 0.);
+    //Coefficients in the new basis
+    double cuHRp[3 * 3] = {0.};
+    double cuHIp[3 * 3] = {0.};
 
-            WC1_set(cdHRtmp, i, j, WC1(cdHR, i, j));
-            WC1_set(cdHItmp, i, j, WC1(cdHI, i, j));
-            WC1_set(cdHR, i, j, 0.);
-            WC1_set(cdHI, i, j, 0.);
-
-        }
-    }
-
-    double o1r, o1i, o2r, o2i, o3r, o3i;
-
+    double cHl1Rp[3 * 3] = {0.};
+    double cHl1Ip[3 * 3] = {0.};
 
 
     for (i = 0; i < 3; i ++) {
         for (j = 0; j < 3; j ++) {
-            o1r = o1i = o2r = o2i = 0;
-            for (k = 0; k < 3; k ++) {
-                for (l = 0; l < 3; l ++) {
-                    o1r += (Rldag(i, k) * WC1(ceHRtmp, k, l) * Re(l, j)).real();
-                    o1i += (Rldag(i, k) * WC1(ceHItmp, k, l) * Re(l, j)).real();
+            z = gslpp::complex(0., 0.);
+            for (a = 0; a < 3; a ++) {
+                for (b = 0; b < 3; b ++) {
+                    z += Rqdag(i, a) *
+                            gslpp::complex(
+                            WC1(cuHR, a, b), WC1(cuHI, a, b)) *
+                            Ru(b, j);
                 }
             }
+            WC1_set(cuHRp, i, j, z.real());
+            WC1_set(cuHIp, i, j, z.imag());
         }
     }
 
+    //The coefficients are updated with the rotated ones
+    std::copy(std::begin(cuHRp), std::end(cuHRp), std::begin(cuHR));
+    std::copy(std::begin(cuHIp), std::end(cuHIp), std::begin(cuHI));
 
-}*/
+
+    for (n = 0; n < DWC2R; n ++) {
+        i = WC2R_indices[n][0];
+        j = WC2R_indices[n][1];
+
+        z = gslpp::complex(0., 0.);
+        for (a = 0; a < 3; a ++) {
+            for (b = 0; b < 3; b ++) {
+                z += Rldag(i, a) *
+                        gslpp::complex(
+                        WC2R(cHl1R, a, b), WC2I(cHl1I, a, b)) *
+                        Rl(b, j);
+            }
+        }
+        WC2R_set(cHl1Rp, i, j, z.real());
+        WC2I_set(cHl1Ip, i, j, z.imag());
+    }
+
+    std::copy(std::begin(cHl1Rp), std::end(cHl1Rp), std::begin(cHl1R));
+    std::copy(std::begin(cHl1Ip), std::end(cHl1Ip), std::begin(cHl1I));
+
+}
+
+void RGESolver::EvolveToBasis(
+        std::string method, double muI, double muF,
+        std::string basis) {
+    Evolve(method, muI, muF);
+    GoToBasis(basis);
+
+}
+
+
+
+
+/*
+void RGESolver::TEST() {
+
+    gslpp::matrix<gslpp::complex> Uu(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> Vu(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> yuDiag(3, 3, 0.);
+    gslpp::vector<double> Su(3, 0.);
+
+    gslpp::matrix<gslpp::complex> Ud(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> Vd(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> ydDiag(3, 3, 0.);
+    gslpp::vector<double> Sd(3, 0.);
+
+    gslpp::matrix<gslpp::complex> Re(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> Rl(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> Redag(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> Rldag(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> yeDiag(3, 3, 0.);
+    gslpp::vector<double> Se(3, 0.);
+
+    int i, j;
+    gslpp::matrix<gslpp::complex> yu(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> yd(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> ye(3, 3, 0.);
+
+
+    using namespace std;
+
+
+    //Matrix to rotate fields
+    gslpp::matrix<gslpp::complex> Ru(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> Rudag(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> Rd(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> Rddag(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> Rq(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> Rqdag(3, 3, 0.);
+
+
+
+
+
+    double cuHRp[3 * 3] = {0.};
+    double cuHIp[3 * 3] = {0.};
+
+    double cHl1Rp[3 * 3] = {0.};
+    double cHl1Ip[3 * 3] = {0.};
+
+
+    WC2R_set(cHl1R, 0, 0, 0.4);
+    WC2R_set(cHl1R, 0, 2, 0.5);
+    WC2I_set(cHl1I, 0, 1, -0.2);
+
+
+    cout << "Before : " << endl;
+    for (i = 0; i < 3; i ++) {
+        for (j = 0; j < 3; j ++) {
+            cout << WC2R(cHl1R, i, j) << " + i * "
+                    << WC2I(cHl1I, i, j) << "\t";
+        }
+        cout << "" << endl;
+    }
+
+
+    Ru.assign(0, 1, gslpp::complex(1., 2.));
+    Ru.assign(2, 1, gslpp::complex(1., 0.));
+    Ru.assign(0, 0, 2.);
+    Ru.assign(2, 0, 1);
+    Ru.assign(2, 2, 4);
+
+
+    Rq.assign(0, 1, gslpp::complex(1., 2.));
+    Rq.assign(2, 1, gslpp::complex(1., 0.));
+    Rq.assign(0, 0, gslpp::complex(2., 0.));
+    Rq.assign(1, 2, gslpp::complex(3., 0.));
+    Rq.assign(2, 2, gslpp::complex(1., 0.));
+
+
+    //I save the hermitian conjugates of the rotation 
+    //matrix to be more efficient. 
+    Rudag = Ru.hconjugate();
+    Rddag = Rd.hconjugate();
+    Rqdag = Rq.hconjugate();
+
+    Redag = Re.hconjugate();
+    Rldag = Rl.hconjugate();
+
+
+    int a, b,n;
+    gslpp::complex z;
+
+    for (i = 0; i < 3; i ++) {
+        for (j = 0; j < 3; j ++) {
+            z = gslpp::complex(0., 0.);
+            for (a = 0; a < 3; a ++) {
+                for (b = 0; b < 3; b ++) {
+                    z += Rqdag(i, a) *
+                            gslpp::complex(
+                            WC1(cuHR, a, b), WC1(cuHI, a, b)) *
+                            Ru(b, j);
+                }
+            }
+            WC1_set(cuHRp, i, j, z.real());
+            WC1_set(cuHIp, i, j, z.imag());
+        }
+    }
+
+    std::copy(std::begin(cuHRp), std::end(cuHRp), std::begin(cuHR));
+    std::copy(std::begin(cuHIp), std::end(cuHIp), std::begin(cuHI));
+
+    
+
+    for (n = 0; n < DWC2R; n ++) {
+        i = WC2R_indices[n][0];
+        j = WC2R_indices[n][1];
+
+        z = gslpp::complex(0., 0.);
+        for (a = 0; a < 3; a ++) {
+            for (b = 0; b < 3; b ++) {
+                z += Rudag(i, a) *
+                        gslpp::complex(
+                        WC2R(cHl1R, a, b), WC2I(cHl1I, a, b)) *
+                        Ru(b, j);
+            }
+        }
+        WC2R_set(cHl1Rp, i, j, z.real());
+        WC2I_set(cHl1Ip, i, j, z.imag());
+    }
+
+    std::copy(std::begin(cHl1Rp), std::end(cHl1Rp), std::begin(cHl1R));
+    std::copy(std::begin(cHl1Ip), std::end(cHl1Ip), std::begin(cHl1I));
+    cout << "After : " << endl;
+    for (i = 0; i < 3; i ++) {
+        for (j = 0; j < 3; j ++) {
+            cout << WC2R(cHl1R, i, j) << " + i * "
+                    << WC2I(cHl1I, i, j) << "\t";
+        }
+        cout << "" << endl;
+    }
+
+
+}
+ */

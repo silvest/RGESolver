@@ -97,6 +97,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:aedc6f80d9a01de09d4ddf1e5b670c690"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a> (std::string method, double muI, double muF)</td></tr>
 <tr class="memdesc:aedc6f80d9a01de09d4ddf1e5b670c690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs the RGE evolution.  <a href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">More...</a><br /></td></tr>
 <tr class="separator:aedc6f80d9a01de09d4ddf1e5b670c690"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a300d0d8643d30cdb49e0df0294793ba2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#a300d0d8643d30cdb49e0df0294793ba2">EvolveToBasis</a> (std::string method, double muI, double muF, std::string basis)</td></tr>
+<tr class="memdesc:a300d0d8643d30cdb49e0df0294793ba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs the RGE evolution and performs the back rotation on the coefficients with flavour indices.  <a href="classRGESolver.html#a300d0d8643d30cdb49e0df0294793ba2">More...</a><br /></td></tr>
+<tr class="separator:a300d0d8643d30cdb49e0df0294793ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4ed89d1098aa91112cf9e5a39dd8e7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#af4ed89d1098aa91112cf9e5a39dd8e7f">GenerateSMInitialConditions</a> (double mu, std::string basis, std::string method)</td></tr>
 <tr class="memdesc:af4ed89d1098aa91112cf9e5a39dd8e7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions.  <a href="classRGESolver.html#af4ed89d1098aa91112cf9e5a39dd8e7f">More...</a><br /></td></tr>
 <tr class="separator:af4ed89d1098aa91112cf9e5a39dd8e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -106,9 +109,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a7c0c4303beb14f728a70542c8583b3a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#a7c0c4303beb14f728a70542c8583b3a7">EvolveSMOnly</a> (std::string method, double muI, double muF)</td></tr>
 <tr class="memdesc:a7c0c4303beb14f728a70542c8583b3a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a>, but only for the SM parameters. The user should use this method instead of <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a> when interested in pure SM running. Using this function is the same of using <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a> with all the SMEFT coefficients set to 0, but it is faster since it does compute only the evolution for the SM parameters.  <a href="classRGESolver.html#a7c0c4303beb14f728a70542c8583b3a7">More...</a><br /></td></tr>
 <tr class="separator:a7c0c4303beb14f728a70542c8583b3a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad499b4ef512ac892c4f5a71b9fa0daf4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#ad499b4ef512ac892c4f5a71b9fa0daf4">ComputeCKMAndFermionMasses</a> ()</td></tr>
-<tr class="memdesc:ad499b4ef512ac892c4f5a71b9fa0daf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute CKM matrix and the mass of the fermions.  <a href="classRGESolver.html#ad499b4ef512ac892c4f5a71b9fa0daf4">More...</a><br /></td></tr>
-<tr class="separator:ad499b4ef512ac892c4f5a71b9fa0daf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Input/output</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p><br  />
  </p>
@@ -609,27 +609,6 @@ A summary of the operators symmetry classes is given in table <a class="el" href
  </td></tr>
 </table>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad499b4ef512ac892c4f5a71b9fa0daf4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad499b4ef512ac892c4f5a71b9fa0daf4">&#9670;&nbsp;</a></span>ComputeCKMAndFermionMasses()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RGESolver::ComputeCKMAndFermionMasses </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Compute CKM matrix and the mass of the fermions. </p>
-<p>The methods <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a> and <a class="el" href="classRGESolver.html#a7c0c4303beb14f728a70542c8583b3a7">EvolveSMOnly</a> do not update the value of CKM parameters and fermion masses after the evolution. This process require the diagonalization of the Yukawa matrices and may slow down the evolution. <br  />
-If the user is interested in these parameters (accessible with <a class="el" href="classRGESolver.html#a1bdc3a8209979b9f4c583b47fc4988d4">GetCKMAngle</a>, <a class="el" href="classRGESolver.html#a891564c063a942fbd01830b30fa8e6e1">GetCKMPhase</a>, <a class="el" href="classRGESolver.html#a55375c02297501cc3ba0302f707a690d">GetFermionMass</a>) must invoke this method after the evolution. </p>
-
-</div>
-</div>
 <a id="aedc6f80d9a01de09d4ddf1e5b670c690"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aedc6f80d9a01de09d4ddf1e5b670c690">&#9670;&nbsp;</a></span>Evolve()</h2>
 
@@ -714,6 +693,58 @@ If the user is interested in these parameters (accessible with <a class="el" hre
     <tr><td class="paramname">method</td><td>resolution method </td></tr>
     <tr><td class="paramname">muI</td><td>initial energy scale (in GeV) </td></tr>
     <tr><td class="paramname">muF</td><td>final energy scale (in GeV) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a300d0d8643d30cdb49e0df0294793ba2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a300d0d8643d30cdb49e0df0294793ba2">&#9670;&nbsp;</a></span>EvolveToBasis()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGESolver::EvolveToBasis </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>method</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>muI</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>muF</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>basis</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Performs the RGE evolution and performs the back rotation on the coefficients with flavour indices. </p>
+<p>After the evolution, the CKM matrix and the fermion masses are computed. A flavour rotation is performed on the coefficients to go in the chosen basis. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">method</td><td>resolution method </td></tr>
+    <tr><td class="paramname">muI</td><td>initial energy scale (in GeV) </td></tr>
+    <tr><td class="paramname">muF</td><td>final energy scale (in GeV) <br  />
+ </td></tr>
+    <tr><td class="paramname">basis</td><td>flavour basis after the evolution ("UP" or "DOWN"). </td></tr>
   </table>
   </dd>
 </dl>

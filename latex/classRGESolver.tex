@@ -45,14 +45,14 @@ void \mbox{\hyperlink{classRGESolver_a51938deb00fbca684c8e4e5b10a239ad}{Set\+\_\
 \item 
 void \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} (std\+::string method, double muI, double muF)
 \begin{DoxyCompactList}\small\item\em Performs the R\+GE evolution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGESolver_a300d0d8643d30cdb49e0df0294793ba2}{Evolve\+To\+Basis}} (std\+::string method, double muI, double muF, std\+::string basis)
+\begin{DoxyCompactList}\small\item\em Performs the R\+GE evolution and performs the back rotation on the coefficients with flavour indices. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_af4ed89d1098aa91112cf9e5a39dd8e7f}{Generate\+S\+M\+Initial\+Conditions}} (double mu, std\+::string basis, std\+::string method)
 \begin{DoxyCompactList}\small\item\em Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_ad61f3c391866dfa833b247019749f373}{Generate\+S\+M\+Initial\+Conditions}} (double mu\+In, double mu\+Fin, std\+::string basis, std\+::string method, double g1in, double g2in, double g3in, double lambdain, double mh2in, double Muin\mbox{[}3\mbox{]}, double Mdin\mbox{[}3\mbox{]}, double Mein\mbox{[}3\mbox{]}, double t12in, double t13in, double t23in, double deltain)
 \begin{DoxyCompactList}\small\item\em Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_a7c0c4303beb14f728a70542c8583b3a7}{Evolve\+S\+M\+Only}} (std\+::string method, double muI, double muF)
-\begin{DoxyCompactList}\small\item\em Same as \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}}, but only for the SM parameters. The user should use this method instead of \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} when interested in pure SM running. Using this function is the same of using \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} with all the S\+M\+E\+FT coefficients set to 0, but it is faster since it does compute only the evolution for the SM parameters. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classRGESolver_ad499b4ef512ac892c4f5a71b9fa0daf4}{Compute\+C\+K\+M\+And\+Fermion\+Masses}} ()
-\begin{DoxyCompactList}\small\item\em Compute C\+KM matrix and the mass of the fermions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Same as \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}}, but only for the SM parameters. The user should use this method instead of \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} when interested in pure SM running. Using this function is the same of using \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} with all the S\+M\+E\+FT coefficients set to 0, but it is faster since it does compute only the evolution for the SM parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Input/output}\par
 {\em ~\newline
@@ -411,18 +411,7 @@ W\+C8I &$ \mathcal{C}_{ee}$ (imaginary part) ~\newline
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classRGESolver_ad499b4ef512ac892c4f5a71b9fa0daf4}\label{classRGESolver_ad499b4ef512ac892c4f5a71b9fa0daf4}} 
-\index{RGESolver@{RGESolver}!ComputeCKMAndFermionMasses@{ComputeCKMAndFermionMasses}}
-\index{ComputeCKMAndFermionMasses@{ComputeCKMAndFermionMasses}!RGESolver@{RGESolver}}
-\doxysubsubsection{\texorpdfstring{ComputeCKMAndFermionMasses()}{ComputeCKMAndFermionMasses()}}
-{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Compute\+C\+K\+M\+And\+Fermion\+Masses (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Compute C\+KM matrix and the mass of the fermions. 
-
-The methods \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} and \mbox{\hyperlink{classRGESolver_a7c0c4303beb14f728a70542c8583b3a7}{Evolve\+S\+M\+Only}} do not update the value of C\+KM parameters and fermion masses after the evolution. This process require the diagonalization of the Yukawa matrices and may slow down the evolution. ~\newline
-If the user is interested in these parameters (accessible with \mbox{\hyperlink{classRGESolver_a1bdc3a8209979b9f4c583b47fc4988d4}{Get\+C\+K\+M\+Angle}}, \mbox{\hyperlink{classRGESolver_a891564c063a942fbd01830b30fa8e6e1}{Get\+C\+K\+M\+Phase}}, \mbox{\hyperlink{classRGESolver_a55375c02297501cc3ba0302f707a690d}{Get\+Fermion\+Mass}}) must invoke this method after the evolution. \mbox{\Hypertarget{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}\label{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}} 
+\mbox{\Hypertarget{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}\label{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}} 
 \index{RGESolver@{RGESolver}!Evolve@{Evolve}}
 \index{Evolve@{Evolve}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{Evolve()}{Evolve()}}
@@ -460,6 +449,28 @@ Same as \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolv
 {\em muI} & initial energy scale (in GeV) \\
 \hline
 {\em muF} & final energy scale (in GeV) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRGESolver_a300d0d8643d30cdb49e0df0294793ba2}\label{classRGESolver_a300d0d8643d30cdb49e0df0294793ba2}} 
+\index{RGESolver@{RGESolver}!EvolveToBasis@{EvolveToBasis}}
+\index{EvolveToBasis@{EvolveToBasis}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{EvolveToBasis()}{EvolveToBasis()}}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Evolve\+To\+Basis (\begin{DoxyParamCaption}\item[{std\+::string}]{method,  }\item[{double}]{muI,  }\item[{double}]{muF,  }\item[{std\+::string}]{basis }\end{DoxyParamCaption})}
+
+
+
+Performs the R\+GE evolution and performs the back rotation on the coefficients with flavour indices. 
+
+After the evolution, the C\+KM matrix and the fermion masses are computed. A flavour rotation is performed on the coefficients to go in the chosen basis. 
+\begin{DoxyParams}{Parameters}
+{\em method} & resolution method \\
+\hline
+{\em muI} & initial energy scale (in GeV) \\
+\hline
+{\em muF} & final energy scale (in GeV) ~\newline
+ \\
+\hline
+{\em basis} & flavour basis after the evolution (\char`\"{}\+U\+P\char`\"{} or \char`\"{}\+D\+O\+W\+N\char`\"{}). \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classRGESolver_af4ed89d1098aa91112cf9e5a39dd8e7f}\label{classRGESolver_af4ed89d1098aa91112cf9e5a39dd8e7f}} 

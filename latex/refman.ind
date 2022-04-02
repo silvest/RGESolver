@@ -1,14 +1,11 @@
 \begin{theindex}
 
-  \item {ComputeCKMAndFermionMasses}
-    \subitem {RGESolver}, \hyperpage{11}
-
-  \indexspace
-
   \item {Evolve}
     \subitem {RGESolver}, \hyperpage{11}
   \item {EvolveSMOnly}
     \subitem {RGESolver}, \hyperpage{11}
+  \item {EvolveToBasis}
+    \subitem {RGESolver}, \hyperpage{12}
 
   \indexspace
 
@@ -26,9 +23,9 @@
   \indexspace
 
   \item {RGESolver}, \hyperpage{5}
-    \subitem {ComputeCKMAndFermionMasses}, \hyperpage{11}
     \subitem {Evolve}, \hyperpage{11}
     \subitem {EvolveSMOnly}, \hyperpage{11}
+    \subitem {EvolveToBasis}, \hyperpage{12}
     \subitem {GenerateSMInitialConditions}, \hyperpage{12}
     \subitem {GetCKMAngle}, \hyperpage{13}
     \subitem {GetCKMPhase}, \hyperpage{14}

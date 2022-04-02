@@ -366,6 +366,20 @@ public:
      */
     void Evolve(std::string method, double muI, double muF);
 
+    /**
+     * @brief Performs the RGE evolution and performs the back rotation 
+     * on the coefficients with flavour indices.
+     * @details After the evolution, the CKM matrix and the 
+     * fermion masses are computed. A flavour rotation is performed 
+     * on the coefficients to go in the chosen basis.
+     * @param method resolution method
+     * @param muI initial energy scale (in GeV)
+     * @param muF final energy scale (in GeV)  
+     * @param basis flavour basis after the evolution 
+     * ("UP" or "DOWN"). 
+     */
+    void EvolveToBasis(std::string method, double muI,
+            double muF, std::string basis);
 
 
     /**
@@ -440,18 +454,7 @@ public:
     void EvolveSMOnly(std::string method, double muI, double muF);
 
 
-    /**
-     * @brief Compute CKM matrix and the mass of the fermions. 
-     * 
-     * @details The methods \ref Evolve and \ref EvolveSMOnly 
-     * do not update the value of CKM parameters and fermion masses after the evolution.
-     * This process require the diagonalization of the Yukawa matrices and 
-     * may slow down the evolution. @n
-     * If the user is interested in these parameters (accessible with 
-     * \ref GetCKMAngle, \ref GetCKMPhase, \ref GetFermionMass)
-     * must invoke this method after the evolution.
-     */
-    void ComputeCKMAndFermionMasses();
+    
 
 
     /** @name Input/output   */
@@ -578,7 +581,8 @@ public:
     void SaveOutputFile(std::string filename,
             std::string format);
 
-
+    //To be removed 
+    //void TEST();
 
 
 
@@ -600,8 +604,7 @@ private:
      * @param basis : allowed options are "UP","DOWN"
      */
     void GoToBasisSMOnly(std::string basis);
-    //void GoToBasis(std::string basis);
-
+    void GoToBasis(std::string basis);
     /**
      * @brief Extracts from the CKM matrix the 4 
      * physical parameters. 
