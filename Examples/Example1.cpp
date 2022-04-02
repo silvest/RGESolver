@@ -39,7 +39,7 @@ int main() {
     double t23in = .3;
     double deltain = 3.14 / 4.;
 
-    S.GenerateSMInitialConditions(91., Lambda, "DOWN", "Numeric",
+    S.GenerateSMInitialConditions(91., Lambda, "UP", "Numeric",
             g1in, g2in, g3in, lambdain, mh2in,
             Muin, Mdin, Mein,
             t12in, t13in, t23in, deltain);
@@ -57,7 +57,7 @@ int main() {
     cout << "-----------------------------------------\n" << endl;
 
     //Evolution from Lambda to muLow (solving numerically the RGEs)
-    S.EvolveToBasis("Numeric", Lambda, muLow, "UP");
+    S.EvolveToBasis("Numeric", Lambda, muLow, "DOWN");
 
     cout << "-------- AFTER THE EVOLUTION --------" << endl;
     cout << "g3(" << muLow << " GeV) : " << S.GetCoefficient("g3") << endl;

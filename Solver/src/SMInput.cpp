@@ -1565,7 +1565,6 @@ void RGESolver::GoToBasis(std::string basis) {
     std::copy(std::begin(cuHRp), std::end(cuHRp), std::begin(cuHR));
     std::copy(std::begin(cuHIp), std::end(cuHIp), std::begin(cuHI));
 
-
     for (n = 0; n < DWC2R; n ++) {
         i = WC2R_indices[n][0];
         j = WC2R_indices[n][1];
@@ -1585,6 +1584,7 @@ void RGESolver::GoToBasis(std::string basis) {
 
     std::copy(std::begin(cHl1Rp), std::end(cHl1Rp), std::begin(cHl1R));
     std::copy(std::begin(cHl1Ip), std::end(cHl1Ip), std::begin(cHl1I));
+
 
 }
 
