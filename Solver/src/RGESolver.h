@@ -480,6 +480,18 @@ public:
      * @return The selected CKM angle. 
      */
     double GetCKMAngle(std::string name);
+    
+     /**
+     * @brief Getter function for the CKM matrix (real part)
+     * @return The real part of the selected CKM matrix element. 
+     */
+    double GetCKMRealPart(int i,int j){return (CKM(i,j).real());};
+    
+    /**
+     * @brief Getter function for the CKM matrix (imaginary part)
+     * @return The imaginary part of the selected CKM matrix element. 
+     */
+    double GetCKMImagPart(int i,int j){return (CKM(i,j).imag());};
 
    
     /**

@@ -1547,7 +1547,12 @@ void RGESolver::GoToBasis(std::string basis) {
     double cuuRp[81] = {0.};
     double cuuIp[81] = {0.};
 
+    double clequ1Rp[81] = {0.};
+    double clequ1Ip[81] = {0.};
 
+
+
+    //Class WC1
     for (i = 0; i < 3; i ++) {
         for (j = 0; j < 3; j ++) {
             z = gslpp::complex(0., 0.);
@@ -1568,6 +1573,8 @@ void RGESolver::GoToBasis(std::string basis) {
     std::copy(std::begin(cuHRp), std::end(cuHRp), std::begin(cuHR));
     std::copy(std::begin(cuHIp), std::end(cuHIp), std::begin(cuHI));
 
+
+    //Class WC2
     for (n = 0; n < DWC2R; n ++) {
         i = WC2R_indices[n][0];
         j = WC2R_indices[n][1];
@@ -1575,10 +1582,10 @@ void RGESolver::GoToBasis(std::string basis) {
         z = gslpp::complex(0., 0.);
         for (a = 0; a < 3; a ++) {
             for (b = 0; b < 3; b ++) {
-                z += Rldag(i,a) *
+                z += Rldag(i, a) *
                         gslpp::complex(
                         WC2R(cHl1R, a, b), WC2I(cHl1I, a, b)) *
-                        Rl(b,j);
+                        Rl(b, j);
             }
         }
         WC2R_set(cHl1Rp, i, j, z.real());
@@ -1589,6 +1596,7 @@ void RGESolver::GoToBasis(std::string basis) {
     std::copy(std::begin(cHl1Ip), std::end(cHl1Ip), std::begin(cHl1I));
 
 
+    //Class WC6
     for (n = 0; n < DWC6R; n ++) {
         p = WC6R_indices[n][0];
         r = WC6R_indices[n][1];
@@ -1597,12 +1605,12 @@ void RGESolver::GoToBasis(std::string basis) {
         z = gslpp::complex(0., 0.);
         for (a = 0; a < 3; a ++) {
             for (b = 0; b < 3; b ++) {
-                for (c = 0; a < 3; a ++) {
-                    for (d = 0; b < 3; b ++) {
-                        z += Rudag(p,a) * Rudag(s,c) *
+                for (c = 0; c < 3; c ++) {
+                    for (d = 0; d < 3; d ++) {
+                        z += Rudag(p, a) * Rudag(s, c) *
                                 gslpp::complex(
                                 WC6R(cuuR, a, b, c, d), WC6I(cuuI, a, b, c, d))
-                                * Ru(b,r) * Ru(d,t);
+                                * Ru(b, r) * Ru(d, t);
                     }
                 }
             }
@@ -1613,6 +1621,38 @@ void RGESolver::GoToBasis(std::string basis) {
 
     std::copy(std::begin(cuuRp), std::end(cuuRp), std::begin(cuuR));
     std::copy(std::begin(cuuIp), std::end(cuuIp), std::begin(cuuI));
+
+    //Class WC5
+    for (p = 0; p < 3; p ++) {
+        for (r = 0; r < 3; r ++) {
+            for (s = 0; s < 3; s ++) {
+                for (t = 0; t < 3; t ++) {
+                    z = gslpp::complex(0., 0.);
+                    for (a = 0; a < 3; a ++) {
+                        for (b = 0; b < 3; b ++) {
+                            for (c = 0; c < 3; c ++) {
+                                for (d = 0; d < 3; d ++) {
+                                    z += Rldag(p, a) * Rqdag(s, c) *
+                                            gslpp::complex(
+                                            WC6R(cuuR, a, b, c, d), WC6I(cuuI, a, b, c, d))
+                                            * Re(b, r) * Ru(d, t);
+                                }
+                            }
+                        }
+                    }
+                    WC5_set(clequ1Rp, p, r, s, t, z.real());
+                    WC5_set(clequ1Ip, p, r, s, t, z.imag());
+                }
+            }
+        }
+    }
+
+    std::copy(std::begin(clequ1Rp), std::end(clequ1Rp), std::begin(clequ1R));
+    std::copy(std::begin(clequ1Ip), std::end(clequ1Ip), std::begin(clequ1I));
+
+
+
+
 
 
 }
