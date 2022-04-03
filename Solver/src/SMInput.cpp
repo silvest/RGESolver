@@ -1,7 +1,7 @@
-#include <gsl/gsl_linalg.h>
+//#include <gsl/gsl_linalg.h>
 
-#include "gsl/gsl_complex.h"
-#include "gsl/gsl_complex_math.h"
+//#include "gsl/gsl_complex.h"
+//#include "gsl/gsl_complex_math.h"
 
 /*
 void RGESolver::SetCKMPhase(double val) {
@@ -1532,7 +1532,7 @@ void RGESolver::GoToBasis(std::string basis) {
 
 
 
-    int a, b, n;
+    int a, b, c, d, p, r, s, t, n;
     gslpp::complex z;
 
 
@@ -1543,6 +1543,9 @@ void RGESolver::GoToBasis(std::string basis) {
 
     double cHl1Rp[3 * 3] = {0.};
     double cHl1Ip[3 * 3] = {0.};
+
+    double cuuRp[81] = {0.};
+    double cuuIp[81] = {0.};
 
 
     for (i = 0; i < 3; i ++) {
@@ -1572,10 +1575,10 @@ void RGESolver::GoToBasis(std::string basis) {
         z = gslpp::complex(0., 0.);
         for (a = 0; a < 3; a ++) {
             for (b = 0; b < 3; b ++) {
-                z += Rldag(i, a) *
+                z += Rldag(i,a) *
                         gslpp::complex(
                         WC2R(cHl1R, a, b), WC2I(cHl1I, a, b)) *
-                        Rl(b, j);
+                        Rl(b,j);
             }
         }
         WC2R_set(cHl1Rp, i, j, z.real());
@@ -1584,6 +1587,32 @@ void RGESolver::GoToBasis(std::string basis) {
 
     std::copy(std::begin(cHl1Rp), std::end(cHl1Rp), std::begin(cHl1R));
     std::copy(std::begin(cHl1Ip), std::end(cHl1Ip), std::begin(cHl1I));
+
+
+    for (n = 0; n < DWC6R; n ++) {
+        p = WC6R_indices[n][0];
+        r = WC6R_indices[n][1];
+        s = WC6R_indices[n][2];
+        t = WC6R_indices[n][3];
+        z = gslpp::complex(0., 0.);
+        for (a = 0; a < 3; a ++) {
+            for (b = 0; b < 3; b ++) {
+                for (c = 0; a < 3; a ++) {
+                    for (d = 0; b < 3; b ++) {
+                        z += Rudag(p,a) * Rudag(s,c) *
+                                gslpp::complex(
+                                WC6R(cuuR, a, b, c, d), WC6I(cuuI, a, b, c, d))
+                                * Ru(b,r) * Ru(d,t);
+                    }
+                }
+            }
+        }
+        WC6R_set(cuuRp, p, r, s, t, z.real());
+        WC6I_set(cuuIp, p, r, s, t, z.imag());
+    }
+
+    std::copy(std::begin(cuuRp), std::end(cuuRp), std::begin(cuuR));
+    std::copy(std::begin(cuuIp), std::end(cuuIp), std::begin(cuuI));
 
 
 }
@@ -1717,10 +1746,10 @@ void RGESolver::TEST() {
         z = gslpp::complex(0., 0.);
         for (a = 0; a < 3; a ++) {
             for (b = 0; b < 3; b ++) {
-                z += Rudag(i, a) *
+                z += Rudag(i,a) *
                         gslpp::complex(
                         WC2R(cHl1R, a, b), WC2I(cHl1I, a, b)) *
-                        Ru(b, j);
+                        Ru(b,j);
             }
         }
         WC2R_set(cHl1Rp, i, j, z.real());

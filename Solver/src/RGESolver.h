@@ -454,7 +454,7 @@ public:
     void EvolveSMOnly(std::string method, double muI, double muF);
 
 
-    
+
 
 
     /** @name Input/output   */
@@ -473,9 +473,6 @@ public:
     double GetFermionMass(std::string name);
 
 
-
-
-
     /**
      * @brief Getter function for the CKM matrix angles 
      *  \f$\theta_{12},\theta_{13},\theta_{23}\f$. 
@@ -484,8 +481,7 @@ public:
      */
     double GetCKMAngle(std::string name);
 
-
-
+   
     /**
      * @brief Getter function for the CKM matrix phase \f$\delta\f$.
      * @return  The CKM matrix phase \f$\delta\f$. 
@@ -582,7 +578,7 @@ public:
             std::string format);
 
     //To be removed 
-    //void TEST();
+    // void TEST();
 
 
 
