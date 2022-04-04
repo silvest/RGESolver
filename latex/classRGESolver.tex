@@ -62,6 +62,10 @@ double \mbox{\hyperlink{classRGESolver_a55375c02297501cc3ba0302f707a690d}{Get\+F
 \begin{DoxyCompactList}\small\item\em Getter function for the mass of the fermions (in GeV). \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classRGESolver_a1bdc3a8209979b9f4c583b47fc4988d4}{Get\+C\+K\+M\+Angle}} (std\+::string name)
 \begin{DoxyCompactList}\small\item\em Getter function for the C\+KM matrix angles $\theta_{12},\theta_{13},\theta_{23}$. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classRGESolver_a67f092224a036208d5904da39726ce80}{Get\+C\+K\+M\+Real\+Part}} (int i, int j)
+\begin{DoxyCompactList}\small\item\em Getter function for the C\+KM matrix (real part) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classRGESolver_a9a3972af1912ae6ffebc806ffe05daeb}{Get\+C\+K\+M\+Imag\+Part}} (int i, int j)
+\begin{DoxyCompactList}\small\item\em Getter function for the C\+KM matrix (imaginary part) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classRGESolver_a891564c063a942fbd01830b30fa8e6e1}{Get\+C\+K\+M\+Phase}} ()
 \begin{DoxyCompactList}\small\item\em Getter function for the C\+KM matrix phase $\delta$. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_adc2b8a9a10216ec5285569c8f24cbed2}{Set\+Coefficient}} (std\+::string name, double val)
@@ -555,6 +559,19 @@ Getter function for the C\+KM matrix angles $\theta_{12},\theta_{13},\theta_{23}
 \begin{DoxyReturn}{Returns}
 The selected C\+KM angle. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classRGESolver_a9a3972af1912ae6ffebc806ffe05daeb}\label{classRGESolver_a9a3972af1912ae6ffebc806ffe05daeb}} 
+\index{RGESolver@{RGESolver}!GetCKMImagPart@{GetCKMImagPart}}
+\index{GetCKMImagPart@{GetCKMImagPart}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCKMImagPart()}{GetCKMImagPart()}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+Get\+C\+K\+M\+Imag\+Part (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Getter function for the C\+KM matrix (imaginary part) 
+
+\begin{DoxyReturn}{Returns}
+The imaginary part of the selected C\+KM matrix element. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classRGESolver_a891564c063a942fbd01830b30fa8e6e1}\label{classRGESolver_a891564c063a942fbd01830b30fa8e6e1}} 
 \index{RGESolver@{RGESolver}!GetCKMPhase@{GetCKMPhase}}
 \index{GetCKMPhase@{GetCKMPhase}!RGESolver@{RGESolver}}
@@ -567,6 +584,19 @@ Getter function for the C\+KM matrix phase $\delta$.
 
 \begin{DoxyReturn}{Returns}
 The C\+KM matrix phase $\delta$. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRGESolver_a67f092224a036208d5904da39726ce80}\label{classRGESolver_a67f092224a036208d5904da39726ce80}} 
+\index{RGESolver@{RGESolver}!GetCKMRealPart@{GetCKMRealPart}}
+\index{GetCKMRealPart@{GetCKMRealPart}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCKMRealPart()}{GetCKMRealPart()}}
+{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+Get\+C\+K\+M\+Real\+Part (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Getter function for the C\+KM matrix (real part) 
+
+\begin{DoxyReturn}{Returns}
+The real part of the selected C\+KM matrix element. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classRGESolver_a23d5d847021421bc8a9ba03412d2674e}\label{classRGESolver_a23d5d847021421bc8a9ba03412d2674e}} 
 \index{RGESolver@{RGESolver}!GetCoefficient@{GetCoefficient}}
