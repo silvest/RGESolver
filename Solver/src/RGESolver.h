@@ -480,20 +480,24 @@ public:
      * @return The selected CKM angle. 
      */
     double GetCKMAngle(std::string name);
-    
-     /**
+
+    /**
      * @brief Getter function for the CKM matrix (real part)
      * @return The real part of the selected CKM matrix element. 
      */
-    double GetCKMRealPart(int i,int j){return (CKM(i,j).real());};
-    
+    double GetCKMRealPart(int i, int j) {
+        return (CKM(i, j).real());
+    };
+
     /**
      * @brief Getter function for the CKM matrix (imaginary part)
      * @return The imaginary part of the selected CKM matrix element. 
      */
-    double GetCKMImagPart(int i,int j){return (CKM(i,j).imag());};
+    double GetCKMImagPart(int i, int j) {
+        return (CKM(i, j).imag());
+    };
 
-   
+
     /**
      * @brief Getter function for the CKM matrix phase \f$\delta\f$.
      * @return  The CKM matrix phase \f$\delta\f$. 
@@ -611,8 +615,16 @@ private:
      * for SMEFT coefficients is performed. 
      * @param basis : allowed options are "UP","DOWN"
      */
-    void GoToBasisSMOnly(std::string basis);
     void GoToBasis(std::string basis);
+
+    /**
+     * @brief Same as \ref GoToBasis, but the rotation is performed 
+     * only on the Yukawa matrices.
+     * @param basis : allowed options are "UP","DOWN"
+     */
+    void GoToBasisSMOnly(std::string basis);
+
+
     /**
      * @brief Extracts from the CKM matrix the 4 
      * physical parameters. 
@@ -720,6 +732,15 @@ private:
     gsl_odeiv2_control * con_ = gsl_odeiv2_control_standard_new(
             epsabs_, epsrel_, 1, 1);
     gsl_odeiv2_evolve* evo_ = gsl_odeiv2_evolve_alloc(2558);
+
+
+    gsl_odeiv2_system sysSMOnly_ = {funcSMOnly, NULL, 3};
+    gsl_odeiv2_step * sSMOnly_ = gsl_odeiv2_step_alloc(
+            gsl_odeiv2_step_rkf45, 59);
+    gsl_odeiv2_control * conSMOnly_ = gsl_odeiv2_control_standard_new(
+            epsabs_, epsrel_, 1, 1);
+    gsl_odeiv2_evolve* evoSMOnly_ = gsl_odeiv2_evolve_alloc(59);
+
 
     /** @brief 1D array for the integration */
     double x[2558];
