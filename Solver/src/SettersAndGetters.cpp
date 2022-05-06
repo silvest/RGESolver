@@ -1,17 +1,3 @@
-
-inline void RGESolver::Yukawa_set(
-double y[3][3], int i, int j, double val) {
-    y[i][j] = val;
-    //std::cout<<y[i][j]<<std::endl;
-    
-}
-
-inline double RGESolver::Yukawa(double y[3][3], int i, int j) {
-    //std::cout<<y[i][j]<<std::endl;
-    return (y[i][j]);
-}
-
-
 inline void RGESolver::WC1_set(double * c, int i, int j, double val) {
   c[3 * i + j] = val;
 }

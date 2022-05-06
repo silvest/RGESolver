@@ -984,8 +984,7 @@ private:
       @details See https://arxiv.org/pdf/1308.2627.pdf for the normalization */ mh2,
     /** @brief @f$ \lambda @f$ (Higgs quartic coupling)
      *  @details See https://arxiv.org/pdf/1308.2627.pdf for the normalization  */ lambda;
-    double yuR[3][3], yuI[3][3], ydR[3][3],
-    ydI[3][3], yeR[3][3], yeI[3][3];
+    gslpp::matrix<double> yuR, yuI, ydR, ydI, yeR, yeI;
     ///@}
     /**
      * @brief The CKM matrix
