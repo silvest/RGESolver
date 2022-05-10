@@ -10,11 +10,10 @@
 #include "SettersAndGetters.cpp"
 #include "SMInput.cpp"
 
-RGESolver::RGESolver() : yuR(3,0.), yuI(3,0.), ydR(3,0.), ydI(3,0.), yeR(3,0.), yeI(3,0.) 
-{
-    
+RGESolver::RGESolver() : yuR(3, 0.), yuI(3, 0.), ydR(3, 0.), ydI(3, 0.), yeR(3, 0.), yeI(3, 0.) {
+
     using namespace boost::placeholders;
-    
+
 
 
     //Build default CKM matrix from default parameters
@@ -24,7 +23,7 @@ RGESolver::RGESolver() : yuR(3,0.), yuI(3,0.), ydR(3,0.), ydI(3,0.), yeR(3,0.), 
     //cout << "epsabs : " << epsabs_ << "  epsrel : " << epsrel_ << endl;
     //cout << "step : " << step_ << endl;
 
-    
+
 
 
     //-----SM SCALAR PARAMETERS I/O----------
@@ -35,7 +34,7 @@ RGESolver::RGESolver() : yuR(3,0.), yuI(3,0.), ydR(3,0.), ydI(3,0.), yeR(3,0.), 
         Operators0F["mh2"] = & mh2;
         Operators0F["lambda"] = & lambda;
 
-       
+
 
         FermionMasses["mu"] = & mu;
         FermionMasses["mc"] = & mc;
@@ -82,7 +81,20 @@ RGESolver::RGESolver() : yuR(3,0.), yuI(3,0.), ydR(3,0.), ydI(3,0.), yeR(3,0.), 
 
     }
     //-----------2F OPERATORS I/O------------
+    Setter2F["YuR"] = boost::bind(&Yukawa_set, &yuR, _1, _2, _3);
+    Setter2F["YuI"] = boost::bind(&Yukawa_set, &yuI, _1, _2, _3);
+    Getter2F["YuR"] = boost::bind(&Yukawa, &yuR, _1, _2);
+    Getter2F["YuI"] = boost::bind(&Yukawa, &yuI, _1, _2);
 
+    Setter2F["YeR"] = boost::bind(&Yukawa_set, &yeR, _1, _2, _3);
+    Setter2F["YeI"] = boost::bind(&Yukawa_set, &yeI, _1, _2, _3);
+    Getter2F["YeR"] = boost::bind(&Yukawa, &yeR, _1, _2);
+    Getter2F["YeI"] = boost::bind(&Yukawa, &yeI, _1, _2);
+
+    Setter2F["YdR"] = boost::bind(&Yukawa_set, &ydR, _1, _2, _3);
+    Setter2F["YdI"] = boost::bind(&Yukawa_set, &ydI, _1, _2, _3);
+    Getter2F["YdR"] = boost::bind(&Yukawa, &ydR, _1, _2);
+    Getter2F["YdI"] = boost::bind(&Yukawa, &ydI, _1, _2);
     {
 
         //Class 5 operators 
@@ -343,17 +355,17 @@ void RGESolver::Init() {
     for (i = 0; i < NG; i ++) {
         for (j = 0; j < NG; j ++) {
             int count = 0;
-            x[n + count * DF] = yuR(i,j);
+            x[n + count * DF] = yuR(i, j);
             count ++;
-            x[n + count * DF] = yuI(i,j);
+            x[n + count * DF] = yuI(i, j);
             count ++;
-            x[n + count * DF] = ydR(i,j);
+            x[n + count * DF] = ydR(i, j);
             count ++;
-            x[n + count * DF] = ydI(i,j);
+            x[n + count * DF] = ydI(i, j);
             count ++;
-            x[n + count * DF] = yeR(i,j);
+            x[n + count * DF] = yeR(i, j);
             count ++;
-            x[n + count * DF] = yeI(i,j);
+            x[n + count * DF] = yeI(i, j);
             count ++;
 
             n ++;
@@ -826,17 +838,17 @@ void RGESolver::Update() {
     for (i = 0; i < NG; i ++) {
         for (j = 0; j < NG; j ++) {
             a = 0;
-            yuR(i,j) = x[n + a * DF];
+            yuR(i, j) = x[n + a * DF];
             a ++;
-            yuI(i,j) = x[n + a * DF];
+            yuI(i, j) = x[n + a * DF];
             a ++;
-            ydR(i,j) = x[n + a * DF];
+            ydR(i, j) = x[n + a * DF];
             a ++;
-            ydI(i,j) = x[n + a * DF];
+            ydI(i, j) = x[n + a * DF];
             a ++;
-            yeR(i,j) = x[n + a * DF];
+            yeR(i, j) = x[n + a * DF];
             a ++;
-            yeI(i,j) = x[n + a * DF];
+            yeI(i, j) = x[n + a * DF];
             a ++;
             n ++;
         }
@@ -1385,7 +1397,7 @@ void RGESolver::SaveOutputFile(std::string filename,
         for (i = 0; i < 3; i ++) {
             for (j = 0; j < 3; j ++) {
                 outf << i + 1 << " " << j + 1
-                        << " " << yuR(i,j) << "\t"
+                        << " " << yuR(i, j) << "\t"
                         << "# Re[Yu]"
                         << "(" << i + 1 << ","
                         << j + 1 << ")" << endl;
@@ -1395,7 +1407,7 @@ void RGESolver::SaveOutputFile(std::string filename,
         for (i = 0; i < 3; i ++) {
             for (j = 0; j < 3; j ++) {
                 outf << i + 1 << " " << j + 1
-                        << " " << yuI(i,j) << "\t"
+                        << " " << yuI(i, j) << "\t"
                         << "# Im[Yu]"
                         << "(" << i + 1 << ","
                         << j + 1 << ")" << endl;
@@ -1405,7 +1417,7 @@ void RGESolver::SaveOutputFile(std::string filename,
         for (i = 0; i < 3; i ++) {
             for (j = 0; j < 3; j ++) {
                 outf << i + 1 << " " << j + 1
-                        << " " << ydR(i,j) << "\t"
+                        << " " << ydR(i, j) << "\t"
                         << "# Re[Yd]"
                         << "(" << i + 1 << ","
                         << j + 1 << ")" << endl;
@@ -1415,7 +1427,7 @@ void RGESolver::SaveOutputFile(std::string filename,
         for (i = 0; i < 3; i ++) {
             for (j = 0; j < 3; j ++) {
                 outf << i + 1 << " " << j + 1
-                        << " " << ydI(i,j) << "\t"
+                        << " " << ydI(i, j) << "\t"
                         << "# Im[Yd]"
                         << "(" << i + 1 << ","
                         << j + 1 << ")" << endl;
@@ -1425,7 +1437,7 @@ void RGESolver::SaveOutputFile(std::string filename,
         for (i = 0; i < 3; i ++) {
             for (j = 0; j < 3; j ++) {
                 outf << i + 1 << " " << j + 1
-                        << " " << yeR(i,j) << "\t"
+                        << " " << yeR(i, j) << "\t"
                         << "# Re[Ye]"
                         << "(" << i + 1 << ","
                         << j + 1 << ")" << endl;
@@ -1435,7 +1447,7 @@ void RGESolver::SaveOutputFile(std::string filename,
         for (i = 0; i < 3; i ++) {
             for (j = 0; j < 3; j ++) {
                 outf << i + 1 << " " << j + 1
-                        << " " << yeI(i,j) << "\t"
+                        << " " << yeI(i, j) << "\t"
                         << "# Im[Ye]"
                         << "(" << i + 1 << ","
                         << j + 1 << ")" << endl;

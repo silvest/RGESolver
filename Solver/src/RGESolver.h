@@ -594,7 +594,15 @@ public:
             std::string format);
 
     //To be removed 
-    // void TEST();
+
+    void test() {
+        std::cout << "inside test : " << std::endl;
+        std::cout << yuR(1, 2) << std::endl;
+        std::cout << GetCoefficient("YuR", 1, 2) << "\n" << std::endl;
+        SetCoefficient("YuR", 0.8, 1, 2);
+        std::cout << yuR(1, 2) << std::endl;
+        std::cout << GetCoefficient("YuR", 1, 2) << std::endl;
+    };
 
 
 
@@ -1277,8 +1285,9 @@ private:
 
 
     ///@{
-    static inline void Yukawa_set(double y[3][3], int i, int j, double val);
-    static inline double Yukawa(double y[3][3], int i, int j);
+
+    static inline void Yukawa_set(gslpp::matrix<double> *y, int i, int j, double val);
+    static inline double Yukawa(gslpp::matrix<double> *y, int i, int j);
 
     static inline void WC1_set(double * c, int i, int j, double val);
     static inline double WC1(double * c, int i, int j);
