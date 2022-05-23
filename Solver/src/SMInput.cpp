@@ -108,7 +108,7 @@ void RGESolver::FromMassesToYukawas(std::string basis) {
     UpdateCKM();
 
     gslpp::vector<double> yudiag(3), yddiag(3), yediag(3);
-    double sqrt2ov = sqrt(2.)/v;
+    double sqrt2ov = sqrt(2.) / v;
 
     yudiag(0) = sqrt2ov * mu;
     yudiag(1) = sqrt2ov * mc;
@@ -131,19 +131,17 @@ void RGESolver::FromMassesToYukawas(std::string basis) {
 
     if (basis == "UP") {
 
-        gslpp::matrix<gslpp::complex> yd = ydR * CKM.hconjugate(); 
+        gslpp::matrix<gslpp::complex> yd = ydR * CKM.hconjugate();
         ydR = yd.real();
         ydI = yd.imag();
 
-    }
-    else if (basis == "DOWN") {
+    } else if (basis == "DOWN") {
 
-        gslpp::matrix<gslpp::complex> yu = yuR * CKM; 
+        gslpp::matrix<gslpp::complex> yu = yuR * CKM;
         yuR = yu.real();
         yuI = yu.imag();
 
-    }
-    else 
+    } else
         std::cout << "WARNING: wrong basis choice: " << basis << ": Yukawa couplings not updated!!!" << std::endl;
 
 }
@@ -349,7 +347,7 @@ void RGESolver::GoToBasisSMOnly(std::string basis) {
     yu = yuR + gslpp::complex::i() * yuI;
     yd = ydR + gslpp::complex::i() * ydI;
     ye = yeR + gslpp::complex::i() * yeI;
-    
+
     yu.singularvalue(Uu, Vu, Su);
     yd.singularvalue(Ud, Vd, Sd);
     ye.singularvalue(Re, Rl, Se);
@@ -400,23 +398,21 @@ void RGESolver::GoToBasisSMOnly(std::string basis) {
         Rd = Ud;
         Rq = Vu;
 
-        gslpp::matrix<gslpp::complex> yd = ydR * CKM.hconjugate(); 
+        gslpp::matrix<gslpp::complex> yd = ydR * CKM.hconjugate();
         ydR = yd.real();
         ydI = yd.imag();
 
-    }
-    else if (basis == "DOWN") {
+    } else if (basis == "DOWN") {
 
         Ru = Uu;
         Rd = Ud;
         Rq = Vd;
 
-        gslpp::matrix<gslpp::complex> yu = yuR * CKM; 
+        gslpp::matrix<gslpp::complex> yu = yuR * CKM; // CKM*yuR;
         yuR = yu.real();
         yuI = yu.imag();
 
-    }
-    else 
+    } else
         std::cout << "WARNING: wrong basis choice: " << basis << ": Yukawa couplings not updated!!!" << std::endl;
 
 
@@ -438,17 +434,17 @@ void RGESolver::InitSMOnly() {
     for (i = 0; i < NG; i ++) {
         for (j = 0; j < NG; j ++) {
             int count = 0;
-            x[n + count * DF] = yuR(i,j);
+            x[n + count * DF] = yuR(i, j);
             count ++;
-            x[n + count * DF] = yuI(i,j);
+            x[n + count * DF] = yuI(i, j);
             count ++;
-            x[n + count * DF] = ydR(i,j);
+            x[n + count * DF] = ydR(i, j);
             count ++;
-            x[n + count * DF] = ydI(i,j);
+            x[n + count * DF] = ydI(i, j);
             count ++;
-            x[n + count * DF] = yeR(i,j);
+            x[n + count * DF] = yeR(i, j);
             count ++;
-            x[n + count * DF] = yeI(i,j);
+            x[n + count * DF] = yeI(i, j);
             count ++;
 
             n ++;
@@ -475,17 +471,17 @@ void RGESolver::UpdateSMOnly() {
     for (i = 0; i < NG; i ++) {
         for (j = 0; j < NG; j ++) {
             a = 0;
-            yuR.assign(i,j,x[n + a * DF]);
+            yuR.assign(i, j, x[n + a * DF]);
             a ++;
-            yuI.assign(i,j,x[n + a * DF]);
+            yuI.assign(i, j, x[n + a * DF]);
             a ++;
-            ydR.assign(i,j,x[n + a * DF]);
+            ydR.assign(i, j, x[n + a * DF]);
             a ++;
-            ydI.assign(i,j,x[n + a * DF]);
+            ydI.assign(i, j, x[n + a * DF]);
             a ++;
-            yeR.assign(i,j,x[n + a * DF]);
+            yeR.assign(i, j, x[n + a * DF]);
             a ++;
-            yeI.assign(i,j,x[n + a * DF]);
+            yeI.assign(i, j, x[n + a * DF]);
             a ++;
             n ++;
         }
@@ -512,33 +508,33 @@ int RGESolver::funcSMOnly(double logmu, const double y[], double f[], void* para
     double mh2 = y[c + 1];
     c += Nh;
 
-    gslpp::matrix<double> yeR(NG,0.), yeI(NG,0.), //yukawas
-            ydR(NG,0.), ydI(NG,0.),
-            yuR(NG,0.), yuI(NG,0.);
-    gslpp::matrix<double> yedagR(NG,0.), yedagI(NG,0.),
-            yddagR(NG,0.), yddagI(NG,0.),
-            yudagR(NG,0.), yudagI(NG,0.);
+    gslpp::matrix<double> yeR(NG, 0.), yeI(NG, 0.), //yukawas
+            ydR(NG, 0.), ydI(NG, 0.),
+            yuR(NG, 0.), yuI(NG, 0.);
+    gslpp::matrix<double> yedagR(NG, 0.), yedagI(NG, 0.),
+            yddagR(NG, 0.), yddagI(NG, 0.),
+            yudagR(NG, 0.), yudagI(NG, 0.);
 
     for (i = 0; i < NG; i ++) {
         for (j = 0; j < NG; j ++) {
             a = 0;
-            yuR.assign(i,j,y[c]);
-            yudagR.assign(j,i,y[c]);
+            yuR.assign(i, j, y[c]);
+            yudagR.assign(j, i, y[c]);
             a ++;
-            yuI.assign(i,j,y[c + DF]);
-            yudagI.assign(j,i,- y[c + DF]);
+            yuI.assign(i, j, y[c + DF]);
+            yudagI.assign(j, i, - y[c + DF]);
             a ++;
-            ydR.assign(i,j,y[c + 2 * DF]);
-            yddagR.assign(j,i,y[c + 2 * DF]);
+            ydR.assign(i, j, y[c + 2 * DF]);
+            yddagR.assign(j, i, y[c + 2 * DF]);
             a ++;
-            ydI.assign(i,j,y[c + 3 * DF]);
-            yddagI.assign(j,i,- y[c + 3 * DF]);
+            ydI.assign(i, j, y[c + 3 * DF]);
+            yddagI.assign(j, i, - y[c + 3 * DF]);
             a ++;
-            yeR.assign(i,j,y[c + 4 * DF]);
-            yedagR.assign(j,i,y[c + 4 * DF]);
+            yeR.assign(i, j, y[c + 4 * DF]);
+            yedagR.assign(j, i, y[c + 4 * DF]);
             a ++;
-            yeI.assign(i,j,y[c + 5 * DF]);
-            yedagI.assign(j,i,- y[c + 5 * DF]);
+            yeI.assign(i, j, y[c + 5 * DF]);
+            yedagI.assign(j, i, - y[c + 5 * DF]);
             a ++;
             c ++;
         }
@@ -557,10 +553,10 @@ int RGESolver::funcSMOnly(double logmu, const double y[], double f[], void* para
 
     double gammaH = 0.; //Higgs wavefunction normalization  
     double H = 0.; //scalar yukawa-trace dependent appearing in lambda RGE
-    gslpp::matrix<double> yudyuR(NG,0.),yudyuI(NG,0.) ; //yu^dag yu 
-    gslpp::matrix<double> yddydR(NG,0.),yddydI(NG,0.); //yd^dag yd 
-    gslpp::matrix<double> yedyeR(NG,0.),yedyeI(NG,0.); //ye^dag ye 
-    gslpp::matrix<double> ydyudR(NG,0.),ydyudI(NG,0.); //yd yu^dag
+    gslpp::matrix<double> yudyuR(NG, 0.), yudyuI(NG, 0.); //yu^dag yu 
+    gslpp::matrix<double> yddydR(NG, 0.), yddydI(NG, 0.); //yd^dag yd 
+    gslpp::matrix<double> yedyeR(NG, 0.), yedyeI(NG, 0.); //ye^dag ye 
+    gslpp::matrix<double> ydyudR(NG, 0.), ydyudI(NG, 0.); //yd yu^dag
 
     yudyuR = yudagR * yuR - yudagI * yuI;
     yudyuI = yudagI * yuR + yudagR * yuI;
@@ -570,18 +566,18 @@ int RGESolver::funcSMOnly(double logmu, const double y[], double f[], void* para
     yedyeI = yedagI * yeR + yedagR * yeI;
     ydyudR = ydR * yudagR - ydI * yudagI;
     ydyudI = ydI * yudagR + ydR * yudagI;
-  
+
 
 
 
 
     //gammaH
     for (i = 0; i < NG; i ++) {
-        gammaH += yedyeR(i,i) + NC * (yudyuR(i,i) + yddydR(i,i));
+        gammaH += yedyeR(i, i) + NC * (yudyuR(i, i) + yddydR(i, i));
         for (j = 0; j < NG; j ++) {
-            H += yedyeR(i,j) * yedyeR(j,i) - yedyeI(i,j) * yedyeI(j,i)
-                    + NC * (yudyuR(i,j) * yudyuR(j,i) - yudyuI(i,j) * yudyuI(j,i)
-                    + yddydR(i,j) * yddydR(j,i) - yddydI(i,j) * yddydI(j,i));
+            H += yedyeR(i, j) * yedyeR(j, i) - yedyeI(i, j) * yedyeI(j, i)
+                    + NC * (yudyuR(i, j) * yudyuR(j, i) - yudyuI(i, j) * yudyuI(j, i)
+                    + yddydR(i, j) * yddydR(j, i) - yddydI(i, j) * yddydI(j, i));
         }
     }
 
@@ -633,52 +629,52 @@ int RGESolver::funcSMOnly(double logmu, const double y[], double f[], void* para
         for (j = 0; j < NG; j ++) {
             //Entries without matrix products:      
             //yuR  
-            f[c ] = (gammaH - (17. / 12.) * g12 - 2.25 * g22 - 8. * g32) * yuR(i,j)
+            f[c ] = (gammaH - (17. / 12.) * g12 - 2.25 * g22 - 8. * g32) * yuR(i, j)
                     ;
             //yuI
-            f[c + DF] = (gammaH - (17. / 12.) * g12 - 2.25 * g22 - 8. * g32) * yuI(i,j)
+            f[c + DF] = (gammaH - (17. / 12.) * g12 - 2.25 * g22 - 8. * g32) * yuI(i, j)
                     ;
             //ydR     
             f[c + 2 * DF] = (gammaH - (5. / 12.) * g12 - 2.25 * g22
-                    - 8. * g32) * ydR(i,j)
+                    - 8. * g32) * ydR(i, j)
                     ;
             //ydI  
             f[c + 3 * DF] = (gammaH - (5. / 12.) * g12 - 2.25 * g22
-                    - 8. * g32) * ydI(i,j)
+                    - 8. * g32) * ydI(i, j)
                     ;
             //yeR
-            f[c + 4 * DF] = (gammaH - 2.25 * g22 - 3.75 * g12) * yeR(i,j)
+            f[c + 4 * DF] = (gammaH - 2.25 * g22 - 3.75 * g12) * yeR(i, j)
                     ;
             //yeI
-            f[c + 5 * DF] = (gammaH - 2.25 * g22 - 3.75 * g12) * yeI(i,j)
+            f[c + 5 * DF] = (gammaH - 2.25 * g22 - 3.75 * g12) * yeI(i, j)
                     ;
             //Entries with 1 matrix product (1 summed index)
             for (b = 0; b < NG; b ++) {
                 //yuR
                 f[c ] +=
-                        + 1.5 * (yuR(i,b)*(yudyuR(b,j) - yddydR(b,j))
-                        - yuI(i,b)*(yudyuI(b,j) - yddydI(b,j)))
+                        + 1.5 * (yuR(i, b)*(yudyuR(b, j) - yddydR(b, j))
+                        - yuI(i, b)*(yudyuI(b, j) - yddydI(b, j)))
                         ;
                 //yuI
-                f[c + DF] += 1.5 * (yuI(i,b)*(yudyuR(b,j) - yddydR(b,j))
-                        + yuR(i,b)*(yudyuI(b,j) - yddydI(b,j)))
+                f[c + DF] += 1.5 * (yuI(i, b)*(yudyuR(b, j) - yddydR(b, j))
+                        + yuR(i, b)*(yudyuI(b, j) - yddydI(b, j)))
                         ;
                 //ydR       
-                f[c + 2 * DF] += 1.5 * (ydR(i,b)*(yddydR(b,j) - yudyuR(b,j))
-                        - ydI(i,b)*(yddydI(b,j) - yudyuI(b,j)))
+                f[c + 2 * DF] += 1.5 * (ydR(i, b)*(yddydR(b, j) - yudyuR(b, j))
+                        - ydI(i, b)*(yddydI(b, j) - yudyuI(b, j)))
                         ;
                 //ydI 
                 f[c + 3 * DF] += 1.5 * (
-                        ydI(i,b)*(yddydR(b,j) - yudyuR(b,j))
-                        + ydR(i,b)*(yddydI(b,j) - yudyuI(b,j)))
+                        ydI(i, b)*(yddydR(b, j) - yudyuR(b, j))
+                        + ydR(i, b)*(yddydI(b, j) - yudyuI(b, j)))
                         ;
                 //yeR
-                f[c + 4 * DF] += 1.5 * (yeR(i,b)*(yedyeR(b,j))
-                        - yeI(i,b)*(yedyeI(b,j)))
+                f[c + 4 * DF] += 1.5 * (yeR(i, b)*(yedyeR(b, j))
+                        - yeI(i, b)*(yedyeI(b, j)))
                         ;
                 //yeI 
-                f[c + 5 * DF] += 1.5 * (yeI(i,b)*(yedyeR(b,j))
-                        + yeR(i,b)*(yedyeI(b,j)))
+                f[c + 5 * DF] += 1.5 * (yeI(i, b)*(yedyeR(b, j))
+                        + yeR(i, b)*(yedyeI(b, j)))
                         ;
 
             }
@@ -830,25 +826,25 @@ void RGESolver::Reset() {
     ydI.reset();
     yeR.reset();
     yeI.reset();
-    
-//    for (i = 0; i < NG; i ++) {
-//        for (j = 0; j < NG; j ++) {
-//            a = 0;
-//            yuR.assign(i,j,0);
-//            a ++;
-//            yuI.assign(i,j,0);
-//            a ++;
-//            ydR.assign(i,j,0);
-//            a ++;
-//            ydI.assign(i,j,0);
-//            a ++;
-//            yeR.assign(i,j,0);
-//            a ++;
-//            yeI.assign(i,j,0);
-//            a ++;
-//            n ++;
-//        }
-//    }
+
+    //    for (i = 0; i < NG; i ++) {
+    //        for (j = 0; j < NG; j ++) {
+    //            a = 0;
+    //            yuR.assign(i,j,0);
+    //            a ++;
+    //            yuI.assign(i,j,0);
+    //            a ++;
+    //            ydR.assign(i,j,0);
+    //            a ++;
+    //            ydI.assign(i,j,0);
+    //            a ++;
+    //            yeR.assign(i,j,0);
+    //            a ++;
+    //            yeI.assign(i,j,0);
+    //            a ++;
+    //            n ++;
+    //        }
+    //    }
     n += (2. * Nyukawa - 1.) * DF;
 
     cG = 0;
@@ -1316,9 +1312,9 @@ void RGESolver::GoToBasis(std::string basis) {
 
     for (i = 0; i < 3; i ++) {
         for (j = 0; j < 3; j ++) {
-            yu.assign(i, j, gslpp::complex(yuR(i,j), yuI(i,j), false));
-            yd.assign(i, j, gslpp::complex(ydR(i,j), ydI(i,j), false));
-            ye.assign(i, j, gslpp::complex(yeR(i,j), yeI(i,j), false));
+            yu.assign(i, j, gslpp::complex(yuR(i, j), yuI(i, j), false));
+            yd.assign(i, j, gslpp::complex(ydR(i, j), ydI(i, j), false));
+            ye.assign(i, j, gslpp::complex(yeR(i, j), yeI(i, j), false));
         }
     }
 
@@ -1359,10 +1355,28 @@ void RGESolver::GoToBasis(std::string basis) {
 
     //Computing the CKM 
     CKM = (Vu.hconjugate()) * Vd;
+    gslpp::matrix<gslpp::complex> CKMUnphys = CKM;
     //Extract the 4 parameters from the raw CKM
     ExtractParametersFromCKM();
     //Build the CKM with the 4 parameters
     UpdateCKM();
+
+    double a11 = (gslpp::complex(CKMUnphys(0, 0) / CKM(0, 0))).arg();
+    double a12 = (gslpp::complex(CKMUnphys(0, 1) / CKM(0, 1))).arg();
+    double a13 = (gslpp::complex(CKMUnphys(0, 2) / CKM(0, 2))).arg();
+
+    double a23 = (gslpp::complex(CKMUnphys(1, 0) / CKM(1, 0))).arg() - a11 + a13;
+    double a33 = (gslpp::complex(CKMUnphys(2, 0) / CKM(2, 0))).arg() - a11 + a13;
+
+    gslpp::matrix<gslpp::complex> phi1(3, 3, 0.);
+    phi1.assign(0, 0, 1.);
+    phi1.assign(1, 1, gslpp::complex(1., a23 - a13, true));
+    phi1.assign(2, 2, gslpp::complex(1., a33 - a13, true));
+
+    gslpp::matrix<gslpp::complex> phi2dag(3, 3, 0.);
+    phi2dag.assign(0, 0, gslpp::complex(1., - a11, true));
+    phi2dag.assign(1, 1, gslpp::complex(1., - a12, true));
+    phi2dag.assign(2, 2, gslpp::complex(1., - a13, true));
 
     yuR = gslpp::matrix<double>(Su);
     yuI.reset();
@@ -1371,29 +1385,36 @@ void RGESolver::GoToBasis(std::string basis) {
     ydR = gslpp::matrix<double>(Sd);
     ydI.reset();
 
+    /*gslpp::matrix<gslpp::complex> Phiu(3, 3, 0.);
+    gslpp::matrix<gslpp::complex> Phid(3, 3, 0.);
+    for (i = 0; i < 3; i ++) {
+
+        Phiu.assign(i, i, gslpp::complex(1, - Uu(i, i).arg(), true));
+        Phid.assign(i, i, gslpp::complex(1, - Ud(i, i).arg(), true));
+    }*/
+
+
     if (basis == "UP") {
 
-        Ru = Uu;
-        Rd = Ud;
-        Rq = Vu;
+        Ru = Uu*phi1;
+        Rd = Ud*phi2dag;
+        Rq = Vu*phi1;
 
-        gslpp::matrix<gslpp::complex> yd = ydR * CKM.hconjugate(); 
+        gslpp::matrix<gslpp::complex> yd = ydR * CKM.hconjugate();
         ydR = yd.real();
         ydI = yd.imag();
 
-    }
-    else if (basis == "DOWN") {
+    } else if (basis == "DOWN") {
 
-        Ru = Uu;
-        Rd = Ud;
-        Rq = Vd;
+        Ru = Uu*phi1;
+        Rd = Ud*phi2dag;
+        Rq = Vd*phi2dag;
 
-        gslpp::matrix<gslpp::complex> yu = yuR * CKM; 
+        gslpp::matrix<gslpp::complex> yu = yuR*CKM;
         yuR = yu.real();
         yuI = yu.imag();
 
-    }
-    else 
+    } else
         std::cout << "WARNING: wrong basis choice: " << basis << ": Yukawa couplings not updated!!!" << std::endl;
 
     //I save the hermitian conjugates of the rotation 
@@ -1406,8 +1427,20 @@ void RGESolver::GoToBasis(std::string basis) {
     Rldag = Rl.hconjugate();
 
 
+    using namespace std;
+    cout << "Uu : " << Uu << endl;
+    cout << "Ud : " << Ud << endl;
+    cout << "Vu : " << Vu << endl;
+    cout << "Vd : " << Vd << endl;
 
+    cout << "phi1 : " << phi1 << endl;
+    cout << "phi2dag : " << phi2dag << endl;
+    cout << "Ru : " << Ru << endl;
+    cout << "Rd : " << Rd << endl;
+    cout << "Rq : " << Rq << endl;
 
+    cout << "Re : " << Re << endl;
+    cout << "Rl : " << Rl << endl;
 
     int a, b, c, d, p, r, s, t, n;
 
