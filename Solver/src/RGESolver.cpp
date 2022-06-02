@@ -14,7 +14,10 @@ RGESolver::RGESolver() : yuR(3, 0.), yuI(3, 0.), ydR(3, 0.), ydI(3, 0.), yeR(3, 
 
     using namespace boost::placeholders;
 
+    //Assigns default values for epsabs and epsrel
 
+    Resetepsrel();
+    Resetepsabs();
 
     //Build default CKM matrix from default parameters
     UpdateCKM();
@@ -337,6 +340,13 @@ RGESolver::RGESolver() : yuR(3, 0.), yuI(3, 0.), ydR(3, 0.), ydI(3, 0.), yeR(3, 
         Setter4F["Clequ3I"] = boost::bind(&WC5_set, clequ3I, _1, _2, _3, _4, _5);
         Getter4F["Clequ3I"] = boost::bind(&WC5, clequ3I, _1, _2, _3, _4);
     }
+}
+
+RGESolver::~ RGESolver() {
+    gsl_odeiv2_step_free(s);
+    gsl_odeiv2_evolve_free(e);
+    gsl_odeiv2_step_free(sSMOnly);
+    gsl_odeiv2_evolve_free(eSMOnly);
 }
 
 void RGESolver::Init() {
@@ -1303,64 +1313,95 @@ void RGESolver::Evolve(std::string method, double muI, double muF) {
                 "Available methods: Numeric, Leading-Log"
                 << std::endl;
     }
+    if (muF != muI) {
+        Init();
+        //Initial conditions are inserted 
+        //in the array x
 
-    Init();
-    //Initial conditions are inserted 
-    //in the array x
+
+        //Numeric solution 
 
 
-    //Numeric solution 
+        //Driver
+        /* if (method == "Numeric") {
+double tI = log(muI);
+            double tF = log(muF);
+            double ttmp = tI;
 
-    if (method == "Numeric") {
-        double tI = log(muI);
-        double tF = log(muF);
-        double ttmp = tI;
+             //Initial step 
+             double stepIn = (tF - tI)*0.01;
+             //std::cout << "step : " << step_ << std::endl;
+             double er = 0.001;
+             double ea = 0.0000000000000000000000001;
 
-        //Initial step 
-        step_ = (tF - tI)*0.1;
+             //std::cout << "ok before driver reset" << std::endl;
 
-        if (tF > tI) {
+             gsl_odeiv2_driver_reset_hstart(d, stepIn);
+             //std::cout << "ok after driver reset" << std::endl;
 
-            while (ttmp < tF) {
-                int status = gsl_odeiv2_evolve_apply(evo_, con_, s_, &sys_, &ttmp, tF, &step_, x);
-                if (status != GSL_SUCCESS) {
-                    printf("error in adaptive integration, return value=%d\n", status);
+             int status = gsl_odeiv2_driver_apply(d, &ttmp, tF, x);
+             //std::cout << "ok after evolution" << std::endl;
+
+             if (status != GSL_SUCCESS) {
+                 printf("error, return value=%d\n", status);
+                 //break;
+             }
+         }*/
+        //Low level 
+        if (method == "Numeric") {
+            double tI = log(muI);
+            double tF = log(muF);
+            double ttmp = tI;
+
+            gsl_odeiv2_control * c
+                    = gsl_odeiv2_control_y_new(epsabs_, epsrel_);
+
+            //Initial step 
+            double stepIn = (tF - tI)*0.01;
+            if (tF > tI) {
+                while (ttmp < tF) {
+                    int status = gsl_odeiv2_evolve_apply(e, c, s,
+                            &sys, &ttmp, tF, &stepIn, x);
+                    if (status != GSL_SUCCESS) {
+                        printf("error, return value=%d\n", status);
+                        break;
+                    }
+                }
+            }
+            if (tF < tI) {
+                while (ttmp > tF) {
+                    int status = gsl_odeiv2_evolve_apply(e, c, s,
+                            &sys, &ttmp, tF, &stepIn, x);
+                    if (status != GSL_SUCCESS) {
+                        printf("error, return value=%d\n", status);
+                        break;
+                    }
                 }
             }
 
-        } else {
+            gsl_odeiv2_evolve_reset(e);
+            gsl_odeiv2_step_reset(s);
+            gsl_odeiv2_control_free(c);
+        }
 
-            while (ttmp > tF) {
-                int status = gsl_odeiv2_evolve_apply(evo_, con_, s_, &sys_, &ttmp, tF, &step_, x);
-                if (status != GSL_SUCCESS) {
-                    printf("error in adaptive integration, return value=%d\n", status);
-                }
 
+
+        //Leading-log solution 
+        //-------------------------------------------
+        if (method == "Leading-Log") {
+            double beta[dim] = {0.};
+            double Log_muF_over_muI = log(muF / muI);
+            /*int status = */func(10., x, beta, NULL);
+            for (int i = 0; i < dim; i ++) {
+                x[i] += beta[i] * Log_muF_over_muI;
             }
         }
+        //-------------------------------------------
 
-
-        gsl_odeiv2_evolve_reset(evo_);
-        gsl_odeiv2_step_reset(s_);
-
+        Update();
+        //Evolved values from x are put 
+        //back in the coefficients 
     }
-
-    //Leading-log solution 
-    //-------------------------------------------
-    if (method == "Leading-Log") {
-        double beta[dim] = {0.};
-        double Log_muF_over_muI = log(muF / muI);
-        /*int status = */func(10., x, beta, NULL);
-        for (int i = 0; i < dim; i ++) {
-            x[i] += beta[i] * Log_muF_over_muI;
-        }
-    }
-    //-------------------------------------------
-
-    Update();
-    //Evolved values from x are put 
-    //back in the coefficients 
-
 }
 
 void RGESolver::SaveOutputFile(std::string filename,
@@ -1616,7 +1657,7 @@ void RGESolver::SaveOutputFile(std::string filename,
 void RGESolver::Print(double* c, std::string name,
         std::string sym,
         std::string format,
-        std::ofstream& f) {
+        std::ofstream & f) {
     using namespace std;
 
     int i, j, k, l;

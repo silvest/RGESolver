@@ -260,65 +260,67 @@ void RGESolver::EvolveSMOnly(std::string method, double muI, double muF) {
                 "Available methods: Numeric, Leading-Log"
                 << std::endl;
     }
-    InitSMOnly();
-    //Initial conditions are inserted 
-    //in the array x
 
 
-    //Numeric resolution 
+    if (muF != muI) {
+        //Initial conditions are inserted 
+        //in the array x
+        InitSMOnly();
 
-    if (method == "Numeric") {
-        double tI = log(muI);
-        double tF = log(muF);
-        double ttmp = tI;
+        //Numeric resolution 
+        if (method == "Numeric") {
+            double tI = log(muI);
+            double tF = log(muF);
+            double ttmp = tI;
+            gsl_odeiv2_control * cSMOnly
+                    = gsl_odeiv2_control_y_new(epsabs_, epsrel_);
 
-        //Initial step 
-        step_ = (tF - tI)*0.1;
-
-        if (tF > tI) {
-
-            while (ttmp < tF) {
-                int status = gsl_odeiv2_evolve_apply(evoSMOnly_, conSMOnly_,
-                        sSMOnly_, &sysSMOnly_, &ttmp, tF, &step_, x);
-                if (status != GSL_SUCCESS) {
-                    printf("error in adaptive integration, return value=%d\n", status);
+            //Initial step 
+            double stepIn = (tF - tI)*0.01;
+            if (tF > tI) {
+                while (ttmp < tF) {
+                    int status = gsl_odeiv2_evolve_apply(eSMOnly, cSMOnly, sSMOnly,
+                            &sysSMOnly, &ttmp, tF, &stepIn, x);
+                    //std::cout << "step : " << stepIn << std::endl;
+                    if (status != GSL_SUCCESS) {
+                        printf("error, return value=%d\n", status);
+                        break;
+                    }
+                }
+            }
+            if (tF < tI) {
+                while (ttmp > tF) {
+                    int status = gsl_odeiv2_evolve_apply(eSMOnly, cSMOnly, sSMOnly,
+                            &sysSMOnly, &ttmp, tF, &stepIn, x);
+                    if (status != GSL_SUCCESS) {
+                        printf("error, return value=%d\n", status);
+                        break;
+                    }
                 }
             }
 
-        } else {
+            gsl_odeiv2_evolve_reset(eSMOnly);
+            gsl_odeiv2_step_reset(sSMOnly);
+            gsl_odeiv2_control_free(cSMOnly);
+        }
 
-            while (ttmp > tF) {
-                int status = gsl_odeiv2_evolve_apply(evoSMOnly_, conSMOnly_,
-                        sSMOnly_, &sysSMOnly_, &ttmp, tF, &step_, x);
-                if (status != GSL_SUCCESS) {
-                    printf("error in adaptive integration, return value=%d\n", status);
-                }
 
+        //Leading-log resolution 
+        //-------------------------------------------
+        if (method == "Leading-Log") {
+            double beta[59] = {0.};
+            double Log_muF_over_muI = log(muF / muI);
+            /*int status = */funcSMOnly(10., x, beta, NULL);
+            for (int i = 0; i < 59; i ++) {
+                x[i] += beta[i] * Log_muF_over_muI;
             }
         }
+        //-------------------------------------------
 
-
-        gsl_odeiv2_evolve_reset(evoSMOnly_);
-        gsl_odeiv2_step_reset(sSMOnly_);
-
+        UpdateSMOnly();
+        //Evolved values from x are put 
+        //back in the coefficients 
     }
-
-    //Leading-log resolution 
-    //-------------------------------------------
-    if (method == "Leading-Log") {
-        double beta[59] = {0.};
-        double Log_muF_over_muI = log(muF / muI);
-        /*int status = */funcSMOnly(10., x, beta, NULL);
-        for (int i = 0; i < 59; i ++) {
-            x[i] += beta[i] * Log_muF_over_muI;
-        }
-    }
-    //-------------------------------------------
-
-    UpdateSMOnly();
-    //Evolved values from x are put 
-    //back in the coefficients 
-
 }
 
 void RGESolver::GoToBasisSMOnly(std::string basis) {
@@ -728,7 +730,7 @@ void RGESolver::SetSMDefaultInput() {
     FromMassesToYukawas("UP");
     //Higgs and Gauge sector
     mh2 = 126. * 126.;
-    lambda = 0.2;
+    lambda = 0.14065;
     g3 = 1.22;
     g2 = 0.6516;
     g1 = .3576;
@@ -808,6 +810,11 @@ void RGESolver::ComputeCKMAndFermionMasses() {
 
 
 void RGESolver::Reset() {
+
+    //Resets integration parameters to default 
+    Resetepsabs();
+    Resetepsrel();
+
 
     int n = 0;
     int a, i, j, k, l;
@@ -1428,6 +1435,7 @@ void RGESolver::GoToBasis(std::string basis) {
 
 
     using namespace std;
+    /*
     cout << "Uu : " << Uu << endl;
     cout << "Ud : " << Ud << endl;
     cout << "Vu : " << Vu << endl;
@@ -1440,7 +1448,7 @@ void RGESolver::GoToBasis(std::string basis) {
     cout << "Rq : " << Rq << endl;
 
     cout << "Re : " << Re << endl;
-    cout << "Rl : " << Rl << endl;
+    cout << "Rl : " << Rl << endl;*/
 
     int a, b, c, d, p, r, s, t, n;
 

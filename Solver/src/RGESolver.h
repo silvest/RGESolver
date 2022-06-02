@@ -13,7 +13,7 @@
 //#include "IndependentIndices.h"
 
 #include <unordered_map>
-//#include <functional>
+//#include <functionalz>
 #include <boost/function.hpp>
 //#include <boost/bind/bind.hpp>
 
@@ -304,8 +304,7 @@ public:
     /**
      * @brief The default destructor.
      */
-    ~RGESolver() {
-    }
+    ~RGESolver();
 
 
     /**@name Parameters related to the numeric integration. */
@@ -324,33 +323,25 @@ public:
         return epsabs_;
     }
 
-    /**
-     * @brief Getter for the step used in the numerical integration
-     */
-    double step() {
-        return step_;
-    }
+   
 
     /**
      * @brief Setter for the relative error used in the numerical integration
+     * (default value = 0.005)
      */
-    void Set_epsrel(double epsrel) {
+    void Setepsrel(double epsrel) {
         epsrel_ = epsrel;
     }
 
     /**
-     * @brief Setter for the absolute error used in the numerical integration
+     * @brief Setter for the absolute error used in the numerical integration 
+     * (default value = e-13)
      */
-    void Set_epsabs(double epsabs) {
+    void Setepsabs(double epsabs) {
         epsabs_ = epsabs;
     }
 
-    /**
-     * @brief Setter  for the step used in the numerical integration
-     */
-    void Set_step(double step) {
-        step_ = step;
-    }
+
     /** @name Evolution */
     /**
      * @brief Performs the RGE evolution
@@ -579,7 +570,9 @@ public:
 
     /**
      * @brief Resets all the SMEFT coefficients to 0 and the 
-     * SM parameters to their default value.
+     * SM parameters to their default value. 
+     * \f$\epsilon_{\textrm{abs}}\f$ and \f$\epsilon_{\textrm{rel}}\f$ are reset to 
+     * their default value.
      * @details 
      */
     void Reset();
@@ -703,38 +696,59 @@ private:
     static int funcSMOnly(double logmu, const double y[],
             double f[], void* params);
 
+
     /**@name GSL Objects */
     ///@{ 
 
     /**
-     * @brief Relative error used in the integrator with its default 
-     * value
+     * @brief Relative error used in the integrator
      * 
      * ().   */
-    double epsrel_ = 0.0000000000000001;
+    double epsrel_; // = ;
 
     /**
-     * @brief Absolute error used in the integrator with its default 
-     * value
+     * @brief Absolute error used in the integrator
      */
-    double epsabs_ = 0.0001;
+    double epsabs_;
 
     /**
-     * @brief Last step used in the integrator 
+     * @brief Resets epsabs to its default value
      */
+    void Resetepsabs() {
+        epsabs_ = 0.0000000000001;
+    };
+
+        /**
+     * @brief Resets epsrel to its default value
+     */
+    void Resetepsrel() {
+        epsrel_ = 0.005;
+    };
 
 
-    double step_;
+
+    gsl_odeiv2_system sys = {func, NULL, 2558, NULL};
+    /*gsl_odeiv2_driver * d =
+            gsl_odeiv2_driver_alloc_y_new(&sys,
+            gsl_odeiv2_step_rkf45,
+            0.1, epsrel_, epsabs_);*/
+    gsl_odeiv2_step * s
+            = gsl_odeiv2_step_alloc(gsl_odeiv2_step_rkf45, 2558);
+    gsl_odeiv2_evolve * e
+            = gsl_odeiv2_evolve_alloc(2558);
+
+    gsl_odeiv2_system sysSMOnly = {funcSMOnly, NULL, 59, NULL};
+
+    gsl_odeiv2_step * sSMOnly
+            = gsl_odeiv2_step_alloc(gsl_odeiv2_step_rkf45, 59);
+    gsl_odeiv2_evolve * eSMOnly
+            = gsl_odeiv2_evolve_alloc(59);
 
 
 
 
+    /*
     gsl_odeiv2_system sys_ = {func, NULL, 3};
-    //gsl_odeiv2_driver * d_ =
-    //		  gsl_odeiv2_driver_alloc_y_new(&sys_, gsl_odeiv2_step_rk8pd,
-    //		  epsrel_, epsabs_, 0.0);
-
-
     gsl_odeiv2_step * s_ = gsl_odeiv2_step_alloc(
             gsl_odeiv2_step_rkf45, 2558);
     gsl_odeiv2_control * con_ = gsl_odeiv2_control_standard_new(
@@ -747,7 +761,7 @@ private:
             gsl_odeiv2_step_rkf45, 59);
     gsl_odeiv2_control * conSMOnly_ = gsl_odeiv2_control_standard_new(
             epsabs_, epsrel_, 1, 1);
-    gsl_odeiv2_evolve* evoSMOnly_ = gsl_odeiv2_evolve_alloc(59);
+    gsl_odeiv2_evolve* evoSMOnly_ = gsl_odeiv2_evolve_alloc(59);*/
 
 
     /** @brief 1D array for the integration */
