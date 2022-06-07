@@ -697,16 +697,25 @@ int RGESolver::funcSMOnly(double logmu, const double y[], double f[], void* para
 
 void RGESolver::SetSMDefaultInput() {
     //Default input scale for SM in GeV
-    InputScale_SM = 91.;
+    //Higgs and Gauge sector
+    mh2 = 126. * 126.;
+    lambda = 0.14065;
+    g3 = 1.22;
+    g2 = 0.6516;
+    g1 = .3576;
 
-    //Fermions masses in GeV
-    mu = 0.002;
-    mc = 1.2;
-    mt = 170.;
+    v = sqrt(0.5 * mh2 / lambda);
+    
+    InputScale_SM = v / sqrt(2.);
 
-    md = 0.006;
-    ms = 0.05;
-    mb = 5.2;
+    //Fermion masses in GeV
+    mu = 0.0012;
+    mc = 0.64;
+    mt = 162.;
+
+    md = 0.0027;
+    ms = 0.052;
+    mb = 2.75;
 
     mel = 0.0005;
     mmu = 0.100;
@@ -728,13 +737,6 @@ void RGESolver::SetSMDefaultInput() {
     //By default, Yukawas are aligned with CKM input
     //in up basis
     FromMassesToYukawas("UP");
-    //Higgs and Gauge sector
-    mh2 = 126. * 126.;
-    lambda = 0.14065;
-    g3 = 1.22;
-    g2 = 0.6516;
-    g1 = .3576;
-
 }
 
 /*
