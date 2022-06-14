@@ -709,13 +709,7 @@ void RGESolver::SetSMDefaultInput() {
 
     double PI = 3.14;
 
-    //Inputs in the Higgs sector (to be updated)
-    mh2 = 125.10 * 125.10;
-    double v = 247.;
 
-    lambda = 0.5 * mh2 / (v * v);
-    //std::cout << "lambda : " << lambda << std::endl;
-    
 
     //Inputs in gauge sector
     double alpha_em = 0.007812;
@@ -727,6 +721,16 @@ void RGESolver::SetSMDefaultInput() {
     g1 = e / sqrt(1. - sinWeakSquared);
     g2 = e / sqrt(sinWeakSquared);
     g3 = sqrt(4. * PI * alpha_s);
+
+
+    //Inputs in the Higgs sector (to be updated)
+    mh2 = 125.10 * 125.10;
+    //double v = 247.;
+    double mZ = 91.191; //Z mass in GeV
+    double v = mZ * 2. * sqrt(1. - sinWeakSquared) / g2;
+    lambda = 0.5 * mh2 / (v * v);
+
+
 
     //Fermion masses in GeV
     mu = 0.0012;
