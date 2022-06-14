@@ -323,8 +323,6 @@ public:
         return epsabs_;
     }
 
-   
-
     /**
      * @brief Setter for the relative error used in the numerical integration
      * (default value = 0.005)
@@ -718,7 +716,7 @@ private:
         epsabs_ = 0.0000000000001;
     };
 
-        /**
+    /**
      * @brief Resets epsrel to its default value
      */
     void Resetepsrel() {
@@ -1152,7 +1150,7 @@ private:
     /** @brief @f$ \mathrm{Re} \left[ C_{dW } \right]@f$ (class 6, WC1) */double cdWR[3 * 3] = {0.};
     /** @brief @f$ \mathrm{Im} \left[ C_{dW } \right]@f$ (class 6, WC1) */double cdWI[3 * 3] = {0.};
     /** @brief @f$ \mathrm{Re} \left[ C_{dB } \right]@f$ (class 6, WC1) */double cdBR[3 * 3] = {0.};
-    /** @brief @f$ \mathrm{Im} \left[ C_{dW } \right]@f$ (class 6, WC1) */double cdBI[3 * 3];
+    /** @brief @f$ \mathrm{Im} \left[ C_{dW } \right]@f$ (class 6, WC1) */double cdBI[3 * 3] = {0.};
 
 
 
