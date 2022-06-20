@@ -35,7 +35,7 @@ int main() {
 
     //Evolution from Lambda to muLow via numerical resolution 
     //of the RGEs
-    S.EvolveToBasis("Numeric", Lambda, muLow,"UP");
+    S.Evolve("Numeric", Lambda,muLow);
 
     std::cout << "--- AFTER THE EVOLUTION ---" << std::endl;
     std::cout << "g3(" << muLow << " GeV) : "

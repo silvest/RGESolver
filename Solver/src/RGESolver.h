@@ -297,7 +297,7 @@ flavour indices for each category.
 class RGESolver {
 public:
     /**
-     * @brief The default constructor
+     * @brief The default constructor. It initializes to 0 all the SMEFT coefficients. 
      */
     RGESolver();
 
@@ -584,16 +584,7 @@ public:
     void SaveOutputFile(std::string filename,
             std::string format);
 
-    //To be removed 
-
-    void test() {
-        std::cout << "inside test : " << std::endl;
-        std::cout << yuR(1, 2) << std::endl;
-        std::cout << GetCoefficient("YuR", 1, 2) << "\n" << std::endl;
-        SetCoefficient("YuR", 0.8, 1, 2);
-        std::cout << yuR(1, 2) << std::endl;
-        std::cout << GetCoefficient("YuR", 1, 2) << std::endl;
-    };
+    
 
 
 

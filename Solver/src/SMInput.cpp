@@ -750,7 +750,7 @@ void RGESolver::SetSMDefaultInput() {
     CKM_theta12 = asin(0.225);
     CKM_theta13 = asin(0.042);
     CKM_theta23 = asin(0.003675);
-    CKM_delta = 1.167625;
+    CKM_delta = 1.167625 * 2. * PI / 360.;
     c12 = cos(CKM_theta12);
     s12 = sin(CKM_theta12);
     c13 = cos(CKM_theta13);
@@ -763,6 +763,21 @@ void RGESolver::SetSMDefaultInput() {
     FromMassesToYukawas("UP");
 
     InputScale_SM = v / sqrt(2.);
+    /*std::cout << "mu_SMInput : " << InputScale_SM << std::endl;
+    std::cout << "g1 : " << g1 << std::endl;
+    std::cout << "g2 : " << g2 << std::endl;
+    std::cout << "g3 : " << g3 << std::endl;
+
+    std::cout << "lambda : " << lambda << std::endl;
+    std::cout << "mh2 : " << mh2 << std::endl;
+
+    std::cout << "CKM_theta12 : " << CKM_theta12 << std::endl;
+    std::cout << "CKM_theta13 : " << CKM_theta13 <<std::endl;
+    std::cout << "CKM_theta23 : " << CKM_theta23 <<std::endl;
+    std::cout << "CKM_delta : " << CKM_delta <<std::endl;*/
+
+
+
 
 }
 
