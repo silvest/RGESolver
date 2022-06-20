@@ -1414,6 +1414,11 @@ void RGESolver::GoToBasis(std::string basis) {
     phi2dag.assign(1, 1, gslpp::complex(1., - a12, true));
     phi2dag.assign(2, 2, gslpp::complex(1., - a13, true));
 
+    gslpp::matrix<gslpp::complex> phie(3, 3, 0.);
+    phie.assign(0, 0, gslpp::complex(1., - (Re(0, 0)).arg(), true));
+    phie.assign(1, 1, gslpp::complex(1., - (Re(1, 1)).arg(), true));
+    phie.assign(2, 2, gslpp::complex(1., - (Re(2, 2)).arg(), true));
+
     yuR = gslpp::matrix<double>(Su);
     yuI.reset();
     yeR = gslpp::matrix<double>(Se);
@@ -1421,20 +1426,15 @@ void RGESolver::GoToBasis(std::string basis) {
     ydR = gslpp::matrix<double>(Sd);
     ydI.reset();
 
-    /*gslpp::matrix<gslpp::complex> Phiu(3, 3, 0.);
-    gslpp::matrix<gslpp::complex> Phid(3, 3, 0.);
-    for (i = 0; i < 3; i ++) {
-
-        Phiu.assign(i, i, gslpp::complex(1, - Uu(i, i).arg(), true));
-        Phid.assign(i, i, gslpp::complex(1, - Ud(i, i).arg(), true));
-    }*/
-
+    Re = Re*phie;
+    Rl = Rl*phie;
 
     if (basis == "UP") {
 
         Ru = Uu*phi1;
         Rd = Ud*phi2dag;
         Rq = Vu*phi1;
+
 
         gslpp::matrix<gslpp::complex> yd = ydR * CKM.hconjugate();
         ydR = yd.real();
