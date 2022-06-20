@@ -740,10 +740,10 @@ void RGESolver::SetSMDefaultInput() {
     md = 0.0027;
     ms = 0.052;
     mb = 2.75;
-    //Not evolved via RGEs, to be set to their experimental value
-    mel = 0.0005;
-    mmu = 0.100;
-    mtau = 1.2;
+    //Not evolved via RGEs, equal to their experimental values (PDG)
+    mel = 0.0005110;
+    mmu = 0.1057;
+    mtau = 1.776;
 
 
     //CKM parameters in radians 
