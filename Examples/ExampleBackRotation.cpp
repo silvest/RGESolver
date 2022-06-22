@@ -1,4 +1,4 @@
-//ExampleEvolutionBackRotation.cpp
+//ExampleBackRotation.cpp
 
 //This program is a realistic example of the usage of the 
 //library RGESolver.h to perform the renormalization 
@@ -19,20 +19,23 @@ int main() {
     RGESolver S;
 
     //Energy scales must be given in GeV 
-    double Lambda = 10000.; 
+    double Lambda = 10000.;
     double muLow = 250.;
 
     //Generate SM initial conditions using a custom low-energy input.
+    //Energy scale at which the input is given
+    double SMinputScale = 91.0;
+
     //SM fermions masses
-    double Muin[3] = {.002, 1.2, 170.};
-    double Mdin[3] = {.006, .05, 5.2};
-    double Mein[3] = {.005, .1, 1.2};
+    double Muin[3] = {0.002, 1.2, 170.};
+    double Mdin[3] = {0.006, 0.05, 5.2};
+    double Mein[3] = {0.005, .1, 1.2};
 
     //CKM angles and phase
     double t12in = asin(0.225);
     double t13in = asin(0.042);
     double t23in = asin(0.003675);
-    double deltain = 1.167625 * 6.28 / 360.;
+    double deltain = 0.02;
 
     //gauge couplings and Higgs sector parameters
     double g1in = .35;
@@ -41,11 +44,11 @@ int main() {
     double lambdain = 0.14;
     double mh2in = 15625.;
 
-    //Energy scale at which the input is generated 
-    double SMinputScale = 91.0;
 
-    //Generating the initial conditions for the SM 
-    //parameters at mu = Lambda in the up basis.
+
+    //Generate the initial conditions for the SM 
+    //parameters at mu = Lambda in the down basis via 
+    //numerical integration.
     S.GenerateSMInitialConditions(SMinputScale, Lambda, "DOWN", "Numeric",
             g1in, g2in, g3in, lambdain, mh2in,
             Muin, Mdin, Mein,
@@ -53,7 +56,9 @@ int main() {
 
 
 
-    //Generate SM initial conditions using the default input parameters. 
+    //Generate the initial conditions for the SM 
+    //parameters at mu = Lambda in the down basis via 
+    //numerical integration (using default input).
     //S.GenerateSMInitialConditions(Lambda, "DOWN", "Numeric");
 
 
@@ -70,7 +75,7 @@ int main() {
 
     //Printing on-screen the initial conditions
     std::cout << "---- INITIAL CONDITIONS GENERATED FOR THE SM PARAMETERS AT "
-            <<Lambda<<" GeV ----" << std::endl;
+            << Lambda << " GeV ----" << std::endl;
     std::cout << "g1(" << Lambda << " GeV) : "
             << S.GetCoefficient("g1") << std::endl;
     std::cout << "g2(" << Lambda << " GeV) : "
@@ -109,31 +114,36 @@ int main() {
         std::cout << std::endl;
     }
     std::cout << "---- INITIAL CONDITIONS FOR THE SMEFT COEFFICIENTS AT "
-            <<Lambda<<" GeV ----" << std::endl;
-    std::cout << "Cqu1R(1,2,2,2)(" << Lambda << " GeV) : "
-            << S.GetCoefficient("Cqu1R", 1, 2, 2, 2) << std::endl;
-    std::cout << "CllR(1,1,1,2)(" << Lambda << " GeV) : "
-            << S.GetCoefficient("CllR", 1, 1, 1, 2) << std::endl;
+            << Lambda << " GeV ----" << std::endl;
+
     std::cout << "CHG(" << Lambda << " GeV) : "
             << S.GetCoefficient("CHG") << std::endl;
-
     std::cout << "CeHR(1,1)(" << Lambda << " GeV) : "
             << S.GetCoefficient("CeHR", 1, 1) << std::endl;
     std::cout << "CHdR(1,2)(" << Lambda << " GeV) : "
             << S.GetCoefficient("CHdR", 1, 2) << std::endl;
     std::cout << "CHuR(0,2)(" << Lambda << " GeV) : "
             << S.GetCoefficient("CHuR", 0, 2) << std::endl;
-
+    std::cout << "Cqu1R(1,2,2,2)(" << Lambda << " GeV) : "
+            << S.GetCoefficient("Cqu1R", 1, 2, 2, 2) << std::endl;
+    std::cout << "CllR(1,1,1,2)(" << Lambda << " GeV) : "
+            << S.GetCoefficient("CllR", 1, 1, 1, 2) << std::endl;
+    
+    
+    
+    
     //Evolution from Lambda to muLow (solving numerically the RGEs), where 
     //a back-rotation is performed to go back into the up basis
     S.EvolveToBasis("Numeric", Lambda, muLow, "DOWN");
-    // S.Evolve("Numeric", Lambda, muLow);
-
+    
+    
+    
+    
 
     std::cout << "" << std::endl;
     std::cout << "-----------------------------------------------" << std::endl;
     std::cout << "" << std::endl;
-    
+
     //Printing on-screen the results
     std::cout << "--------- RESULTS AFTER THE EVOLUTION ---------" << std::endl;
     std::cout << "g1(" << muLow << " GeV) : "
@@ -171,19 +181,18 @@ int main() {
         }
         std::cout << std::endl;
     }
-    std::cout << "Cqu1R(1,2,2,2)(" << muLow << " GeV) : "
-            << S.GetCoefficient("Cqu1R", 1, 2, 2, 2) << std::endl;
-    std::cout << "CllR(1,1,1,2)(" << muLow << " GeV) : "
-            << S.GetCoefficient("CllR", 1, 1, 1, 2) << std::endl;
+
     std::cout << "CHG(" << muLow << " GeV) : "
             << S.GetCoefficient("CHG") << std::endl;
-
     std::cout << "CeHR(1,1)(" << muLow << " GeV) : "
             << S.GetCoefficient("CeHR", 1, 1) << std::endl;
     std::cout << "CHdR(1,2)(" << muLow << " GeV) : "
             << S.GetCoefficient("CHdR", 1, 2) << std::endl;
     std::cout << "CHuR(0,2)(" << muLow << " GeV) : "
             << S.GetCoefficient("CHuR", 0, 2) << std::endl;
-
+    std::cout << "Cqu1R(1,2,2,2)(" << muLow << " GeV) : "
+            << S.GetCoefficient("Cqu1R", 1, 2, 2, 2) << std::endl;
+    std::cout << "CllR(1,1,1,2)(" << muLow << " GeV) : "
+            << S.GetCoefficient("CllR", 1, 1, 1, 2) << std::endl;
     return 0;
 }
