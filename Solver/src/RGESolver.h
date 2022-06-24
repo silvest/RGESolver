@@ -103,6 +103,39 @@
  * 
  * 
  * 
+ <table>
+<caption id="SMInput">  SM parameters used by default to generate SM initial conditions at an arbitrary
+scale. The scale at which these parameters are given is \f$ \mu = 173.65\f$ GeV. We follow http://www.utfit.org/UTfit/Formalism
+for what concerns the conventions for the CKM matrix.
+ </caption>
+<tr style="vertical-align:top">
+<td>
+<table>
+<tr> <th> Parameter     <th> Value  
+<tr>    <td> \f$g_1\f$ <td> 0.3573
+<tr><td>    \f$g_2\f$       <td> 0.6511
+<tr><td>\f$g_3\f$         <td> 1.161     
+<tr><td>\f$\lambda\f$         <td> 0.1297      
+<tr><td>\f$m_h^2\f$ \f$[\mathrm{GeV}^2]\f$  <td> 15650      
+<tr><td>\f$\sin(\theta_{12})\f$         <td> 0.225     
+<tr><td>\f$\sin(\theta_{13})\f$         <td> 0.042      
+<tr><td>\f$\sin(\theta_{23})\f$         <td> 0.003675    
+<tr><td>\f$\delta\f$ [rad]       <td> 1.1676     
+</table> 
+<td>
+<table>
+<tr><th> Parameter     <th> Value [GeV]   
+<tr><td>\f$m_u\f$ \f$[\mathrm{GeV}]\f$  <td> 0.0012      
+<tr><td>\f$m_c\f$ \f$[\mathrm{GeV}]\f$  <td> 0.640      
+<tr><td>\f$m_t\f$ \f$[\mathrm{GeV}]\f$  <td> 126.0      
+<tr><td>\f$m_d\f$ \f$[\mathrm{GeV}]\f$  <td> 0.0027      
+<tr><td>\f$m_s\f$ \f$[\mathrm{GeV}]\f$  <td> 0.052      
+<tr><td>\f$m_b\f$ \f$[\mathrm{GeV}]\f$  <td> 2.75     
+<tr><td>\f$m_{e}\f$ \f$[\mathrm{GeV}]\f$  <td> 0.000511     
+<tr><td>\f$m_{\mu}\f$ \f$[\mathrm{GeV}]\f$  <td> 0.1057    
+<tr><td>\f$m_{\tau}\f$ \f$[\mathrm{GeV}]\f$  <td> 1.776      
+</table>
+</table> 
  * 
  * 
  
