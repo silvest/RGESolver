@@ -198,7 +198,7 @@ void RGESolver::GenerateSMInitialConditions(double muIn, double muFin, std::stri
             deltain <= 3.141592653589793 && deltain > - 3.141592653589793 &&
             s12in > 0. && s12in < 1. &&
             s13in > 0. && s13in < 1. &&
-            s23in > 0. && s23in < 1. &&
+            s23in > 0. && s23in < 1. 
             ) {
 
         g1 = g1in;
