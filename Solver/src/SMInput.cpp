@@ -174,9 +174,9 @@ void RGESolver::GenerateSMInitialConditions(
     //Before evolving, eventual changes 
     //in the input values of CKM angles must be 
     //translated 
-    c12 = sqrt(1.-s12*s12);
-    c13 = sqrt(1.-s13*s13);
-    c23 = sqrt(1.-s23*s23);
+    c12 = sqrt(1. - s12 * s12);
+    c13 = sqrt(1. - s13 * s13);
+    c23 = sqrt(1. - s23 * s23);
 
     //if (inputCKM == true) {
     UpdateCKM();
@@ -223,9 +223,9 @@ void RGESolver::GenerateSMInitialConditions(double muIn, double muFin, std::stri
         CKM_delta = deltain;
 
 
-        c12 = sqrt(1.-s12*s12);
-        c13 = sqrt(1.-s13*s13);
-        c23 = sqrt(1.-s23*s23);
+        c12 = sqrt(1. - s12 * s12);
+        c13 = sqrt(1. - s13 * s13);
+        c23 = sqrt(1. - s23 * s23);
 
         UpdateCKM();
         FromMassesToYukawas(basis);
@@ -734,9 +734,9 @@ void RGESolver::SetSMDefaultInput() {
     s13 = 0.042;
     s23 = 0.003675;
     CKM_delta = 1.167625;
-    c12 = sqrt(1.-s12*s12);
-    c13 = sqrt(1.-s13*s13);
-    c23 = sqrt(1.-s23*s23);
+    c12 = sqrt(1. - s12 * s12);
+    c13 = sqrt(1. - s13 * s13);
+    c23 = sqrt(1. - s23 * s23);
 
 
 
