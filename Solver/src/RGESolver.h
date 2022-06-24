@@ -401,7 +401,7 @@ public:
      * (smallest mass for the 1st generation and greatest mass for the 3rd withoud mass degeneracy 
      * for all up and down quarks and for charged leptons). 
      * The generation of the initial conditions is performed only if all the masses are non-negative and 
-     * if \f$ \theta_{12},\theta_{13},\theta_{23} \in [0, \pi/2] \f$, \f$\delta \in (\pi,\pi]\f$.
+     * if \f$ \sin \theta_{ij} \in (0,1) \f$, \f$\delta \in (\pi,\pi]\f$.
      * @param muIn Low-energy input scale (in GeV)
      * @param muIn  Scale (in GeV) at which the initial conditions 
      * are generated
