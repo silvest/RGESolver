@@ -125,15 +125,15 @@ for what concerns the conventions for the CKM matrix.
 <td>
 <table>
 <tr><th> Parameter     <th> Value [GeV]   
-<tr><td>\f$m_u\f$ \f$[\mathrm{GeV}]\f$  <td> 0.0012      
-<tr><td>\f$m_c\f$ \f$[\mathrm{GeV}]\f$  <td> 0.640      
-<tr><td>\f$m_t\f$ \f$[\mathrm{GeV}]\f$  <td> 126.0      
-<tr><td>\f$m_d\f$ \f$[\mathrm{GeV}]\f$  <td> 0.0027      
-<tr><td>\f$m_s\f$ \f$[\mathrm{GeV}]\f$  <td> 0.052      
-<tr><td>\f$m_b\f$ \f$[\mathrm{GeV}]\f$  <td> 2.75     
-<tr><td>\f$m_{e}\f$ \f$[\mathrm{GeV}]\f$  <td> 0.000511     
-<tr><td>\f$m_{\mu}\f$ \f$[\mathrm{GeV}]\f$  <td> 0.1057    
-<tr><td>\f$m_{\tau}\f$ \f$[\mathrm{GeV}]\f$  <td> 1.776      
+<tr><td>\f$m_u\f$   <td> 0.0012      
+<tr><td>\f$m_c\f$   <td> 0.640      
+<tr><td>\f$m_t\f$   <td> 126.0      
+<tr><td>\f$m_d\f$  <td> 0.0027      
+<tr><td>\f$m_s\f$   <td> 0.052      
+<tr><td>\f$m_b\f$   <td> 2.75     
+<tr><td>\f$m_{e}\f$   <td> 0.000511     
+<tr><td>\f$m_{\mu}\f$  <td> 0.1057    
+<tr><td>\f$m_{\tau}\f$   <td> 1.776      
 </table>
 </table> 
  * 
