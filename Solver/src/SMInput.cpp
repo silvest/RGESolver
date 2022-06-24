@@ -54,14 +54,11 @@ double RGESolver::GetFermionMass(std::string name) {
 void RGESolver::ExtractParametersFromCKM() {
 
     s13 = CKM(0, 2).abs();
-    c13 = (sqrt(gslpp::complex(1. - s13 * s13, 0.))).real();
+    c13 = sqrt(1. - s13 * s13);
     c12 = CKM(0, 0).abs() / c13;
-    s12 = (sqrt(gslpp::complex(1. - c12 * c12, 0.))).real();
+    s12 = sqrt(1. - c12 * c12);
     s23 = CKM(1, 2).abs() / c13;
-    c23 = (sqrt(gslpp::complex(1. - s23 * s23, 0.))).real();
-    CKM_theta12 = (arcsin(gslpp::complex(s12, 0.))).real();
-    CKM_theta13 = (arcsin(gslpp::complex(s13, 0.))).real();
-    CKM_theta23 = (arcsin(gslpp::complex(s23, 0.))).real();
+    c23 = sqrt(1. - s23 * s23);
 
     //See http://www.utfit.org/UTfit/Formalism
     //delta in [-Pi,Pi]
@@ -177,13 +174,9 @@ void RGESolver::GenerateSMInitialConditions(
     //Before evolving, eventual changes 
     //in the input values of CKM angles must be 
     //translated 
-    c12 = cos(CKM_theta12);
-    s12 = sin(CKM_theta12);
-    c13 = cos(CKM_theta13);
-    s13 = sin(CKM_theta13);
-    c23 = cos(CKM_theta23);
-    s23 = sin(CKM_theta23);
-
+    c12 = sqrt(1.-s12*s12);
+    c13 = sqrt(1.-s13*s13);
+    c23 = sqrt(1.-s23*s23);
 
     //if (inputCKM == true) {
     UpdateCKM();
@@ -197,17 +190,11 @@ void RGESolver::GenerateSMInitialConditions(
 void RGESolver::GenerateSMInitialConditions(double muIn, double muFin, std::string basis, std::string method,
         double g1in, double g2in, double g3in, double lambdain, double mh2in,
         double Muin[3], double Mdin[3], double Mein[3],
-        double t12in, double t13in, double t23in, double deltain) {
-
-
-    double pihalf = 3.141592653589793;
+        double s12in, double s13in, double s23in, double deltain) {
 
     if (Muin[0] > 0. && Muin[1] > 0. && Muin[2] > 0. &&
             Mdin[0] > 0. && Mdin[1] > 0. && Mdin[2] > 0. &&
             Mein[0] > 0. && Mein[1] > 0. && Mein[2] > 0. &&
-            t12in <= pihalf && t12in >= 0. &&
-            t13in <= pihalf && t13in >= 0. &&
-            t23in <= pihalf && t23in >= 0. &&
             deltain <= 3.141592653589793 && deltain > - 3.141592653589793
             ) {
 
@@ -230,19 +217,15 @@ void RGESolver::GenerateSMInitialConditions(double muIn, double muFin, std::stri
         mmu = Mein[1];
         mtau = Mein[2];
 
-        CKM_theta12 = t12in;
-        CKM_theta13 = t13in;
-        CKM_theta23 = t23in;
+        s12 = s12in;
+        s13 = s13in;
+        s23 = s23in;
         CKM_delta = deltain;
 
 
-        c12 = cos(CKM_theta12);
-        s12 = sin(CKM_theta12);
-        c13 = cos(CKM_theta13);
-        s13 = sin(CKM_theta13);
-        c23 = cos(CKM_theta23);
-        s23 = sin(CKM_theta23);
-
+        c12 = sqrt(1.-s12*s12);
+        c13 = sqrt(1.-s13*s13);
+        c23 = sqrt(1.-s23*s23);
 
         UpdateCKM();
         FromMassesToYukawas(basis);
@@ -747,16 +730,15 @@ void RGESolver::SetSMDefaultInput() {
 
 
     //CKM parameters in radians 
-    CKM_theta12 = asin(0.225);
-    CKM_theta13 = asin(0.042);
-    CKM_theta23 = asin(0.003675);
-    CKM_delta = 1.167625 * 2. * PI / 360.;
-    c12 = cos(CKM_theta12);
-    s12 = sin(CKM_theta12);
-    c13 = cos(CKM_theta13);
-    s13 = sin(CKM_theta13);
-    c23 = cos(CKM_theta23);
-    s23 = sin(CKM_theta23);
+    s12 = 0.225;
+    s13 = 0.042;
+    s23 = 0.003675;
+    CKM_delta = 1.167625;
+    c12 = sqrt(1.-s12*s12);
+    c13 = sqrt(1.-s13*s13);
+    c23 = sqrt(1.-s23*s23);
+
+
 
     //By default, Yukawas are aligned with CKM input
     //in up basis
@@ -771,9 +753,9 @@ void RGESolver::SetSMDefaultInput() {
     std::cout << "lambda : " << lambda << std::endl;
     std::cout << "mh2 : " << mh2 << std::endl;
 
-    std::cout << "CKM_theta12 : " << CKM_theta12 << std::endl;
-    std::cout << "CKM_theta13 : " << CKM_theta13 <<std::endl;
-    std::cout << "CKM_theta23 : " << CKM_theta23 <<std::endl;
+    std::cout << "s12 : " << s12 << std::endl;
+    std::cout << "s13 : " << s13 <<std::endl;
+    std::cout << "s23 : " << s23 <<std::endl;
     std::cout << "CKM_delta : " << CKM_delta <<std::endl;*/
 
 

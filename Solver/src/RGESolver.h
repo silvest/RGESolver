@@ -84,9 +84,9 @@
 <td>
 <table>
 <tr><th> Parameter     <th> Name        
-<tr><td>\f$\theta_{12}\f$         <td> `CKM_theta12`      
-<tr><td>\f$\theta_{13}\f$         <td> `CKM_theta13`      
-<tr><td>\f$\theta_{23}\f$         <td> `CKM_theta23`      
+<tr><td>\f$\sin(\theta_{12})\f$         <td> `s12`      
+<tr><td>\f$\sin(\theta_{13})\f$         <td> `s13`      
+<tr><td>\f$\sin(\theta_{23})\f$         <td> `s23`      
 <tr><td>\f$\delta\f$         <td> `CKM_delta`      
 <tr><td>\f$m_u\f$ \f$[\mathrm{GeV}]\f$  <td> `mu`      
 <tr><td>\f$m_c\f$ \f$[\mathrm{GeV}]\f$  <td> `mc`      
@@ -1031,13 +1031,6 @@ private:
     double InputScale_SM; //GeV
 
     //CKM parameters
-    /**
-     * @brief \f$\theta_{12\f$  of the CKM matrix (in radians). 
-     * The default value is ??? 
-     */
-    double CKM_theta12;
-    double CKM_theta13;
-    double CKM_theta23;
     double CKM_delta;
 
     /**

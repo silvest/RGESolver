@@ -32,10 +32,10 @@ int main() {
     double Mein[3] = {0.005, .1, 1.2};
 
     //CKM angles and phase
-    double t12in = asin(0.225);
-    double t13in = asin(0.042);
-    double t23in = asin(0.003675);
-    double deltain = 0.02;
+    double s12in = 0.225;
+    double s13in = 0.042;
+    double s23in = 0.003675;
+    double deltain = 1.;
 
     //gauge couplings and Higgs sector parameters
     double g1in = .35;
@@ -52,7 +52,7 @@ int main() {
     S.GenerateSMInitialConditions(SMinputScale, Lambda, "DOWN", "Numeric",
             g1in, g2in, g3in, lambdain, mh2in,
             Muin, Mdin, Mein,
-            t12in, t13in, t23in, deltain);
+            s12in, s13in, s23in, deltain);
 
 
 

@@ -51,9 +51,9 @@ RGESolver::RGESolver() : yuR(3, 0.), yuI(3, 0.), ydR(3, 0.), ydI(3, 0.), yeR(3, 
         FermionMasses["mmu"] = & mmu;
         FermionMasses["mtau"] = & mtau;
 
-        CKMAngles["CKM_theta12"] = & CKM_theta12;
-        CKMAngles["CKM_theta13"] = & CKM_theta13;
-        CKMAngles["CKM_theta23"] = & CKM_theta23;
+        CKMAngles["s12"] = & s12;
+        CKMAngles["s13"] = & s13;
+        CKMAngles["s23"] = & s23;
 
     }
 
