@@ -43,7 +43,7 @@ void \mbox{\hyperlink{classRGESolver_a300d0d8643d30cdb49e0df0294793ba2}{Evolve\+
 \begin{DoxyCompactList}\small\item\em Performs the R\+GE evolution and performs the back rotation on the coefficients with flavour indices. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_af4ed89d1098aa91112cf9e5a39dd8e7f}{Generate\+S\+M\+Initial\+Conditions}} (double mu, std\+::string basis, std\+::string method)
 \begin{DoxyCompactList}\small\item\em Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classRGESolver_ad61f3c391866dfa833b247019749f373}{Generate\+S\+M\+Initial\+Conditions}} (double mu\+In, double mu\+Fin, std\+::string basis, std\+::string method, double g1in, double g2in, double g3in, double lambdain, double mh2in, double Muin\mbox{[}3\mbox{]}, double Mdin\mbox{[}3\mbox{]}, double Mein\mbox{[}3\mbox{]}, double t12in, double t13in, double t23in, double deltain)
+void \mbox{\hyperlink{classRGESolver_ab228238c79a43b8d3dbb3d220beea73d}{Generate\+S\+M\+Initial\+Conditions}} (double mu\+In, double mu\+Fin, std\+::string basis, std\+::string method, double g1in, double g2in, double g3in, double lambdain, double mh2in, double Muin\mbox{[}3\mbox{]}, double Mdin\mbox{[}3\mbox{]}, double Mein\mbox{[}3\mbox{]}, double s12in, double s13in, double s23in, double deltain)
 \begin{DoxyCompactList}\small\item\em Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_a7c0c4303beb14f728a70542c8583b3a7}{Evolve\+S\+M\+Only}} (std\+::string method, double muI, double muF)
 \begin{DoxyCompactList}\small\item\em Same as \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}}, but only for the SM parameters. The user should use this method instead of \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} when interested in pure SM running. Using this function is the same of using \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} with all the S\+M\+E\+FT coefficients set to 0, but it is faster since it does compute only the evolution for the SM parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -133,11 +133,11 @@ $\mathrm{Im}(\mathcal{Y}_e)$ &{\ttfamily YeI} ~\newline
 &{\begin{tabularx}{\linewidth}{|*{2}{>{\raggedright\arraybackslash}X|}}\hline
 \cellcolor{\tableheadbgcolor}\textbf{ Parameter }&\cellcolor{\tableheadbgcolor}\textbf{ Name ~\newline
  }\\\cline{1-2}
-$\theta_{12}$ &{\ttfamily C\+K\+M\+\_\+theta12} ~\newline
+$\sin(\theta_{12})$ &{\ttfamily s12} ~\newline
  \\\cline{1-2}
-$\theta_{13}$ &{\ttfamily C\+K\+M\+\_\+theta13} ~\newline
+$\sin(\theta_{13})$ &{\ttfamily s13} ~\newline
  \\\cline{1-2}
-$\theta_{23}$ &{\ttfamily C\+K\+M\+\_\+theta23} ~\newline
+$\sin(\theta_{23})$ &{\ttfamily s23} ~\newline
  \\\cline{1-2}
 $\delta$ &{\ttfamily C\+K\+M\+\_\+delta} ~\newline
  \\\cline{1-2}
@@ -481,7 +481,7 @@ After the evolution, the C\+KM matrix and the fermion masses are computed. A fla
 
 Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. 
 
-The initial conditions are generated at the scale {\ttfamily mu} starting from the values at $\mu = ??? $ GeV in table ???. 
+The initial conditions are generated at the scale {\ttfamily mu} starting from the values at $\mu = 173.65 $ GeV in table ???. 
 \begin{DoxyParams}{Parameters}
 {\em mu} & Scale (in GeV) at which the initial conditions are generated \\
 \hline
@@ -490,11 +490,11 @@ The initial conditions are generated at the scale {\ttfamily mu} starting from t
 {\em method} & Method used by \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}} to run the SM parameters to the scale {\ttfamily mu} ({\ttfamily \char`\"{}\+Numeric\char`\"{}} or {\ttfamily \char`\"{}\+Leading-\/\+Log\char`\"{}}) \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classRGESolver_ad61f3c391866dfa833b247019749f373}\label{classRGESolver_ad61f3c391866dfa833b247019749f373}} 
+\mbox{\Hypertarget{classRGESolver_ab228238c79a43b8d3dbb3d220beea73d}\label{classRGESolver_ab228238c79a43b8d3dbb3d220beea73d}} 
 \index{RGESolver@{RGESolver}!GenerateSMInitialConditions@{GenerateSMInitialConditions}}
 \index{GenerateSMInitialConditions@{GenerateSMInitialConditions}!RGESolver@{RGESolver}}
 \doxysubsubsection{\texorpdfstring{GenerateSMInitialConditions()}{GenerateSMInitialConditions()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Generate\+S\+M\+Initial\+Conditions (\begin{DoxyParamCaption}\item[{double}]{mu\+In,  }\item[{double}]{mu\+Fin,  }\item[{std\+::string}]{basis,  }\item[{std\+::string}]{method,  }\item[{double}]{g1in,  }\item[{double}]{g2in,  }\item[{double}]{g3in,  }\item[{double}]{lambdain,  }\item[{double}]{mh2in,  }\item[{double}]{Muin\mbox{[}3\mbox{]},  }\item[{double}]{Mdin\mbox{[}3\mbox{]},  }\item[{double}]{Mein\mbox{[}3\mbox{]},  }\item[{double}]{t12in,  }\item[{double}]{t13in,  }\item[{double}]{t23in,  }\item[{double}]{deltain }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void R\+G\+E\+Solver\+::\+Generate\+S\+M\+Initial\+Conditions (\begin{DoxyParamCaption}\item[{double}]{mu\+In,  }\item[{double}]{mu\+Fin,  }\item[{std\+::string}]{basis,  }\item[{std\+::string}]{method,  }\item[{double}]{g1in,  }\item[{double}]{g2in,  }\item[{double}]{g3in,  }\item[{double}]{lambdain,  }\item[{double}]{mh2in,  }\item[{double}]{Muin\mbox{[}3\mbox{]},  }\item[{double}]{Mdin\mbox{[}3\mbox{]},  }\item[{double}]{Mein\mbox{[}3\mbox{]},  }\item[{double}]{s12in,  }\item[{double}]{s13in,  }\item[{double}]{s23in,  }\item[{double}]{deltain }\end{DoxyParamCaption})}
 
 
 
@@ -526,11 +526,11 @@ The initial conditions are generated at the scale {\ttfamily mu\+Fin} starting f
 \hline
 {\em Mein} & Array containing the masses of the charged leptons in GeV in the order $(m_{e},m_{\mu},m_{\tau})$ \\
 \hline
-{\em t12in} & The C\+KM matrix angle $ \theta_{12} $ \\
+{\em s12in} & The sine of the C\+KM matrix angle $\sin \theta_{12} $ \\
 \hline
-{\em t13in} & The C\+KM matrix angle $ \theta_{13} $ \\
+{\em s13in} & The sine of the C\+KM matrix angle $\sin \theta_{13} $ \\
 \hline
-{\em t23in} & The C\+KM matrix angle $ \theta_{23} $ \\
+{\em s23in} & The sine of the C\+KM matrix angle $\sin \theta_{23} $ \\
 \hline
 {\em deltain} & The C\+KM matrix phase $ \delta $ \\
 \hline

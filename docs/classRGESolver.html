@@ -95,9 +95,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:af4ed89d1098aa91112cf9e5a39dd8e7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#af4ed89d1098aa91112cf9e5a39dd8e7f">GenerateSMInitialConditions</a> (double mu, std::string basis, std::string method)</td></tr>
 <tr class="memdesc:af4ed89d1098aa91112cf9e5a39dd8e7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions.  <a href="classRGESolver.html#af4ed89d1098aa91112cf9e5a39dd8e7f">More...</a><br /></td></tr>
 <tr class="separator:af4ed89d1098aa91112cf9e5a39dd8e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad61f3c391866dfa833b247019749f373"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#ad61f3c391866dfa833b247019749f373">GenerateSMInitialConditions</a> (double muIn, double muFin, std::string basis, std::string method, double g1in, double g2in, double g3in, double lambdain, double mh2in, double Muin[3], double Mdin[3], double Mein[3], double t12in, double t13in, double t23in, double deltain)</td></tr>
-<tr class="memdesc:ad61f3c391866dfa833b247019749f373"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions.  <a href="classRGESolver.html#ad61f3c391866dfa833b247019749f373">More...</a><br /></td></tr>
-<tr class="separator:ad61f3c391866dfa833b247019749f373"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab228238c79a43b8d3dbb3d220beea73d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#ab228238c79a43b8d3dbb3d220beea73d">GenerateSMInitialConditions</a> (double muIn, double muFin, std::string basis, std::string method, double g1in, double g2in, double g3in, double lambdain, double mh2in, double Muin[3], double Mdin[3], double Mein[3], double s12in, double s13in, double s23in, double deltain)</td></tr>
+<tr class="memdesc:ab228238c79a43b8d3dbb3d220beea73d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions.  <a href="classRGESolver.html#ab228238c79a43b8d3dbb3d220beea73d">More...</a><br /></td></tr>
+<tr class="separator:ab228238c79a43b8d3dbb3d220beea73d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c0c4303beb14f728a70542c8583b3a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#a7c0c4303beb14f728a70542c8583b3a7">EvolveSMOnly</a> (std::string method, double muI, double muF)</td></tr>
 <tr class="memdesc:a7c0c4303beb14f728a70542c8583b3a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a>, but only for the SM parameters. The user should use this method instead of <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a> when interested in pure SM running. Using this function is the same of using <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a> with all the SMEFT coefficients set to 0, but it is faster since it does compute only the evolution for the SM parameters.  <a href="classRGESolver.html#a7c0c4303beb14f728a70542c8583b3a7">More...</a><br /></td></tr>
 <tr class="separator:a7c0c4303beb14f728a70542c8583b3a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -205,13 +205,13 @@ A summary of the operators symmetry classes is given in table <a class="el" href
 <th>Parameter </th><th>Name <br  />
  </th></tr>
 <tr>
-<td>\(\theta_{12}\) </td><td><code>CKM_theta12</code> <br  />
+<td>\(\sin(\theta_{12})\) </td><td><code>s12</code> <br  />
  </td></tr>
 <tr>
-<td>\(\theta_{13}\) </td><td><code>CKM_theta13</code> <br  />
+<td>\(\sin(\theta_{13})\) </td><td><code>s13</code> <br  />
  </td></tr>
 <tr>
-<td>\(\theta_{23}\) </td><td><code>CKM_theta23</code> <br  />
+<td>\(\sin(\theta_{23})\) </td><td><code>s23</code> <br  />
  </td></tr>
 <tr>
 <td>\(\delta\) </td><td><code>CKM_delta</code> <br  />
@@ -782,7 +782,7 @@ A summary of the operators symmetry classes is given in table <a class="el" href
 </div><div class="memdoc">
 
 <p>Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions. </p>
-<p>The initial conditions are generated at the scale <code>mu</code> starting from the values at \(\mu = ??? \) GeV in table ???. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The initial conditions are generated at the scale <code>mu</code> starting from the values at \(\mu = 173.65 \) GeV in table ???. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mu</td><td>Scale (in GeV) at which the initial conditions are generated </td></tr>
     <tr><td class="paramname">basis</td><td>Flavour basis ( <code>"UP"</code> or <code>"DOWN"</code>) </td></tr>
@@ -793,8 +793,8 @@ A summary of the operators symmetry classes is given in table <a class="el" href
 
 </div>
 </div>
-<a id="ad61f3c391866dfa833b247019749f373"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad61f3c391866dfa833b247019749f373">&#9670;&nbsp;</a></span>GenerateSMInitialConditions() <span class="overload">[2/2]</span></h2>
+<a id="ab228238c79a43b8d3dbb3d220beea73d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab228238c79a43b8d3dbb3d220beea73d">&#9670;&nbsp;</a></span>GenerateSMInitialConditions() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -875,19 +875,19 @@ A summary of the operators symmetry classes is given in table <a class="el" href
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>t12in</em>, </td>
+          <td class="paramname"><em>s12in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>t13in</em>, </td>
+          <td class="paramname"><em>s13in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>t23in</em>, </td>
+          <td class="paramname"><em>s23in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -918,9 +918,9 @@ A summary of the operators symmetry classes is given in table <a class="el" href
     <tr><td class="paramname">Muin</td><td>Array containing the masses of the up-type quarks in GeV in the order \((m_u,m_c,m_t)\) </td></tr>
     <tr><td class="paramname">Mdin</td><td>Array containing the masses of the down-type quarks in GeV in the order \((m_d,m_s,m_b)\) </td></tr>
     <tr><td class="paramname">Mein</td><td>Array containing the masses of the charged leptons in GeV in the order \((m_{e},m_{\mu},m_{\tau})\) </td></tr>
-    <tr><td class="paramname">t12in</td><td>The CKM matrix angle \( \theta_{12} \) </td></tr>
-    <tr><td class="paramname">t13in</td><td>The CKM matrix angle \( \theta_{13} \) </td></tr>
-    <tr><td class="paramname">t23in</td><td>The CKM matrix angle \( \theta_{23} \) </td></tr>
+    <tr><td class="paramname">s12in</td><td>The sine of the CKM matrix angle \(\sin \theta_{12} \) </td></tr>
+    <tr><td class="paramname">s13in</td><td>The sine of the CKM matrix angle \(\sin \theta_{13} \) </td></tr>
+    <tr><td class="paramname">s23in</td><td>The sine of the CKM matrix angle \(\sin \theta_{23} \) </td></tr>
     <tr><td class="paramname">deltain</td><td>The CKM matrix phase \( \delta \) </td></tr>
   </table>
   </dd>

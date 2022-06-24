@@ -378,7 +378,7 @@ public:
      * <tt>mu</tt> (in GeV), using one-loop pure SM beta functions. 
      *
      * @details The initial conditions are generated at the scale <tt>mu</tt> starting from the values 
-     * at \f$\mu = ??? \f$ GeV in table \ref ???. 
+     * at \f$\mu = 173.65 \f$ GeV in table \ref ???. 
      * @param mu Scale (in GeV) at which the initial conditions 
      * are generated
      * @param basis Flavour basis (
@@ -418,16 +418,16 @@ public:
      * @param Muin Array containing the masses of the up-type quarks in GeV in the order \f$(m_u,m_c,m_t)\f$ 
      * @param Mdin Array containing the masses of the down-type quarks in GeV in the order \f$(m_d,m_s,m_b)\f$ 
      * @param Mein Array containing the masses of the charged leptons in GeV in the order \f$(m_{e},m_{\mu},m_{\tau})\f$
-     * @param t12in The CKM matrix angle \f$ \theta_{12} \f$ 
-     * @param t13in The CKM matrix angle \f$ \theta_{13} \f$ 
-     * @param t23in The CKM matrix angle \f$ \theta_{23} \f$ 
+     * @param s12in The sine of the CKM matrix angle \f$\sin \theta_{12} \f$ 
+     * @param s13in The sine of the CKM matrix angle \f$\sin \theta_{13} \f$ 
+     * @param s23in The sine of the CKM matrix angle \f$\sin \theta_{23} \f$ 
      * @param deltain The CKM matrix phase \f$ \delta \f$ 
 
      */
     void GenerateSMInitialConditions(double muIn, double muFin, std::string basis, std::string method,
             double g1in, double g2in, double g3in, double lambdain, double mh2in,
             double Muin[3], double Mdin[3], double Mein[3],
-            double t12in, double t13in, double t23in, double deltain);
+             double s12in, double s13in, double s23in, double deltain);
 
 
     /**
