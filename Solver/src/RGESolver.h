@@ -63,48 +63,49 @@
 //tables with all the names of the coefficients.
 
 /**
+ * 
+ * 
+ * 
+
 <table>
 <caption id="SM"> Standard Model parameters. The labels in the left column 
-must be used with the GetCoefficient(std::string name) method. The ones 
-in the right column must be used with GetFermionMass(std::string name) and GetCKMAngle(std::string name) </caption>
+must be used with the GetCoefficient method, the ones 
+in the right column must be used with GetFermionMass and GetCKMAngle methods.  </caption>
 <tr style="vertical-align:top">
 <td>
 <table>
 <tr> <th> Parameter     <th> Name  
-<tr> <td> \f$g_1\f$     <td> `g1`
-<tr><td> \f$g_2\f$          <td> `g2`
-<tr><td>\f$g_3\f$         <td> `g3`      
-<tr><td>\f$\lambda\f$         <td> `lambda`      
-<tr><td>\f$m_h^2\f$ \f$[\mathrm{GeV}^2]\f$  <td> `mh2`      
-<tr><td>\f$\mathrm{Re}(\mathcal{Y}_u)\f$         <td> `YuR`      
-<tr><td>\f$\mathrm{Im}(\mathcal{Y}_u)\f$         <td> `YuI`      
-<tr><td>\f$\mathrm{Re}(\mathcal{Y}_d)\f$         <td> `YdR`      
-<tr><td>\f$\mathrm{Im}(\mathcal{Y}_d)\f$         <td> `YdI`      
+<tr><td> \f$g_1\f$     <td> `g1`
+<tr><td> \f$g_2\f$     <td> `g2`
+<tr><td> \f$g_3\f$     <td> `g3`      
+<tr><td> \f$\lambda\f$  <td> `lambda`      
+<tr><td> \f$m_h^2\f$ \f$[\mathrm{GeV}^2]\f$  <td> `mh2`      
+<tr><td> \f$\mathrm{Re}(\mathcal{Y}_u)\f$         <td> `YuR`      
+<tr><td> \f$\mathrm{Im}(\mathcal{Y}_u)\f$         <td> `YuI`      
+<tr><td> \f$\mathrm{Re}(\mathcal{Y}_d)\f$         <td> `YdR`      
+<tr><td> \f$\mathrm{Im}(\mathcal{Y}_d)\f$         <td> `YdI`      
 <tr><td> \f$\mathrm{Re}(\mathcal{Y}_e)\f$         <td> `YeR`      
-<tr><td>\f$\mathrm{Im}(\mathcal{Y}_e)\f$         <td> `YeI`      
-</table> 
-<td>
+<tr><td> \f$\mathrm{Im}(\mathcal{Y}_e)\f$         <td> `YeI`
+</table> <td> 
 <table>
-<tr><th> Parameter     <th> Name        
-<tr><td>\f$\sin(\theta_{12})\f$         <td> `s12`      
-<tr><td>\f$\sin(\theta_{13})\f$         <td> `s13`      
-<tr><td>\f$\sin(\theta_{23})\f$         <td> `s23`      
- <tr><td>\f$m_u\f$ \f$[\mathrm{GeV}]\f$  <td> `mu`      
-<tr><td>\f$m_c\f$ \f$[\mathrm{GeV}]\f$  <td> `mc`      
-<tr><td>\f$m_t\f$ \f$[\mathrm{GeV}]\f$  <td> `mt`      
-<tr><td>\f$m_d\f$ \f$[\mathrm{GeV}]\f$  <td> `md`      
-<tr><td>\f$m_s\f$ \f$[\mathrm{GeV}]\f$  <td> `ms`      
-<tr><td>\f$m_b\f$ \f$[\mathrm{GeV}]\f$  <td> `mb`      
-<tr><td>\f$m_{e}\f$ \f$[\mathrm{GeV}]\f$  <td> `mel`      
-<tr><td>\f$m_{\mu}\f$ \f$[\mathrm{GeV}]\f$  <td> `mmu`      
-<tr><td>\f$m_{\tau}\f$ \f$[\mathrm{GeV}]\f$  <td> `mtau`      
+<tr> <th> Parameter     <th> Name        
+<tr><td> \f$ \sin(\theta_{12})\f$         <td> `s12`      
+<tr><td> \f$ \sin(\theta_{13})\f$         <td> `s13`      
+<tr><td> \f$ \sin(\theta_{23})\f$         <td> `s23`  
+<tr><td> \f$ m_u\f$ \f$[\mathrm{GeV}]\f$  <td> `mu`      
+<tr><td> \f$ m_c\f$ \f$[\mathrm{GeV}]\f$  <td> `mc`      
+<tr><td> \f$ m_t\f$ \f$[\mathrm{GeV}]\f$  <td> `mt`      
+<tr><td> \f$ m_d\f$ \f$[\mathrm{GeV}]\f$  <td> `md`      
+<tr><td> \f$ m_s\f$ \f$[\mathrm{GeV}]\f$  <td> `ms`      
+<tr><td> \f$ m_b\f$ \f$[\mathrm{GeV}]\f$  <td> `mb`      
+<tr><td> \f$ m_{e}\f$ \f$[\mathrm{GeV}]\f$  <td> `mel`      
+<tr><td> \f$ m_{\mu}\f$ \f$[\mathrm{GeV}]\f$  <td> `mmu`      
+<tr><td> \f$ m_{\tau}\f$ \f$[\mathrm{GeV}]\f$  <td> `mtau`
 </table>
-</table> 
-  
+</table>
+
+ *
  * 
- * 
- * 
- 
  
 <table>
 <caption id="0F"> Scalar (and real) SMEFT operators. </caption>
