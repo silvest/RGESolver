@@ -127,7 +127,7 @@ for what concerns the conventions for the CKM matrix.
 <tr><th> Parameter     <th> Value [GeV]   
 <tr><td>\f$m_u\f$   <td> 0.0012      
 <tr><td>\f$m_c\f$   <td> 0.640      
-<tr><td>\f$m_t\f$   <td> 126.0      
+<tr><td>\f$m_t\f$   <td> 162.0      
 <tr><td>\f$m_d\f$  <td> 0.0027      
 <tr><td>\f$m_s\f$   <td> 0.052      
 <tr><td>\f$m_b\f$   <td> 2.75     
