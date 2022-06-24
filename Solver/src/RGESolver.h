@@ -65,8 +65,8 @@
 /**
 <table>
 <caption id="SM"> Standard Model parameters. The labels in the left column 
- * must be used with the \ref GetCoefficient(std::string name) method. The ones 
- * in the right column must be used with \ref GetFermionMass and \ref GetCKMAngle </caption>
+must be used with the \ref GetCoefficient(std::string name) method. The ones 
+in the right column must be used with \ref GetFermionMass and \ref GetCKMAngle </caption>
 <tr style="vertical-align:top">
 <td>
 <table>
