@@ -64,7 +64,9 @@
 
 /**
 <table>
-<caption id="SM"> Standard Model parameters. </caption>
+<caption id="SM"> Standard Model parameters. The labels in the left column 
+ * must be used with the \ref GetCoefficient(std::string name) method. The ones 
+ * in the right column must be used with \ref GetFermionMass and \ref GetCKMAngle </caption>
 <tr style="vertical-align:top">
 <td>
 <table>
@@ -87,8 +89,7 @@
 <tr><td>\f$\sin(\theta_{12})\f$         <td> `s12`      
 <tr><td>\f$\sin(\theta_{13})\f$         <td> `s13`      
 <tr><td>\f$\sin(\theta_{23})\f$         <td> `s23`      
-<tr><td>\f$\delta\f$         <td> `CKM_delta`      
-<tr><td>\f$m_u\f$ \f$[\mathrm{GeV}]\f$  <td> `mu`      
+ <tr><td>\f$m_u\f$ \f$[\mathrm{GeV}]\f$  <td> `mu`      
 <tr><td>\f$m_c\f$ \f$[\mathrm{GeV}]\f$  <td> `mc`      
 <tr><td>\f$m_t\f$ \f$[\mathrm{GeV}]\f$  <td> `mt`      
 <tr><td>\f$m_d\f$ \f$[\mathrm{GeV}]\f$  <td> `md`      
