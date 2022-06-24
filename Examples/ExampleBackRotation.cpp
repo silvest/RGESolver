@@ -194,5 +194,10 @@ int main() {
             << S.GetCoefficient("Cqu1R", 1, 2, 2, 2) << std::endl;
     std::cout << "CllR(1,1,1,2)(" << muLow << " GeV) : "
             << S.GetCoefficient("CllR", 1, 1, 1, 2) << std::endl;
+    
+    
+    //Mass of the fermions: 
+    std::cout << "Up quark mass at " << muLow << " GeV : "
+            << S.GetCoefficient("mu") << std::endl;
     return 0;
 }

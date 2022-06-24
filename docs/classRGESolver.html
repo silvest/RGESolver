@@ -93,7 +93,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:a300d0d8643d30cdb49e0df0294793ba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs the RGE evolution and performs the back rotation on the coefficients with flavour indices.  <a href="classRGESolver.html#a300d0d8643d30cdb49e0df0294793ba2">More...</a><br /></td></tr>
 <tr class="separator:a300d0d8643d30cdb49e0df0294793ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4ed89d1098aa91112cf9e5a39dd8e7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#af4ed89d1098aa91112cf9e5a39dd8e7f">GenerateSMInitialConditions</a> (double mu, std::string basis, std::string method)</td></tr>
-<tr class="memdesc:af4ed89d1098aa91112cf9e5a39dd8e7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions.  <a href="classRGESolver.html#af4ed89d1098aa91112cf9e5a39dd8e7f">More...</a><br /></td></tr>
+<tr class="memdesc:af4ed89d1098aa91112cf9e5a39dd8e7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions. At such scale, the masses of the fermions and the CKM parameters are computed.  <a href="classRGESolver.html#af4ed89d1098aa91112cf9e5a39dd8e7f">More...</a><br /></td></tr>
 <tr class="separator:af4ed89d1098aa91112cf9e5a39dd8e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab228238c79a43b8d3dbb3d220beea73d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#ab228238c79a43b8d3dbb3d220beea73d">GenerateSMInitialConditions</a> (double muIn, double muFin, std::string basis, std::string method, double g1in, double g2in, double g3in, double lambdain, double mh2in, double Muin[3], double Mdin[3], double Mein[3], double s12in, double s13in, double s23in, double deltain)</td></tr>
 <tr class="memdesc:ab228238c79a43b8d3dbb3d220beea73d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions.  <a href="classRGESolver.html#ab228238c79a43b8d3dbb3d220beea73d">More...</a><br /></td></tr>
@@ -247,74 +247,6 @@ A summary of the operators symmetry classes is given in table <a class="el" href
 </td></tr>
 </table>
 </dd></dl>
-<a class="anchor" id="SMInput"></a>
-<table class="doxtable">
-<caption>SM parameters used by default to generate SM initial conditions at an arbitrary scale. The scale at which these parameters are given is \( \mu = 173.65\) GeV. We follow <a href="http://www.utfit.org/UTfit/Formalism">http://www.utfit.org/UTfit/Formalism</a> for what concerns the conventions for the CKM matrix. </caption>
-<tr style="vertical-align:top">
-<td><table class="doxtable">
-<tr>
-<th>Parameter </th><th>Value <br  />
- </th></tr>
-<tr>
-<td>\(g_1\) </td><td>0.3573 </td></tr>
-<tr>
-<td>\(g_2\) </td><td>0.6511 </td></tr>
-<tr>
-<td>\(g_3\) </td><td>1.161 <br  />
- </td></tr>
-<tr>
-<td>\(\lambda\) </td><td>0.1297 <br  />
- </td></tr>
-<tr>
-<td>\(m_h^2\) \([\mathrm{GeV}^2]\) </td><td>15650 <br  />
- </td></tr>
-<tr>
-<td>\(\sin(\theta_{12})\) </td><td>0.225 <br  />
- </td></tr>
-<tr>
-<td>\(\sin(\theta_{13})\) </td><td>0.042 <br  />
- </td></tr>
-<tr>
-<td>\(\sin(\theta_{23})\) </td><td>0.003675 <br  />
- </td></tr>
-<tr>
-<td>\(\delta\) [rad] </td><td>1.1676 <br  />
- </td></tr>
-</table>
-</td><td><table class="doxtable">
-<tr>
-<th>Parameter </th><th>Value [GeV] <br  />
- </th></tr>
-<tr>
-<td>\(m_u\) </td><td>0.0012 <br  />
- </td></tr>
-<tr>
-<td>\(m_c\) </td><td>0.640 <br  />
- </td></tr>
-<tr>
-<td>\(m_t\) </td><td>162.0 <br  />
- </td></tr>
-<tr>
-<td>\(m_d\) </td><td>0.0027 <br  />
- </td></tr>
-<tr>
-<td>\(m_s\) </td><td>0.052 <br  />
- </td></tr>
-<tr>
-<td>\(m_b\) </td><td>2.75 <br  />
- </td></tr>
-<tr>
-<td>\(m_{e}\) </td><td>0.000511 <br  />
- </td></tr>
-<tr>
-<td>\(m_{\mu}\) </td><td>0.1057 <br  />
- </td></tr>
-<tr>
-<td>\(m_{\tau}\) </td><td>1.776 <br  />
- </td></tr>
-</table>
-</td></tr>
-</table>
 <a class="anchor" id="0F"></a>
 <table class="doxtable">
 <caption>Scalar (and real) SMEFT operators. </caption>
@@ -674,6 +606,74 @@ A summary of the operators symmetry classes is given in table <a class="el" href
 <td>WC8I </td><td>\( \mathcal{C}_{ee}\) (imaginary part) <br  />
  </td></tr>
 </table>
+<a class="anchor" id="SMInput"></a>
+<table class="doxtable">
+<caption>SM parameters used by default to generate SM initial conditions at an arbitrary scale. The scale at which these parameters are given is \( \mu = 173.65\) GeV. We follow <a href="http://www.utfit.org/UTfit/Formalism">http://www.utfit.org/UTfit/Formalism</a> for what concerns the conventions for the CKM matrix.  </caption>
+<tr style="vertical-align:top">
+<td><table class="doxtable">
+<tr>
+<th>Parameter </th><th>Value <br  />
+ </th></tr>
+<tr>
+<td>\(g_1\) </td><td>0.3573 </td></tr>
+<tr>
+<td>\(g_2\) </td><td>0.6511 </td></tr>
+<tr>
+<td>\(g_3\) </td><td>1.161 <br  />
+ </td></tr>
+<tr>
+<td>\(\lambda\) </td><td>0.1297 <br  />
+ </td></tr>
+<tr>
+<td>\(m_h^2\) \([\mathrm{GeV}^2]\) </td><td>15650 <br  />
+ </td></tr>
+<tr>
+<td>\(\sin(\theta_{12})\) </td><td>0.225 <br  />
+ </td></tr>
+<tr>
+<td>\(\sin(\theta_{13})\) </td><td>0.042 <br  />
+ </td></tr>
+<tr>
+<td>\(\sin(\theta_{23})\) </td><td>0.003675 <br  />
+ </td></tr>
+<tr>
+<td>\(\delta\) [rad] </td><td>1.1676 <br  />
+ </td></tr>
+</table>
+</td><td><table class="doxtable">
+<tr>
+<th>Parameter </th><th>Value [GeV] <br  />
+ </th></tr>
+<tr>
+<td>\(m_u\) </td><td>0.0012 <br  />
+ </td></tr>
+<tr>
+<td>\(m_c\) </td><td>0.640 <br  />
+ </td></tr>
+<tr>
+<td>\(m_t\) </td><td>162.0 <br  />
+ </td></tr>
+<tr>
+<td>\(m_d\) </td><td>0.0027 <br  />
+ </td></tr>
+<tr>
+<td>\(m_s\) </td><td>0.052 <br  />
+ </td></tr>
+<tr>
+<td>\(m_b\) </td><td>2.75 <br  />
+ </td></tr>
+<tr>
+<td>\(m_{e}\) </td><td>0.000511 <br  />
+ </td></tr>
+<tr>
+<td>\(m_{\mu}\) </td><td>0.1057 <br  />
+ </td></tr>
+<tr>
+<td>\(m_{\tau}\) </td><td>1.776 <br  />
+ </td></tr>
+</table>
+</td></tr>
+</table>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aedc6f80d9a01de09d4ddf1e5b670c690"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aedc6f80d9a01de09d4ddf1e5b670c690">&#9670;&nbsp;</a></span>Evolve()</h2>
@@ -849,8 +849,8 @@ A summary of the operators symmetry classes is given in table <a class="el" href
       </table>
 </div><div class="memdoc">
 
-<p>Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions. </p>
-<p>The initial conditions are generated at the scale <code>mu</code> starting from the values at \(\mu = 173.65 \) GeV in table ???. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions. At such scale, the masses of the fermions and the CKM parameters are computed. </p>
+<p>The initial conditions are generated at the scale <code>mu</code> starting from the values at \(\mu = 173.65 \) GeV in table <a class="el" href="classRGESolver.html#SMInput">SMInput</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mu</td><td>Scale (in GeV) at which the initial conditions are generated </td></tr>
     <tr><td class="paramname">basis</td><td>Flavour basis ( <code>"UP"</code> or <code>"DOWN"</code>) </td></tr>

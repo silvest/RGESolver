@@ -103,41 +103,7 @@
  * 
  * 
  * 
- <table>
-<caption id="SMInput">  SM parameters used by default to generate SM initial conditions at an arbitrary
-scale. The scale at which these parameters are given is \f$ \mu = 173.65\f$ GeV. We follow http://www.utfit.org/UTfit/Formalism
-for what concerns the conventions for the CKM matrix.
- </caption>
-<tr style="vertical-align:top">
-<td>
-<table>
-<tr> <th> Parameter     <th> Value  
-<tr>    <td> \f$g_1\f$ <td> 0.3573
-<tr><td>    \f$g_2\f$       <td> 0.6511
-<tr><td>\f$g_3\f$         <td> 1.161     
-<tr><td>\f$\lambda\f$         <td> 0.1297      
-<tr><td>\f$m_h^2\f$ \f$[\mathrm{GeV}^2]\f$  <td> 15650      
-<tr><td>\f$\sin(\theta_{12})\f$         <td> 0.225     
-<tr><td>\f$\sin(\theta_{13})\f$         <td> 0.042      
-<tr><td>\f$\sin(\theta_{23})\f$         <td> 0.003675    
-<tr><td>\f$\delta\f$ [rad]       <td> 1.1676     
-</table> 
-<td>
-<table>
-<tr><th> Parameter     <th> Value [GeV]   
-<tr><td>\f$m_u\f$   <td> 0.0012      
-<tr><td>\f$m_c\f$   <td> 0.640      
-<tr><td>\f$m_t\f$   <td> 162.0      
-<tr><td>\f$m_d\f$  <td> 0.0027      
-<tr><td>\f$m_s\f$   <td> 0.052      
-<tr><td>\f$m_b\f$   <td> 2.75     
-<tr><td>\f$m_{e}\f$   <td> 0.000511     
-<tr><td>\f$m_{\mu}\f$  <td> 0.1057    
-<tr><td>\f$m_{\tau}\f$   <td> 1.776      
-</table>
-</table> 
- * 
- * 
+ 
  
 <table>
 <caption id="0F"> Scalar (and real) SMEFT operators. </caption>
@@ -325,6 +291,43 @@ flavour indices for each category.
 </table> 
  * 
  * 
+ * 
+ <table>
+<caption id="SMInput">  SM parameters used by default to generate SM initial conditions at an arbitrary
+scale. The scale at which these parameters are given is \f$ \mu = 173.65\f$ GeV. We follow http://www.utfit.org/UTfit/Formalism
+for what concerns the conventions for the CKM matrix.  
+ </caption>
+<tr style="vertical-align:top">
+<td>
+<table>
+<tr> <th> Parameter     <th> Value  
+<tr>    <td> \f$g_1\f$ <td> 0.3573
+<tr><td>    \f$g_2\f$       <td> 0.6511
+<tr><td>\f$g_3\f$         <td> 1.161     
+<tr><td>\f$\lambda\f$         <td> 0.1297      
+<tr><td>\f$m_h^2\f$ \f$[\mathrm{GeV}^2]\f$  <td> 15650      
+<tr><td>\f$\sin(\theta_{12})\f$         <td> 0.225     
+<tr><td>\f$\sin(\theta_{13})\f$         <td> 0.042      
+<tr><td>\f$\sin(\theta_{23})\f$         <td> 0.003675    
+<tr><td>\f$\delta\f$ [rad]       <td> 1.1676     
+</table> 
+<td>
+<table>
+<tr><th> Parameter     <th> Value [GeV]   
+<tr><td>\f$m_u\f$   <td> 0.0012      
+<tr><td>\f$m_c\f$   <td> 0.640      
+<tr><td>\f$m_t\f$   <td> 162.0      
+<tr><td>\f$m_d\f$  <td> 0.0027      
+<tr><td>\f$m_s\f$   <td> 0.052      
+<tr><td>\f$m_b\f$   <td> 2.75     
+<tr><td>\f$m_{e}\f$   <td> 0.000511     
+<tr><td>\f$m_{\mu}\f$  <td> 0.1057    
+<tr><td>\f$m_{\tau}\f$   <td> 1.776      
+</table>
+</table> 
+ * 
+ * 
+ * 
  */
 
 class RGESolver {
@@ -408,10 +411,10 @@ public:
      * @brief Generates the initial conditions 
      * for Standard Model's parameters (gauge couplings,
      * Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale 
-     * <tt>mu</tt> (in GeV), using one-loop pure SM beta functions. 
-     *
+     * <tt>mu</tt> (in GeV), using one-loop pure SM beta functions.
+     * At such scale, the masses of the fermions and the CKM parameters are computed.
      * @details The initial conditions are generated at the scale <tt>mu</tt> starting from the values 
-     * at \f$\mu = 173.65 \f$ GeV in table \ref ???. 
+     * at \f$\mu = 173.65 \f$ GeV in table \ref SMInput. 
      * @param mu Scale (in GeV) at which the initial conditions 
      * are generated
      * @param basis Flavour basis (

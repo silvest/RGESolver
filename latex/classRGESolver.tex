@@ -42,7 +42,7 @@ void \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}}
 void \mbox{\hyperlink{classRGESolver_a300d0d8643d30cdb49e0df0294793ba2}{Evolve\+To\+Basis}} (std\+::string method, double muI, double muF, std\+::string basis)
 \begin{DoxyCompactList}\small\item\em Performs the R\+GE evolution and performs the back rotation on the coefficients with flavour indices. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_af4ed89d1098aa91112cf9e5a39dd8e7f}{Generate\+S\+M\+Initial\+Conditions}} (double mu, std\+::string basis, std\+::string method)
-\begin{DoxyCompactList}\small\item\em Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. At such scale, the masses of the fermions and the C\+KM parameters are computed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_ab228238c79a43b8d3dbb3d220beea73d}{Generate\+S\+M\+Initial\+Conditions}} (double mu\+In, double mu\+Fin, std\+::string basis, std\+::string method, double g1in, double g2in, double g3in, double lambdain, double mh2in, double Muin\mbox{[}3\mbox{]}, double Mdin\mbox{[}3\mbox{]}, double Mein\mbox{[}3\mbox{]}, double s12in, double s13in, double s23in, double deltain)
 \begin{DoxyCompactList}\small\item\em Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_a7c0c4303beb14f728a70542c8583b3a7}{Evolve\+S\+M\+Only}} (std\+::string method, double muI, double muF)
@@ -164,57 +164,6 @@ $m_{\tau}$ $[\mathrm{GeV}]$ &{\ttfamily mtau} ~\newline
 \end{longtabu}
 
 \end{DoxyCopyright}
-\hypertarget{classRGESolver_SMInput}{}
-\tabulinesep=1mm
-\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
-\caption{SM parameters used by default to generate SM initial conditions at an arbitrary scale. The scale at which these parameters are given is $ \mu = 173.65$ GeV. We follow \href{http://www.utfit.org/UTfit/Formalism}{\texttt{ http\+://www.\+utfit.\+org/\+U\+Tfit/\+Formalism}} for what concerns the conventions for the C\+KM matrix. }\label{classRGESolver_SMInput}\\
-\hline
-{\begin{tabularx}{\linewidth}{|*{2}{>{\raggedright\arraybackslash}X|}}\hline
-\cellcolor{\tableheadbgcolor}\textbf{ Parameter }&\cellcolor{\tableheadbgcolor}\textbf{ Value ~\newline
- }\\\cline{1-2}
-$g_1$ &0.\+3573 \\\cline{1-2}
-$g_2$ &0.\+6511 \\\cline{1-2}
-$g_3$ &1.\+161 ~\newline
- \\\cline{1-2}
-$\lambda$ &0.\+1297 ~\newline
- \\\cline{1-2}
-$m_h^2$ $[\mathrm{GeV}^2]$ &15650 ~\newline
- \\\cline{1-2}
-$\sin(\theta_{12})$ &0.\+225 ~\newline
- \\\cline{1-2}
-$\sin(\theta_{13})$ &0.\+042 ~\newline
- \\\cline{1-2}
-$\sin(\theta_{23})$ &0.\+003675 ~\newline
- \\\cline{1-2}
-$\delta$ \mbox{[}rad\mbox{]} &1.\+1676 ~\newline
- \\\cline{1-2}
-\end{tabularx}}
-&{\begin{tabularx}{\linewidth}{|*{2}{>{\raggedright\arraybackslash}X|}}\hline
-\cellcolor{\tableheadbgcolor}\textbf{ Parameter }&\cellcolor{\tableheadbgcolor}\textbf{ Value \mbox{[}GeV\mbox{]} ~\newline
- }\\\cline{1-2}
-$m_u$ &0.\+0012 ~\newline
- \\\cline{1-2}
-$m_c$ &0.\+640 ~\newline
- \\\cline{1-2}
-$m_t$ &162.\+0 ~\newline
- \\\cline{1-2}
-$m_d$ &0.\+0027 ~\newline
- \\\cline{1-2}
-$m_s$ &0.\+052 ~\newline
- \\\cline{1-2}
-$m_b$ &2.\+75 ~\newline
- \\\cline{1-2}
-$m_{e}$ &0.\+000511 ~\newline
- \\\cline{1-2}
-$m_{\mu}$ &0.\+1057 ~\newline
- \\\cline{1-2}
-$m_{\tau}$ &1.\+776 ~\newline
- \\\cline{1-2}
-\end{tabularx}}
-\\\cline{1-2}
-\end{longtabu}
-
-
 \hypertarget{classRGESolver_0F}{}
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
@@ -459,6 +408,57 @@ W\+C8I &$ \mathcal{C}_{ee}$ (imaginary part) ~\newline
 \end{longtabu}
 
 
+\hypertarget{classRGESolver_SMInput}{}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\caption{SM parameters used by default to generate SM initial conditions at an arbitrary scale. The scale at which these parameters are given is $ \mu = 173.65$ GeV. We follow \href{http://www.utfit.org/UTfit/Formalism}{\texttt{ http\+://www.\+utfit.\+org/\+U\+Tfit/\+Formalism}} for what concerns the conventions for the C\+KM matrix.  }\label{classRGESolver_SMInput}\\
+\hline
+{\begin{tabularx}{\linewidth}{|*{2}{>{\raggedright\arraybackslash}X|}}\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Parameter }&\cellcolor{\tableheadbgcolor}\textbf{ Value ~\newline
+ }\\\cline{1-2}
+$g_1$ &0.\+3573 \\\cline{1-2}
+$g_2$ &0.\+6511 \\\cline{1-2}
+$g_3$ &1.\+161 ~\newline
+ \\\cline{1-2}
+$\lambda$ &0.\+1297 ~\newline
+ \\\cline{1-2}
+$m_h^2$ $[\mathrm{GeV}^2]$ &15650 ~\newline
+ \\\cline{1-2}
+$\sin(\theta_{12})$ &0.\+225 ~\newline
+ \\\cline{1-2}
+$\sin(\theta_{13})$ &0.\+042 ~\newline
+ \\\cline{1-2}
+$\sin(\theta_{23})$ &0.\+003675 ~\newline
+ \\\cline{1-2}
+$\delta$ \mbox{[}rad\mbox{]} &1.\+1676 ~\newline
+ \\\cline{1-2}
+\end{tabularx}}
+&{\begin{tabularx}{\linewidth}{|*{2}{>{\raggedright\arraybackslash}X|}}\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Parameter }&\cellcolor{\tableheadbgcolor}\textbf{ Value \mbox{[}GeV\mbox{]} ~\newline
+ }\\\cline{1-2}
+$m_u$ &0.\+0012 ~\newline
+ \\\cline{1-2}
+$m_c$ &0.\+640 ~\newline
+ \\\cline{1-2}
+$m_t$ &162.\+0 ~\newline
+ \\\cline{1-2}
+$m_d$ &0.\+0027 ~\newline
+ \\\cline{1-2}
+$m_s$ &0.\+052 ~\newline
+ \\\cline{1-2}
+$m_b$ &2.\+75 ~\newline
+ \\\cline{1-2}
+$m_{e}$ &0.\+000511 ~\newline
+ \\\cline{1-2}
+$m_{\mu}$ &0.\+1057 ~\newline
+ \\\cline{1-2}
+$m_{\tau}$ &1.\+776 ~\newline
+ \\\cline{1-2}
+\end{tabularx}}
+\\\cline{1-2}
+\end{longtabu}
+
+
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}\label{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}} 
 \index{RGESolver@{RGESolver}!Evolve@{Evolve}}
@@ -530,9 +530,9 @@ After the evolution, the C\+KM matrix and the fermion masses are computed. A fla
 
 
 
-Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. 
+Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. At such scale, the masses of the fermions and the C\+KM parameters are computed. 
 
-The initial conditions are generated at the scale {\ttfamily mu} starting from the values at $\mu = 173.65 $ GeV in table ???. 
+The initial conditions are generated at the scale {\ttfamily mu} starting from the values at $\mu = 173.65 $ GeV in table \doxytablelink{classRGESolver_SMInput}{S\+M\+Input}. 
 \begin{DoxyParams}{Parameters}
 {\em mu} & Scale (in GeV) at which the initial conditions are generated \\
 \hline
