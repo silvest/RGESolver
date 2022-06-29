@@ -37,20 +37,6 @@ RGESolver::RGESolver() : yuR(3, 0.), yuI(3, 0.), ydR(3, 0.), ydI(3, 0.), yeR(3, 
         Operators0F["mh2"] = & mh2;
         Operators0F["lambda"] = & lambda;
 
-
-
-        FermionMasses["mu"] = & mu;
-        FermionMasses["mc"] = & mc;
-        FermionMasses["mt"] = & mt;
-
-        FermionMasses["md"] = & md;
-        FermionMasses["ms"] = & ms;
-        FermionMasses["mb"] = & mb;
-
-        FermionMasses["mel"] = & mel;
-        FermionMasses["mmu"] = & mmu;
-        FermionMasses["mtau"] = & mtau;
-
         CKMAngles["s12"] = & s12;
         CKMAngles["s13"] = & s13;
         CKMAngles["s23"] = & s23;

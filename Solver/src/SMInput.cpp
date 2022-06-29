@@ -3,26 +3,6 @@
 //#include "gsl/gsl_complex.h"
 //#include "gsl/gsl_complex_math.h"
 
-/*
-void RGESolver::SetCKMPhase(double val) {
-    if (val <= 3.141592653589793
-            && val>- 3.141592653589793) {
-        CKM_delta = val;
-    } else {
-        std::cout << "ERROR: CKM PHASE SHOULD BE IN THE INTERVAL (-pi,pi]"
-                << std::endl;
-    }
-}
-
-void RGESolver::SetCKMAngle(std::string name, double val) {
-    if (val <= 3.141592653589793 * 0.5
-            && val >= 0.) {
- *(CKMAngles.at(name)) = val;
-    } else {
-        std::cout << "ERROR: CKM ANGLES SHOULD BE IN THE INTERVAL [0,pi/2]"
-                << std::endl;
-    }
-}*/
 
 double RGESolver::GetCKMAngle(std::string name) {
     return * (CKMAngles.at(name));
@@ -32,19 +12,6 @@ double RGESolver::GetCKMPhase() {
     return CKM_delta;
 }
 
-/*
-void RGESolver::SetFermionMass(std::string name, double val) {
-    if (val >= 0.) {
- *(FermionMasses.at(name)) = val;
-    } else {
-        std::cout << "ERROR: FERMION MASSES MUST BE NON-NEGATIVE"
-                << std::endl;
-    }
-}*/
-
-double RGESolver::GetFermionMass(std::string name) {
-    return * (FermionMasses.at(name));
-}
 
 
 
@@ -340,25 +307,7 @@ void RGESolver::GoToBasisSMOnly(std::string basis) {
     yd.singularvalue(Ud, Vd, Sd);
     ye.singularvalue(Re, Rl, Se);
 
-    //Updating fermion masses
-
-    //mf = yfdiag * v /sqrt(2)
-    //v = sqrt(mh2 / (2 lambda))
-    //v/sqrt(2) =  sqrt(mh2 / (4 lambda))
-    double vOverSqrt2 = sqrt(0.25 * mh2 / lambda);
-
-
-    mu = Su(0) * vOverSqrt2;
-    mc = Su(1) * vOverSqrt2;
-    mt = Su(2) * vOverSqrt2;
-
-    md = Sd(0) * vOverSqrt2;
-    ms = Sd(1) * vOverSqrt2;
-    mb = Sd(2) * vOverSqrt2;
-
-    mel = Se(0) * vOverSqrt2;
-    mmu = Se(1) * vOverSqrt2;
-    mtau = Se(2) * vOverSqrt2;
+    
 
 
     //Matrix to rotate fields
@@ -766,74 +715,6 @@ void RGESolver::SetSMDefaultInput() {
 
 }
 
-/*
-void RGESolver::ComputeCKMAndFermionMasses() {
-
-    gslpp::matrix<gslpp::complex> Uu(3, 3, 0.);
-    gslpp::matrix<gslpp::complex> Vu(3, 3, 0.);
-    gslpp::matrix<gslpp::complex> yuDiag(3, 3, 0.);
-    gslpp::vector<double> Su(3, 0.);
-
-    gslpp::matrix<gslpp::complex> Ud(3, 3, 0.);
-    gslpp::matrix<gslpp::complex> Vd(3, 3, 0.);
-    gslpp::matrix<gslpp::complex> ydDiag(3, 3, 0.);
-    gslpp::vector<double> Sd(3, 0.);
-
-    gslpp::matrix<gslpp::complex> Re(3, 3, 0.);
-    gslpp::matrix<gslpp::complex> Rl(3, 3, 0.);
-    gslpp::matrix<gslpp::complex> Redag(3, 3, 0.);
-    gslpp::matrix<gslpp::complex> Rldag(3, 3, 0.);
-    gslpp::matrix<gslpp::complex> yeDiag(3, 3, 0.);
-    gslpp::vector<double> Se(3, 0.);
-
-    int i, j;
-    gslpp::matrix<gslpp::complex> yu(3, 3, 0.);
-    gslpp::matrix<gslpp::complex> yd(3, 3, 0.);
-    gslpp::matrix<gslpp::complex> ye(3, 3, 0.);
-
-    for (i = 0; i < 3; i ++) {
-        for (j = 0; j < 3; j ++) {
-            yu.assign(i, j, gslpp::complex(yuR[i][j], yuI[i][j], false));
-            yd.assign(i, j, gslpp::complex(ydR[i][j], ydI[i][j], false));
-            ye.assign(i, j, gslpp::complex(yeR[i][j], yeI[i][j], false));
-        }
-    }
-
-    using namespace std;
-
-    yu.singularvalue(Uu, Vu, Su);
-    yd.singularvalue(Ud, Vd, Sd);
-    ye.singularvalue(Re, Rl, Se);
-
-    //Updating fermion masses
-
-    //mf = yfdiag * v /sqrt(2)
-    //v = sqrt(mh2 / (2 lambda))
-    //v/sqrt(2) =  sqrt(mh2 / (4 lambda))
-    double vOverSqrt2 = sqrt(0.25 * mh2 / lambda);
-
-
-    mu = Su(0) * vOverSqrt2;
-    mc = Su(1) * vOverSqrt2;
-    mt = Su(2) * vOverSqrt2;
-
-    md = Sd(0) * vOverSqrt2;
-    ms = Sd(1) * vOverSqrt2;
-    mb = Sd(2) * vOverSqrt2;
-
-    mel = Se(0) * vOverSqrt2;
-    mmu = Se(1) * vOverSqrt2;
-    mtau = Se(2) * vOverSqrt2;
-
-
-    //Computing the CKM 
-    CKM = (Vu.hconjugate()) * Vd;
-    //Extract the 4 parameters from the raw CKM
-    ExtractParametersFromCKM();
-    //Build the CKM with the 4 parameters
-    UpdateCKM();
-
-} */
 
 
 
@@ -1360,27 +1241,7 @@ void RGESolver::GoToBasis(std::string basis) {
     yd.singularvalue(Ud, Vd, Sd);
     ye.singularvalue(Re, Rl, Se);
 
-    //Updating fermion masses
-
-    //mf = yfdiag * v /sqrt(2)
-    //v = sqrt(mh2 / (2 lambda))
-    //v/sqrt(2) =  sqrt(mh2 / (4 lambda))
-    double vOverSqrt2 = sqrt(0.25 * mh2 / lambda);
-
-
-    mu = Su(0) * vOverSqrt2;
-    mc = Su(1) * vOverSqrt2;
-    mt = Su(2) * vOverSqrt2;
-
-    md = Sd(0) * vOverSqrt2;
-    ms = Sd(1) * vOverSqrt2;
-    mb = Sd(2) * vOverSqrt2;
-
-    mel = Se(0) * vOverSqrt2;
-    mmu = Se(1) * vOverSqrt2;
-    mtau = Se(2) * vOverSqrt2;
-
-
+   
     //Matrix to rotate fields
     gslpp::matrix<gslpp::complex> Ru(3, 3, 0.);
     gslpp::matrix<gslpp::complex> Rudag(3, 3, 0.);

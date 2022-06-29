@@ -42,7 +42,7 @@ void \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}}
 void \mbox{\hyperlink{classRGESolver_a300d0d8643d30cdb49e0df0294793ba2}{Evolve\+To\+Basis}} (std\+::string method, double muI, double muF, std\+::string basis)
 \begin{DoxyCompactList}\small\item\em Performs the R\+GE evolution and performs the back rotation on the coefficients with flavour indices. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_af4ed89d1098aa91112cf9e5a39dd8e7f}{Generate\+S\+M\+Initial\+Conditions}} (double mu, std\+::string basis, std\+::string method)
-\begin{DoxyCompactList}\small\item\em Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. At such scale, the masses of the fermions and the C\+KM parameters are computed. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. At such scale, the C\+KM matrix is computed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_ab228238c79a43b8d3dbb3d220beea73d}{Generate\+S\+M\+Initial\+Conditions}} (double mu\+In, double mu\+Fin, std\+::string basis, std\+::string method, double g1in, double g2in, double g3in, double lambdain, double mh2in, double Muin\mbox{[}3\mbox{]}, double Mdin\mbox{[}3\mbox{]}, double Mein\mbox{[}3\mbox{]}, double s12in, double s13in, double s23in, double deltain)
 \begin{DoxyCompactList}\small\item\em Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRGESolver_a7c0c4303beb14f728a70542c8583b3a7}{Evolve\+S\+M\+Only}} (std\+::string method, double muI, double muF)
@@ -52,8 +52,6 @@ void \mbox{\hyperlink{classRGESolver_a7c0c4303beb14f728a70542c8583b3a7}{Evolve\+
 {\em ~\newline
  }\begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classRGESolver_a55375c02297501cc3ba0302f707a690d}{Get\+Fermion\+Mass}} (std\+::string name)
-\begin{DoxyCompactList}\small\item\em Getter function for the mass of the fermions (in GeV). \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classRGESolver_a1bdc3a8209979b9f4c583b47fc4988d4}{Get\+C\+K\+M\+Angle}} (std\+::string name)
 \begin{DoxyCompactList}\small\item\em Getter function for the C\+KM matrix angles $\theta_{12},\theta_{13},\theta_{23}$. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classRGESolver_a67f092224a036208d5904da39726ce80}{Get\+C\+K\+M\+Real\+Part}} (int i, int j)
@@ -106,7 +104,7 @@ G\+NU General Public License
 \hypertarget{classRGESolver_SM}{}
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
-\caption{Standard Model parameters. The labels in the left column must be used with the Get\+Coefficient method, the ones in the right column must be used with Get\+Fermion\+Mass and Get\+C\+K\+M\+Angle methods. }\label{classRGESolver_SM}\\
+\caption{Standard Model parameters. The labels in the left column must be used with the Get\+Coefficient method, the ones in the right column must be used with Get\+C\+K\+M\+Angle methods. }\label{classRGESolver_SM}\\
 \hline
 {\begin{tabularx}{\linewidth}{|*{2}{>{\raggedright\arraybackslash}X|}}\hline
 \cellcolor{\tableheadbgcolor}\textbf{ Parameter }&\cellcolor{\tableheadbgcolor}\textbf{ Name ~\newline
@@ -140,23 +138,6 @@ $ \sin(\theta_{13})$ &{\ttfamily s13} ~\newline
  \\\cline{1-2}
 $ \sin(\theta_{23})$ &{\ttfamily s23} ~\newline
  \\\cline{1-2}
-$ m_u$ $[\mathrm{GeV}]$ &{\ttfamily mu} ~\newline
- \\\cline{1-2}
-$ m_c$ $[\mathrm{GeV}]$ &{\ttfamily mc} ~\newline
- \\\cline{1-2}
-$ m_t$ $[\mathrm{GeV}]$ &{\ttfamily mt} ~\newline
- \\\cline{1-2}
-$ m_d$ $[\mathrm{GeV}]$ &{\ttfamily md} ~\newline
- \\\cline{1-2}
-$ m_s$ $[\mathrm{GeV}]$ &{\ttfamily ms} ~\newline
- \\\cline{1-2}
-$ m_b$ $[\mathrm{GeV}]$ &{\ttfamily mb} ~\newline
- \\\cline{1-2}
-$ m_{e}$ $[\mathrm{GeV}]$ &{\ttfamily mel} ~\newline
- \\\cline{1-2}
-$ m_{\mu}$ $[\mathrm{GeV}]$ &{\ttfamily mmu} ~\newline
- \\\cline{1-2}
-$ m_{\tau}$ $[\mathrm{GeV}]$ &{\ttfamily mtau} \\\cline{1-2}
 \end{tabularx}}
 \\\cline{1-2}
 \end{longtabu}
@@ -508,7 +489,7 @@ Same as \mbox{\hyperlink{classRGESolver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolv
 
 Performs the R\+GE evolution and performs the back rotation on the coefficients with flavour indices. 
 
-After the evolution, the C\+KM matrix and the fermion masses are computed. A flavour rotation is performed on the coefficients to go in the chosen basis. 
+After the evolution, the C\+KM matrix is computed. A flavour rotation is performed on the coefficients to go in the chosen basis. 
 \begin{DoxyParams}{Parameters}
 {\em method} & resolution method \\
 \hline
@@ -528,7 +509,7 @@ After the evolution, the C\+KM matrix and the fermion masses are computed. A fla
 
 
 
-Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. At such scale, the masses of the fermions and the C\+KM parameters are computed. 
+Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. At such scale, the C\+KM matrix is computed. 
 
 The initial conditions are generated at the scale {\ttfamily mu} starting from the values at $\mu = 173.65 $ GeV in table \doxytablelink{classRGESolver_SMInput}{S\+M\+Input}. 
 \begin{DoxyParams}{Parameters}
@@ -594,6 +575,8 @@ The initial conditions are generated at the scale {\ttfamily mu\+Fin} starting f
 
 Getter function for the C\+KM matrix angles $\theta_{12},\theta_{13},\theta_{23}$. 
 
+This method should be called only after methods that choose a specific flavour basis (as \mbox{\hyperlink{classRGESolver_af4ed89d1098aa91112cf9e5a39dd8e7f}{Generate\+S\+M\+Initial\+Conditions}} or \mbox{\hyperlink{classRGESolver_a300d0d8643d30cdb49e0df0294793ba2}{Evolve\+To\+Basis}} ), otherwise the C\+KM matrix is not updated.
+
 
 \begin{DoxyParams}{Parameters}
 {\em name} & of the angle (see table \doxytablelink{classRGESolver_SM}{SM}) \\
@@ -612,7 +595,7 @@ The selected C\+KM angle.
 
 Getter function for the C\+KM matrix (imaginary part) 
 
-\begin{DoxyReturn}{Returns}
+This method should be called only after methods that choose a specific flavour basis (as \mbox{\hyperlink{classRGESolver_af4ed89d1098aa91112cf9e5a39dd8e7f}{Generate\+S\+M\+Initial\+Conditions}} or \mbox{\hyperlink{classRGESolver_a300d0d8643d30cdb49e0df0294793ba2}{Evolve\+To\+Basis}} ), otherwise the C\+KM matrix is not updated. \begin{DoxyReturn}{Returns}
 The imaginary part of the selected C\+KM matrix element. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classRGESolver_a891564c063a942fbd01830b30fa8e6e1}\label{classRGESolver_a891564c063a942fbd01830b30fa8e6e1}} 
@@ -625,7 +608,7 @@ The imaginary part of the selected C\+KM matrix element.
 
 Getter function for the C\+KM matrix phase $\delta$. 
 
-\begin{DoxyReturn}{Returns}
+This method should be called only after methods that choose a specific flavour basis (as \mbox{\hyperlink{classRGESolver_af4ed89d1098aa91112cf9e5a39dd8e7f}{Generate\+S\+M\+Initial\+Conditions}} or \mbox{\hyperlink{classRGESolver_a300d0d8643d30cdb49e0df0294793ba2}{Evolve\+To\+Basis}} ), otherwise the C\+KM matrix is not updated. \begin{DoxyReturn}{Returns}
 The C\+KM matrix phase $\delta$. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classRGESolver_a67f092224a036208d5904da39726ce80}\label{classRGESolver_a67f092224a036208d5904da39726ce80}} 
@@ -638,7 +621,7 @@ The C\+KM matrix phase $\delta$.
 
 Getter function for the C\+KM matrix (real part) 
 
-\begin{DoxyReturn}{Returns}
+This method should be called only after methods that choose a specific flavour basis (as \mbox{\hyperlink{classRGESolver_af4ed89d1098aa91112cf9e5a39dd8e7f}{Generate\+S\+M\+Initial\+Conditions}} or \mbox{\hyperlink{classRGESolver_a300d0d8643d30cdb49e0df0294793ba2}{Evolve\+To\+Basis}} ), otherwise the C\+KM matrix is not updated. \begin{DoxyReturn}{Returns}
 The real part of the selected C\+KM matrix element. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classRGESolver_a23d5d847021421bc8a9ba03412d2674e}\label{classRGESolver_a23d5d847021421bc8a9ba03412d2674e}} 
@@ -706,25 +689,6 @@ Getter function for 4F parameters (4 flavour indices). one of the inserted indic
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 the requested parameter 
-\end{DoxyReturn}
-\mbox{\Hypertarget{classRGESolver_a55375c02297501cc3ba0302f707a690d}\label{classRGESolver_a55375c02297501cc3ba0302f707a690d}} 
-\index{RGESolver@{RGESolver}!GetFermionMass@{GetFermionMass}}
-\index{GetFermionMass@{GetFermionMass}!RGESolver@{RGESolver}}
-\doxysubsubsection{\texorpdfstring{GetFermionMass()}{GetFermionMass()}}
-{\footnotesize\ttfamily double R\+G\+E\+Solver\+::\+Get\+Fermion\+Mass (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})}
-
-
-
-Getter function for the mass of the fermions (in GeV). 
-
-
-\begin{DoxyParams}{Parameters}
-{\em name} & name of the fermion (see table \doxytablelink{classRGESolver_SM}{SM}) \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-the requested fermion mass ~\newline
- 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classRGESolver_ab6a813bff78d9278d3b875ea9c2f5324}\label{classRGESolver_ab6a813bff78d9278d3b875ea9c2f5324}} 
 \index{RGESolver@{RGESolver}!SaveOutputFile@{SaveOutputFile}}

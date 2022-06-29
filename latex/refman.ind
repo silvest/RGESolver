@@ -16,13 +16,11 @@
   \item {GetCKMImagPart}
     \subitem {RGESolver}, \hyperpage{14}
   \item {GetCKMPhase}
-    \subitem {RGESolver}, \hyperpage{14}
+    \subitem {RGESolver}, \hyperpage{15}
   \item {GetCKMRealPart}
     \subitem {RGESolver}, \hyperpage{15}
   \item {GetCoefficient}
     \subitem {RGESolver}, \hyperpage{15, 16}
-  \item {GetFermionMass}
-    \subitem {RGESolver}, \hyperpage{16}
 
   \indexspace
 
@@ -33,10 +31,9 @@
     \subitem {GenerateSMInitialConditions}, \hyperpage{12, 13}
     \subitem {GetCKMAngle}, \hyperpage{14}
     \subitem {GetCKMImagPart}, \hyperpage{14}
-    \subitem {GetCKMPhase}, \hyperpage{14}
+    \subitem {GetCKMPhase}, \hyperpage{15}
     \subitem {GetCKMRealPart}, \hyperpage{15}
     \subitem {GetCoefficient}, \hyperpage{15, 16}
-    \subitem {GetFermionMass}, \hyperpage{16}
     \subitem {SaveOutputFile}, \hyperpage{17}
     \subitem {SetCoefficient}, \hyperpage{17, 18}
 

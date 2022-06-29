@@ -196,10 +196,7 @@ int main() {
             << S.GetCoefficient("CllR", 1, 1, 1, 2) << std::endl;
 
 
-    //Mass of the fermions: 
-    std::cout << "Up quark mass at " << muLow << " GeV : "
-            << S.GetFermionMass("mu") << std::endl;
-    std::cout << "Sin theta12 " << muLow << " GeV : "
+    std::cout << "Sin(theta12) at " << muLow << " GeV : "
             << S.GetCKMAngle("s12") << std::endl;
     return 0;
 }

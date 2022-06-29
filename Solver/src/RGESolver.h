@@ -70,7 +70,7 @@
 <table>
 <caption id="SM"> Standard Model parameters. The labels in the left column 
 must be used with the GetCoefficient method, the ones 
-in the right column must be used with GetFermionMass and GetCKMAngle methods.  </caption>
+in the right column must be used with GetCKMAngle methods.  </caption>
 <tr style="vertical-align:top">
 <td>
 <table>
@@ -92,15 +92,6 @@ in the right column must be used with GetFermionMass and GetCKMAngle methods.  <
 <tr><td> \f$ \sin(\theta_{12})\f$         <td> `s12`      
 <tr><td> \f$ \sin(\theta_{13})\f$         <td> `s13`      
 <tr><td> \f$ \sin(\theta_{23})\f$         <td> `s23`  
-<tr><td> \f$ m_u\f$ \f$[\mathrm{GeV}]\f$  <td> `mu`      
-<tr><td> \f$ m_c\f$ \f$[\mathrm{GeV}]\f$  <td> `mc`      
-<tr><td> \f$ m_t\f$ \f$[\mathrm{GeV}]\f$  <td> `mt`      
-<tr><td> \f$ m_d\f$ \f$[\mathrm{GeV}]\f$  <td> `md`      
-<tr><td> \f$ m_s\f$ \f$[\mathrm{GeV}]\f$  <td> `ms`      
-<tr><td> \f$ m_b\f$ \f$[\mathrm{GeV}]\f$  <td> `mb`      
-<tr><td> \f$ m_{e}\f$ \f$[\mathrm{GeV}]\f$  <td> `mel`      
-<tr><td> \f$ m_{\mu}\f$ \f$[\mathrm{GeV}]\f$  <td> `mmu`      
-<tr><td> \f$ m_{\tau}\f$ \f$[\mathrm{GeV}]\f$  <td> `mtau`
 </table>
 </table>
 
@@ -396,8 +387,7 @@ public:
     /**
      * @brief Performs the RGE evolution and performs the back rotation 
      * on the coefficients with flavour indices.
-     * @details After the evolution, the CKM matrix and the 
-     * fermion masses are computed. A flavour rotation is performed 
+     * @details After the evolution, the CKM matrix is computed. A flavour rotation is performed 
      * on the coefficients to go in the chosen basis.
      * @param method resolution method
      * @param muI initial energy scale (in GeV)
@@ -414,7 +404,7 @@ public:
      * for Standard Model's parameters (gauge couplings,
      * Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale 
      * <tt>mu</tt> (in GeV), using one-loop pure SM beta functions.
-     * At such scale, the masses of the fermions and the CKM parameters are computed.
+     * At such scale, the CKM matrix is computed.
      * @details The initial conditions are generated at the scale <tt>mu</tt> starting from the values 
      * at \f$\mu = 173.65 \f$ GeV in table \ref SMInput. 
      * @param mu Scale (in GeV) at which the initial conditions 
@@ -492,17 +482,12 @@ public:
 
 
     /**
-     * @brief Getter function for the mass of the 
-     * fermions (in GeV).
-     * @param name name of the fermion (see table \ref SM)
-     * @return the requested fermion mass  
-     */
-    double GetFermionMass(std::string name);
-
-
-    /**
      * @brief Getter function for the CKM matrix angles 
      *  \f$\theta_{12},\theta_{13},\theta_{23}\f$. 
+     * @details This method should be called only after methods that choose a specific
+     *  flavour basis (as \ref GenerateSMInitialConditions or
+     * \ref EvolveToBasis ), otherwise the CKM matrix is not updated.
+
      * @param name of the angle (see table \ref SM)
      * @return The selected CKM angle. 
      */
@@ -510,6 +495,9 @@ public:
 
     /**
      * @brief Getter function for the CKM matrix (real part)
+     * @details This method should be called only after methods that choose a specific
+     *  flavour basis (as \ref GenerateSMInitialConditions or
+     * \ref EvolveToBasis ), otherwise the CKM matrix is not updated.
      * @return The real part of the selected CKM matrix element. 
      */
     double GetCKMRealPart(int i, int j) {
@@ -518,6 +506,9 @@ public:
 
     /**
      * @brief Getter function for the CKM matrix (imaginary part)
+     * @details This method should be called only after methods that choose a specific
+     *  flavour basis (as \ref GenerateSMInitialConditions or
+     * \ref EvolveToBasis ), otherwise the CKM matrix is not updated.
      * @return The imaginary part of the selected CKM matrix element. 
      */
     double GetCKMImagPart(int i, int j) {
@@ -527,6 +518,9 @@ public:
 
     /**
      * @brief Getter function for the CKM matrix phase \f$\delta\f$.
+     * @details This method should be called only after methods that choose a specific
+     *  flavour basis (as \ref GenerateSMInitialConditions or
+     * \ref EvolveToBasis ), otherwise the CKM matrix is not updated.
      * @return  The CKM matrix phase \f$\delta\f$. 
      */
     double GetCKMPhase();
@@ -1097,21 +1091,7 @@ private:
     double s23;
 
 
-    /**
-     * @brief \f$m_\f$ , the mass of up quark in GeV 
-     * (default value ?????).
-     */
-    double mu;
-    double mc;
-    double mt;
-
-    double md;
-    double ms;
-    double mb;
-
-    double mel;
-    double mmu;
-    double mtau;
+    
 
     /**@name SMEFT dimension-six operators 
      * By default, all SMEFT dimension-six operators' coefficients are set to 0. 
@@ -1276,7 +1256,6 @@ private:
      */
 
     ///@{
-    std::unordered_map<std::string, double*> FermionMasses;
     std::unordered_map<std::string, double*> CKMAngles;
     std::unordered_map<std::string, double*> Operators0F;
     std::unordered_map<std::string, boost::function<void(int, int, double) >> Setter2F;
