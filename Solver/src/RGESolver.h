@@ -74,7 +74,7 @@
 
 <table>
 <caption id="SM"> Standard Model parameters. The labels in the left column 
-must be used with the GetCoefficient method, the ones 
+must be used with the GetCoefficient/SetCoefficient methods, the ones 
 in the right column must be used with GetCKMAngle methods.  </caption>
 <tr style="vertical-align:top">
 <td>
