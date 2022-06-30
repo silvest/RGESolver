@@ -60,9 +60,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a45669aa780325da0b1e866ba229b277f"><td class="memItemLeft" align="right" valign="top"><a id="a45669aa780325da0b1e866ba229b277f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#a45669aa780325da0b1e866ba229b277f">RGESolver</a> ()</td></tr>
-<tr class="memdesc:a45669aa780325da0b1e866ba229b277f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default constructor. It initializes to 0 all the SMEFT coefficients. <br /></td></tr>
+<tr class="memitem:a45669aa780325da0b1e866ba229b277f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#a45669aa780325da0b1e866ba229b277f">RGESolver</a> ()</td></tr>
+<tr class="memdesc:a45669aa780325da0b1e866ba229b277f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default constructor.  <a href="classRGESolver.html#a45669aa780325da0b1e866ba229b277f">More...</a><br /></td></tr>
 <tr class="separator:a45669aa780325da0b1e866ba229b277f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1edd7795c6a3dfd0ee1a13a0ae25361"><td class="memItemLeft" align="right" valign="top"><a id="ab1edd7795c6a3dfd0ee1a13a0ae25361"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#ab1edd7795c6a3dfd0ee1a13a0ae25361">~RGESolver</a> ()</td></tr>
@@ -90,13 +89,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:aedc6f80d9a01de09d4ddf1e5b670c690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs the RGE evolution.  <a href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">More...</a><br /></td></tr>
 <tr class="separator:aedc6f80d9a01de09d4ddf1e5b670c690"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a300d0d8643d30cdb49e0df0294793ba2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#a300d0d8643d30cdb49e0df0294793ba2">EvolveToBasis</a> (std::string method, double muI, double muF, std::string basis)</td></tr>
-<tr class="memdesc:a300d0d8643d30cdb49e0df0294793ba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs the RGE evolution and performs the back rotation on the coefficients with flavour indices.  <a href="classRGESolver.html#a300d0d8643d30cdb49e0df0294793ba2">More...</a><br /></td></tr>
+<tr class="memdesc:a300d0d8643d30cdb49e0df0294793ba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs the RGE evolution and the back rotation on the coefficients with flavour indices.  <a href="classRGESolver.html#a300d0d8643d30cdb49e0df0294793ba2">More...</a><br /></td></tr>
 <tr class="separator:a300d0d8643d30cdb49e0df0294793ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4ed89d1098aa91112cf9e5a39dd8e7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#af4ed89d1098aa91112cf9e5a39dd8e7f">GenerateSMInitialConditions</a> (double mu, std::string basis, std::string method)</td></tr>
-<tr class="memdesc:af4ed89d1098aa91112cf9e5a39dd8e7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions. At such scale, the CKM matrix is computed.  <a href="classRGESolver.html#af4ed89d1098aa91112cf9e5a39dd8e7f">More...</a><br /></td></tr>
+<tr class="memdesc:af4ed89d1098aa91112cf9e5a39dd8e7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions. Default low-energy input is used.  <a href="classRGESolver.html#af4ed89d1098aa91112cf9e5a39dd8e7f">More...</a><br /></td></tr>
 <tr class="separator:af4ed89d1098aa91112cf9e5a39dd8e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab228238c79a43b8d3dbb3d220beea73d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#ab228238c79a43b8d3dbb3d220beea73d">GenerateSMInitialConditions</a> (double muIn, double muFin, std::string basis, std::string method, double g1in, double g2in, double g3in, double lambdain, double mh2in, double Muin[3], double Mdin[3], double Mein[3], double s12in, double s13in, double s23in, double deltain)</td></tr>
-<tr class="memdesc:ab228238c79a43b8d3dbb3d220beea73d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions.  <a href="classRGESolver.html#ab228238c79a43b8d3dbb3d220beea73d">More...</a><br /></td></tr>
+<tr class="memdesc:ab228238c79a43b8d3dbb3d220beea73d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions. User-defined low energy input is used.  <a href="classRGESolver.html#ab228238c79a43b8d3dbb3d220beea73d">More...</a><br /></td></tr>
 <tr class="separator:ab228238c79a43b8d3dbb3d220beea73d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c0c4303beb14f728a70542c8583b3a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGESolver.html#a7c0c4303beb14f728a70542c8583b3a7">EvolveSMOnly</a> (std::string method, double muI, double muF)</td></tr>
 <tr class="memdesc:a7c0c4303beb14f728a70542c8583b3a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a>, but only for the SM parameters. The user should use this method instead of <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a> when interested in pure SM running. Using this function is the same of using <a class="el" href="classRGESolver.html#aedc6f80d9a01de09d4ddf1e5b670c690">Evolve</a> with all the SMEFT coefficients set to 0, but it is faster since it does compute only the evolution for the SM parameters.  <a href="classRGESolver.html#a7c0c4303beb14f728a70542c8583b3a7">More...</a><br /></td></tr>
@@ -145,14 +144,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class that performs renormalization group evolution in the context of the SMEFT. </p>
-<p>The class solves the Renormalization Group Equations (RGEs) both numerically and in the leading-log approximation. Only operators up to dimension six that preserve lepton and baryon numbers are considered. The operator basis is the Warsaw basis, defined in <a href="https://arxiv.org/abs/1008.4884">https://arxiv.org/abs/1008.4884</a>. The class splits real and imaginary part of each complex parameter. <br  />
+<p>The class solves the Renormalization Group Equations (RGEs) both numerically and in the leading-log approximation. Only operators up to dimension six that preserve lepton and baryon numbers are considered. The operator basis is the Warsaw basis, defined in <a href="https://arxiv.org/abs/1008.4884">https://arxiv.org/abs/1008.4884</a>. <code><a class="el" href="classRGESolver.html" title="A class that performs renormalization group evolution in the context of the SMEFT.">RGESolver</a></code> splits real and imaginary part of each complex parameter. <br  />
  <br  />
  The numerical integration is performed with an adaptive step-size routine (the explicit embedded Runge-Kutta-Fehlberg method), using the tools in the GNU Scientific Library. See <a href="https://www.gnu.org/software/gsl/doc/html/ode-initval.html">https://www.gnu.org/software/gsl/doc/html/ode-initval.html</a> for all the details. <br  />
-The accuracy level of the numerical integration can be tuned selecting the parameters \(\epsilon_{rel}, \epsilon_{abs}\) and the integration step using the dedicated setter functions. <br  />
+The accuracy level of the numerical integration can be tuned selecting the parameters \(\epsilon_{rel} and \epsilon_{abs}\) using the dedicated setter functions. <br  />
  <br  />
  All the SMEFT coefficients are set using the <a class="el" href="classRGESolver.html#adc2b8a9a10216ec5285569c8f24cbed2">SetCoefficient</a> methods and accessed with the <a class="el" href="classRGESolver.html#a23d5d847021421bc8a9ba03412d2674e">GetCoefficient</a> methods. There exist three different signatures for each method, depending on the number of flavour indices of the parameter (0,2,4). <br  />
  These two routines must be used also for the SM parameters \(g_1,g_2,g_3,\lambda,m_h^2,\) \(\mathrm{Re}(\mathcal{Y}_u),\mathrm{Im}(\mathcal{Y}_u),\) \(\mathrm{Re}(\mathcal{Y}_d),\mathrm{Im}(\mathcal{Y}_d),\) \(\mathrm{Re}(\mathcal{Y}_e),\mathrm{Im}(\mathcal{Y}_e)\) (we follow <a href="https://arxiv.org/abs/1308.2627">https://arxiv.org/abs/1308.2627</a> for what concerns the conventions in the Higgs' sector). <br  />
- A complete list of the keys that must be used to correctly invoke setter/getter methods are given in tables <a class="el" href="classRGESolver.html#SM">SM</a>, <a class="el" href="classRGESolver.html#0F">0F</a>, <a class="el" href="classRGESolver.html#2F">2F</a> and <a class="el" href="classRGESolver.html#4F">4F</a>. <br  />
+ The routines <a class="el" href="classRGESolver.html#a1bdc3a8209979b9f4c583b47fc4988d4">GetCKMAngle</a>, <a class="el" href="classRGESolver.html#a891564c063a942fbd01830b30fa8e6e1">GetCKMPhase</a>, <a class="el" href="classRGESolver.html#a67f092224a036208d5904da39726ce80">GetCKMRealPart</a>, <a class="el" href="classRGESolver.html#a9a3972af1912ae6ffebc806ffe05daeb">GetCKMImagPart</a> should be used when interested in the CKM parameters or elements. The usage of this method is recommended after methods such <a class="el" href="classRGESolver.html#af4ed89d1098aa91112cf9e5a39dd8e7f">GenerateSMInitialConditions</a> or <a class="el" href="classRGESolver.html#a300d0d8643d30cdb49e0df0294793ba2">EvolveToBasis</a> that choose a specific flavour basis ("UP" or "DOWN"), in which cases the CKM matrix is updated. A complete list of the keys that must be used to correctly invoke setter/getter methods are given in tables <a class="el" href="classRGESolver.html#SM">SM</a>, <a class="el" href="classRGESolver.html#0F">0F</a>, <a class="el" href="classRGESolver.html#2F">2F</a> and <a class="el" href="classRGESolver.html#4F">4F</a>. <br  />
 A summary of the operators symmetry classes is given in table <a class="el" href="classRGESolver.html#Sym">Sym</a>. <br  />
  <br  />
  We follow <a href="http://www.utfit.org/UTfit/Formalism">http://www.utfit.org/UTfit/Formalism</a> for what concerns the conventions for the CKM matrix.</p>
@@ -348,7 +347,7 @@ A summary of the operators symmetry classes is given in table <a class="el" href
 <th>Coefficient </th><th>Name </th><th>Symmetry <br  />
  </th></tr>
 <tr>
-<td>\(\mathrm{Re}(C_{Hl1})\) </td><td><code>CHtal1R</code> </td><td>WC2R <br  />
+<td>\(\mathrm{Re}(C_{Hl1})\) </td><td><code>CHl1R</code> </td><td>WC2R <br  />
  </td></tr>
 <tr>
 <td>\(\mathrm{Im}(C_{Hl1})\) </td><td><code>CHl1I</code> </td><td>WC2I </td></tr>
@@ -640,7 +639,28 @@ A summary of the operators symmetry classes is given in table <a class="el" href
 </table>
 </td></tr>
 </table>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a45669aa780325da0b1e866ba229b277f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45669aa780325da0b1e866ba229b277f">&#9670;&nbsp;</a></span>RGESolver()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RGESolver::RGESolver </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The default constructor. </p>
+<p>It initializes to 0 all the SMEFT coefficients. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="aedc6f80d9a01de09d4ddf1e5b670c690"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aedc6f80d9a01de09d4ddf1e5b670c690">&#9670;&nbsp;</a></span>Evolve()</h2>
 
@@ -675,7 +695,7 @@ A summary of the operators symmetry classes is given in table <a class="el" href
 
 <p>Performs the RGE evolution. </p>
 <p>RGEs are solved with the chosen method from <code>muI</code> to <code>muF</code>. Currently, the available methods are "Numeric" and "Leading-Log". <br  />
- The evolutor takes as initial values the current values of the parameters, set with the <a class="el" href="classRGESolver.html#adc2b8a9a10216ec5285569c8f24cbed2">SetCoefficient</a> functions. After completing the evolution the values of the parameters are updated and are accessible with the GetCoefficients function. </p><dl class="params"><dt>Parameters</dt><dd>
+ The method takes as initial values the current values of the parameters, set with the <a class="el" href="classRGESolver.html#adc2b8a9a10216ec5285569c8f24cbed2">SetCoefficient</a> functions. After completing the evolution the values of the parameters are updated and are accessible with the <a class="el" href="classRGESolver.html#a23d5d847021421bc8a9ba03412d2674e">GetCoefficient</a> functions. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">method</td><td>resolution method </td></tr>
     <tr><td class="paramname">muI</td><td>initial energy scale (in GeV) </td></tr>
@@ -769,7 +789,7 @@ A summary of the operators symmetry classes is given in table <a class="el" href
       </table>
 </div><div class="memdoc">
 
-<p>Performs the RGE evolution and performs the back rotation on the coefficients with flavour indices. </p>
+<p>Performs the RGE evolution and the back rotation on the coefficients with flavour indices. </p>
 <p>After the evolution, the CKM matrix is computed. A flavour rotation is performed on the coefficients to go in the chosen basis. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">method</td><td>resolution method </td></tr>
@@ -815,8 +835,8 @@ A summary of the operators symmetry classes is given in table <a class="el" href
       </table>
 </div><div class="memdoc">
 
-<p>Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions. At such scale, the CKM matrix is computed. </p>
-<p>The initial conditions are generated at the scale <code>mu</code> starting from the values at \(\mu = 173.65 \) GeV in table <a class="el" href="classRGESolver.html#SMInput">SMInput</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions. Default low-energy input is used. </p>
+<p>The initial conditions are generated at the scale <code>mu</code> starting from the values at \(\mu = 173.65 \) GeV in table <a class="el" href="classRGESolver.html#SMInput">SMInput</a>. At the scale <code>mu</code> the CKM matrix is computed. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mu</td><td>Scale (in GeV) at which the initial conditions are generated </td></tr>
     <tr><td class="paramname">basis</td><td>Flavour basis ( <code>"UP"</code> or <code>"DOWN"</code>) </td></tr>
@@ -937,8 +957,8 @@ A summary of the operators symmetry classes is given in table <a class="el" href
       </table>
 </div><div class="memdoc">
 
-<p>Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions. </p>
-<p>The initial conditions are generated at the scale <code>muFin</code> starting from the inserted parameters at the scale <code>muIn</code>. This method should be used with usual fermion hierarchy (smallest mass for the 1st generation and greatest mass for the 3rd withoud mass degeneracy for all up and down quarks and for charged leptons). The generation of the initial conditions is performed only if all the masses are non-negative and if \( \sin \theta_{ij} \in (0,1) \), \(\delta \in (\pi,\pi]\). </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Generates the initial conditions for Standard Model's parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale <code>mu</code> (in GeV), using one-loop pure SM beta functions. User-defined low energy input is used. </p>
+<p>The initial conditions are generated at the scale <code>muFin</code> starting from the inserted parameters at the scale <code>muIn</code>. This method should be used with usual fermion hierarchy (smallest mass for the 1st generation and greatest mass for the 3rd withoud mass degeneracy for all up and down quarks and for charged leptons). The generation of the initial conditions is performed only if all the masses are non-negative and if \( \sin \theta_{ij} \in (0,1) \), \(\delta \in (\pi,\pi]\). We follow <a href="http://www.utfit.org/UTfit">http://www.utfit.org/UTfit</a> for what concerns the conventions for the CKM matrix. At the scale <code>mu</code> the CKM matrix is computed. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">muIn</td><td>Low-energy input scale (in GeV) </td></tr>
     <tr><td class="paramname">muIn</td><td>Scale (in GeV) at which the initial conditions are generated </td></tr>

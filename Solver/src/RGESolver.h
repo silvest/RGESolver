@@ -26,13 +26,13 @@
  * Only operators up to dimension six that preserve  lepton and baryon numbers 
  * are considered. The operator basis is the Warsaw basis, 
  * defined in https://arxiv.org/abs/1008.4884.
- * The class splits real and imaginary part of each complex parameter. @n @n 
+ * <tt>RGESolver</tt> splits real and imaginary part of each complex parameter. @n @n 
  * The numerical integration is performed with an adaptive step-size routine 
  * (the explicit embedded Runge-Kutta-Fehlberg method), using the
  * tools in the GNU Scientific Library. 
  * See https://www.gnu.org/software/gsl/doc/html/ode-initval.html for all the details. @n
  * The accuracy level of the numerical integration can be tuned selecting the parameters 
- * @f$\epsilon_{rel}, \epsilon_{abs}@f$ and the integration step using the
+ * @f$\epsilon_{rel} and \epsilon_{abs}@f$ using the
  *  dedicated setter functions. @n @n 
  * All the SMEFT coefficients are set using the \ref SetCoefficient methods and 
  * accessed with the \ref GetCoefficient methods. 
@@ -46,10 +46,15 @@
  *   \f$\mathrm{Re}(\mathcal{Y}_e),\mathrm{Im}(\mathcal{Y}_e)\f$ 
  *  (we follow https://arxiv.org/abs/1308.2627 for what concerns
  * the conventions in the Higgs' sector). @n 
+ * The routines \ref GetCKMAngle, \ref GetCKMPhase, \ref GetCKMRealPart, \ref GetCKMImagPart
+ * should be used when interested in the CKM parameters or elements. The usage of this method is 
+ * recommended after methods such \ref GenerateSMInitialConditions or \ref EvolveToBasis that choose 
+ * a specific flavour basis ("UP" or "DOWN"), in which 
+ * cases the CKM matrix is updated. 
  * A complete list of the keys that must be used to 
  * correctly invoke setter/getter methods are given in 
  * tables \ref SM, \ref 0F, \ref 2F and \ref 4F. @n
- * A summary of the operators symmetry classes is given in table \ref Sym. @n @n 
+ * A summary of the operators symmetry classes is given in table \ref Sym. @n  
  * We follow http://www.utfit.org/UTfit/Formalism for what concerns the conventions for the CKM matrix.
  
 
@@ -168,7 +173,7 @@ in the right column must be used with GetCKMAngle methods.  </caption>
 <table> 
 <tr> <th colspan="3"> Class 7   
 <tr> <th> Coefficient     <th> Name <th> Symmetry  
-<tr><td>\f$\mathrm{Re}(C_{Hl1})\f$ <td> `CHtal1R` <td> WC2R  
+<tr><td>\f$\mathrm{Re}(C_{Hl1})\f$ <td> `CHl1R` <td> WC2R  
 <tr><td>\f$\mathrm{Im}(C_{Hl1})\f$ <td> `CHl1I` <td> WC2I 
 <tr><td>\f$\mathrm{Re}(C_{Hl3})\f$ <td> `CHl3R` <td> WC2R 
 <tr><td>\f$\mathrm{Im}(C_{Hl3})\f$ <td> `CHl3I` <td> WC2I 
@@ -326,7 +331,8 @@ for what concerns the conventions for the CKM matrix.
 class RGESolver {
 public:
     /**
-     * @brief The default constructor. It initializes to 0 all the SMEFT coefficients. 
+     * @brief The default constructor.
+     * @details It initializes to 0 all the SMEFT coefficients. 
      */
     RGESolver();
 
@@ -374,10 +380,10 @@ public:
      * @brief Performs the RGE evolution
      * @details RGEs are solved with the chosen method from @p muI to @p muF.
      * Currently, the available methods are "Numeric" and "Leading-Log". @n 
-     * The evolutor takes as initial values the current values of the parameters, 
+     * The method takes as initial values the current values of the parameters, 
      * set with the \ref SetCoefficient functions. After completing the evolution
      * the values of the parameters are updated and are accessible with the
-     * \ref GetCoefficients function.
+     * \ref GetCoefficient functions.
      * @param method resolution method
      * @param muI initial energy scale (in GeV)
      * @param muF final energy scale (in GeV)  
@@ -385,7 +391,7 @@ public:
     void Evolve(std::string method, double muI, double muF);
 
     /**
-     * @brief Performs the RGE evolution and performs the back rotation 
+     * @brief Performs the RGE evolution and the back rotation 
      * on the coefficients with flavour indices.
      * @details After the evolution, the CKM matrix is computed. A flavour rotation is performed 
      * on the coefficients to go in the chosen basis.
@@ -403,10 +409,11 @@ public:
      * @brief Generates the initial conditions 
      * for Standard Model's parameters (gauge couplings,
      * Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale 
-     * <tt>mu</tt> (in GeV), using one-loop pure SM beta functions.
-     * At such scale, the CKM matrix is computed.
+     * <tt>mu</tt> (in GeV), using one-loop pure SM beta functions. Default low-energy
+     * input is used. 
+     * 
      * @details The initial conditions are generated at the scale <tt>mu</tt> starting from the values 
-     * at \f$\mu = 173.65 \f$ GeV in table \ref SMInput. 
+     * at \f$\mu = 173.65 \f$ GeV in table \ref SMInput. At the scale <tt>mu</tt> the CKM matrix is computed.
      * @param mu Scale (in GeV) at which the initial conditions 
      * are generated
      * @param basis Flavour basis (
@@ -422,7 +429,8 @@ public:
      * @brief Generates the initial conditions 
      * for Standard Model's parameters (gauge couplings,
      * Yukawa coupling, quartic coupling and Higgs' boson mass) at the scale 
-     * <tt>mu</tt> (in GeV), using one-loop pure SM beta functions. 
+     * <tt>mu</tt> (in GeV), using one-loop pure SM beta functions. User-defined low energy 
+     * input is used.
      * 
      * @details The initial conditions are generated at the scale <tt>muFin</tt> starting from the 
      * inserted parameters at the scale <tt>muIn</tt>. This method should be used with usual fermion hierarchy 
@@ -430,6 +438,8 @@ public:
      * for all up and down quarks and for charged leptons). 
      * The generation of the initial conditions is performed only if all the masses are non-negative and 
      * if \f$ \sin \theta_{ij} \in (0,1) \f$, \f$\delta \in (\pi,\pi]\f$.
+     * We follow http://www.utfit.org/UTfit for what concerns the conventions for the CKM matrix.
+     * At the scale <tt>mu</tt> the CKM matrix is computed.
      * @param muIn Low-energy input scale (in GeV)
      * @param muIn  Scale (in GeV) at which the initial conditions 
      * are generated
