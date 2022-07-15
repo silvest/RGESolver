@@ -1397,7 +1397,7 @@ void RGESolver::SaveOutputFile(std::string filename,
 
     if (format != "SLHA") {
         cout << "ERROR : FORMAT " << format << " NOT AVAILABLE" << endl;
-        cout << "Use \"SLHA\" or \"JSON\" " << endl;
+        //cout << "Use \"SLHA\" or \"JSON\" " << endl;
         return;
     }
 

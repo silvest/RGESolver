@@ -465,7 +465,7 @@ public:
     void GenerateSMInitialConditions(double muIn, double muFin, std::string basis, std::string method,
             double g1in, double g2in, double g3in, double lambdain, double mh2in,
             double Muin[3], double Mdin[3], double Mein[3],
-             double s12in, double s13in, double s23in, double deltain);
+            double s12in, double s13in, double s23in, double deltain);
 
 
     /**
@@ -626,7 +626,7 @@ public:
     void SaveOutputFile(std::string filename,
             std::string format);
 
-    
+
 
 
 
@@ -1073,46 +1073,83 @@ private:
     double InputScale_SM; //GeV
 
     //CKM parameters
+    /**
+     * @brief \f$\delta\f$  
+     */
     double CKM_delta;
 
     /**
-     * @brief \f$\cos \theta_{12\f$  
+     * @brief \f$\cos \theta_{12}\f$  
      */
     double c12;
     /**
-     * @brief \f$\sin \theta_{12\f$  
+     * @brief \f$\sin \theta_{12}\f$  
      */
     double s12;
     /**
-     * @brief \f$\cos \theta_{13\f$  
+     * @brief \f$\cos \theta_{13}\f$  
      */
     double c13;
     /**
-     * @brief \f$\sin \theta_{13\f$  
+     * @brief \f$\sin \theta_{13}\f$  
      */
     double s13;
     /**
-     * @brief \f$\cos \theta_{23\f$  
+     * @brief \f$\cos \theta_{23}\f$  
      */
     double c23;
     /**
-     * @brief \f$\sin \theta_{23\f$  
+     * @brief \f$\sin \theta_{23}\f$  
      */
     double s23;
 
-
+    //masses
+    /**
+     *  @brief \f$m_u\f$ (GeV)
+     * */
+    double mu;
+    /**
+     *  @brief \f$m_c\f$ (GeV)
+     * */
+    double mc;/**
+     *  @brief \f$m_t\f$ (GeV)
+     * */
+    double mt;
     
+    /**
+     *  @brief \f$m_d\f$ (GeV)
+     * */
+    double md;
+    /**
+     *  @brief \f$m_s\f$ (GeV)
+     * */
+    double ms;/**
+     *  @brief \f$m_b\f$ (GeV)
+     * */
+    double mb;
+    
+    /**
+     *  @brief \f$m_e\f$ (GeV)
+     * */
+    double mel;
+    /**
+     *  @brief \f$m_{\mu}\f$ (GeV)
+     * */
+    double mmu;/**
+     *  @brief \f$m_{\tau}\f$ (GeV)
+     * */
+    double mtau;
+    
+            /**@name SMEFT dimension-six operators 
+             * By default, all SMEFT dimension-six operators' coefficients are set to 0. 
+             * See https://arxiv.org/abs/1308.2627 tab. 1 for the full list of operators. 
+             * Each member has a class from 1 to 8 depending on its field contents, as well 
+             * as a flavour symmetry classification (WC1, WC2R, WC2I...).  
+             */
 
-    /**@name SMEFT dimension-six operators 
-     * By default, all SMEFT dimension-six operators' coefficients are set to 0. 
-     * See https://arxiv.org/abs/1308.2627 tab. 1 for the full list of operators. 
-     * Each member has a class from 1 to 8 depending on its field contents, as well 
-     * as a flavour symmetry classification (WC1, WC2R, WC2I...).  
-     */
+            ///@{
 
-    ///@{
-
-    /**  @brief @f$ C_G@f$ (class 1, scalar) */ double cG = 0.;
+            /**  @brief @f$ C_G@f$ (class 1, scalar) */ double cG = 0.;
     /**  @brief @f$ C_{\tilde{G}}@f$ (class 1, scalar)*/double cGT = 0.;
     /**  @brief @f$ C_W@f$ (class 1, scalar)*/ double cW = 0.;
     /**  @brief @f$ C_{\tilde{W}} @f$ (class 1, scalar)*/double cWT = 0.;
