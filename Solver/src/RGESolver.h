@@ -21,8 +21,8 @@
 
 /** 
  * @brief A class that performs renormalization group evolution in the context of the SMEFT
- * @details The class solves the Renormalization Group Equations (RGEs) numerically, but provides 
- * also a faster, approximate solution that neglects the scale dependence of the anomalous dimension matrix.
+ * @details The class solves the Renormalization Group Equations (RGEs) numerically. A faster, approximate 
+ * solution that neglects the scale dependence of the anomalous dimension matrix is also available.
  * Only operators up to dimension six that preserve  lepton and baryon numbers 
  * are considered. The operator basis is the Warsaw basis, 
  * defined in https://arxiv.org/abs/1008.4884.
