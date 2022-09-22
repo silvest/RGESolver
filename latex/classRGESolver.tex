@@ -82,7 +82,7 @@ void \mbox{\hyperlink{classRGESolver_ab6a813bff78d9278d3b875ea9c2f5324}{Save\+Ou
 \doxysubsection{Detailed Description}
 A class that performs renormalization group evolution in the context of the S\+M\+E\+FT. 
 
-The class solves the Renormalization Group Equations (R\+G\+Es) both numerically and in the leading-\/log approximation. Only operators up to dimension six that preserve lepton and baryon numbers are considered. The operator basis is the Warsaw basis, defined in \href{https://arxiv.org/abs/1008.4884}{\texttt{ https\+://arxiv.\+org/abs/1008.\+4884}}. {\ttfamily \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}}} splits real and imaginary part of each complex parameter. ~\newline
+The class solves the Renormalization Group Equations (R\+G\+Es) numerically, but provides also a faster, approximate solution that neglects the scale dependence of the anomalous dimension matrix. Only operators up to dimension six that preserve lepton and baryon numbers are considered. The operator basis is the Warsaw basis, defined in \href{https://arxiv.org/abs/1008.4884}{\texttt{ https\+://arxiv.\+org/abs/1008.\+4884}}. {\ttfamily \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}}} splits real and imaginary part of each complex parameter. ~\newline
  ~\newline
  The numerical integration is performed with an adaptive step-\/size routine (the explicit embedded Runge-\/\+Kutta-\/\+Fehlberg method), using the tools in the G\+NU Scientific Library. See \href{https://www.gnu.org/software/gsl/doc/html/ode-initval.html}{\texttt{ https\+://www.\+gnu.\+org/software/gsl/doc/html/ode-\/initval.\+html}} for all the details. ~\newline
 The accuracy level of the numerical integration can be tuned selecting the parameters $\epsilon_{rel} and \epsilon_{abs}$ using the dedicated setter functions. ~\newline
@@ -461,7 +461,7 @@ It initializes to 0 all the S\+M\+E\+FT coefficients.
 
 Performs the R\+GE evolution. 
 
-R\+G\+Es are solved with the chosen method from {\ttfamily muI} to {\ttfamily muF}. Currently, the available methods are \char`\"{}\+Numeric\char`\"{} and \char`\"{}\+Leading-\/\+Log\char`\"{}. ~\newline
+R\+G\+Es are solved with the chosen method from {\ttfamily muI} to {\ttfamily muF}. Currently, the available methods are \char`\"{}\+Numeric\char`\"{} and \char`\"{}\+Approximate\char`\"{}. ~\newline
  The method takes as initial values the current values of the parameters, set with the \mbox{\hyperlink{classRGESolver_adc2b8a9a10216ec5285569c8f24cbed2}{Set\+Coefficient}} functions. After completing the evolution the values of the parameters are updated and are accessible with the \mbox{\hyperlink{classRGESolver_a23d5d847021421bc8a9ba03412d2674e}{Get\+Coefficient}} functions. 
 \begin{DoxyParams}{Parameters}
 {\em method} & resolution method \\
@@ -529,7 +529,7 @@ The initial conditions are generated at the scale {\ttfamily mu} starting from t
 \hline
 {\em basis} & Flavour basis ( {\ttfamily \char`\"{}\+U\+P\char`\"{}} or {\ttfamily \char`\"{}\+D\+O\+W\+N\char`\"{}}) \\
 \hline
-{\em method} & Method used by \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}} to run the SM parameters to the scale {\ttfamily mu} ({\ttfamily \char`\"{}\+Numeric\char`\"{}} or {\ttfamily \char`\"{}\+Leading-\/\+Log\char`\"{}}) \\
+{\em method} & Method used by \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}} to run the SM parameters to the scale {\ttfamily mu} ({\ttfamily \char`\"{}\+Numeric\char`\"{}} or {\ttfamily \char`\"{}\+Approximate\char`\"{}}) \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classRGESolver_ab228238c79a43b8d3dbb3d220beea73d}\label{classRGESolver_ab228238c79a43b8d3dbb3d220beea73d}} 
@@ -550,7 +550,7 @@ The initial conditions are generated at the scale {\ttfamily mu\+Fin} starting f
 \hline
 {\em basis} & Flavour basis ( {\ttfamily \char`\"{}\+U\+P\char`\"{}} or {\ttfamily \char`\"{}\+D\+O\+W\+N\char`\"{}}) \\
 \hline
-{\em method} & Method used by \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}} to run the SM parameters to the scale {\ttfamily mu} ({\ttfamily \char`\"{}\+Numeric\char`\"{}} or {\ttfamily \char`\"{}\+Leading-\/\+Log\char`\"{}}) \\
+{\em method} & Method used by \mbox{\hyperlink{classRGESolver}{R\+G\+E\+Solver}} to run the SM parameters to the scale {\ttfamily mu} ({\ttfamily \char`\"{}\+Numeric\char`\"{}} or {\ttfamily \char`\"{}\+Approximate\char`\"{}}) \\
 \hline
 {\em g1in} & $g_1 $ \\
 \hline

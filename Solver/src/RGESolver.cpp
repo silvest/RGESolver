@@ -1295,9 +1295,9 @@ void RGESolver::Update() {
 void RGESolver::Evolve(std::string method, double muI, double muF) {
 
 
-    if (method != "Numeric" && method != "Leading-Log") {
+    if (method != "Numeric" && method != "Approximate") {
         std::cout << "WARNING : invalid method\n"
-                "Available methods: Numeric, Leading-Log"
+                "Available methods: Numeric, Approximate"
                 << std::endl;
     }
     if (muF != muI) {
@@ -1375,7 +1375,7 @@ double tI = log(muI);
 
         //Leading-log solution 
         //-------------------------------------------
-        if (method == "Leading-Log") {
+        if (method == "Approximate") {
             double beta[dim] = {0.};
             double Log_muF_over_muI = log(muF / muI);
             /*int status = */func(10., x, beta, NULL);

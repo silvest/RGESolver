@@ -144,7 +144,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class that performs renormalization group evolution in the context of the SMEFT. </p>
-<p>The class solves the Renormalization Group Equations (RGEs) both numerically and in the leading-log approximation. Only operators up to dimension six that preserve lepton and baryon numbers are considered. The operator basis is the Warsaw basis, defined in <a href="https://arxiv.org/abs/1008.4884">https://arxiv.org/abs/1008.4884</a>. <code><a class="el" href="classRGESolver.html" title="A class that performs renormalization group evolution in the context of the SMEFT.">RGESolver</a></code> splits real and imaginary part of each complex parameter. <br  />
+<p>The class solves the Renormalization Group Equations (RGEs) numerically, but provides also a faster, approximate solution that neglects the scale dependence of the anomalous dimension matrix. Only operators up to dimension six that preserve lepton and baryon numbers are considered. The operator basis is the Warsaw basis, defined in <a href="https://arxiv.org/abs/1008.4884">https://arxiv.org/abs/1008.4884</a>. <code><a class="el" href="classRGESolver.html" title="A class that performs renormalization group evolution in the context of the SMEFT.">RGESolver</a></code> splits real and imaginary part of each complex parameter. <br  />
  <br  />
  The numerical integration is performed with an adaptive step-size routine (the explicit embedded Runge-Kutta-Fehlberg method), using the tools in the GNU Scientific Library. See <a href="https://www.gnu.org/software/gsl/doc/html/ode-initval.html">https://www.gnu.org/software/gsl/doc/html/ode-initval.html</a> for all the details. <br  />
 The accuracy level of the numerical integration can be tuned selecting the parameters \(\epsilon_{rel} and \epsilon_{abs}\) using the dedicated setter functions. <br  />
@@ -694,7 +694,7 @@ A summary of the operators symmetry classes is given in table <a class="el" href
 </div><div class="memdoc">
 
 <p>Performs the RGE evolution. </p>
-<p>RGEs are solved with the chosen method from <code>muI</code> to <code>muF</code>. Currently, the available methods are "Numeric" and "Leading-Log". <br  />
+<p>RGEs are solved with the chosen method from <code>muI</code> to <code>muF</code>. Currently, the available methods are "Numeric" and "Approximate". <br  />
  The method takes as initial values the current values of the parameters, set with the <a class="el" href="classRGESolver.html#adc2b8a9a10216ec5285569c8f24cbed2">SetCoefficient</a> functions. After completing the evolution the values of the parameters are updated and are accessible with the <a class="el" href="classRGESolver.html#a23d5d847021421bc8a9ba03412d2674e">GetCoefficient</a> functions. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">method</td><td>resolution method </td></tr>
@@ -840,7 +840,7 @@ A summary of the operators symmetry classes is given in table <a class="el" href
   <table class="params">
     <tr><td class="paramname">mu</td><td>Scale (in GeV) at which the initial conditions are generated </td></tr>
     <tr><td class="paramname">basis</td><td>Flavour basis ( <code>"UP"</code> or <code>"DOWN"</code>) </td></tr>
-    <tr><td class="paramname">method</td><td>Method used by <a class="el" href="classRGESolver.html">RGESolver</a> to run the SM parameters to the scale <code>mu</code> (<code>"Numeric"</code> or <code>"Leading-Log"</code>) </td></tr>
+    <tr><td class="paramname">method</td><td>Method used by <a class="el" href="classRGESolver.html">RGESolver</a> to run the SM parameters to the scale <code>mu</code> (<code>"Numeric"</code> or <code>"Approximate"</code>) </td></tr>
   </table>
   </dd>
 </dl>
@@ -963,7 +963,7 @@ A summary of the operators symmetry classes is given in table <a class="el" href
     <tr><td class="paramname">muIn</td><td>Low-energy input scale (in GeV) </td></tr>
     <tr><td class="paramname">muIn</td><td>Scale (in GeV) at which the initial conditions are generated </td></tr>
     <tr><td class="paramname">basis</td><td>Flavour basis ( <code>"UP"</code> or <code>"DOWN"</code>) </td></tr>
-    <tr><td class="paramname">method</td><td>Method used by <a class="el" href="classRGESolver.html">RGESolver</a> to run the SM parameters to the scale <code>mu</code> (<code>"Numeric"</code> or <code>"Leading-Log"</code>) </td></tr>
+    <tr><td class="paramname">method</td><td>Method used by <a class="el" href="classRGESolver.html">RGESolver</a> to run the SM parameters to the scale <code>mu</code> (<code>"Numeric"</code> or <code>"Approximate"</code>) </td></tr>
     <tr><td class="paramname">g1in</td><td>\(g_1 \) </td></tr>
     <tr><td class="paramname">g2in</td><td>\(g_2 \) </td></tr>
     <tr><td class="paramname">g3in</td><td>\(g_3 \) </td></tr>

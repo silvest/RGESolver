@@ -21,8 +21,8 @@
 
 /** 
  * @brief A class that performs renormalization group evolution in the context of the SMEFT
- * @details The class solves the Renormalization Group Equations (RGEs) both numerically and 
- * in the leading-log approximation. 
+ * @details The class solves the Renormalization Group Equations (RGEs) numerically, but provides 
+ * also a faster, approximate solution that neglects the scale dependence of the anomalous dimension matrix.
  * Only operators up to dimension six that preserve  lepton and baryon numbers 
  * are considered. The operator basis is the Warsaw basis, 
  * defined in https://arxiv.org/abs/1008.4884.
@@ -379,7 +379,7 @@ public:
     /**
      * @brief Performs the RGE evolution
      * @details RGEs are solved with the chosen method from @p muI to @p muF.
-     * Currently, the available methods are "Numeric" and "Leading-Log". @n 
+     * Currently, the available methods are "Numeric" and "Approximate". @n 
      * The method takes as initial values the current values of the parameters, 
      * set with the \ref SetCoefficient functions. After completing the evolution
      * the values of the parameters are updated and are accessible with the
@@ -420,7 +420,7 @@ public:
      * <tt>"UP"</tt> or <tt>"DOWN"</tt>)
      * @param method Method used by \ref RGESolver
      * to run the SM parameters to the scale <tt>mu</tt> 
-     * (<tt>"Numeric"</tt> or <tt>"Leading-Log"</tt>) 
+     * (<tt>"Numeric"</tt> or <tt>"Approximate"</tt>) 
      */
     void GenerateSMInitialConditions(double mu, std::string basis, std::string method);
 
@@ -447,7 +447,7 @@ public:
      * <tt>"UP"</tt> or <tt>"DOWN"</tt>)
      * @param method Method used by \ref RGESolver
      * to run the SM parameters to the scale <tt>mu</tt> 
-     * (<tt>"Numeric"</tt> or <tt>"Leading-Log"</tt>) 
+     * (<tt>"Numeric"</tt> or <tt>"Approximate"</tt>) 
      * @param g1in \f$g_1 \f$ 
      * @param g2in \f$g_2 \f$ 
      * @param g3in \f$g_3 \f$ 

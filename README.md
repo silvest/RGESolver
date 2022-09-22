@@ -1,7 +1,7 @@
 
 # `RGESolver`
 
-A `C++` library to perform renormalization group evolution of SMEFT coefficients, both numerically and with the leading-log approximation. 
+A `C++` library to perform renormalization group evolution of SMEFT coefficients  numericallybut provides also a faster, approximate solution that neglects the scale dependence of the anomalous dimension matrix.
   The general flavour case at dimension-six level is considered. Operators that violate lepton and/or baryon number conservation are not considered. The documentation for this library can be found [here](https://silvest.github.io/RGESolver/annotated.html)
   
 `RGESolver` is a free software under the copyright of the GNU General Public License.
