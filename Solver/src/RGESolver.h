@@ -32,7 +32,7 @@
  * tools in the GNU Scientific Library. 
  * See https://www.gnu.org/software/gsl/doc/html/ode-initval.html for all the details. @n
  * The accuracy level of the numerical integration can be tuned selecting the parameters 
- * @f$\epsilon_{rel} and \epsilon_{abs}@f$ using the
+ * @f$\epsilon_{rel}@f$ and @f$\epsilon_{abs}@f$ using the
  *  dedicated setter functions. @n @n 
  * All the SMEFT coefficients are set using the \ref SetCoefficient methods and 
  * accessed with the \ref GetCoefficient methods. 
