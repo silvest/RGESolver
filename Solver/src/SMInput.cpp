@@ -132,9 +132,9 @@ void RGESolver::UpdateCKM() {
 void RGESolver::GenerateSMInitialConditions(
         double mu, std::string basis,
         std::string method) {
-    /*if (method != "Numeric" && method != "Leading-Log") {
+    /*if (method != "Numeric" && method != "Approximate") {
         std::cout << "WARNING : invalid method\n"
-                "Available methods: Numeric, Leading-Log"
+                "Available methods: Numeric, Approximate"
                 << std::endl;
     }*/
     SetSMDefaultInput();
@@ -208,9 +208,9 @@ void RGESolver::GenerateSMInitialConditions(double muIn, double muFin, std::stri
 }
 
 void RGESolver::EvolveSMOnly(std::string method, double muI, double muF) {
-    if (method != "Numeric" && method != "Leading-Log") {
+    if (method != "Numeric" && method != "Approximate") {
         std::cout << "WARNING : invalid method\n"
-                "Available methods: Numeric, Leading-Log"
+                "Available methods: Numeric, Approximate"
                 << std::endl;
     }
 
@@ -260,7 +260,7 @@ void RGESolver::EvolveSMOnly(std::string method, double muI, double muF) {
 
         //Leading-log resolution 
         //-------------------------------------------
-        if (method == "Leading-Log") {
+        if (method == "Approximate") {
             double beta[59] = {0.};
             double Log_muF_over_muI = log(muF / muI);
             /*int status = */funcSMOnly(10., x, beta, NULL);
