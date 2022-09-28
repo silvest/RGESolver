@@ -18,6 +18,7 @@ RGESolver::RGESolver() : yuR(3, 0.), yuI(3, 0.), ydR(3, 0.), ydI(3, 0.), yeR(3, 
   
   Resetepsrel();
   Resetepsabs();
+  SetSMDefaultInput();
   
    
   //-----SM SCALAR PARAMETERS I/O----------
