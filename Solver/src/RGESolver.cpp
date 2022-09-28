@@ -19,16 +19,7 @@ RGESolver::RGESolver() : yuR(3, 0.), yuI(3, 0.), ydR(3, 0.), ydI(3, 0.), yeR(3, 
   Resetepsrel();
   Resetepsabs();
   
-  //Build default CKM matrix from default parameters
-  //UpdateCKM();
-  
-  //cout << "Constructor called" << endl;
-  //cout << "epsabs : " << epsabs_ << "  epsrel : " << epsrel_ << endl;
-  //cout << "step : " << step_ << endl;
-  
-  
-  
-  
+   
   //-----SM SCALAR PARAMETERS I/O----------
   {
     Operators0F["g1"] = & g1;
@@ -701,13 +692,7 @@ void RGESolver::Update() {
 
   int n = 0;
   int a, i, j, k, l;
-  x[0] = 12;
-  x[1] = 72;
-
-  n=0;
-  std::cout << x[n++] << std::endl;
-    
-  n=0;
+ 
   g2 = x[0];
   g1 = x[1];
   g3 = x[2];

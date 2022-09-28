@@ -704,9 +704,6 @@ void RGESolver::SetSMDefaultInput() {
     std::cout << "s23 : " << s23 <<std::endl;
     std::cout << "CKM_delta : " << CKM_delta <<std::endl;*/
 
-
-
-
 }
 
 
@@ -721,7 +718,7 @@ void RGESolver::Reset() {
 
 
     int a, i, j, k, l;
-    g2 = 0;
+    /*g2 = 0;
     g1 = 0;
     g3 = 0;
     lambda = 0;
@@ -732,7 +729,8 @@ void RGESolver::Reset() {
     ydR.reset();
     ydI.reset();
     yeR.reset();
-    yeI.reset();
+    yeI.reset();*/
+    SetSMDefaultInput();
 
     //    for (i = 0; i < NG; i ++) {
     //        for (j = 0; j < NG; j ++) {

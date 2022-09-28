@@ -609,7 +609,7 @@ public:
      * @brief Resets all the SMEFT coefficients to 0 and the 
      * SM parameters to their default value. 
      * \f$\epsilon_{\textrm{abs}}\f$ and \f$\epsilon_{\textrm{rel}}\f$ are reset to 
-     * their default value.
+     * their default value (in the UP basis).
      * @details 
      */
     void Reset();
