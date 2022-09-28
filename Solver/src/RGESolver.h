@@ -481,9 +481,6 @@ public:
     void EvolveSMOnly(std::string method, double muI, double muF);
 
 
-
-
-
     /** @name Input/output   */
 
 
