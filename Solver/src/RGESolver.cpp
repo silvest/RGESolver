@@ -1133,7 +1133,7 @@ void RGESolver::Evolve(std::string method, double muI, double muF) {
 
 
 
-    //Leading-log solution 
+    //Approximate solution 
     //-------------------------------------------
     if (method == "Approximate") {
       double beta[dim] = {0.};

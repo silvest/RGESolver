@@ -384,7 +384,7 @@ public:
      * set with the \ref SetCoefficient functions. After completing the evolution
      * the values of the parameters are updated and are accessible with the
      * \ref GetCoefficient functions.
-     * @param method resolution method
+     * @param method solution method
      * @param muI initial energy scale (in GeV)
      * @param muF final energy scale (in GeV)  
      */
@@ -395,7 +395,7 @@ public:
      * on the coefficients with flavour indices.
      * @details After the evolution, the CKM matrix is computed. A flavour rotation is performed 
      * on the coefficients to go in the chosen basis.
-     * @param method resolution method
+     * @param method solution method
      * @param muI initial energy scale (in GeV)
      * @param muF final energy scale (in GeV)  
      * @param basis flavour basis after the evolution 
@@ -441,7 +441,7 @@ public:
      * We follow http://www.utfit.org/UTfit for what concerns the conventions for the CKM matrix.
      * At the scale <tt>mu</tt> the CKM matrix is computed.
      * @param muIn Low-energy input scale (in GeV)
-     * @param muIn  Scale (in GeV) at which the initial conditions 
+     * @param muFin  Scale (in GeV) at which the initial conditions 
      * are generated
      * @param basis Flavour basis (
      * <tt>"UP"</tt> or <tt>"DOWN"</tt>)
@@ -474,7 +474,7 @@ public:
      * interested in pure SM running. Using this function is the same of 
      * using \ref Evolve with all the SMEFT coefficients set to 0, but it is faster since 
      * it does compute only the evolution for the SM parameters.
-     * @param method resolution method
+     * @param method solution method
      * @param muI initial energy scale (in GeV)
      * @param muF final energy scale (in GeV)
      */

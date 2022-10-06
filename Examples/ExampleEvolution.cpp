@@ -33,7 +33,7 @@ int main() {
     std::cout << "CHG(" << Lambda << " GeV) : "
             << S.GetCoefficient("CHG") << std::endl;
 
-    //Evolution from Lambda to muLow via numerical resolution 
+    //Evolution from Lambda to muLow via numerical solution 
     //of the RGEs
     S.Evolve("Numeric", Lambda,muLow);
 

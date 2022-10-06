@@ -218,7 +218,7 @@ void RGESolver::EvolveSMOnly(std::string method, double muI, double muF) {
         //in the array x
         InitSMOnly();
 
-        //Numeric resolution 
+        //Numeric solution 
         if (method == "Numeric") {
             double tI = log(muI);
             double tF = log(muF);
@@ -256,7 +256,7 @@ void RGESolver::EvolveSMOnly(std::string method, double muI, double muF) {
         }
 
 
-        //Leading-log resolution 
+        //Approximate solution 
         //-------------------------------------------
         if (method == "Approximate") {
             double beta[59] = {0.};
