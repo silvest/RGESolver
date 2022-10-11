@@ -17,7 +17,7 @@ int main() {
     RGESolver S; //Initialize an instance of the class
 
     //Energy scales must be given in GeV 
-    double Lambda = 10000;
+    double Lambda = 10000.;
     double muLow = 250.;
 
     //Setting the initial conditions at mu = Lambda 
