@@ -29,7 +29,7 @@ int main() {
     //SM fermions masses
     double Muin[3] = {0.002, 1.2, 170.};
     double Mdin[3] = {0.006, 0.05, 5.2};
-    double Mein[3] = {0.005, .1, 1.2};
+    double Mein[3] = {0.0005, 0.1, 1.2};
 
     //CKM angles and phase
     double s12in = 0.225;
