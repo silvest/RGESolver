@@ -21,8 +21,6 @@ int main() {
     double muLow = 250.;
 
     //Setting the initial conditions at mu = Lambda 
-    S.SetCoefficient("g3", 0.958);
-    S.SetCoefficient("YuR", 1.05, 2, 2);
     S.SetCoefficient("CHG", 1. / (Lambda * Lambda));
 
     std::cout << "---- INITIAL CONDITIONS ----" << std::endl;
@@ -33,9 +31,11 @@ int main() {
     std::cout << "CHG(" << Lambda << " GeV) : "
             << S.GetCoefficient("CHG") << std::endl;
 
+   
     //Evolution from Lambda to muLow via numerical solution 
     //of the RGEs
-    S.Evolve("Numeric", Lambda,muLow);
+    S.Evolve("Numeric", Lambda, muLow);
+
 
     std::cout << "--- AFTER THE EVOLUTION ---" << std::endl;
     std::cout << "g3(" << muLow << " GeV) : "
