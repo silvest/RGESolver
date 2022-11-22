@@ -15,7 +15,7 @@ A `C++` library to perform renormalization group evolution of SMEFT coefficients
 The installation of `RGESolver` requires the availability of `CMake` in the system (version `3.1` or greater). A description of `CMake` and the instructions for its installation can be found in the [`CMake`website](https://cmake.org/).
 Clone the repository with 
 ```
-git clone https://github.com/silvest/RGESolver --recursively
+git clone https://github.com/silvest/RGESolver --recursive
 ```
 The installation can be performed writhing the following lines in a terminal session (in the `RGESolver` directory):
 ```
