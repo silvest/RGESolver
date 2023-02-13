@@ -1,0 +1,474 @@
+\hypertarget{_r_g_e_solver_8h_source}{}\doxysection{RGESolver.\+h}
+\label{_r_g_e_solver_8h_source}\index{Solver/src/RGESolver.h@{Solver/src/RGESolver.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ RGESolver\_h}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ RGESolver\_h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//RGESolver.h}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <gsl/gsl\_errno.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <gsl/gsl\_matrix.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <gsl/gsl\_odeiv2.h>}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\#include\ "{}IndependentIndices.h"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\#include\ <functionalz>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <boost/function.hpp>}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\#include\ <boost/bind/bind.hpp>}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}gslpp.h"{}}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00068\ \textcolor{comment}{//tables\ with\ all\ the\ names\ of\ the\ coefficients.}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00331\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_r_g_e_solver}{RGESolver}}\ \{}
+\DoxyCodeLine{00332\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00337\ \ \ \ \ \mbox{\hyperlink{class_r_g_e_solver_a45669aa780325da0b1e866ba229b277f}{RGESolver}}();}
+\DoxyCodeLine{00338\ }
+\DoxyCodeLine{00342\ \ \ \ \ \mbox{\hyperlink{class_r_g_e_solver_ab1edd7795c6a3dfd0ee1a13a0ae25361}{\string~RGESolver}}();}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00344\ }
+\DoxyCodeLine{00350\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_r_g_e_solver_a834b18f36a698038cbf574ea52fa2545}{epsrel}}()\ \{}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ epsrel\_;}
+\DoxyCodeLine{00352\ \ \ \ \ \}}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00357\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_r_g_e_solver_a87ca405240592096e3671d4e1fd81b6b}{epsabs}}()\ \{}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ epsabs\_;}
+\DoxyCodeLine{00359\ \ \ \ \ \}}
+\DoxyCodeLine{00360\ }
+\DoxyCodeLine{00365\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_g_e_solver_ae31b8e876f8d158f98fee5b402628d7b}{Setepsrel}}(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_r_g_e_solver_a834b18f36a698038cbf574ea52fa2545}{epsrel}})\ \{}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ epsrel\_\ =\ \mbox{\hyperlink{class_r_g_e_solver_a834b18f36a698038cbf574ea52fa2545}{epsrel}};}
+\DoxyCodeLine{00367\ \ \ \ \ \}}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00373\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_g_e_solver_a82723bc1077713dea8cafa5319298a2e}{Setepsabs}}(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_r_g_e_solver_a87ca405240592096e3671d4e1fd81b6b}{epsabs}})\ \{}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ epsabs\_\ =\ \mbox{\hyperlink{class_r_g_e_solver_a87ca405240592096e3671d4e1fd81b6b}{epsabs}};}
+\DoxyCodeLine{00375\ \ \ \ \ \}}
+\DoxyCodeLine{00376\ }
+\DoxyCodeLine{00377\ }
+\DoxyCodeLine{00391\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_g_e_solver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}}(std::string\ method,\ \textcolor{keywordtype}{double}\ muI,\ \textcolor{keywordtype}{double}\ muF);}
+\DoxyCodeLine{00392\ }
+\DoxyCodeLine{00404\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_g_e_solver_a300d0d8643d30cdb49e0df0294793ba2}{EvolveToBasis}}(std::string\ method,\ \textcolor{keywordtype}{double}\ muI,}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ muF,\ std::string\ basis);}
+\DoxyCodeLine{00406\ }
+\DoxyCodeLine{00407\ }
+\DoxyCodeLine{00425\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_g_e_solver_af4ed89d1098aa91112cf9e5a39dd8e7f}{GenerateSMInitialConditions}}(\textcolor{keywordtype}{double}\ mu,\ std::string\ basis,\ std::string\ method);}
+\DoxyCodeLine{00426\ }
+\DoxyCodeLine{00427\ }
+\DoxyCodeLine{00465\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_g_e_solver_ab228238c79a43b8d3dbb3d220beea73d}{GenerateSMInitialConditions}}(\textcolor{keywordtype}{double}\ muIn,\ \textcolor{keywordtype}{double}\ muFin,\ std::string\ basis,\ std::string\ method,}
+\DoxyCodeLine{00466\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ g1in,\ \textcolor{keywordtype}{double}\ g2in,\ \textcolor{keywordtype}{double}\ g3in,\ \textcolor{keywordtype}{double}\ lambdain,\ \textcolor{keywordtype}{double}\ mh2in,}
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ Muin[3],\ \textcolor{keywordtype}{double}\ Mdin[3],\ \textcolor{keywordtype}{double}\ Mein[3],}
+\DoxyCodeLine{00468\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ s12in,\ \textcolor{keywordtype}{double}\ s13in,\ \textcolor{keywordtype}{double}\ s23in,\ \textcolor{keywordtype}{double}\ deltain);}
+\DoxyCodeLine{00469\ }
+\DoxyCodeLine{00470\ }
+\DoxyCodeLine{00481\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_g_e_solver_a7c0c4303beb14f728a70542c8583b3a7}{EvolveSMOnly}}(std::string\ method,\ \textcolor{keywordtype}{double}\ muI,\ \textcolor{keywordtype}{double}\ muF);}
+\DoxyCodeLine{00482\ }
+\DoxyCodeLine{00483\ }
+\DoxyCodeLine{00501\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_r_g_e_solver_a1bdc3a8209979b9f4c583b47fc4988d4}{GetCKMAngle}}(std::string\ name);}
+\DoxyCodeLine{00502\ }
+\DoxyCodeLine{00510\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_r_g_e_solver_a67f092224a036208d5904da39726ce80}{GetCKMRealPart}}(\textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j)\ \{}
+\DoxyCodeLine{00511\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (CKM(i,\ j).real());}
+\DoxyCodeLine{00512\ \ \ \ \ \};}
+\DoxyCodeLine{00513\ }
+\DoxyCodeLine{00521\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_r_g_e_solver_a9a3972af1912ae6ffebc806ffe05daeb}{GetCKMImagPart}}(\textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j)\ \{}
+\DoxyCodeLine{00522\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (CKM(i,\ j).imag());}
+\DoxyCodeLine{00523\ \ \ \ \ \};}
+\DoxyCodeLine{00524\ }
+\DoxyCodeLine{00525\ }
+\DoxyCodeLine{00533\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_r_g_e_solver_a891564c063a942fbd01830b30fa8e6e1}{GetCKMPhase}}();}
+\DoxyCodeLine{00534\ }
+\DoxyCodeLine{00535\ }
+\DoxyCodeLine{00536\ }
+\DoxyCodeLine{00537\ \ \ \ \ \textcolor{comment}{//Setters\ for\ 0F,2F,4F}}
+\DoxyCodeLine{00538\ }
+\DoxyCodeLine{00544\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_g_e_solver_adc2b8a9a10216ec5285569c8f24cbed2}{SetCoefficient}}(std::string\ name,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{00555\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_g_e_solver_adc2b8a9a10216ec5285569c8f24cbed2}{SetCoefficient}}(std::string\ name,\ \textcolor{keywordtype}{double}\ val,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j);}
+\DoxyCodeLine{00569\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_g_e_solver_adc2b8a9a10216ec5285569c8f24cbed2}{SetCoefficient}}(std::string\ name,\ \textcolor{keywordtype}{double}\ val,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{int}\ l);}
+\DoxyCodeLine{00571\ }
+\DoxyCodeLine{00572\ }
+\DoxyCodeLine{00573\ }
+\DoxyCodeLine{00574\ \ \ \ \ \textcolor{comment}{//Getters\ for\ 0F,2F,4F}}
+\DoxyCodeLine{00580\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_r_g_e_solver_a23d5d847021421bc8a9ba03412d2674e}{GetCoefficient}}(std::string\ name);}
+\DoxyCodeLine{00591\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_r_g_e_solver_a23d5d847021421bc8a9ba03412d2674e}{GetCoefficient}}(std::string\ name,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j);}
+\DoxyCodeLine{00592\ }
+\DoxyCodeLine{00604\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_r_g_e_solver_a23d5d847021421bc8a9ba03412d2674e}{GetCoefficient}}(std::string\ name,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,}
+\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{int}\ l);}
+\DoxyCodeLine{00606\ }
+\DoxyCodeLine{00607\ }
+\DoxyCodeLine{00615\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_g_e_solver_a98473c7d53e598bfef878106a3715948}{Reset}}();}
+\DoxyCodeLine{00616\ }
+\DoxyCodeLine{00623\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_g_e_solver_ab6a813bff78d9278d3b875ea9c2f5324}{SaveOutputFile}}(std::string\ filename,}
+\DoxyCodeLine{00624\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ format);}
+\DoxyCodeLine{00625\ }
+\DoxyCodeLine{00626\ }
+\DoxyCodeLine{00627\ }
+\DoxyCodeLine{00628\ }
+\DoxyCodeLine{00629\ }
+\DoxyCodeLine{00630\ }
+\DoxyCodeLine{00631\ }
+\DoxyCodeLine{00632\ }
+\DoxyCodeLine{00633\ }
+\DoxyCodeLine{00634\ }
+\DoxyCodeLine{00635\ }
+\DoxyCodeLine{00636\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00637\ }
+\DoxyCodeLine{00638\ }
+\DoxyCodeLine{00639\ }
+\DoxyCodeLine{00640\ }
+\DoxyCodeLine{00647\ \ \ \ \ \textcolor{keywordtype}{void}\ GoToBasis(std::string\ basis);}
+\DoxyCodeLine{00648\ }
+\DoxyCodeLine{00654\ \ \ \ \ \textcolor{keywordtype}{void}\ GoToBasisSMOnly(std::string\ basis);}
+\DoxyCodeLine{00655\ }
+\DoxyCodeLine{00656\ }
+\DoxyCodeLine{00661\ \ \ \ \ \textcolor{keywordtype}{void}\ ExtractParametersFromCKM();}
+\DoxyCodeLine{00667\ \ \ \ \ \textcolor{keywordtype}{void}\ FromMassesToYukawas(std::string\ basis);}
+\DoxyCodeLine{00672\ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateCKM();}
+\DoxyCodeLine{00679\ \ \ \ \ \textcolor{keywordtype}{void}\ InitSMOnly();}
+\DoxyCodeLine{00684\ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateSMOnly();}
+\DoxyCodeLine{00685\ }
+\DoxyCodeLine{00686\ }
+\DoxyCodeLine{00691\ \ \ \ \ \textcolor{keywordtype}{void}\ SetSMDefaultInput();}
+\DoxyCodeLine{00692\ }
+\DoxyCodeLine{00697\ \ \ \ \ \textcolor{keywordtype}{void}\ Init();}
+\DoxyCodeLine{00703\ \ \ \ \ \textcolor{keywordtype}{void}\ Update();}
+\DoxyCodeLine{00704\ }
+\DoxyCodeLine{00713\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ func(\textcolor{keywordtype}{double}\ logmu,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ y[],}
+\DoxyCodeLine{00714\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ f[],\ \textcolor{keywordtype}{void}*\ params);}
+\DoxyCodeLine{00715\ }
+\DoxyCodeLine{00724\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ funcSMOnly(\textcolor{keywordtype}{double}\ logmu,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ y[],}
+\DoxyCodeLine{00725\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ f[],\ \textcolor{keywordtype}{void}*\ params);}
+\DoxyCodeLine{00726\ }
+\DoxyCodeLine{00727\ }
+\DoxyCodeLine{00730\ }
+\DoxyCodeLine{00735\ \ \ \ \ \textcolor{keywordtype}{double}\ epsrel\_;\ \textcolor{comment}{//\ =\ ;}}
+\DoxyCodeLine{00736\ }
+\DoxyCodeLine{00740\ \ \ \ \ \textcolor{keywordtype}{double}\ epsabs\_;}
+\DoxyCodeLine{00741\ }
+\DoxyCodeLine{00745\ \ \ \ \ \textcolor{keywordtype}{void}\ Resetepsabs()\ \{}
+\DoxyCodeLine{00746\ \ \ \ \ \ \ \ \ epsabs\_\ =\ 0.0000000000001;}
+\DoxyCodeLine{00747\ \ \ \ \ \};}
+\DoxyCodeLine{00748\ }
+\DoxyCodeLine{00752\ \ \ \ \ \textcolor{keywordtype}{void}\ Resetepsrel()\ \{}
+\DoxyCodeLine{00753\ \ \ \ \ \ \ \ \ epsrel\_\ =\ 0.005;}
+\DoxyCodeLine{00754\ \ \ \ \ \};}
+\DoxyCodeLine{00755\ }
+\DoxyCodeLine{00756\ }
+\DoxyCodeLine{00757\ }
+\DoxyCodeLine{00758\ \ \ \ \ gsl\_odeiv2\_system\ sys\ =\ \{func,\ NULL,\ 2558,\ NULL\};}
+\DoxyCodeLine{00759\ \ \ \ \ \textcolor{comment}{/*gsl\_odeiv2\_driver\ *\ d\ =}}
+\DoxyCodeLine{00760\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ gsl\_odeiv2\_driver\_alloc\_y\_new(\&sys,}}
+\DoxyCodeLine{00761\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ gsl\_odeiv2\_step\_rkf45,}}
+\DoxyCodeLine{00762\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ 0.1,\ epsrel\_,\ epsabs\_);*/}}
+\DoxyCodeLine{00763\ \ \ \ \ gsl\_odeiv2\_step\ *\ s}
+\DoxyCodeLine{00764\ \ \ \ \ \ \ \ \ \ \ \ \ =\ gsl\_odeiv2\_step\_alloc(gsl\_odeiv2\_step\_rkf45,\ 2558);}
+\DoxyCodeLine{00765\ \ \ \ \ gsl\_odeiv2\_evolve\ *\ e}
+\DoxyCodeLine{00766\ \ \ \ \ \ \ \ \ \ \ \ \ =\ gsl\_odeiv2\_evolve\_alloc(2558);}
+\DoxyCodeLine{00767\ }
+\DoxyCodeLine{00768\ \ \ \ \ gsl\_odeiv2\_system\ sysSMOnly\ =\ \{funcSMOnly,\ NULL,\ 59,\ NULL\};}
+\DoxyCodeLine{00769\ }
+\DoxyCodeLine{00770\ \ \ \ \ gsl\_odeiv2\_step\ *\ sSMOnly}
+\DoxyCodeLine{00771\ \ \ \ \ \ \ \ \ \ \ \ \ =\ gsl\_odeiv2\_step\_alloc(gsl\_odeiv2\_step\_rkf45,\ 59);}
+\DoxyCodeLine{00772\ \ \ \ \ gsl\_odeiv2\_evolve\ *\ eSMOnly}
+\DoxyCodeLine{00773\ \ \ \ \ \ \ \ \ \ \ \ \ =\ gsl\_odeiv2\_evolve\_alloc(59);}
+\DoxyCodeLine{00774\ }
+\DoxyCodeLine{00775\ }
+\DoxyCodeLine{00776\ }
+\DoxyCodeLine{00777\ }
+\DoxyCodeLine{00778\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00779\ \textcolor{comment}{\ \ \ \ gsl\_odeiv2\_system\ sys\_\ =\ \{func,\ NULL,\ 3\};}}
+\DoxyCodeLine{00780\ \textcolor{comment}{\ \ \ \ gsl\_odeiv2\_step\ *\ s\_\ =\ gsl\_odeiv2\_step\_alloc(}}
+\DoxyCodeLine{00781\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ gsl\_odeiv2\_step\_rkf45,\ 2558);}}
+\DoxyCodeLine{00782\ \textcolor{comment}{\ \ \ \ gsl\_odeiv2\_control\ *\ con\_\ =\ gsl\_odeiv2\_control\_standard\_new(}}
+\DoxyCodeLine{00783\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ epsabs\_,\ epsrel\_,\ 1,\ 1);}}
+\DoxyCodeLine{00784\ \textcolor{comment}{\ \ \ \ gsl\_odeiv2\_evolve*\ evo\_\ =\ gsl\_odeiv2\_evolve\_alloc(2558);}}
+\DoxyCodeLine{00785\ \textcolor{comment}{}}
+\DoxyCodeLine{00786\ \textcolor{comment}{}}
+\DoxyCodeLine{00787\ \textcolor{comment}{\ \ \ \ gsl\_odeiv2\_system\ sysSMOnly\_\ =\ \{funcSMOnly,\ NULL,\ 3\};}}
+\DoxyCodeLine{00788\ \textcolor{comment}{\ \ \ \ gsl\_odeiv2\_step\ *\ sSMOnly\_\ =\ gsl\_odeiv2\_step\_alloc(}}
+\DoxyCodeLine{00789\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ gsl\_odeiv2\_step\_rkf45,\ 59);}}
+\DoxyCodeLine{00790\ \textcolor{comment}{\ \ \ \ gsl\_odeiv2\_control\ *\ conSMOnly\_\ =\ gsl\_odeiv2\_control\_standard\_new(}}
+\DoxyCodeLine{00791\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ epsabs\_,\ epsrel\_,\ 1,\ 1);}}
+\DoxyCodeLine{00792\ \textcolor{comment}{\ \ \ \ gsl\_odeiv2\_evolve*\ evoSMOnly\_\ =\ gsl\_odeiv2\_evolve\_alloc(59);*/}}
+\DoxyCodeLine{00793\ }
+\DoxyCodeLine{00794\ }
+\DoxyCodeLine{00796\ \ \ \ \ \textcolor{keywordtype}{double}\ x[2558];}
+\DoxyCodeLine{00797\ }
+\DoxyCodeLine{00799\ }
+\DoxyCodeLine{00800\ }
+\DoxyCodeLine{00801\ }
+\DoxyCodeLine{00802\ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00803\ }
+\DoxyCodeLine{00812\ }
+\DoxyCodeLine{00815\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ DWC2R\ =\ 6;}
+\DoxyCodeLine{00818\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ DWC2I\ =\ 3;}
+\DoxyCodeLine{00821\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ DWC6R\ =\ 27;}
+\DoxyCodeLine{00824\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ DWC6I\ =\ 18;}
+\DoxyCodeLine{00827\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ DWC7R\ =\ 45;}
+\DoxyCodeLine{00830\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ DWC7I\ =\ 36;}
+\DoxyCodeLine{00833\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ DWC8R\ =\ 21;}
+\DoxyCodeLine{00836\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ DWC8I\ =\ 15;}
+\DoxyCodeLine{00837\ }
+\DoxyCodeLine{00839\ }
+\DoxyCodeLine{00840\ }
+\DoxyCodeLine{00847\ }
+\DoxyCodeLine{00848\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WC2R\_indices[DWC2R][2];}
+\DoxyCodeLine{00850\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WC2I\_indices[DWC2I][2];}
+\DoxyCodeLine{00852\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WC6R\_indices[DWC6R][4];}
+\DoxyCodeLine{00854\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WC6I\_indices[DWC6I][4];}
+\DoxyCodeLine{00856\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WC7R\_indices[DWC7R][4];}
+\DoxyCodeLine{00858\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WC7I\_indices[DWC7I][4];}
+\DoxyCodeLine{00860\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WC8R\_indices[DWC8R][4];}
+\DoxyCodeLine{00862\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WC8I\_indices[DWC8I][4];}
+\DoxyCodeLine{00863\ }
+\DoxyCodeLine{00864\ }
+\DoxyCodeLine{00866\ }
+\DoxyCodeLine{00867\ }
+\DoxyCodeLine{00868\ }
+\DoxyCodeLine{00869\ }
+\DoxyCodeLine{00870\ }
+\DoxyCodeLine{00871\ }
+\DoxyCodeLine{00872\ }
+\DoxyCodeLine{00883\ }
+\DoxyCodeLine{00884\ }
+\DoxyCodeLine{00888\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ NG\ =\ 3;}
+\DoxyCodeLine{00892\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ DF\ =\ 9;}
+\DoxyCodeLine{00896\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ DFs\ =\ (NG*NG\ +\ NG)\ /\ 2;}
+\DoxyCodeLine{00900\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ DFa\ =\ (NG*NG\ -\/\ NG)\ /\ 2;}
+\DoxyCodeLine{00901\ }
+\DoxyCodeLine{00904\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ Ngauge\ =\ 3;}
+\DoxyCodeLine{00907\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ Nh\ =\ 2;}
+\DoxyCodeLine{00910\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ Nyukawa\ =\ 3;}
+\DoxyCodeLine{00913\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ Eyuk\ =\ (Nyukawa\ *\ 2\ *\ DF);}
+\DoxyCodeLine{00914\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ N1\ =\ 4;}
+\DoxyCodeLine{00915\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ N23\ =\ 3;}
+\DoxyCodeLine{00916\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ N4\ =\ 8;}
+\DoxyCodeLine{00917\ }
+\DoxyCodeLine{00918\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ N5\ =\ 3;}
+\DoxyCodeLine{00919\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ E5\ =\ (N5\ *\ 2\ *\ DF);}
+\DoxyCodeLine{00920\ }
+\DoxyCodeLine{00921\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ N6\ =\ 8;}
+\DoxyCodeLine{00922\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ E6\ =\ (N6\ *\ 2\ *\ DF);}
+\DoxyCodeLine{00923\ }
+\DoxyCodeLine{00924\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ N7\ =\ 8;}
+\DoxyCodeLine{00926\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ N7H\ =\ 7;}
+\DoxyCodeLine{00928\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ N7NH\ =\ 1;}
+\DoxyCodeLine{00929\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ E7\ =\ (N7H*(DWC2R\ +\ DWC2I)\ +\ N7NH\ *\ 2\ *\ DF);}
+\DoxyCodeLine{00930\ }
+\DoxyCodeLine{00931\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ N8\_LLLL\ =\ 5;}
+\DoxyCodeLine{00932\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ E8\_LLLL\ =\ 2\ *\ (DWC7R\ +\ DWC7I)\ +\ 3\ *\ (DWC6R\ +\ DWC6I);}
+\DoxyCodeLine{00933\ }
+\DoxyCodeLine{00934\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ N8\_RRRR\ =\ 7;}
+\DoxyCodeLine{00935\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ E8\_RRRR\ =\ 4\ *\ (DWC7R\ +\ DWC7I)\ +\ 2\ *\ (DWC6R\ +\ DWC6I)\ +\ 1\ *\ (DWC8R\ +\ DWC8I);}
+\DoxyCodeLine{00936\ }
+\DoxyCodeLine{00937\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ N8\_LLRR\ =\ 8;}
+\DoxyCodeLine{00938\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ E8\_LLRR\ =\ 8\ *\ (DWC7R\ +\ DWC7I);}
+\DoxyCodeLine{00939\ }
+\DoxyCodeLine{00940\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ N8\_LRRL\ =\ 1;}
+\DoxyCodeLine{00941\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ E8\_LRRL\ =\ 2\ *\ NG*NG*NG*NG*N8\_LRRL;}
+\DoxyCodeLine{00942\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ N8\_LRLR\ =\ 4;}
+\DoxyCodeLine{00943\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ E8\_LRLR\ =\ 2\ *\ NG*NG*NG*NG*N8\_LRLR;}
+\DoxyCodeLine{00944\ }
+\DoxyCodeLine{00946\ }
+\DoxyCodeLine{00947\ }
+\DoxyCodeLine{00948\ }
+\DoxyCodeLine{00954\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ TWO\_THIRDS;}
+\DoxyCodeLine{00955\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ FOUR\_THIRDS;}
+\DoxyCodeLine{00956\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ EIGHT\_THIRDS;}
+\DoxyCodeLine{00957\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ ONE\_THIRD;}
+\DoxyCodeLine{00958\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ ONE\_SIXTH;}
+\DoxyCodeLine{00959\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ TEN\_THIRDS;}
+\DoxyCodeLine{00961\ }
+\DoxyCodeLine{00962\ }
+\DoxyCodeLine{00967\ }
+\DoxyCodeLine{00970\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ delta[3][3];}
+\DoxyCodeLine{00971\ }
+\DoxyCodeLine{00972\ }
+\DoxyCodeLine{00974\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ dim\ =\ (Ngauge\ +\ Nh\ +\ Eyuk\ +\ N1\ +\ N23\ +\ N4\ +\ E5\ +\ E6\ +\ E7\ +\ E8\_LLLL\ +\ E8\_RRRR\ +\ E8\_LLRR\ +\ E8\_LRRL\ +\ E8\_LRLR);}
+\DoxyCodeLine{00975\ }
+\DoxyCodeLine{00977\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ NC;}
+\DoxyCodeLine{00979\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ NC2;}
+\DoxyCodeLine{00980\ }
+\DoxyCodeLine{00983\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ b01;}
+\DoxyCodeLine{00985\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ b02;}
+\DoxyCodeLine{00987\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ b03;}
+\DoxyCodeLine{00988\ }
+\DoxyCodeLine{00989\ \ \ \ \ \textcolor{comment}{//Casimirs}}
+\DoxyCodeLine{00991\ \textcolor{comment}{}\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ cA2;}
+\DoxyCodeLine{00993\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ cA3;}
+\DoxyCodeLine{00995\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ cF2;}
+\DoxyCodeLine{00997\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ cF3;}
+\DoxyCodeLine{00999\ }
+\DoxyCodeLine{01000\ \ \ \ \ \textcolor{comment}{//Hypercharges\ (and\ product\ of\ hypercharges)}}
+\DoxyCodeLine{01001\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{01002\ }
+\DoxyCodeLine{01009\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ Yh;}
+\DoxyCodeLine{01010\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ Yh2;}
+\DoxyCodeLine{01011\ }
+\DoxyCodeLine{01012\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ Yq;}
+\DoxyCodeLine{01013\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ Yq2;}
+\DoxyCodeLine{01014\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ Yl;}
+\DoxyCodeLine{01015\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ Yl2;}
+\DoxyCodeLine{01016\ }
+\DoxyCodeLine{01017\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ Yu;}
+\DoxyCodeLine{01018\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ Yu2;}
+\DoxyCodeLine{01019\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ Yd;}
+\DoxyCodeLine{01020\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ Yd2;}
+\DoxyCodeLine{01021\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ Ye;}
+\DoxyCodeLine{01022\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ Ye2;}
+\DoxyCodeLine{01023\ }
+\DoxyCodeLine{01024\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ YhYu;}
+\DoxyCodeLine{01025\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ YhYd;}
+\DoxyCodeLine{01026\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ YhYe;}
+\DoxyCodeLine{01027\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ YhYq;}
+\DoxyCodeLine{01028\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ YhYl;}
+\DoxyCodeLine{01029\ }
+\DoxyCodeLine{01030\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ YuYd;}
+\DoxyCodeLine{01031\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ YuYe;}
+\DoxyCodeLine{01032\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ YuYq;}
+\DoxyCodeLine{01033\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ YuYl;}
+\DoxyCodeLine{01034\ }
+\DoxyCodeLine{01035\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ YdYe;}
+\DoxyCodeLine{01036\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ YdYq;}
+\DoxyCodeLine{01037\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ YdYl;}
+\DoxyCodeLine{01038\ }
+\DoxyCodeLine{01039\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ YeYq;}
+\DoxyCodeLine{01040\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ YeYl;}
+\DoxyCodeLine{01041\ }
+\DoxyCodeLine{01042\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ YlYq;}
+\DoxyCodeLine{01044\ }
+\DoxyCodeLine{01045\ }
+\DoxyCodeLine{01046\ }
+\DoxyCodeLine{01047\ }
+\DoxyCodeLine{01052\ }
+\DoxyCodeLine{01053\ \ \ \ \ \textcolor{keywordtype}{double}\ g1,\ \ g2,\ \ g3,\ mh2,\ lambda;}
+\DoxyCodeLine{01058\ \ \ \ \ gslpp::matrix<double>\ yuR,\ yuI,\ ydR,\ ydI,\ yeR,\ yeI;}
+\DoxyCodeLine{01060\ }
+\DoxyCodeLine{01063\ \ \ \ \ gslpp::matrix<gslpp::complex>\ CKM\ =\ gslpp::matrix<gslpp::complex>(3,\ 3,\ 0.);}
+\DoxyCodeLine{01064\ }
+\DoxyCodeLine{01070\ \ \ \ \ \textcolor{keywordtype}{double}\ InputScale\_SM;\ \textcolor{comment}{//GeV}}
+\DoxyCodeLine{01071\ }
+\DoxyCodeLine{01072\ \ \ \ \ \textcolor{comment}{//CKM\ parameters}}
+\DoxyCodeLine{01076\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{double}\ CKM\_delta;}
+\DoxyCodeLine{01077\ }
+\DoxyCodeLine{01081\ \ \ \ \ \textcolor{keywordtype}{double}\ c12;}
+\DoxyCodeLine{01085\ \ \ \ \ \textcolor{keywordtype}{double}\ s12;}
+\DoxyCodeLine{01089\ \ \ \ \ \textcolor{keywordtype}{double}\ c13;}
+\DoxyCodeLine{01093\ \ \ \ \ \textcolor{keywordtype}{double}\ s13;}
+\DoxyCodeLine{01097\ \ \ \ \ \textcolor{keywordtype}{double}\ c23;}
+\DoxyCodeLine{01101\ \ \ \ \ \textcolor{keywordtype}{double}\ s23;}
+\DoxyCodeLine{01102\ }
+\DoxyCodeLine{01103\ \ \ \ \ \textcolor{comment}{//masses}}
+\DoxyCodeLine{01107\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{double}\ mu;}
+\DoxyCodeLine{01111\ \ \ \ \ \textcolor{keywordtype}{double}\ mc;}
+\DoxyCodeLine{01114\ \ \ \ \ \textcolor{keywordtype}{double}\ mt;}
+\DoxyCodeLine{01115\ \ \ \ \ }
+\DoxyCodeLine{01119\ \ \ \ \ \textcolor{keywordtype}{double}\ md;}
+\DoxyCodeLine{01123\ \ \ \ \ \textcolor{keywordtype}{double}\ ms;}
+\DoxyCodeLine{01126\ \ \ \ \ \textcolor{keywordtype}{double}\ mb;}
+\DoxyCodeLine{01127\ \ \ \ \ }
+\DoxyCodeLine{01131\ \ \ \ \ \textcolor{keywordtype}{double}\ mel;}
+\DoxyCodeLine{01135\ \ \ \ \ \textcolor{keywordtype}{double}\ mmu;}
+\DoxyCodeLine{01138\ \ \ \ \ \textcolor{keywordtype}{double}\ mtau;}
+\DoxyCodeLine{01139\ \ \ \ \ }
+\DoxyCodeLine{01148\ \ \textcolor{keywordtype}{double}\ cG\ =\ 0.;\textcolor{keywordtype}{double}\ cGT\ =\ 0.;\ \textcolor{keywordtype}{double}\ cW\ =\ 0.;\textcolor{keywordtype}{double}\ cWT\ =\ 0.;}
+\DoxyCodeLine{01153\ \textcolor{keywordtype}{double}\ cH\ =\ 0.;}
+\DoxyCodeLine{01155\ \ \textcolor{keywordtype}{double}\ cHBOX\ =\ 0.;\ \textcolor{keywordtype}{double}\ cHD\ =\ 0.;}
+\DoxyCodeLine{01158\ \ \textcolor{keywordtype}{double}\ cHG\ =\ 0.;\ \textcolor{keywordtype}{double}\ cHGT\ =\ 0.;\ \textcolor{keywordtype}{double}\ cHW\ =\ 0.;\ \textcolor{keywordtype}{double}\ cHWT\ =\ 0.;\ \textcolor{keywordtype}{double}\ cHB\ =\ 0.;\ \textcolor{keywordtype}{double}\ cHBT\ =\ 0.;\ \textcolor{keywordtype}{double}\ cHWB\ =\ 0.;\textcolor{keywordtype}{double}\ cHWBT\ =\ 0.;}
+\DoxyCodeLine{01167\ }
+\DoxyCodeLine{01168\ }
+\DoxyCodeLine{01169\ }
+\DoxyCodeLine{01171\ \ \ \ \ \textcolor{keywordtype}{double}\ ceHR[3\ *\ 3]\ =\ \{0.\};}
+\DoxyCodeLine{01173\ \ \ \ \ \textcolor{keywordtype}{double}\ ceHI[3\ *\ 3]\ =\ \{0.\};}
+\DoxyCodeLine{01175\ \ \ \ \ \textcolor{keywordtype}{double}\ cuHR[3\ *\ 3]\ =\ \{0.\};}
+\DoxyCodeLine{01177\ \ \ \ \ \textcolor{keywordtype}{double}\ cuHI[3\ *\ 3]\ =\ \{0.\};}
+\DoxyCodeLine{01179\ \ \ \ \ \textcolor{keywordtype}{double}\ cdHR[3\ *\ 3]\ =\ \{0.\};}
+\DoxyCodeLine{01181\ \ \ \ \ \textcolor{keywordtype}{double}\ cdHI[3\ *\ 3]\ =\ \{0.\};}
+\DoxyCodeLine{01182\ }
+\DoxyCodeLine{01183\ \ \textcolor{keywordtype}{double}\ ceWR[3\ *\ 3]\ =\ \{0.\};\ \textcolor{keywordtype}{double}\ ceWI[3\ *\ 3]\ =\ \{0.\};\ \textcolor{keywordtype}{double}\ ceBR[3\ *\ 3]\ =\ \{0.\};\ \textcolor{keywordtype}{double}\ ceBI[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cuGR[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cuGI[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cuWR[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cuWI[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cuBR[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cuBI[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cdGR[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cdGI[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cdWR[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cdWI[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cdBR[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cdBI[3\ *\ 3]\ =\ \{0.\};}
+\DoxyCodeLine{01200\ }
+\DoxyCodeLine{01201\ }
+\DoxyCodeLine{01202\ }
+\DoxyCodeLine{01203\ \ \textcolor{keywordtype}{double}\ cHl1R[3\ *\ 3]\ =\ \{0.\};\ \textcolor{keywordtype}{double}\ cHl1I[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cHl3R[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cHl3I[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cHeR[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cHeI[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cHq1R[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cHq1I[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cHq3R[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cHq3I[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cHuR[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cHuI[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cHdR[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cHdI[3\ *\ 3]\ =\ \{0.\};}
+\DoxyCodeLine{01218\ \textcolor{keywordtype}{double}\ cHudR[3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cHudI[3\ *\ 3]\ =\ \{0.\};}
+\DoxyCodeLine{01221\ }
+\DoxyCodeLine{01222\ }
+\DoxyCodeLine{01223\ }
+\DoxyCodeLine{01224\ \textcolor{keywordtype}{double}\ cllR[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cllI[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cqq1R[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cqq1I[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cqq3R[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cqq3I[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ clq1R[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ clq1I[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ clq3R[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ clq3I[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};}
+\DoxyCodeLine{01235\ }
+\DoxyCodeLine{01236\ \textcolor{keywordtype}{double}\ cuuR[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cuuI[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cddR[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cddI[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ ceeR[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ ceeI[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ ceuR[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ ceuI[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cedR[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\ \textcolor{keywordtype}{double}\ cedI[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cud1R[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cud1I[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cud8R[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cud8I[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};}
+\DoxyCodeLine{01251\ }
+\DoxyCodeLine{01252\ }
+\DoxyCodeLine{01253\ \textcolor{keywordtype}{double}\ cleR[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cleI[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cluR[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cluI[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cldR[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cldI[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cqeR[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cqeI[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cqu1R[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cqu1I[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cqu8R[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cqu8I[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cqd1R[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\ \textcolor{keywordtype}{double}\ cqd1I[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cqd8R[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\ \textcolor{keywordtype}{double}\ cqd8I[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};}
+\DoxyCodeLine{01270\ }
+\DoxyCodeLine{01271\ }
+\DoxyCodeLine{01272\ }
+\DoxyCodeLine{01273\ \ \textcolor{keywordtype}{double}\ cledqR[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cledqI[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};}
+\DoxyCodeLine{01276\ }
+\DoxyCodeLine{01277\ }
+\DoxyCodeLine{01278\ \textcolor{keywordtype}{double}\ clequ1R[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ clequ1I[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ clequ3R[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ clequ3I[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cquqd1R[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cquqd1I[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cquqd8R[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};\textcolor{keywordtype}{double}\ cquqd8I[3\ *\ 3\ *\ 3\ *\ 3]\ =\ \{0.\};}
+\DoxyCodeLine{01288\ }
+\DoxyCodeLine{01289\ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{01290\ }
+\DoxyCodeLine{01291\ }
+\DoxyCodeLine{01292\ }
+\DoxyCodeLine{01293\ }
+\DoxyCodeLine{01294\ }
+\DoxyCodeLine{01295\ }
+\DoxyCodeLine{01303\ \ \ \ \ std::unordered\_map<std::string,\ double*>\ CKMAngles;}
+\DoxyCodeLine{01304\ \ \ \ \ std::unordered\_map<std::string,\ double*>\ Operators0F;}
+\DoxyCodeLine{01305\ \ \ \ \ std::unordered\_map<std::string,\ boost::function<void(\textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{double})\ >>\ Setter2F;}
+\DoxyCodeLine{01306\ \ \ \ \ std::unordered\_map<std::string,\ boost::function<double(\textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int})\ >>\ Getter2F;}
+\DoxyCodeLine{01307\ \ \ \ \ std::unordered\_map<std::string,\ boost::function<void(\textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{double})\ >>\ Setter4F;}
+\DoxyCodeLine{01308\ \ \ \ \ std::unordered\_map<std::string,\ boost::function<double(\textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int})\ >>\ Getter4F;}
+\DoxyCodeLine{01310\ }
+\DoxyCodeLine{01311\ }
+\DoxyCodeLine{01316\ }
+\DoxyCodeLine{01331\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ Print(\textcolor{keywordtype}{double}*\ c,\ std::string\ name,}
+\DoxyCodeLine{01332\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ sym,\ std::string\ format,}
+\DoxyCodeLine{01333\ \ \ \ \ \ \ \ \ \ \ \ \ std::ofstream\&\ f);}
+\DoxyCodeLine{01335\ }
+\DoxyCodeLine{01336\ }
+\DoxyCodeLine{01337\ }
+\DoxyCodeLine{01345\ }
+\DoxyCodeLine{01346\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ Yukawa\_set(gslpp::matrix<double>\ *y,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{01347\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ Yukawa(gslpp::matrix<double>\ *y,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j);}
+\DoxyCodeLine{01348\ }
+\DoxyCodeLine{01349\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ WC1\_set(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{01350\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ WC1(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j);}
+\DoxyCodeLine{01351\ }
+\DoxyCodeLine{01352\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ WC2R(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j);}
+\DoxyCodeLine{01353\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ WC2R\_set(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{01354\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ WC2I(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j);}
+\DoxyCodeLine{01355\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ WC2I\_set(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{01356\ }
+\DoxyCodeLine{01357\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ WC3(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j);}
+\DoxyCodeLine{01358\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ WC3\_set(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{01359\ }
+\DoxyCodeLine{01360\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ WC5\_set(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{int}\ l,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{01361\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ WC5(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{int}\ l);}
+\DoxyCodeLine{01362\ }
+\DoxyCodeLine{01363\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ WC6R(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{int}\ l);}
+\DoxyCodeLine{01364\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ WC6R\_set(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{int}\ l,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{01365\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ WC6I(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{int}\ l);}
+\DoxyCodeLine{01366\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ WC6I\_set(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{int}\ l,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{01367\ }
+\DoxyCodeLine{01368\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ WC7R\_set(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{int}\ l,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{01369\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ WC7R(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{int}\ l);}
+\DoxyCodeLine{01370\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ WC7I(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{int}\ l);}
+\DoxyCodeLine{01371\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ WC7I\_set(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{int}\ l,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{01372\ }
+\DoxyCodeLine{01373\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ WC8R(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{int}\ l);}
+\DoxyCodeLine{01374\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ WC8R\_set(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{int}\ l,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{01375\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ WC8I(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{int}\ l);}
+\DoxyCodeLine{01376\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ WC8I\_set(\textcolor{keywordtype}{double}\ *\ c,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{int}\ l,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{01378\ }
+\DoxyCodeLine{01379\ \};}
+\DoxyCodeLine{01380\ }
+\DoxyCodeLine{01381\ }
+\DoxyCodeLine{01382\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

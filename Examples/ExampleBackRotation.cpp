@@ -33,8 +33,8 @@ int main() {
 
     //CKM angles and phase
     double s12in = 0.225;
-    double s13in = 0.042;
-    double s23in = 0.003675;
+    double s13in = 0.003675;
+    double s23in = 0.042;
     double deltain = 1.17;
 
     //gauge couplings and Higgs sector parameters

@@ -1,53 +1,54 @@
 \label{index_md_README}%
 \Hypertarget{index_md_README}%
- A {\ttfamily C++} library to perform renormalization group evolution of SMEFT coefficients numerically. A faster, approximate solution that neglects the scale dependence of the anomalous dimension matrix is also available. The general flavour case at dimension-\/six level is considered. Operators that violate lepton and/or baryon number conservation are not considered. The documentation for this library can be found \href{https://silvest.github.io/RGESolver/annotated.html}{\texttt{ here}}
-
-{\ttfamily \mbox{\hyperlink{classRGESolver}{RGESolver}}} is a free software under the copyright of the GNU General Public License.\hypertarget{index_autotoc_md1}{}\doxysection{Dependencies}\label{index_autotoc_md1}
+ A {\ttfamily C++} library to perform renormalization group evolution of SMEFT coefficients numerically. A faster, approximate solution that neglects the scale dependence of the anomalous dimension matrix is also available. The general flavour case at dimension-\/six level is considered. Operators that violate lepton and/or baryon number conservation are not considered. ~\newline
+ The documentation for this library can be found \href{https://silvest.github.io/RGESolver/annotated.html}{\texttt{ here}}. ~\newline
+ {\ttfamily \mbox{\hyperlink{class_r_g_e_solver}{RGESolver}}} is a free software under the copyright of the GNU General Public License. ~\newline
+ If you use {\ttfamily \mbox{\hyperlink{class_r_g_e_solver}{RGESolver}}} please cite \href{https://arxiv.org/abs/2210.06838}{\texttt{ https\+://arxiv.\+org/abs/2210.\+06838}}.\hypertarget{index_autotoc_md1}{}\doxysection{Dependencies}\label{index_autotoc_md1}
 
 \begin{DoxyItemize}
-\item {\ttfamily BOOST} \+: BOOST is a C++ library which can be obtained from the \href{https://www.boost.org/}{\texttt{ {\ttfamily BOOST} website}} or from Linux package managers or Mac ports. \mbox{\hyperlink{classRGESolver}{RGESolver}} only requires the BOOST headers, not the full libraries, so a header-\/only installation is sufficient.
-\item {\ttfamily GSL} \+: The GNU Scientific Library (GSL) is a C library for numerical computations. It can be found on the \href{https://www.gnu.org/software/gsl/}{\texttt{ {\ttfamily GSL} website}}. Most Linux package managers will have a stable version as will any ports for Mac.
+\item {\ttfamily GSL} \+: The GNU Scientific Library (GSL) is a {\ttfamily C} library for numerical computations. More details can be found in the \href{https://www.gnu.org/software/gsl/}{\texttt{ {\ttfamily GSL} website}}.
+\item {\ttfamily BOOST} \+: {\ttfamily BOOST} is a set of libraries for the C++ programming language. \mbox{\hyperlink{class_r_g_e_solver}{RGESolver}} requires only the {\ttfamily BOOST} headers, not the full libraries, thus a header-\/only installation is sufficient. More details can be found in the \href{https://www.boost.org/}{\texttt{ {\ttfamily BOOST} website}}.
 \item {\ttfamily C++11} \+: A compiler that supports at least {\ttfamily C++11} standard is required. 
 \end{DoxyItemize}\hypertarget{index_autotoc_md2}{}\doxysection{Installation}\label{index_autotoc_md2}
-The installation of {\ttfamily \mbox{\hyperlink{classRGESolver}{RGESolver}}} requires the availability of {\ttfamily CMake} in the system (version {\ttfamily 3.\+1} or greater). A description of {\ttfamily CMake} and the instructions for its installation can be found in the \href{https://cmake.org/}{\texttt{ {\ttfamily CMake}website}}. Clone the repository with 
+The installation of {\ttfamily \mbox{\hyperlink{class_r_g_e_solver}{RGESolver}}} requires the availability of {\ttfamily CMake} in the system (version {\ttfamily 3.\+1} or greater). A description of {\ttfamily CMake} and the instructions for its installation can be found in the \href{https://cmake.org/}{\texttt{ {\ttfamily CMake}website}}. Clone the repository with 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{git clone https://github.com/silvest/RGESolver -\/-\/recursively}
+\DoxyCodeLine{git\ clone\ https://github.com/silvest/RGESolver\ -\/-\/recursive}
 
 \end{DoxyCode}
- The installation can be performed writhing the following lines in a terminal session (in the {\ttfamily \mbox{\hyperlink{classRGESolver}{RGESolver}}} directory)\+: 
+ The installation can be performed writhing the following lines in a terminal session (in the {\ttfamily \mbox{\hyperlink{class_r_g_e_solver}{RGESolver}}} directory)\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{mkdir build \&\& cd \$\_}
-\DoxyCodeLine{cmake .. <options>}
-\DoxyCodeLine{cmake -\/-\/build .}
-\DoxyCodeLine{cmake -\/-\/install .}
+\DoxyCodeLine{mkdir\ build\ \&\&\ cd\ build}
+\DoxyCodeLine{cmake\ ..\ <options>}
+\DoxyCodeLine{cmake\ -\/-\/build\ .}
+\DoxyCodeLine{cmake\ -\/-\/install\ .}
 
 \end{DoxyCode}
- Note that depending on the setting of installation prefix (see below) the user might need root privileges to be able to install {\ttfamily \mbox{\hyperlink{classRGESolver}{RGESolver}}}.\hypertarget{index_autotoc_md3}{}\doxysubsection{Command line options for the installation}\label{index_autotoc_md3}
+ Note that depending on the setting of installation prefix (see below) the user might need root privileges to be able to install {\ttfamily \mbox{\hyperlink{class_r_g_e_solver}{RGESolver}}} (thus {\ttfamily cmake -\/-\/install .}should be replaced with {\ttfamily sudo cmake -\/-\/install .})\hypertarget{index_autotoc_md3}{}\doxysubsection{Command line options for the installation}\label{index_autotoc_md3}
 
 \begin{DoxyItemize}
-\item {\ttfamily -\/DLOCAL\+\_\+\+INSTALL\+:BOOL=\texorpdfstring{$<$}{<}ON or OFF\texorpdfstring{$>$}{>}} \+: to install {\ttfamily \mbox{\hyperlink{classRGESolver}{RGESolver}}} in the directory {\ttfamily build/install} (default\+: {\ttfamily OFF}).
-\item {\ttfamily -\/DCMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\+:PATH=\texorpdfstring{$<$}{<}\mbox{\hyperlink{classRGESolver}{RGESolver}} installation directory\texorpdfstring{$>$}{>}} \+: the directory in which {\ttfamily \mbox{\hyperlink{classRGESolver}{RGESolver}}} will be installed (default\+: {\ttfamily /usr/local}). This variable cannot be modified when {\ttfamily -\/DLOCAL INSTALL ALL=ON} is set.
+\item {\ttfamily -\/DLOCAL\+\_\+\+INSTALL\+:BOOL=\texorpdfstring{$<$}{<}ON or OFF\texorpdfstring{$>$}{>}} \+: to install {\ttfamily \mbox{\hyperlink{class_r_g_e_solver}{RGESolver}}} in the directory {\ttfamily build/install} (default\+: {\ttfamily OFF}).
+\item {\ttfamily -\/DCMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\+:PATH=\texorpdfstring{$<$}{<}\mbox{\hyperlink{class_r_g_e_solver}{RGESolver}} installation directory\texorpdfstring{$>$}{>}} \+: the directory in which {\ttfamily \mbox{\hyperlink{class_r_g_e_solver}{RGESolver}}} will be installed (default\+: {\ttfamily /usr/local}). This variable cannot be modified when {\ttfamily -\/DLOCAL INSTALL ALL=ON} is set.
 \item {\ttfamily -\/DDEBUG\+\_\+\+MODE\+:BOOL=\texorpdfstring{$<$}{<}ON or OFF\texorpdfstring{$>$}{>}} \+: to enable the debug mode (default\+: {\ttfamily OFF}).
 \item {\ttfamily -\/DBOOST\+\_\+\+INCLUDE\+\_\+\+DIR\+:PATH=\texorpdfstring{$<$}{<}include path\texorpdfstring{$>$}{>}/boost/} \+: {\ttfamily CMake}checks for {\ttfamily BOOST} headers availability in the system and fails if they are not installed. Thus, if {\ttfamily BOOST} is not installed in the predefined search path, the user can specify where it is with this option. The path must end with the {\ttfamily boost/}directory which contains the headers.
-\item {\ttfamily -\/DGSL\+\_\+\+CONFIG\+\_\+\+DIR\+:PATH=\texorpdfstring{$<$}{<}gsl-\/config directory\texorpdfstring{$>$}{>}} \+: {\ttfamily \mbox{\hyperlink{classRGESolver}{RGESolver}}} uses {\ttfamily gsl-\/config} to get the {\ttfamily GSL} parameters. If this is not in the predefined search path, the user can specify it with this option.
+\item {\ttfamily -\/DGSL\+\_\+\+CONFIG\+\_\+\+DIR\+:PATH=\texorpdfstring{$<$}{<}gsl-\/config directory\texorpdfstring{$>$}{>}} \+: {\ttfamily \mbox{\hyperlink{class_r_g_e_solver}{RGESolver}}} uses {\ttfamily gsl-\/config} to get the {\ttfamily GSL} parameters. If this is not in the predefined search path, the user can specify it with this option.
 \end{DoxyItemize}\hypertarget{index_autotoc_md4}{}\doxysection{Usage}\label{index_autotoc_md4}
 The {\ttfamily rgesolver-\/config} script is available in the {\ttfamily \texorpdfstring{$<$}{<}CMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\texorpdfstring{$>$}{>}/bin} directory (default\+: {\ttfamily /usr/local}), which can be invoked with the following options\+:
 \begin{DoxyItemize}
-\item {\ttfamily -\/-\/cflags}\+: to obtain the include path needed for compilation against the {\ttfamily \mbox{\hyperlink{classRGESolver}{RGESolver}}}.
-\item {\ttfamily -\/-\/libs}\+: to obtain the flags needed for linking against the {\ttfamily \mbox{\hyperlink{classRGESolver}{RGESolver}}}.
+\item {\ttfamily -\/-\/cflags}\+: to obtain the include path needed for compilation against {\ttfamily \mbox{\hyperlink{class_r_g_e_solver}{RGESolver}}}.
+\item {\ttfamily -\/-\/libs}\+: to obtain the flags needed for linking against {\ttfamily \mbox{\hyperlink{class_r_g_e_solver}{RGESolver}}}.
 \end{DoxyItemize}
 
-If the path {\ttfamily \texorpdfstring{$<$}{<}CMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\texorpdfstring{$>$}{>}/bin} is not in the predefined search path, the compilation will (most likely) fail. if the user wants to use the compilation command above, it is suggested to add {\ttfamily \texorpdfstring{$<$}{<}CMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\texorpdfstring{$>$}{>}/bin} to the {\ttfamily \$\+PATH} variable. Alternatively, the script can be invoked from a terminal session in {\ttfamily \texorpdfstring{$<$}{<}CMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\texorpdfstring{$>$}{>}/bin} to visualize the paths to the library and to the headers.
+If the path {\ttfamily \texorpdfstring{$<$}{<}CMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\texorpdfstring{$>$}{>}/bin} is not in the predefined search path, the compilation will (most likely) fail. if the user wants to use the compilation command above, it is suggested to add {\ttfamily \texorpdfstring{$<$}{<}CMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\texorpdfstring{$>$}{>}/bin} to the {\ttfamily \$PATH} variable. Alternatively, the script can be invoked from a terminal session in {\ttfamily \texorpdfstring{$<$}{<}CMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\texorpdfstring{$>$}{>}/bin} to visualize the paths to the library and to the headers.
 
-After the installation, the example program {\ttfamily Example1.\+cpp} (available in the {\ttfamily Examples} directory) can be compiled with the command 
+After the installation, the example program {\ttfamily Example\+Evolution.\+cpp} (available in the {\ttfamily Examples} directory) can be compiled with the command 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{g++ -\/o app Example1.cpp `rgesolver-\/config -\/-\/cflags` `rgesolver-\/config -\/-\/libs`}
+\DoxyCodeLine{g++\ -\/o\ app\ ExampleEvolution.cpp\ `rgesolver-\/config\ -\/-\/cflags`\ `rgesolver-\/config\ -\/-\/libs`}
 
 \end{DoxyCode}
 \hypertarget{index_autotoc_md5}{}\doxysection{Uninstall}\label{index_autotoc_md5}
 The user can uninstall the library typing in a terminal session in the {\ttfamily build} directory\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{cmake -\/-\/build . -\/-\/target uninstall}
+\DoxyCodeLine{cmake\ -\/-\/build\ .\ -\/-\/target\ uninstall}
 
 \end{DoxyCode}
- Also in this case, depending on the setting of installation prefix, the user might need root privileges to be able to uninstall {\ttfamily \mbox{\hyperlink{classRGESolver}{RGESolver}}}. 
+ Also in this case, depending on the setting of installation prefix, the user might need root privileges to be able to uninstall {\ttfamily \mbox{\hyperlink{class_r_g_e_solver}{RGESolver}}}. 

@@ -677,8 +677,8 @@ void RGESolver::SetSMDefaultInput() {
 
     //CKM parameters in radians 
     s12 = 0.225;
-    s13 = 0.042;
-    s23 = 0.003675;
+    s13 = 0.003675;
+    s23 = 0.042;
     CKM_delta = 1.167625;
     c12 = sqrt(1. - s12 * s12);
     c13 = sqrt(1. - s13 * s13);

@@ -1,0 +1,794 @@
+\hypertarget{class_r_g_e_solver}{}\doxysection{RGESolver Class Reference}
+\label{class_r_g_e_solver}\index{RGESolver@{RGESolver}}
+
+
+A class that performs renormalization group evolution in the context of the SMEFT.  
+
+
+
+
+{\ttfamily \#include $<$RGESolver.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_r_g_e_solver_a45669aa780325da0b1e866ba229b277f}{RGESolver}} ()
+\begin{DoxyCompactList}\small\item\em The default constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_r_g_e_solver_ab1edd7795c6a3dfd0ee1a13a0ae25361}\label{class_r_g_e_solver_ab1edd7795c6a3dfd0ee1a13a0ae25361}} 
+{\bfseries $\sim$\+RGESolver} ()
+\begin{DoxyCompactList}\small\item\em The default destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Parameters related to the numeric integration.}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_r_g_e_solver_a834b18f36a698038cbf574ea52fa2545}\label{class_r_g_e_solver_a834b18f36a698038cbf574ea52fa2545}} 
+double {\bfseries epsrel} ()
+\begin{DoxyCompactList}\small\item\em Getter for the relative error used in the numerical integration. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_r_g_e_solver_a87ca405240592096e3671d4e1fd81b6b}\label{class_r_g_e_solver_a87ca405240592096e3671d4e1fd81b6b}} 
+double {\bfseries epsabs} ()
+\begin{DoxyCompactList}\small\item\em Getter for the absolute error used in the numerical integration. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_r_g_e_solver_ae31b8e876f8d158f98fee5b402628d7b}\label{class_r_g_e_solver_ae31b8e876f8d158f98fee5b402628d7b}} 
+void {\bfseries Setepsrel} (double \mbox{\hyperlink{class_r_g_e_solver_a834b18f36a698038cbf574ea52fa2545}{epsrel}})
+\begin{DoxyCompactList}\small\item\em Setter for the relative error used in the numerical integration (default value = 0.\+005) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_r_g_e_solver_a82723bc1077713dea8cafa5319298a2e}\label{class_r_g_e_solver_a82723bc1077713dea8cafa5319298a2e}} 
+void {\bfseries Setepsabs} (double \mbox{\hyperlink{class_r_g_e_solver_a87ca405240592096e3671d4e1fd81b6b}{epsabs}})
+\begin{DoxyCompactList}\small\item\em Setter for the absolute error used in the numerical integration (default value = e-\/13) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Evolution}\par
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_r_g_e_solver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} (std\+::string method, double muI, double muF)
+\begin{DoxyCompactList}\small\item\em Performs the RGE evolution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_r_g_e_solver_a300d0d8643d30cdb49e0df0294793ba2}{Evolve\+To\+Basis}} (std\+::string method, double muI, double muF, std\+::string basis)
+\begin{DoxyCompactList}\small\item\em Performs the RGE evolution and the back rotation on the coefficients with flavour indices. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_r_g_e_solver_af4ed89d1098aa91112cf9e5a39dd8e7f}{Generate\+SMInitial\+Conditions}} (double mu, std\+::string basis, std\+::string method)
+\begin{DoxyCompactList}\small\item\em Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. Default low-\/energy input is used. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_r_g_e_solver_ab228238c79a43b8d3dbb3d220beea73d}{Generate\+SMInitial\+Conditions}} (double mu\+In, double mu\+Fin, std\+::string basis, std\+::string method, double g1in, double g2in, double g3in, double lambdain, double mh2in, double Muin\mbox{[}3\mbox{]}, double Mdin\mbox{[}3\mbox{]}, double Mein\mbox{[}3\mbox{]}, double s12in, double s13in, double s23in, double deltain)
+\begin{DoxyCompactList}\small\item\em Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. User-\/defined low energy input is used. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_r_g_e_solver_a7c0c4303beb14f728a70542c8583b3a7}{Evolve\+SMOnly}} (std\+::string method, double muI, double muF)
+\begin{DoxyCompactList}\small\item\em Same as \mbox{\hyperlink{class_r_g_e_solver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}}, but only for the SM parameters. The user should use this method instead of \mbox{\hyperlink{class_r_g_e_solver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} when interested in pure SM running. Using this function is the same of using \mbox{\hyperlink{class_r_g_e_solver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} with all the SMEFT coefficients set to 0, but it is faster since it does compute only the evolution for the SM parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Input/output \texorpdfstring{$<$}{<}br\texorpdfstring{$>$}{>}}\par
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_r_g_e_solver_a1bdc3a8209979b9f4c583b47fc4988d4}{Get\+CKMAngle}} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Getter function for the CKM matrix angles $\theta_{12},\theta_{13},\theta_{23}$. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_r_g_e_solver_a67f092224a036208d5904da39726ce80}{Get\+CKMReal\+Part}} (int i, int j)
+\begin{DoxyCompactList}\small\item\em Getter function for the CKM matrix (real part) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_r_g_e_solver_a9a3972af1912ae6ffebc806ffe05daeb}{Get\+CKMImag\+Part}} (int i, int j)
+\begin{DoxyCompactList}\small\item\em Getter function for the CKM matrix (imaginary part) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_r_g_e_solver_a891564c063a942fbd01830b30fa8e6e1}{Get\+CKMPhase}} ()
+\begin{DoxyCompactList}\small\item\em Getter function for the CKM matrix phase $\delta$. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_r_g_e_solver_adc2b8a9a10216ec5285569c8f24cbed2}{Set\+Coefficient}} (std\+::string name, double val)
+\begin{DoxyCompactList}\small\item\em Setter function for scalar/0F parameters (no flavour indices). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_r_g_e_solver_aec5d994dae1dccb52ece9e51c28b9f2e}{Set\+Coefficient}} (std\+::string name, double val, int i, int j)
+\begin{DoxyCompactList}\small\item\em Setter function for 2F parameters (2 flavour indices). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_r_g_e_solver_abd765cfec77255200600fd8151711c3f}{Set\+Coefficient}} (std\+::string name, double val, int i, int j, int k, int l)
+\begin{DoxyCompactList}\small\item\em Setter function for 4F parameters (4 flavour indices). \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_r_g_e_solver_a23d5d847021421bc8a9ba03412d2674e}{Get\+Coefficient}} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Getter function for scalar/0F parameters (no flavour indices). \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_r_g_e_solver_a26a55e4d88d327756d9bd5999d4c6045}{Get\+Coefficient}} (std\+::string name, int i, int j)
+\begin{DoxyCompactList}\small\item\em Getter function for 2F parameters (2 flavour indices). \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_r_g_e_solver_ab4da1b64edf881b585de6bcfd03a2ab5}{Get\+Coefficient}} (std\+::string name, int i, int j, int k, int l)
+\begin{DoxyCompactList}\small\item\em Getter function for 4F parameters (4 flavour indices). one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, an error message is printed and the value 0 is returned. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_r_g_e_solver_a98473c7d53e598bfef878106a3715948}\label{class_r_g_e_solver_a98473c7d53e598bfef878106a3715948}} 
+void {\bfseries Reset} ()
+\begin{DoxyCompactList}\small\item\em Resets all the SMEFT coefficients to 0 and the SM parameters to their default value. $\epsilon_{\textrm{abs}}$ and $\epsilon_{\textrm{rel}}$ are reset to their default value (in the UP basis). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_r_g_e_solver_ab6a813bff78d9278d3b875ea9c2f5324}{Save\+Output\+File}} (std\+::string filename, std\+::string format)
+\begin{DoxyCompactList}\small\item\em Saves the current values of parameters in a file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\doxysubsection{Detailed Description}
+A class that performs renormalization group evolution in the context of the SMEFT. 
+
+The class solves the Renormalization Group Equations (RGEs) numerically. A faster, approximate solution that neglects the scale dependence of the anomalous dimension matrix is also available. Only operators up to dimension six that preserve lepton and baryon numbers are considered. The operator basis is the Warsaw basis, defined in \href{https://arxiv.org/abs/1008.4884}{\texttt{ https\+://arxiv.\+org/abs/1008.\+4884}}. {\ttfamily \mbox{\hyperlink{class_r_g_e_solver}{RGESolver}}} splits real and imaginary part of each complex parameter. ~\newline
+ ~\newline
+ The numerical integration is performed with an adaptive step-\/size routine (the explicit embedded Runge-\/\+Kutta-\/\+Fehlberg method), using the tools in the GNU Scientific Library. See \href{https://www.gnu.org/software/gsl/doc/html/ode-initval.html}{\texttt{ https\+://www.\+gnu.\+org/software/gsl/doc/html/ode-\/initval.\+html}} for all the details. ~\newline
+The accuracy level of the numerical integration can be tuned selecting the parameters $\epsilon_{rel}$ and $\epsilon_{abs}$ using the dedicated setter functions. ~\newline
+ ~\newline
+ All the SMEFT coefficients are set using the \mbox{\hyperlink{class_r_g_e_solver_adc2b8a9a10216ec5285569c8f24cbed2}{Set\+Coefficient}} methods and accessed with the \mbox{\hyperlink{class_r_g_e_solver_a23d5d847021421bc8a9ba03412d2674e}{Get\+Coefficient}} methods. There exist three different signatures for each method, depending on the number of flavour indices of the parameter (0,2,4). ~\newline
+ These two routines must be used also for the SM parameters $g_1,g_2,g_3,\lambda,m_h^2,$ $\mathrm{Re}(\mathcal{Y}_u),\mathrm{Im}(\mathcal{Y}_u),$ $\mathrm{Re}(\mathcal{Y}_d),\mathrm{Im}(\mathcal{Y}_d),$ $\mathrm{Re}(\mathcal{Y}_e),\mathrm{Im}(\mathcal{Y}_e)$ (we follow \href{https://arxiv.org/abs/1308.2627}{\texttt{ https\+://arxiv.\+org/abs/1308.\+2627}} for what concerns the conventions in the Higgs\textquotesingle{} sector). ~\newline
+ The routines \mbox{\hyperlink{class_r_g_e_solver_a1bdc3a8209979b9f4c583b47fc4988d4}{Get\+CKMAngle}}, \mbox{\hyperlink{class_r_g_e_solver_a891564c063a942fbd01830b30fa8e6e1}{Get\+CKMPhase}}, \mbox{\hyperlink{class_r_g_e_solver_a67f092224a036208d5904da39726ce80}{Get\+CKMReal\+Part}}, \mbox{\hyperlink{class_r_g_e_solver_a9a3972af1912ae6ffebc806ffe05daeb}{Get\+CKMImag\+Part}} should be used when interested in the CKM parameters or elements. The usage of this method is recommended after methods such \mbox{\hyperlink{class_r_g_e_solver_af4ed89d1098aa91112cf9e5a39dd8e7f}{Generate\+SMInitial\+Conditions}} or \mbox{\hyperlink{class_r_g_e_solver_a300d0d8643d30cdb49e0df0294793ba2}{Evolve\+To\+Basis}} that choose a specific flavour basis (\char`\"{}\+UP\char`\"{} or \char`\"{}\+DOWN\char`\"{}), in which cases the CKM matrix is updated. A complete list of the keys that must be used to correctly invoke setter/getter methods are given in tables \doxytablelink{class_r_g_e_solver_SM}{SM}, \doxytablelink{class_r_g_e_solver_0F}{0F}, \doxytablelink{class_r_g_e_solver_2F}{2F} and \doxytablelink{class_r_g_e_solver_4F}{4F}. ~\newline
+A summary of the operators symmetry classes is given in table \doxytablelink{class_r_g_e_solver_Sym}{Sym}. ~\newline
+ ~\newline
+ We follow \href{http://www.utfit.org/UTfit/Formalism}{\texttt{ http\+://www.\+utfit.\+org/\+UTfit/\+Formalism}} for what concerns the conventions for the CKM matrix.
+
+\begin{DoxyAuthor}{Author}
+S. Di Noi, L. Silvestrini. 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+GNU General Public License
+\end{DoxyCopyright}
+\hypertarget{class_r_g_e_solver_SM}{}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\caption{Standard Model parameters. The labels in the left column must be used with the Get\+Coefficient/\+Set\+Coefficient methods, the ones in the right column must be used with Get\+CKMAngle methods. }\label{class_r_g_e_solver_SM}\\
+\hline
+{\begin{tabularx}{\linewidth}{|*{2}{>{\raggedright\arraybackslash}X|}}\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Parameter }&\cellcolor{\tableheadbgcolor}\textbf{ Name ~\newline
+ }\\\cline{1-2}
+$g_1$ &{\ttfamily g1} \\\cline{1-2}
+$g_2$ &{\ttfamily g2} \\\cline{1-2}
+$g_3$ &{\ttfamily g3} ~\newline
+ \\\cline{1-2}
+$\lambda$ &{\ttfamily lambda} ~\newline
+ \\\cline{1-2}
+$m_h^2$ $[\mathrm{GeV}^2]$ &{\ttfamily mh2} ~\newline
+ \\\cline{1-2}
+$\mathrm{Re}(\mathcal{Y}_u)$ &{\ttfamily YuR} ~\newline
+ \\\cline{1-2}
+$\mathrm{Im}(\mathcal{Y}_u)$ &{\ttfamily YuI} ~\newline
+ \\\cline{1-2}
+$\mathrm{Re}(\mathcal{Y}_d)$ &{\ttfamily YdR} ~\newline
+ \\\cline{1-2}
+$\mathrm{Im}(\mathcal{Y}_d)$ &{\ttfamily YdI} ~\newline
+ \\\cline{1-2}
+$\mathrm{Re}(\mathcal{Y}_e)$ &{\ttfamily YeR} ~\newline
+ \\\cline{1-2}
+$\mathrm{Im}(\mathcal{Y}_e)$ &{\ttfamily YeI} \\\cline{1-2}
+\end{tabularx}}
+&{\begin{tabularx}{\linewidth}{|*{2}{>{\raggedright\arraybackslash}X|}}\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Parameter }&\cellcolor{\tableheadbgcolor}\textbf{ Name ~\newline
+ }\\\cline{1-2}
+$ \sin(\theta_{12})$ &{\ttfamily s12} ~\newline
+ \\\cline{1-2}
+$ \sin(\theta_{13})$ &{\ttfamily s13} ~\newline
+ \\\cline{1-2}
+$ \sin(\theta_{23})$ &{\ttfamily s23} ~\newline
+ \\\cline{1-2}
+\end{tabularx}}
+\\\cline{1-2}
+\end{longtabu}
+
+
+\hypertarget{class_r_g_e_solver_0F}{}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\caption{Scalar (and real) SMEFT operators. }\label{class_r_g_e_solver_0F}\\
+\hline
+{\begin{tabularx}{\linewidth}{|*{2}{>{\raggedright\arraybackslash}X|}}\hline
+\multicolumn{2}{|l|}{\cellcolor{\tableheadbgcolor}\textbf{ Classes 1-\/3 }}\\\cline{1-2}
+\cellcolor{\tableheadbgcolor}\textbf{ Coefficient }&\cellcolor{\tableheadbgcolor}\textbf{ Name ~\newline
+ }\\\cline{1-2}
+$C_{G}$ &{\ttfamily CG} ~\newline
+ \\\cline{1-2}
+$C_{\tilde{G}}$ &{\ttfamily CGtilde} \\\cline{1-2}
+$C_{W}$ &{\ttfamily CW} ~\newline
+ \\\cline{1-2}
+$C_{\tilde{W}}$ &{\ttfamily CWtilde} \\\cline{1-2}
+$C_H$ &{\ttfamily CH} ~\newline
+ \\\cline{1-2}
+$C_{H \Box} $ &{\ttfamily CHbox} ~\newline
+ \\\cline{1-2}
+$C_{HD}$ &{\ttfamily CHD} ~\newline
+ \\\cline{1-2}
+\end{tabularx}}
+&{\begin{tabularx}{\linewidth}{|*{2}{>{\raggedright\arraybackslash}X|}}\hline
+\multicolumn{2}{|l|}{\cellcolor{\tableheadbgcolor}\textbf{ Class 4 ~\newline
+ }}\\\cline{1-2}
+\cellcolor{\tableheadbgcolor}\textbf{ Coefficient }&\cellcolor{\tableheadbgcolor}\textbf{ Name ~\newline
+ }\\\cline{1-2}
+$C_{HG}$ &{\ttfamily CHG} ~\newline
+ \\\cline{1-2}
+$C_{H\tilde{G}}$ &{\ttfamily CHGtilde} \\\cline{1-2}
+$C_{HW}$ &{\ttfamily CHW} ~\newline
+ \\\cline{1-2}
+$C_{H\tilde{W}}$ &{\ttfamily CHWtilde} \\\cline{1-2}
+$C_{HB}$ &{\ttfamily CHB} ~\newline
+ \\\cline{1-2}
+$C_{H\tilde{B}}$ &{\ttfamily CHBtilde} \\\cline{1-2}
+$C_{HWB}$ &{\ttfamily CHWB} ~\newline
+ \\\cline{1-2}
+$C_{H\tilde{W}B}$ &{\ttfamily CHWtildeB} \\\cline{1-2}
+\end{tabularx}}
+\\\cline{1-2}
+\end{longtabu}
+
+
+\hypertarget{class_r_g_e_solver_2F}{}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\caption{2F SMEFT operators. }\label{class_r_g_e_solver_2F}\\
+\hline
+{\begin{tabularx}{\linewidth}{|*{3}{>{\raggedright\arraybackslash}X|}}\hline
+\multicolumn{3}{|l|}{\cellcolor{\tableheadbgcolor}\textbf{ Class 5 ~\newline
+ }}\\\cline{1-3}
+\cellcolor{\tableheadbgcolor}\textbf{ Coefficient }&\cellcolor{\tableheadbgcolor}\textbf{ Name }&\cellcolor{\tableheadbgcolor}\textbf{ Symmetry ~\newline
+ }\\\cline{1-3}
+$\mathrm{Re}(C_{eH})$ &{\ttfamily Ce\+HR} &WC1 ~\newline
+ \\\cline{1-3}
+$\mathrm{Im}(C_{eH})$ &{\ttfamily Ce\+HI} &WC1 \\\cline{1-3}
+$\mathrm{Re}(C_{uH})$ &{\ttfamily Cu\+HR} &WC1 \\\cline{1-3}
+$\mathrm{Im}(C_{uH})$ &{\ttfamily Cu\+HI} &WC1 \\\cline{1-3}
+$\mathrm{Re}(C_{dH})$ &{\ttfamily Cd\+HR} &WC1 \\\cline{1-3}
+$\mathrm{Im}(C_{dH})$ &{\ttfamily Cd\+HI} &WC1 \\\cline{1-3}
+\end{tabularx}}
+&{\begin{tabularx}{\linewidth}{|*{3}{>{\raggedright\arraybackslash}X|}}\hline
+\multicolumn{3}{|l|}{\cellcolor{\tableheadbgcolor}\textbf{ Class 6 ~\newline
+ }}\\\cline{1-3}
+\cellcolor{\tableheadbgcolor}\textbf{ Coefficient }&\cellcolor{\tableheadbgcolor}\textbf{ Name }&\cellcolor{\tableheadbgcolor}\textbf{ Symmetry ~\newline
+ }\\\cline{1-3}
+$\mathrm{Re}(C_{eW})$ &{\ttfamily Ce\+WR} &WC1 ~\newline
+ \\\cline{1-3}
+$\mathrm{Im}(C_{eW})$ &{\ttfamily Ce\+WI} &WC1 \\\cline{1-3}
+$\mathrm{Re}(C_{eB})$ &{\ttfamily Ce\+BR} &WC1 \\\cline{1-3}
+$\mathrm{Im}(C_{eB})$ &{\ttfamily Ce\+BI} &WC1 \\\cline{1-3}
+$\mathrm{Re}(C_{uG})$ &{\ttfamily Cu\+GR} &WC1 \\\cline{1-3}
+$\mathrm{Im}(C_{uG})$ &{\ttfamily Cu\+GI} &WC1 \\\cline{1-3}
+$\mathrm{Re}(C_{uW})$ &{\ttfamily Cu\+WR} &WC1 \\\cline{1-3}
+$\mathrm{Im}(C_{uW})$ &{\ttfamily Cu\+WI} &WC1 \\\cline{1-3}
+$\mathrm{Re}(C_{uB})$ &{\ttfamily Cu\+BR} &WC1 \\\cline{1-3}
+$\mathrm{Im}(C_{uB})$ &{\ttfamily Cu\+BI} &WC1 \\\cline{1-3}
+$\mathrm{Re}(C_{dG})$ &{\ttfamily Cd\+GR} &WC1 \\\cline{1-3}
+$\mathrm{Im}(C_{dG})$ &{\ttfamily Cd\+GI} &WC1 \\\cline{1-3}
+$\mathrm{Re}(C_{dW})$ &{\ttfamily Cd\+WR} &WC1 \\\cline{1-3}
+$\mathrm{Im}(C_{dW})$ &{\ttfamily Cd\+WI} &WC1 \\\cline{1-3}
+$\mathrm{Re}(C_{dB})$ &{\ttfamily Cd\+BR} &WC1 \\\cline{1-3}
+$\mathrm{Im}(C_{dB})$ &{\ttfamily Cd\+BI} &WC1 \\\cline{1-3}
+\end{tabularx}}
+&~\newline
+ {\begin{tabularx}{\linewidth}{|*{3}{>{\raggedright\arraybackslash}X|}}\hline
+\multicolumn{3}{|l|}{\cellcolor{\tableheadbgcolor}\textbf{ Class 7 ~\newline
+ }}\\\cline{1-3}
+\cellcolor{\tableheadbgcolor}\textbf{ Coefficient }&\cellcolor{\tableheadbgcolor}\textbf{ Name }&\cellcolor{\tableheadbgcolor}\textbf{ Symmetry ~\newline
+ }\\\cline{1-3}
+$\mathrm{Re}(C_{Hl1})$ &{\ttfamily CHl1R} &WC2R ~\newline
+ \\\cline{1-3}
+$\mathrm{Im}(C_{Hl1})$ &{\ttfamily CHl1I} &WC2I \\\cline{1-3}
+$\mathrm{Re}(C_{Hl3})$ &{\ttfamily CHl3R} &WC2R \\\cline{1-3}
+$\mathrm{Im}(C_{Hl3})$ &{\ttfamily CHl3I} &WC2I \\\cline{1-3}
+$\mathrm{Re}(C_{He})$ &{\ttfamily CHeR} &WC2R \\\cline{1-3}
+$\mathrm{Im}(C_{He})$ &{\ttfamily CHeI} &WC2I \\\cline{1-3}
+$\mathrm{Re}(C_{Hq1})$ &{\ttfamily CHq1R} &WC2R \\\cline{1-3}
+$\mathrm{Im}(C_{Hq1})$ &{\ttfamily CHq1I} &WC2I \\\cline{1-3}
+$\mathrm{Re}(C_{Hq3})$ &{\ttfamily CHq3R} &WC2R ~\newline
+ \\\cline{1-3}
+$\mathrm{Im}(C_{Hq3})$ &{\ttfamily CHq3I} &WC2I \\\cline{1-3}
+$\mathrm{Re}(C_{Hu})$ &{\ttfamily CHuR} &WC2R \\\cline{1-3}
+$\mathrm{Im}(C_{Hu})$ &{\ttfamily CHuI} &WC2I \\\cline{1-3}
+$\mathrm{Re}(C_{Hd})$ &{\ttfamily CHdR} &WC2R \\\cline{1-3}
+$\mathrm{Im}(C_{Hd})$ &{\ttfamily CHdI} &WC2I \\\cline{1-3}
+$\mathrm{Re}(C_{Hud})$ &{\ttfamily CHudR} &WC1 \\\cline{1-3}
+$\mathrm{Im}(C_{Hud})$ &{\ttfamily CHudI} &WC1 ~\newline
+ \\\cline{1-3}
+\end{tabularx}}
+\\\cline{1-3}
+\end{longtabu}
+
+
+\hypertarget{class_r_g_e_solver_4F}{}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\caption{4F SMEFT Operators.}\label{class_r_g_e_solver_4F}\\
+\hline
+{\begin{tabularx}{\linewidth}{|*{3}{>{\raggedright\arraybackslash}X|}}\hline
+\multicolumn{3}{|l|}{\cellcolor{\tableheadbgcolor}\textbf{ Class 8 $(\bar{L}L)(\bar{L}L)$ ~\newline
+ }}\\\cline{1-3}
+\cellcolor{\tableheadbgcolor}\textbf{ Coefficient }&\cellcolor{\tableheadbgcolor}\textbf{ Name }&\cellcolor{\tableheadbgcolor}\textbf{ Symmetry ~\newline
+ }\\\cline{1-3}
+$\mathrm{Re}(C_{ll})$ &{\ttfamily CllR} &WC6R \\\cline{1-3}
+$\mathrm{Im}(C_{ll})$ &{\ttfamily CllI} &WC6I ~\newline
+ \\\cline{1-3}
+$\mathrm{Re}(C_{qq1})$ &{\ttfamily Cqq1R} &WC6R \\\cline{1-3}
+$\mathrm{Im}(C_{qq1})$ &{\ttfamily Cqq1I} &WC6I ~\newline
+ \\\cline{1-3}
+$\mathrm{Re}(C_{qq3})$ &{\ttfamily Cqq3R} &WC6R \\\cline{1-3}
+$\mathrm{Im}(C_{qq3})$ &{\ttfamily Cqq3I} &WC6I \\\cline{1-3}
+$\mathrm{Re}(C_{lq1})$ &{\ttfamily Clq1R} &WC7R \\\cline{1-3}
+$\mathrm{Im}(C_{lq1})$ &{\ttfamily Clq1I} &WC7I \\\cline{1-3}
+$\mathrm{Re}(C_{lq3})$ &{\ttfamily Clq3R} &WC7R \\\cline{1-3}
+$\mathrm{Im}(C_{lq3})$ &{\ttfamily Clq3I} &WC7I ~\newline
+ \\\cline{1-3}
+\multicolumn{3}{|l|}{\cellcolor{\tableheadbgcolor}\textbf{ Class 8 $(\bar{L}R)(\bar{L}R)$ ~\newline
+ }}\\\cline{1-3}
+\cellcolor{\tableheadbgcolor}\textbf{ Coefficient }&\cellcolor{\tableheadbgcolor}\textbf{ Name }&\cellcolor{\tableheadbgcolor}\textbf{ Symmetry ~\newline
+ }\\\cline{1-3}
+$\mathrm{Re}(C_{quqd1})$ &{\ttfamily Cquqd1R} &WC5 \\\cline{1-3}
+$\mathrm{Im}(C_{quqd1})$ &{\ttfamily Cquqd1I} &WC5 \\\cline{1-3}
+$\mathrm{Re}(C_{quqd8})$ &{\ttfamily Cquqd8R} &WC5 \\\cline{1-3}
+$\mathrm{Im}(C_{quqd8})$ &{\ttfamily Cquqs8I} &WC5 \\\cline{1-3}
+$\mathrm{Re}(C_{lequ1})$ &{\ttfamily Clequ1R} &WC5 \\\cline{1-3}
+$\mathrm{Im}(C_{lequ1})$ &{\ttfamily Clequ1I} &WC5 ~\newline
+ \\\cline{1-3}
+$\mathrm{Re}(C_{lequ3})$ &{\ttfamily Clequ3R} &WC5 \\\cline{1-3}
+$\mathrm{Im}(C_{lequ3})$ &{\ttfamily Clequ3I} &WC5 ~\newline
+ \\\cline{1-3}
+\end{tabularx}}
+&{\begin{tabularx}{\linewidth}{|*{3}{>{\raggedright\arraybackslash}X|}}\hline
+\multicolumn{3}{|l|}{\cellcolor{\tableheadbgcolor}\textbf{ Class 8 $(\bar{R}R)(\bar{R}R)$ ~\newline
+ }}\\\cline{1-3}
+\cellcolor{\tableheadbgcolor}\textbf{ Coefficient }&\cellcolor{\tableheadbgcolor}\textbf{ Name }&\cellcolor{\tableheadbgcolor}\textbf{ Symmetry ~\newline
+ }\\\cline{1-3}
+$\mathrm{Re}(C_{ee})$ &{\ttfamily CeeR} &WC8R \\\cline{1-3}
+$\mathrm{Im}(C_{ee})$ &{\ttfamily CeeI} &WC8I \\\cline{1-3}
+$\mathrm{Re}(C_{uu})$ &{\ttfamily CuuR} &WC6R \\\cline{1-3}
+$\mathrm{Im}(C_{uu})$ &{\ttfamily CuuI} &WC6I \\\cline{1-3}
+$\mathrm{Re}(C_{dd})$ &{\ttfamily CddR} &WC6R \\\cline{1-3}
+$\mathrm{Im}(C_{dd})$ &{\ttfamily CddI} &WC6I ~\newline
+ \\\cline{1-3}
+$\mathrm{Re}(C_{eu})$ &{\ttfamily CeuR} &WC7R \\\cline{1-3}
+$\mathrm{Im}(C_{eu})$ &{\ttfamily CeuI} &WC7I \\\cline{1-3}
+$\mathrm{Re}(C_{ed})$ &{\ttfamily CedR} &WC7R \\\cline{1-3}
+$\mathrm{Im}(C_{ed})$ &{\ttfamily CedI} &WC7I \\\cline{1-3}
+$\mathrm{Re}(C_{ud1})$ &{\ttfamily Cud1R} &WC7R \\\cline{1-3}
+$\mathrm{Im}(C_{ud1})$ &{\ttfamily Cud1I} &WC7I \\\cline{1-3}
+$\mathrm{Re}(C_{ud8})$ &{\ttfamily Cud8R} &WC7R \\\cline{1-3}
+$\mathrm{Im}(C_{ud8})$ &{\ttfamily Cud8I} &WC7I ~\newline
+ \\\cline{1-3}
+\multicolumn{3}{|l|}{\cellcolor{\tableheadbgcolor}\textbf{ Class 8 $(\bar{L}R)(\bar{R}L)$ ~\newline
+ }}\\\cline{1-3}
+\cellcolor{\tableheadbgcolor}\textbf{ Coefficient }&\cellcolor{\tableheadbgcolor}\textbf{ Name }&\cellcolor{\tableheadbgcolor}\textbf{ Symmetry ~\newline
+ }\\\cline{1-3}
+$\mathrm{Re}(C_{ledq})$ &{\ttfamily CledqR} &WC5 \\\cline{1-3}
+$\mathrm{Im}(C_{ledq})$ &{\ttfamily CledqI} &WC5 \\\cline{1-3}
+\end{tabularx}}
+&{\begin{tabularx}{\linewidth}{|*{3}{>{\raggedright\arraybackslash}X|}}\hline
+\multicolumn{3}{|l|}{\cellcolor{\tableheadbgcolor}\textbf{ Class 8 $(\bar{L}L)(\bar{R}R)$ ~\newline
+ }}\\\cline{1-3}
+\cellcolor{\tableheadbgcolor}\textbf{ Coefficient }&\cellcolor{\tableheadbgcolor}\textbf{ Name }&\cellcolor{\tableheadbgcolor}\textbf{ Symmetry ~\newline
+ }\\\cline{1-3}
+$\mathrm{Re}(C_{le})$ &{\ttfamily CleR} &WC7R \\\cline{1-3}
+$\mathrm{Im}(C_{le})$ &{\ttfamily CleI} &WC7I \\\cline{1-3}
+$\mathrm{Re}(C_{lu})$ &{\ttfamily CluR} &WC7R \\\cline{1-3}
+$\mathrm{Im}(C_{lu})$ &{\ttfamily CluI} &WC7I \\\cline{1-3}
+$\mathrm{Re}(C_{ld})$ &{\ttfamily CldR} &WC7R \\\cline{1-3}
+$\mathrm{Im}(C_{ld})$ &{\ttfamily CldI} &WC7I \\\cline{1-3}
+$\mathrm{Re}(C_{qe})$ &{\ttfamily CqeR} &WC7R \\\cline{1-3}
+$\mathrm{Im}(C_{qe})$ &{\ttfamily CqeI} &WC7I \\\cline{1-3}
+$\mathrm{Re}(C_{qu1})$ &{\ttfamily Cqu1R} &WC7R \\\cline{1-3}
+$\mathrm{Im}(C_{qu1})$ &{\ttfamily Cqu1I} &WC7I \\\cline{1-3}
+$\mathrm{Re}(C_{qu8})$ &{\ttfamily Cqu8R} &WC7R \\\cline{1-3}
+$\mathrm{Im}(C_{qu8})$ &{\ttfamily Cqu8I} &WC7I \\\cline{1-3}
+$\mathrm{Re}(C_{qd1})$ &{\ttfamily Cqd1R} &WC7R \\\cline{1-3}
+$\mathrm{Im}(C_{qd1})$ &{\ttfamily Cqd1I} &WC7I \\\cline{1-3}
+$\mathrm{Re}(C_{qd8})$ &{\ttfamily Cqd8R} &WC7R \\\cline{1-3}
+$\mathrm{Im}(C_{qd8})$ &{\ttfamily Cqd8I} &WC7I ~\newline
+ \\\cline{1-3}
+\end{tabularx}}
+\\\cline{1-3}
+\end{longtabu}
+
+
+\hypertarget{class_r_g_e_solver_Sym}{}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\caption{Symmetry categories for operators in the SMEFT. nF indicates the number of flavour indices for each category. }\label{class_r_g_e_solver_Sym}\\
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Parameter }&\cellcolor{\tableheadbgcolor}\textbf{ Name ~\newline
+ }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Parameter }&\cellcolor{\tableheadbgcolor}\textbf{ Name ~\newline
+ }\\\cline{1-2}
+\endhead
+0 &0F scalar object \\\cline{1-2}
+WC1 &2F generic real matrix \\\cline{1-2}
+WC2R &2F Hermitian matrix (real part) ~\newline
+ \\\cline{1-2}
+WC2I &2F Hermitian matrix (imaginary part) ~\newline
+ \\\cline{1-2}
+WC5 &4F generic real object \\\cline{1-2}
+WC6R &4F two identical $ \bar{\psi} \psi $ currents (real part) ~\newline
+ \\\cline{1-2}
+WC6I &4F two identical $ \bar{\psi} \psi $ currents (imaginary part) ~\newline
+ \\\cline{1-2}
+WC7R &4F two independent $ \bar{\psi} \psi $ currents (real part) ~\newline
+ \\\cline{1-2}
+WC7I &4F two independent $ \bar{\psi} \psi $ currents (imaginary part) ~\newline
+ \\\cline{1-2}
+WC8R &$ \mathcal{C}_{ee}$ (real part) ~\newline
+ \\\cline{1-2}
+WC8I &$ \mathcal{C}_{ee}$ (imaginary part) ~\newline
+ \\\cline{1-2}
+\end{longtabu}
+
+
+\hypertarget{class_r_g_e_solver_SMInput}{}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\caption{SM parameters used by default to generate SM initial conditions at an arbitrary scale. The scale at which these parameters are given is $ \mu = 173.65$ GeV. We follow \href{http://www.utfit.org/UTfit/Formalism}{\texttt{ http\+://www.\+utfit.\+org/\+UTfit/\+Formalism}} for what concerns the conventions for the CKM matrix.  }\label{class_r_g_e_solver_SMInput}\\
+\hline
+{\begin{tabularx}{\linewidth}{|*{2}{>{\raggedright\arraybackslash}X|}}\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Parameter }&\cellcolor{\tableheadbgcolor}\textbf{ Value ~\newline
+ }\\\cline{1-2}
+$g_1$ &0.\+3573 \\\cline{1-2}
+$g_2$ &0.\+6511 \\\cline{1-2}
+$g_3$ &1.\+161 ~\newline
+ \\\cline{1-2}
+$\lambda$ &0.\+1297 ~\newline
+ \\\cline{1-2}
+$m_h^2$ $[\mathrm{GeV}^2]$ &15650 ~\newline
+ \\\cline{1-2}
+$\sin(\theta_{12})$ &0.\+225 ~\newline
+ \\\cline{1-2}
+$\sin(\theta_{13})$ &0.\+042 ~\newline
+ \\\cline{1-2}
+$\sin(\theta_{23})$ &0.\+003675 ~\newline
+ \\\cline{1-2}
+$\delta$ \mbox{[}rad\mbox{]} &1.\+1676 ~\newline
+ \\\cline{1-2}
+\end{tabularx}}
+&{\begin{tabularx}{\linewidth}{|*{2}{>{\raggedright\arraybackslash}X|}}\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Parameter }&\cellcolor{\tableheadbgcolor}\textbf{ Value \mbox{[}GeV\mbox{]} ~\newline
+ }\\\cline{1-2}
+$m_u$ &0.\+0012 ~\newline
+ \\\cline{1-2}
+$m_c$ &0.\+640 ~\newline
+ \\\cline{1-2}
+$m_t$ &162.\+0 ~\newline
+ \\\cline{1-2}
+$m_d$ &0.\+0027 ~\newline
+ \\\cline{1-2}
+$m_s$ &0.\+052 ~\newline
+ \\\cline{1-2}
+$m_b$ &2.\+75 ~\newline
+ \\\cline{1-2}
+$m_{e}$ &0.\+000511 ~\newline
+ \\\cline{1-2}
+$m_{\mu}$ &0.\+1057 ~\newline
+ \\\cline{1-2}
+$m_{\tau}$ &1.\+776 ~\newline
+ \\\cline{1-2}
+\end{tabularx}}
+\\\cline{1-2}
+\end{longtabu}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_r_g_e_solver_a45669aa780325da0b1e866ba229b277f}\label{class_r_g_e_solver_a45669aa780325da0b1e866ba229b277f}} 
+\index{RGESolver@{RGESolver}!RGESolver@{RGESolver}}
+\index{RGESolver@{RGESolver}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{RGESolver()}{RGESolver()}}
+{\footnotesize\ttfamily RGESolver\+::\+RGESolver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The default constructor. 
+
+It initializes to 0 all the SMEFT coefficients. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_r_g_e_solver_aedc6f80d9a01de09d4ddf1e5b670c690}\label{class_r_g_e_solver_aedc6f80d9a01de09d4ddf1e5b670c690}} 
+\index{RGESolver@{RGESolver}!Evolve@{Evolve}}
+\index{Evolve@{Evolve}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{Evolve()}{Evolve()}}
+{\footnotesize\ttfamily void RGESolver\+::\+Evolve (\begin{DoxyParamCaption}\item[{std\+::string}]{method,  }\item[{double}]{muI,  }\item[{double}]{muF }\end{DoxyParamCaption})}
+
+
+
+Performs the RGE evolution. 
+
+RGEs are solved with the chosen method from {\ttfamily muI} to {\ttfamily muF}. Currently, the available methods are \char`\"{}\+Numeric\char`\"{} and \char`\"{}\+Approximate\char`\"{}. ~\newline
+ The method takes as initial values the current values of the parameters, set with the \mbox{\hyperlink{class_r_g_e_solver_adc2b8a9a10216ec5285569c8f24cbed2}{Set\+Coefficient}} functions. After completing the evolution the values of the parameters are updated and are accessible with the \mbox{\hyperlink{class_r_g_e_solver_a23d5d847021421bc8a9ba03412d2674e}{Get\+Coefficient}} functions. 
+\begin{DoxyParams}{Parameters}
+{\em method} & solution method \\
+\hline
+{\em muI} & initial energy scale (in GeV) \\
+\hline
+{\em muF} & final energy scale (in GeV) ~\newline
+ \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_r_g_e_solver_a7c0c4303beb14f728a70542c8583b3a7}\label{class_r_g_e_solver_a7c0c4303beb14f728a70542c8583b3a7}} 
+\index{RGESolver@{RGESolver}!EvolveSMOnly@{EvolveSMOnly}}
+\index{EvolveSMOnly@{EvolveSMOnly}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{EvolveSMOnly()}{EvolveSMOnly()}}
+{\footnotesize\ttfamily void RGESolver\+::\+Evolve\+SMOnly (\begin{DoxyParamCaption}\item[{std\+::string}]{method,  }\item[{double}]{muI,  }\item[{double}]{muF }\end{DoxyParamCaption})}
+
+
+
+Same as \mbox{\hyperlink{class_r_g_e_solver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}}, but only for the SM parameters. The user should use this method instead of \mbox{\hyperlink{class_r_g_e_solver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} when interested in pure SM running. Using this function is the same of using \mbox{\hyperlink{class_r_g_e_solver_aedc6f80d9a01de09d4ddf1e5b670c690}{Evolve}} with all the SMEFT coefficients set to 0, but it is faster since it does compute only the evolution for the SM parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em method} & solution method \\
+\hline
+{\em muI} & initial energy scale (in GeV) \\
+\hline
+{\em muF} & final energy scale (in GeV) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_r_g_e_solver_a300d0d8643d30cdb49e0df0294793ba2}\label{class_r_g_e_solver_a300d0d8643d30cdb49e0df0294793ba2}} 
+\index{RGESolver@{RGESolver}!EvolveToBasis@{EvolveToBasis}}
+\index{EvolveToBasis@{EvolveToBasis}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{EvolveToBasis()}{EvolveToBasis()}}
+{\footnotesize\ttfamily void RGESolver\+::\+Evolve\+To\+Basis (\begin{DoxyParamCaption}\item[{std\+::string}]{method,  }\item[{double}]{muI,  }\item[{double}]{muF,  }\item[{std\+::string}]{basis }\end{DoxyParamCaption})}
+
+
+
+Performs the RGE evolution and the back rotation on the coefficients with flavour indices. 
+
+After the evolution, the CKM matrix is computed. A flavour rotation is performed on the coefficients to go in the chosen basis. 
+\begin{DoxyParams}{Parameters}
+{\em method} & solution method \\
+\hline
+{\em muI} & initial energy scale (in GeV) \\
+\hline
+{\em muF} & final energy scale (in GeV) ~\newline
+ \\
+\hline
+{\em basis} & flavour basis after the evolution (\char`\"{}\+UP\char`\"{} or \char`\"{}\+DOWN\char`\"{}). \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_r_g_e_solver_af4ed89d1098aa91112cf9e5a39dd8e7f}\label{class_r_g_e_solver_af4ed89d1098aa91112cf9e5a39dd8e7f}} 
+\index{RGESolver@{RGESolver}!GenerateSMInitialConditions@{GenerateSMInitialConditions}}
+\index{GenerateSMInitialConditions@{GenerateSMInitialConditions}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GenerateSMInitialConditions()}{GenerateSMInitialConditions()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void RGESolver\+::\+Generate\+SMInitial\+Conditions (\begin{DoxyParamCaption}\item[{double}]{mu,  }\item[{std\+::string}]{basis,  }\item[{std\+::string}]{method }\end{DoxyParamCaption})}
+
+
+
+Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. Default low-\/energy input is used. 
+
+The initial conditions are generated at the scale {\ttfamily mu} starting from the values at $\mu = 173.65 $ GeV in table \doxytablelink{class_r_g_e_solver_SMInput}{SMInput}. At the scale {\ttfamily mu} the CKM matrix is computed. 
+\begin{DoxyParams}{Parameters}
+{\em mu} & Scale (in GeV) at which the initial conditions are generated \\
+\hline
+{\em basis} & Flavour basis ( {\ttfamily \char`\"{}\+UP\char`\"{}} or {\ttfamily \char`\"{}\+DOWN\char`\"{}}) \\
+\hline
+{\em method} & Method used by \mbox{\hyperlink{class_r_g_e_solver}{RGESolver}} to run the SM parameters to the scale {\ttfamily mu} ({\ttfamily \char`\"{}\+Numeric\char`\"{}} or {\ttfamily \char`\"{}\+Approximate\char`\"{}}) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_r_g_e_solver_ab228238c79a43b8d3dbb3d220beea73d}\label{class_r_g_e_solver_ab228238c79a43b8d3dbb3d220beea73d}} 
+\index{RGESolver@{RGESolver}!GenerateSMInitialConditions@{GenerateSMInitialConditions}}
+\index{GenerateSMInitialConditions@{GenerateSMInitialConditions}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GenerateSMInitialConditions()}{GenerateSMInitialConditions()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void RGESolver\+::\+Generate\+SMInitial\+Conditions (\begin{DoxyParamCaption}\item[{double}]{mu\+In,  }\item[{double}]{mu\+Fin,  }\item[{std\+::string}]{basis,  }\item[{std\+::string}]{method,  }\item[{double}]{g1in,  }\item[{double}]{g2in,  }\item[{double}]{g3in,  }\item[{double}]{lambdain,  }\item[{double}]{mh2in,  }\item[{double}]{Muin\mbox{[}3\mbox{]},  }\item[{double}]{Mdin\mbox{[}3\mbox{]},  }\item[{double}]{Mein\mbox{[}3\mbox{]},  }\item[{double}]{s12in,  }\item[{double}]{s13in,  }\item[{double}]{s23in,  }\item[{double}]{deltain }\end{DoxyParamCaption})}
+
+
+
+Generates the initial conditions for Standard Model\textquotesingle{}s parameters (gauge couplings, Yukawa coupling, quartic coupling and Higgs\textquotesingle{} boson mass) at the scale {\ttfamily mu} (in GeV), using one-\/loop pure SM beta functions. User-\/defined low energy input is used. 
+
+The initial conditions are generated at the scale {\ttfamily mu\+Fin} starting from the inserted parameters at the scale {\ttfamily mu\+In}. This method should be used with usual fermion hierarchy (smallest mass for the 1st generation and greatest mass for the 3rd withoud mass degeneracy for all up and down quarks and for charged leptons). The generation of the initial conditions is performed only if all the masses are non-\/negative and if $ \sin \theta_{ij} \in (0,1) $, $\delta \in (\pi,\pi]$. We follow \href{http://www.utfit.org/UTfit}{\texttt{ http\+://www.\+utfit.\+org/\+UTfit}} for what concerns the conventions for the CKM matrix. At the scale {\ttfamily mu} the CKM matrix is computed. 
+\begin{DoxyParams}{Parameters}
+{\em mu\+In} & Low-\/energy input scale (in GeV) \\
+\hline
+{\em mu\+Fin} & Scale (in GeV) at which the initial conditions are generated \\
+\hline
+{\em basis} & Flavour basis ( {\ttfamily \char`\"{}\+UP\char`\"{}} or {\ttfamily \char`\"{}\+DOWN\char`\"{}}) \\
+\hline
+{\em method} & Method used by \mbox{\hyperlink{class_r_g_e_solver}{RGESolver}} to run the SM parameters to the scale {\ttfamily mu} ({\ttfamily \char`\"{}\+Numeric\char`\"{}} or {\ttfamily \char`\"{}\+Approximate\char`\"{}}) \\
+\hline
+{\em g1in} & $g_1 $ \\
+\hline
+{\em g2in} & $g_2 $ \\
+\hline
+{\em g3in} & $g_3 $ \\
+\hline
+{\em lambdain} & $ \lambda $ \\
+\hline
+{\em mh2in} & $ m_h^2 $ (in Ge\+V$^\wedge$2) \\
+\hline
+{\em Muin} & Array containing the masses of the up-\/type quarks in GeV in the order $(m_u,m_c,m_t)$ \\
+\hline
+{\em Mdin} & Array containing the masses of the down-\/type quarks in GeV in the order $(m_d,m_s,m_b)$ \\
+\hline
+{\em Mein} & Array containing the masses of the charged leptons in GeV in the order $(m_{e},m_{\mu},m_{\tau})$ \\
+\hline
+{\em s12in} & The sine of the CKM matrix angle $\sin \theta_{12} $ \\
+\hline
+{\em s13in} & The sine of the CKM matrix angle $\sin \theta_{13} $ \\
+\hline
+{\em s23in} & The sine of the CKM matrix angle $\sin \theta_{23} $ \\
+\hline
+{\em deltain} & The CKM matrix phase $ \delta $ \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_r_g_e_solver_a1bdc3a8209979b9f4c583b47fc4988d4}\label{class_r_g_e_solver_a1bdc3a8209979b9f4c583b47fc4988d4}} 
+\index{RGESolver@{RGESolver}!GetCKMAngle@{GetCKMAngle}}
+\index{GetCKMAngle@{GetCKMAngle}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCKMAngle()}{GetCKMAngle()}}
+{\footnotesize\ttfamily double RGESolver\+::\+Get\+CKMAngle (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})}
+
+
+
+Getter function for the CKM matrix angles $\theta_{12},\theta_{13},\theta_{23}$. 
+
+This method should be called only after methods that choose a specific flavour basis (as \mbox{\hyperlink{class_r_g_e_solver_af4ed89d1098aa91112cf9e5a39dd8e7f}{Generate\+SMInitial\+Conditions}} or \mbox{\hyperlink{class_r_g_e_solver_a300d0d8643d30cdb49e0df0294793ba2}{Evolve\+To\+Basis}} ), otherwise the CKM matrix is not updated.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & of the angle (see table \doxytablelink{class_r_g_e_solver_SM}{SM}) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The selected CKM angle. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_r_g_e_solver_a9a3972af1912ae6ffebc806ffe05daeb}\label{class_r_g_e_solver_a9a3972af1912ae6ffebc806ffe05daeb}} 
+\index{RGESolver@{RGESolver}!GetCKMImagPart@{GetCKMImagPart}}
+\index{GetCKMImagPart@{GetCKMImagPart}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCKMImagPart()}{GetCKMImagPart()}}
+{\footnotesize\ttfamily double RGESolver\+::\+Get\+CKMImag\+Part (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Getter function for the CKM matrix (imaginary part) 
+
+This method should be called only after methods that choose a specific flavour basis (as \mbox{\hyperlink{class_r_g_e_solver_af4ed89d1098aa91112cf9e5a39dd8e7f}{Generate\+SMInitial\+Conditions}} or \mbox{\hyperlink{class_r_g_e_solver_a300d0d8643d30cdb49e0df0294793ba2}{Evolve\+To\+Basis}} ), otherwise the CKM matrix is not updated. \begin{DoxyReturn}{Returns}
+The imaginary part of the selected CKM matrix element. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_r_g_e_solver_a891564c063a942fbd01830b30fa8e6e1}\label{class_r_g_e_solver_a891564c063a942fbd01830b30fa8e6e1}} 
+\index{RGESolver@{RGESolver}!GetCKMPhase@{GetCKMPhase}}
+\index{GetCKMPhase@{GetCKMPhase}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCKMPhase()}{GetCKMPhase()}}
+{\footnotesize\ttfamily double RGESolver\+::\+Get\+CKMPhase (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getter function for the CKM matrix phase $\delta$. 
+
+This method should be called only after methods that choose a specific flavour basis (as \mbox{\hyperlink{class_r_g_e_solver_af4ed89d1098aa91112cf9e5a39dd8e7f}{Generate\+SMInitial\+Conditions}} or \mbox{\hyperlink{class_r_g_e_solver_a300d0d8643d30cdb49e0df0294793ba2}{Evolve\+To\+Basis}} ), otherwise the CKM matrix is not updated. \begin{DoxyReturn}{Returns}
+The CKM matrix phase $\delta$. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_r_g_e_solver_a67f092224a036208d5904da39726ce80}\label{class_r_g_e_solver_a67f092224a036208d5904da39726ce80}} 
+\index{RGESolver@{RGESolver}!GetCKMRealPart@{GetCKMRealPart}}
+\index{GetCKMRealPart@{GetCKMRealPart}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCKMRealPart()}{GetCKMRealPart()}}
+{\footnotesize\ttfamily double RGESolver\+::\+Get\+CKMReal\+Part (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Getter function for the CKM matrix (real part) 
+
+This method should be called only after methods that choose a specific flavour basis (as \mbox{\hyperlink{class_r_g_e_solver_af4ed89d1098aa91112cf9e5a39dd8e7f}{Generate\+SMInitial\+Conditions}} or \mbox{\hyperlink{class_r_g_e_solver_a300d0d8643d30cdb49e0df0294793ba2}{Evolve\+To\+Basis}} ), otherwise the CKM matrix is not updated. \begin{DoxyReturn}{Returns}
+The real part of the selected CKM matrix element. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_r_g_e_solver_a23d5d847021421bc8a9ba03412d2674e}\label{class_r_g_e_solver_a23d5d847021421bc8a9ba03412d2674e}} 
+\index{RGESolver@{RGESolver}!GetCoefficient@{GetCoefficient}}
+\index{GetCoefficient@{GetCoefficient}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCoefficient()}{GetCoefficient()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily double RGESolver\+::\+Get\+Coefficient (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})}
+
+
+
+Getter function for scalar/0F parameters (no flavour indices). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the parameter (see table \doxytablelink{class_r_g_e_solver_0F}{0F}) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the requested parameter 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_r_g_e_solver_a26a55e4d88d327756d9bd5999d4c6045}\label{class_r_g_e_solver_a26a55e4d88d327756d9bd5999d4c6045}} 
+\index{RGESolver@{RGESolver}!GetCoefficient@{GetCoefficient}}
+\index{GetCoefficient@{GetCoefficient}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCoefficient()}{GetCoefficient()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily double RGESolver\+::\+Get\+Coefficient (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})}
+
+
+
+Getter function for 2F parameters (2 flavour indices). 
+
+If at least one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, an error message is printed and the value 0 is returned. 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the parameter (see table \doxytablelink{class_r_g_e_solver_2F}{2F}) \\
+\hline
+{\em i} & first flavour index \\
+\hline
+{\em j} & second flavour index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the requested parameter 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_r_g_e_solver_ab4da1b64edf881b585de6bcfd03a2ab5}\label{class_r_g_e_solver_ab4da1b64edf881b585de6bcfd03a2ab5}} 
+\index{RGESolver@{RGESolver}!GetCoefficient@{GetCoefficient}}
+\index{GetCoefficient@{GetCoefficient}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{GetCoefficient()}{GetCoefficient()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily double RGESolver\+::\+Get\+Coefficient (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{int}]{i,  }\item[{int}]{j,  }\item[{int}]{k,  }\item[{int}]{l }\end{DoxyParamCaption})}
+
+
+
+Getter function for 4F parameters (4 flavour indices). one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, an error message is printed and the value 0 is returned. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the parameter (see table \doxytablelink{class_r_g_e_solver_4F}{4F}) \\
+\hline
+{\em i} & first flavour index \\
+\hline
+{\em j} & second flavour index \\
+\hline
+{\em k} & third flavour index \\
+\hline
+{\em l} & fourth flavour index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the requested parameter 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_r_g_e_solver_ab6a813bff78d9278d3b875ea9c2f5324}\label{class_r_g_e_solver_ab6a813bff78d9278d3b875ea9c2f5324}} 
+\index{RGESolver@{RGESolver}!SaveOutputFile@{SaveOutputFile}}
+\index{SaveOutputFile@{SaveOutputFile}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{SaveOutputFile()}{SaveOutputFile()}}
+{\footnotesize\ttfamily void RGESolver\+::\+Save\+Output\+File (\begin{DoxyParamCaption}\item[{std\+::string}]{filename,  }\item[{std\+::string}]{format }\end{DoxyParamCaption})}
+
+
+
+Saves the current values of parameters in a file. 
+
+Currently, only \char`\"{}\+SLHA\char`\"{} format is implemented 
+\begin{DoxyParams}{Parameters}
+{\em filename} & Name of the output file \\
+\hline
+{\em format} & Format of the output file \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_r_g_e_solver_adc2b8a9a10216ec5285569c8f24cbed2}\label{class_r_g_e_solver_adc2b8a9a10216ec5285569c8f24cbed2}} 
+\index{RGESolver@{RGESolver}!SetCoefficient@{SetCoefficient}}
+\index{SetCoefficient@{SetCoefficient}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{SetCoefficient()}{SetCoefficient()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void RGESolver\+::\+Set\+Coefficient (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{double}]{val }\end{DoxyParamCaption})}
+
+
+
+Setter function for scalar/0F parameters (no flavour indices). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the parameter (see table \doxytablelink{class_r_g_e_solver_0F}{0F}) \\
+\hline
+{\em val} & its value \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_r_g_e_solver_aec5d994dae1dccb52ece9e51c28b9f2e}\label{class_r_g_e_solver_aec5d994dae1dccb52ece9e51c28b9f2e}} 
+\index{RGESolver@{RGESolver}!SetCoefficient@{SetCoefficient}}
+\index{SetCoefficient@{SetCoefficient}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{SetCoefficient()}{SetCoefficient()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void RGESolver\+::\+Set\+Coefficient (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{double}]{val,  }\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})}
+
+
+
+Setter function for 2F parameters (2 flavour indices). 
+
+If at least one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, an error message is printed and no assignation is performed. 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the parameter (see table \doxytablelink{class_r_g_e_solver_2F}{2F}) \\
+\hline
+{\em val} & its value \\
+\hline
+{\em i} & first flavour index \\
+\hline
+{\em j} & second flavour index \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_r_g_e_solver_abd765cfec77255200600fd8151711c3f}\label{class_r_g_e_solver_abd765cfec77255200600fd8151711c3f}} 
+\index{RGESolver@{RGESolver}!SetCoefficient@{SetCoefficient}}
+\index{SetCoefficient@{SetCoefficient}!RGESolver@{RGESolver}}
+\doxysubsubsection{\texorpdfstring{SetCoefficient()}{SetCoefficient()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void RGESolver\+::\+Set\+Coefficient (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{double}]{val,  }\item[{int}]{i,  }\item[{int}]{j,  }\item[{int}]{k,  }\item[{int}]{l }\end{DoxyParamCaption})}
+
+
+
+Setter function for 4F parameters (4 flavour indices). 
+
+If at least one of the inserted indices is outside the \mbox{[}0\+:2\mbox{]} range, an error message is printed and no assignation is performed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the parameter (see table \doxytablelink{class_r_g_e_solver_4F}{4F}) \\
+\hline
+{\em val} & its value \\
+\hline
+{\em i} & first flavour index \\
+\hline
+{\em j} & second flavour index \\
+\hline
+{\em k} & third flavour index \\
+\hline
+{\em l} & fourth flavour index \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Solver/src/RGESolver.\+h\item 
+Solver/src/RGESolver.\+cpp\item 
+Solver/src/Static\+Members.\+cpp\item 
+Solver/src/Beta\+Function.\+cpp\item 
+Solver/src/Setters\+And\+Getters.\+cpp\end{DoxyCompactItemize}
