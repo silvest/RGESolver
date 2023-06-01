@@ -59,7 +59,7 @@ int main() {
     //Generate the initial conditions for the SM 
     //parameters at mu = Lambda in the down basis via 
     //numerical integration (using default input).
-    //S.GenerateSMInitialConditions(Lambda, "DOWN", "Numeric");
+   // S.GenerateSMInitialConditions(Lambda, "DOWN", "Numeric");
 
 
     //Initial conditions for SMEFT coefficients
