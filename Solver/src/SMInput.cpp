@@ -685,18 +685,7 @@ void RGESolver::SetSMDefaultInput()
     FromMassesToYukawas("UP");
 
     InputScale_SM = v / sqrt(2.);
-    /*std::cout << "mu_SMInput : " << InputScale_SM << std::endl;
-    std::cout << "g1 : " << g1 << std::endl;
-    std::cout << "g2 : " << g2 << std::endl;
-    std::cout << "g3 : " << g3 << std::endl;
-
-    std::cout << "lambda : " << lambda << std::endl;
-    std::cout << "mh2 : " << mh2 << std::endl;
-
-    std::cout << "s12 : " << s12 << std::endl;
-    std::cout << "s13 : " << s13 <<std::endl;
-    std::cout << "s23 : " << s23 <<std::endl;
-    std::cout << "CKM_delta : " << CKM_delta <<std::endl;*/
+   
 
 }
 
@@ -1156,19 +1145,7 @@ void RGESolver::GoToBasis(std::string basis)
     //Build the CKM with the 4 parameters
     UpdateCKM();
 
-    //Debug: S.D.N. 31/05/23
-    std::cout<<"------------------------------------"<<std::endl;
-    std::cout<<" START DEBUG IN GoToBasis "<<std::endl;
-    std::cout<<"------------------------------------"<<std::endl;
-
-    std::cout<<"Vu,Vd : "<<Vu<<"\n"<<Vd<<endl;
-    std::cout<<"CKM : " <<CKM<<endl;
-    std::cout<<"CKMUnphys : " <<CKMUnphys<<endl;
-
-    std::cout<<"------------------------------------"<<std::endl;
-    std::cout<<" END DEBUG IN GoToBasis "<<std::endl;
-    std::cout<<"------------------------------------"<<std::endl;
-
+    
 
     double a11 = remainder(CKMUnphys(0, 0).arg() - CKM(0, 0).arg(), 2.*M_PI);
     double a12 = remainder(CKMUnphys(0, 1).arg() - CKM(0, 1).arg(), 2.*M_PI);
@@ -1240,20 +1217,7 @@ void RGESolver::GoToBasis(std::string basis)
 
 
     using namespace std;
-    /*
-    cout << "Uu : " << Uu << endl;
-    cout << "Ud : " << Ud << endl;
-    cout << "Vu : " << Vu << endl;
-    cout << "Vd : " << Vd << endl;
-
-    cout << "phi1 : " << phi1 << endl;
-    cout << "phi2dag : " << phi2dag << endl;
-    cout << "Ru : " << Ru << endl;
-    cout << "Rd : " << Rd << endl;
-    cout << "Rq : " << Rq << endl;
-
-    cout << "Re : " << Re << endl;
-    cout << "Rl : " << Rl << endl;*/
+    
 
     int a, b, c, d, p, r, s, t, n;
 
