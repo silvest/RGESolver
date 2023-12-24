@@ -4,7 +4,7 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
     int i, j, a, b, l, k, d, w, count, v;
     int p, r, s, t;
     double loop_factor = 1.
-            / (16. * 3.1415926535 * 3.1415926535);
+            / (16. * M_PI2);
     int c = 0;
     //counter initialized at 0. This index reads inside the array y, where all 
     //independent parameters are stored. In this part of the function the 
@@ -32,22 +32,16 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
             a = 0;
             yuR[i][j] = y[c];
             yudagR[j][i] = y[c];
-            a ++;
             yuI[i][j] = y[c + DF];
             yudagI[j][i] = - y[c + DF];
-            a ++;
             ydR[i][j] = y[c + 2 * DF];
             yddagR[j][i] = y[c + 2 * DF];
-            a ++;
             ydI[i][j] = y[c + 3 * DF];
             yddagI[j][i] = - y[c + 3 * DF];
-            a ++;
             yeR[i][j] = y[c + 4 * DF];
             yedagR[j][i] = y[c + 4 * DF];
-            a ++;
             yeI[i][j] = y[c + 5 * DF];
             yedagI[j][i] = - y[c + 5 * DF];
-            a ++;
             c ++;
         }
     }
@@ -507,8 +501,10 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
         for (j = 0; j < NG; j ++) {
             for (k = 0; k < NG; k ++) {
                 for (l = 0; l < NG; l ++) {
-                    CledqR[NG * NG * NG * i + NG * NG * j + NG * k + l] = y[c];
-                    CledqI[NG * NG * NG * i + NG * NG * j + NG * k + l] = y[c + NG * NG * NG * NG];
+//                    CledqR[NG * NG * NG * i + NG * NG * j + NG * k + l] = y[c];
+//                    CledqI[NG * NG * NG * i + NG * NG * j + NG * k + l] = y[c + NG * NG * NG * NG];
+                WC5_set(CledqR, i, j, k, l, y[c]);
+                WC5_set(CledqI, i, j, k, l, y[c +  NG * NG * NG * NG]);
                     c ++;
                 }
             }
@@ -833,7 +829,7 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
                     + WC1(CHudR, s, r) * yuyddR[s][r] + WC1(CHudI, s, r) * yuyddI[s][r]
                     )
                     + 4. * (
-                    + WC2R(CHl1R, r, s) * yedyeR[s][r] - WC2I(CHl1R, r, s) * yedyeI[s][r]
+                    + WC2R(CHl1R, r, s) * yedyeR[s][r] - WC2I(CHl1I, r, s) * yedyeI[s][r]
                     )
                     - 4. *
                     (WC2R(CHeR, r, s) * geR[s][r] - WC2I(CHeI, r, s) * geI[s][r]);
@@ -2159,7 +2155,7 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
                             +((- 2. * WC6R(CllR, p, r, s, t) - 2. * WC6R(CllR, s, t, p, r)
                             - WC6R(CllR, p, t, s, r) - WC6R(CllR, s, r, p, t)) * yedyeR[t][s]
                             -(- 2. * WC6I(CllI, p, r, s, t) - 2. * WC6I(CllI, s, t, p, r)
-                            - WC6I(CllI, p, t, s, r) - WC6R(CllI, s, r, p, t)) * yedyeI[t][s])
+                            - WC6I(CllI, p, t, s, r) - WC6I(CllI, s, r, p, t)) * yedyeI[t][s])
                             - 2. * NC * (WC7R(Clq1R, p, r, s, t)*(yddydR[t][s] - yudyuR[t][s])
                             - WC7I(Clq1I, p, r, s, t)*(yddydI[t][s] - yudyuI[t][s]))
                             - 2. * NC * (WC7R(CluR, p, r, s, t) * guR[t][s] - WC7I(CluI, p, r, s, t) * guI[t][s])
@@ -2206,7 +2202,7 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
                             +((- 2. * WC6R(CllR, p, r, s, t) - 2. * WC6R(CllR, s, t, p, r)
                             - WC6R(CllR, p, t, s, r) - WC6R(CllR, s, r, p, t)) * yedyeI[t][s]
                             +(- 2. * WC6I(CllI, p, r, s, t) - 2. * WC6I(CllI, s, t, p, r)
-                            - WC6I(CllI, p, t, s, r) - WC6R(CllI, s, r, p, t)) * yedyeR[t][s])
+                            - WC6I(CllI, p, t, s, r) - WC6I(CllI, s, r, p, t)) * yedyeR[t][s])
                             - 2. * NC * (WC7R(Clq1R, p, r, s, t)*(yddydI[t][s] - yudyuI[t][s])
                             + WC7I(Clq1I, p, r, s, t)*(yddydR[t][s] - yudyuR[t][s]))
                             - 2. * NC * (WC7R(CluR, p, r, s, t) * guI[t][s] + WC7I(CluI, p, r, s, t) * guR[t][s])
