@@ -577,7 +577,7 @@ public:
      * @param name name of the parameter (see table \ref 0F)
      * @return the requested parameter 
      */
-    double GetCoefficient(std::string name);
+    double GetCoefficient(std::string name) const;
     /**
      * @brief Getter function for 2F parameters (2 flavour indices).
      * @details If at least 
@@ -588,7 +588,7 @@ public:
      * @param j second flavour index
      * @return the requested parameter
      */
-    double GetCoefficient(std::string name, int i, int j);
+    double GetCoefficient(std::string name, int i, int j) const;
 
     /**
      * @brief Getter function for 4F parameters (4 flavour indices).
@@ -602,7 +602,7 @@ public:
      * @return the requested parameter 
      */
     double GetCoefficient(std::string name, int i, int j,
-            int k, int l);
+            int k, int l) const;
 
 
     /**

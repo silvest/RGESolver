@@ -1557,7 +1557,7 @@ void RGESolver::SetCoefficient(std::string name, double val) {
 
 //Getter for 0F
 
-double RGESolver::GetCoefficient(std::string name) {
+double RGESolver::GetCoefficient(std::string name) const {
   return * (Operators0F.at(name));
 }
 
@@ -1580,7 +1580,7 @@ void RGESolver::SetCoefficient(std::string name, double val,
 //Getter for 2F
 
 double RGESolver::GetCoefficient(std::string name,
-				 int i, int j) {
+				 int i, int j) const {
 
   double val = 0.;
   if ((i <= 2)&&(i >= 0)&&(j <= 2)&&(j >= 0)) {
@@ -1612,7 +1612,7 @@ void RGESolver::SetCoefficient(std::string name, double val,
 //Setter for 4F
 
 double RGESolver::GetCoefficient(std::string name,
-				 int i, int j, int k, int l) {
+				 int i, int j, int k, int l) const {
   double val = 0.;
   if ((i <= 2)&&(i >= 0)&&(j <= 2)&&(j >= 0)
       &&(k <= 2)&&(k >= 0)&&(l <= 2)&&(l >= 0)) {
