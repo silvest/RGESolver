@@ -1110,7 +1110,7 @@ void RGESolver::Evolve(std::string method, double muI, double muF) {
 	  int status = gsl_odeiv2_evolve_apply(e, c, s,
 					       &sys, &ttmp, tF, &stepIn, x);
 	  if (status != GSL_SUCCESS) {
-	    printf("error, return value=%d\n", status);
+	    printf("error in Evolve(%s,%g,%g) for tF > tI, ttmp = %g, attempted step = %g, return value=%d\n", method.c_str(), muI, muF, ttmp, stepIn, status);
 	    break;
 	  }
 	}
@@ -1120,7 +1120,7 @@ void RGESolver::Evolve(std::string method, double muI, double muF) {
 	  int status = gsl_odeiv2_evolve_apply(e, c, s,
 					       &sys, &ttmp, tF, &stepIn, x);
 	  if (status != GSL_SUCCESS) {
-	    printf("error, return value=%d\n", status);
+	    printf("error in Evolve(%s,%g,%g) for tF < tI, ttmp = %g, attempted step = %g, return value=%d\n", method.c_str(), muI, muF, ttmp, stepIn, status);
 	    break;
 	  }
 	}

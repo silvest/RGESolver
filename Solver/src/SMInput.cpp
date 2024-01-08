@@ -3,12 +3,12 @@
 //#include "gsl/gsl_complex.h"
 //#include "gsl/gsl_complex_math.h"
 
-double RGESolver::GetCKMAngle(std::string name)
+double RGESolver::GetCKMAngle(std::string name) const
 {
     return * (CKMAngles.at(name));
 }
 
-double RGESolver::GetCKMPhase()
+double RGESolver::GetCKMPhase() const
 {
     return CKM_delta;
 }
@@ -223,7 +223,7 @@ void RGESolver::EvolveSMOnly(std::string method, double muI, double muF)
                             &sysSMOnly, &ttmp, tF, &stepIn, x);
                     //std::cout << "step : " << stepIn << std::endl;
                     if (status != GSL_SUCCESS) {
-                        printf("error, return value=%d\n", status);
+                        printf("error in EvolveSMOnly(%s,%g,%g) for tF > tI, return value=%d\n", method.c_str(), muI, muF, status);
                         break;
                     }
                 }
@@ -233,7 +233,7 @@ void RGESolver::EvolveSMOnly(std::string method, double muI, double muF)
                     int status = gsl_odeiv2_evolve_apply(eSMOnly, cSMOnly, sSMOnly,
                             &sysSMOnly, &ttmp, tF, &stepIn, x);
                     if (status != GSL_SUCCESS) {
-                        printf("error, return value=%d\n", status);
+                        printf("error in EvolveSMOnly(%s,%g,%g) for tF < tI, return value=%d\n", method.c_str(), muI, muF, status);
                         break;
                     }
                 }

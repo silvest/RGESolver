@@ -498,7 +498,7 @@ public:
      * @param name of the angle (see table \ref SM)
      * @return The selected CKM angle. 
      */
-    double GetCKMAngle(std::string name);
+    double GetCKMAngle(std::string name) const;
 
     /**
      * @brief Getter function for the CKM matrix (real part)
@@ -507,7 +507,7 @@ public:
      * \ref EvolveToBasis ), otherwise the CKM matrix is not updated.
      * @return The real part of the selected CKM matrix element. 
      */
-    double GetCKMRealPart(int i, int j) {
+    double GetCKMRealPart(int i, int j) const {
         return (CKM(i, j).real());
     };
 
@@ -518,7 +518,7 @@ public:
      * \ref EvolveToBasis ), otherwise the CKM matrix is not updated.
      * @return The imaginary part of the selected CKM matrix element. 
      */
-    double GetCKMImagPart(int i, int j) {
+    double GetCKMImagPart(int i, int j) const {
         return (CKM(i, j).imag());
     };
 
@@ -530,7 +530,7 @@ public:
      * \ref EvolveToBasis ), otherwise the CKM matrix is not updated.
      * @return  The CKM matrix phase \f$\delta\f$. 
      */
-    double GetCKMPhase();
+    double GetCKMPhase() const;
 
 
 
