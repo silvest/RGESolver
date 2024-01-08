@@ -4,7 +4,7 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
     int i, j, a, b, l, k, d, w, count, v;
     int p, r, s, t;
     double loop_factor = 1.
-            / (16. * M_PI2);
+            / (16. * M_PI_2);
     int c = 0;
     //counter initialized at 0. This index reads inside the array y, where all 
     //independent parameters are stored. In this part of the function the 
