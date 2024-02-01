@@ -5,6 +5,10 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
     int p, r, s, t;
     double loop_factor = 1.
             / (16. * M_PI * M_PI); 
+    //the parameter SMEFTinSMbeta governs the inclusion of SMEFT effects in the running of SM parameters.
+    //If SMEFTinSMbeta = false, the running of SM parameters is the same as in the SM.
+    //If SMEFTinSMbeta = true, the running of SM parameters includes the SMEFT contributions.
+    bool SMEFTinSMbeta = *(bool *)params;
     int c = 0;
     //counter initialized at 0. This index reads inside the array y, where all 
     //independent parameters are stored. In this part of the function the 
@@ -948,17 +952,17 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
     {
         //g2
         f[c] = (- b02 * g22 //SM
-                - 4. * mh2 * CHW //SMEFT
+                - 4. * mh2 * CHW * SMEFTinSMbeta //SMEFT
                 ) * g2 * loop_factor;
         c ++;
         //g1
         f[c] = (- b01 * g12 //SM
-                - 4. * mh2 * CHB //SMEFT
+                - 4. * mh2 * CHB * SMEFTinSMbeta //SMEFT
                 ) * g1 * loop_factor;
         c ++;
         //g3
         f[c] = (- b03 * g32 //SM
-                - 4. * mh2 * CHG //SMEFT
+                - 4. * mh2 * CHG * SMEFTinSMbeta //SMEFT
                 ) * g3 * loop_factor;
         c ++;
 
@@ -972,13 +976,13 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
                 + FOUR_THIRDS * g22 * (
                 (WC2R(CHl3R, 0, 0) + WC2R(CHl3R, 1, 1) + WC2R(CHl3R, 2, 2)) +
                 NC * (WC2R(CHq3R, 0, 0) + WC2R(CHq3R, 1, 1) + WC2R(CHq3R, 2, 2)))
-                ) //SMEFT
+                ) * SMEFTinSMbeta //SMEFT
                 ;
         f[c] *= loop_factor;
         c ++;
         //mh2
         f[c] = mh2 * (12. * lambda + 2. * gammaH - 1.5 * g12 - 4.5 * g22 //SM  
-                + mh2 * (2. * CHD - 4. * CHBOX) //SMEFT
+                + mh2 * (2. * CHD - 4. * CHBOX) * SMEFTinSMbeta //SMEFT
                 ) * loop_factor;
         c ++;
     }
@@ -992,34 +996,34 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
             //yuR  
             f[c ] = (gammaH - (17. / 12.) * g12 - 2.25 * g22 - 8. * g32) * yuR[i][j]
                     +(3. * WC1(CuHR, j, i) - CHBOX * yuR[i][j]
-                    + 0.5 * CHD * yuR[i][j]) * mh2
+                    + 0.5 * CHD * yuR[i][j]) * mh2 * SMEFTinSMbeta
                     ;
             //yuI
             f[c + DF] = (gammaH - (17. / 12.) * g12 - 2.25 * g22 - 8. * g32) * yuI[i][j]
                     +(- 3. * WC1(CuHI, j, i) - CHBOX * yuI[i][j]
-                    + 0.5 * CHD * yuI[i][j]) * mh2
+                    + 0.5 * CHD * yuI[i][j]) * mh2 * SMEFTinSMbeta
                     ;
             //ydR     
             f[c + 2 * DF] = (gammaH - (5. / 12.) * g12 - 2.25 * g22
                     - 8. * g32) * ydR[i][j]
                     +(3. * WC1(CdHR, j, i) - CHBOX * ydR[i][j]
-                    + 0.5 * CHD * ydR[i][j]) * mh2
+                    + 0.5 * CHD * ydR[i][j]) * mh2 * SMEFTinSMbeta
                     ;
             //ydI  
             f[c + 3 * DF] = (gammaH - (5. / 12.) * g12 - 2.25 * g22
                     - 8. * g32) * ydI[i][j]
                     +(- 3. * WC1(CdHI, j, i) - CHBOX * ydI[i][j]
-                    + 0.5 * CHD * ydI[i][j]) * mh2
+                    + 0.5 * CHD * ydI[i][j]) * mh2 * SMEFTinSMbeta
                     ;
             //yeR
             f[c + 4 * DF] = (gammaH - 2.25 * g22 - 3.75 * g12) * yeR[i][j]
                     +(3. * WC1(CeHR, j, i) - CHBOX * yeR[i][j]
-                    + 0.5 * CHD * yeR[i][j]) * mh2
+                    + 0.5 * CHD * yeR[i][j]) * mh2 * SMEFTinSMbeta
                     ;
             //yeI
             f[c + 5 * DF] = (gammaH - 2.25 * g22 - 3.75 * g12) * yeI[i][j]
                     +(- 3. * WC1(CeHI, j, i) - CHBOX * yeI[i][j]
-                    + 0.5 * CHD * yeI[i][j]) * mh2
+                    + 0.5 * CHD * yeI[i][j]) * mh2 * SMEFTinSMbeta
                     ;
             //Entries with 1 matrix product (1 summed index)
             for (b = 0; b < NG; b ++) {
@@ -1031,7 +1035,7 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
                         - yuI[i][b]*(WC2I(CHq1I, b, j) - 3. * WC2I(CHq3I, b, j)))
                         +(WC2R(CHuR, i, b) * yuR[b][j] - WC2I(CHuI, i, b) * yuI[b][j])
                         - (WC1(CHudR, i, b) * ydR[b][j] - WC1(CHudI, i, b) * ydI[b][j])
-                        ) * mh2
+                        ) * mh2 * SMEFTinSMbeta
                         ;
                 //yuI
                 f[c + DF] += 1.5 * (yuI[i][b]*(yudyuR[b][j] - yddydR[b][j])
@@ -1040,7 +1044,7 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
                         + yuR[i][b]*(WC2I(CHq1I, b, j) - 3. * WC2I(CHq3I, b, j)))
                         +(WC2R(CHuR, i, b) * yuI[b][j] + WC2I(CHuI, i, b) * yuR[b][j])
                         - (WC1(CHudR, i, b) * ydI[b][j] + WC1(CHudI, i, b) * ydR[b][j])
-                        ) * mh2
+                        ) * mh2 * SMEFTinSMbeta
                         ;
                 //ydR       
                 f[c + 2 * DF] += 1.5 * (ydR[i][b]*(yddydR[b][j] - yudyuR[b][j])
@@ -1049,7 +1053,7 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
                         - ydI[i][b]*(WC2I(CHq1I, b, j) + 3. * WC2I(CHq3I, b, j))
                         -(WC2R(CHdR, i, b) * ydR[b][j] - WC2I(CHdI, i, b) * ydI[b][j])
                         -(yuR[b][j] * WC1(CHudR, b, i) + yuI[b][j] * WC1(CHudI, b, i))
-                        ) * mh2
+                        ) * mh2 * SMEFTinSMbeta
                         ;
                 //ydI 
                 f[c + 3 * DF] += 1.5 * (
@@ -1059,7 +1063,7 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
                         + ydR[i][b]*(WC2I(CHq1I, b, j) + 3. * WC2I(CHq3I, b, j))
                         -(WC2R(CHdR, i, b) * ydI[b][j] + WC2I(CHdI, i, b) * ydR[b][j])
                         -(yuI[b][j] * WC1(CHudR, b, i) - yuR[b][j] * WC1(CHudI, b, i))
-                        ) * mh2
+                        ) * mh2 * SMEFTinSMbeta
                         ;
                 //yeR
                 f[c + 4 * DF] += 1.5 * (yeR[i][b]*(yedyeR[b][j])
@@ -1067,7 +1071,7 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
                         +(yeR[i][b]*(WC2R(CHl1R, b, j) + 3. * WC2R(CHl3R, b, j))
                         - yeI[i][b]*(WC2I(CHl1I, b, j) + 3. * WC2I(CHl3I, b, j))
                         -(WC2R(CHeR, i, b) * yeR[b][j] - WC2I(CHeI, i, b) * yeI[b][j])
-                        ) * mh2
+                        ) * mh2 * SMEFTinSMbeta
                         ;
                 //yeI 
                 f[c + 5 * DF] += 1.5 * (yeI[i][b]*(yedyeR[b][j])
@@ -1075,7 +1079,7 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
                         +(yeI[i][b]*(WC2R(CHl1R, b, j) + 3. * WC2R(CHl3R, b, j))
                         + yeR[i][b]*(WC2I(CHl1I, b, j) + 3. * WC2I(CHl3I, b, j))
                         -(WC2R(CHeR, i, b) * yeI[b][j] + WC2I(CHeI, i, b) * yeR[b][j])
-                        ) * mh2
+                        ) * mh2 * SMEFTinSMbeta
                         ;
 
                 for (a = 0; a < NG; a ++) {
@@ -1089,7 +1093,7 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
                             (WC5(Cquqd1R, a, i, j, b) + cF3 * WC5(Cquqd8R, a, i, j, b)) * ydR[b][a]
                             -(WC5(Cquqd1I, a, i, j, b) + cF3 * WC5(Cquqd8I, a, i, j, b)) * ydI[b][a]
                             )
-                            ) * mh2;
+                            ) * mh2 * SMEFTinSMbeta;
                     //yuI 
                     f[c + DF] += (- 2. * (
                             (WC7R(Cqu1R, a, j, i, b) + cF3 * WC7R(Cqu8R, a, j, i, b)) * yuI[b][a]
@@ -1099,7 +1103,7 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
                             + 0.5 * (
                             - (WC5(Cquqd1R, a, i, j, b) + cF3 * WC5(Cquqd8R, a, i, j, b)) * ydI[b][a]
                             -(WC5(Cquqd1I, a, i, j, b) + cF3 * WC5(Cquqd8I, a, i, j, b)) * ydR[b][a])
-                            ) * mh2;
+                            ) * mh2 * SMEFTinSMbeta;
                     //ydR
                     f[c + 2 * DF] += (- 2. * (
                             (WC7R(Cqd1R, a, j, i, b) + cF3 * WC7R(Cqd8R, a, j, i, b)) * ydR[b][a]
@@ -1108,7 +1112,7 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
                             + NC * (WC5(Cquqd1R, a, b, j, i) * yuR[b][a] - WC5(Cquqd1I, a, b, j, i) * yuI[b][a])
                             + 0.5 * ((WC5(Cquqd1R, j, a, b, i) + cF3 * WC5(Cquqd8R, j, a, b, i)) * yuR[a][b]
                             -(WC5(Cquqd1I, j, a, b, i) + cF3 * WC5(Cquqd8I, j, a, b, i)) * yuI[a][b])
-                            ) * mh2;
+                            ) * mh2 * SMEFTinSMbeta;
                     //ydI
                     f[c + 3 * DF] += (- 2. * (
                             (WC7R(Cqd1R, a, j, i, b) + cF3 * WC7R(Cqd8R, a, j, i, b)) * ydI[b][a]
@@ -1118,20 +1122,20 @@ int RGESolver::func(double logmu, const double y[], double f[], void* params) {
                             + 0.5 * (
                             - (WC5(Cquqd1R, j, a, b, i) + cF3 * WC5(Cquqd8R, j, a, b, i)) * yuI[a][b]
                             -(WC5(Cquqd1I, j, a, b, i) + cF3 * WC5(Cquqd8I, j, a, b, i)) * yuR[a][b])
-                            ) * mh2;
+                            ) * mh2 * SMEFTinSMbeta;
 
                     //yeR
                     f[c + 4 * DF] += (
                             - 2. * (WC7R(CleR, a, j, i, b) * yeR[b][a] - WC7I(CleI, a, j, i, b) * yeI[b][a])
                             + NC * (WC5(CledqR, j, i, a, b) * ydR[a][b] + WC5(CledqI, j, i, a, b) * ydI[a][b])
                             - NC * (WC5(Clequ1R, j, i, a, b) * yuR[b][a] - WC5(Clequ1I, j, i, a, b) * yuI[b][a])
-                            ) * mh2;
+                            ) * mh2 * SMEFTinSMbeta;
                     //yeI
                     f[c + 5 * DF] += (
                             - 2. * (WC7R(CleR, a, j, i, b) * yeI[b][a] + WC7I(CleI, a, j, i, b) * yeR[b][a])
                             + NC * (WC5(CledqR, j, i, a, b) * ydI[a][b] - WC5(CledqI, j, i, a, b) * ydR[a][b])
                             - NC * (- WC5(Clequ1R, j, i, a, b) * yuI[b][a] - WC5(Clequ1I, j, i, a, b) * yuR[b][a])
-                            ) * mh2;
+                            ) * mh2 * SMEFTinSMbeta;
                 }
             }
 

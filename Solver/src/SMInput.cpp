@@ -148,6 +148,7 @@ void RGESolver::GenerateSMInitialConditions(
 
     EvolveSMOnly(method, InputScale_SM, mu);
     GoToBasisSMOnly(basis);
+    basisAtLambda = basis;
 }
 
 void RGESolver::GenerateSMInitialConditions(double muIn, double muFin, std::string basis, std::string method,
@@ -190,7 +191,7 @@ void RGESolver::GenerateSMInitialConditions(double muIn, double muFin, std::stri
 
         EvolveSMOnly(method, muIn, muFin);
         GoToBasisSMOnly(basis);
-    
+        basisAtLambda = basis;
 }
 
 void RGESolver::EvolveSMOnly(std::string method, double muI, double muF)

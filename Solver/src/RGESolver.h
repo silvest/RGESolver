@@ -19,6 +19,10 @@
 
 #include "gslpp.h"
 
+#define NX 2558
+// map an NX*(NX-59) matrix into a 1D array
+#define idx(i,j) (i*(NX-59)+(j-59))
+
 /** 
  * @brief A class that performs renormalization group evolution in the context of the SMEFT
  * @details The class solves the Renormalization Group Equations (RGEs) numerically. A faster, approximate 
@@ -480,13 +484,28 @@ public:
      */
     void EvolveSMOnly(std::string method, double muI, double muF);
 
+    /**
+     * @brief Same as \ref Evolve, but only for the SMEFT coefficients,
+     * in the approximation of neglecting SMEFT effects on the running of the SM parameters.
+     * In this approximation the evolution matrix for fixed scales and fixed values of the SM parameters
+     * is a numerical matrix, that can be computed once for all and stored in a file.
+     * The user can use this method instead of \ref Evolve for faster running, within the approximation stated above.
+     * @param muI initial energy scale (in GeV)
+     * @param muF final energy scale (in GeV)
+     */
+    void EvolveSMEFTOnly(double muI, double muF);
+
+    /**
+     * @brief Compute the linearized SMEFT corrections to the SM evolution matrix.
+     * In this approximation the evolution matrix for fixed scales and fixed values of the SM parameters
+     * is a numerical matrix, that can be computed once for all and stored in a file.
+     * @param muI initial energy scale (in GeV)
+     * @param muF final energy scale (in GeV)
+     */
+    void ComputeLinearizedSMEFTCorrectionsToSMEvolution(double muI, double muF);
+
 
     /** @name Input/output   */
-
-
-
-
-
 
     /**
      * @brief Getter function for the CKM matrix angles 
@@ -707,7 +726,9 @@ private:
      * @param logmu value of the logarithm of the energy scale at which the beta functions are computed 
      * @param y 1D array in which are stored the current values of the parameters
      * @param f 1D array in which the beta functions for each parameters are saved
-     * @param params eventual additional parameters (not used)
+     * @param params pointer to a parameter that governs the inclusion of SMEFT effects in the running of SM parameters.
+     * If set to 0, the running of SM parameters is the same as in the SM.
+     * If set to 1, the running of SM parameters includes the SMEFT contributions.
      * @return @p GSL_SUCCESS
      */
     static int func(double logmu, const double y[],
@@ -724,6 +745,13 @@ private:
     static int funcSMOnly(double logmu, const double y[],
             double f[], void* params);
 
+
+        /**
+         * @brief governs the inclusion of SMEFT contributions in the beta functions of SM parameters
+         * If set to false, the running of SM parameters is the same as in the SM.
+         * If set to true (default), the running of SM parameters includes the SMEFT contributions.
+         */
+     bool SMEFTinSMbeta = true;
 
     /**@name GSL Objects */
     ///@{ 
@@ -755,15 +783,15 @@ private:
 
 
 
-    gsl_odeiv2_system sys = {func, NULL, 2558, NULL};
+    gsl_odeiv2_system sys = {func, NULL, NX, &SMEFTinSMbeta};
     /*gsl_odeiv2_driver * d =
             gsl_odeiv2_driver_alloc_y_new(&sys,
             gsl_odeiv2_step_rkf45,
             0.1, epsrel_, epsabs_);*/
     gsl_odeiv2_step * s
-            = gsl_odeiv2_step_alloc(gsl_odeiv2_step_rkf45, 2558);
+            = gsl_odeiv2_step_alloc(gsl_odeiv2_step_rkf45, NX);
     gsl_odeiv2_evolve * e
-            = gsl_odeiv2_evolve_alloc(2558);
+            = gsl_odeiv2_evolve_alloc(NX);
 
     gsl_odeiv2_system sysSMOnly = {funcSMOnly, NULL, 59, NULL};
 
@@ -778,10 +806,10 @@ private:
     /*
     gsl_odeiv2_system sys_ = {func, NULL, 3};
     gsl_odeiv2_step * s_ = gsl_odeiv2_step_alloc(
-            gsl_odeiv2_step_rkf45, 2558);
+            gsl_odeiv2_step_rkf45, NX);
     gsl_odeiv2_control * con_ = gsl_odeiv2_control_standard_new(
             epsabs_, epsrel_, 1, 1);
-    gsl_odeiv2_evolve* evo_ = gsl_odeiv2_evolve_alloc(2558);
+    gsl_odeiv2_evolve* evo_ = gsl_odeiv2_evolve_alloc(NX);
 
 
     gsl_odeiv2_system sysSMOnly_ = {funcSMOnly, NULL, 3};
@@ -793,7 +821,13 @@ private:
 
 
     /** @brief 1D array for the integration */
-    double x[2558];
+    double x[NX]={};
+    /** @brief 2D array for caching the SMEFT evolutor */
+    std::vector<double> SMEFTevcache;
+    /** @brief 1D array for caching the x */
+    double xcache[NX]={};
+    double muIcache,muFcache;
+    bool cache = false;
 
     /// @}
 
@@ -1069,6 +1103,12 @@ private:
      */
     double InputScale_SM; //GeV
 
+        /**
+         * @brief the basis for SM Yukawa couplings at the scale \f$\Lambda\f$.
+         * Default value is "UP". 
+         */
+    std::string basisAtLambda = "UP";
+
     //CKM parameters
     /**
      * @brief \f$\delta\f$  
@@ -1136,6 +1176,20 @@ private:
      *  @brief \f$m_{\tau}\f$ (GeV)
      * */
     double mtau;
+
+     /** @name Linearized SMEFT corrections to the evolved SM parameters 
+     */
+
+    ///@{
+    /** @brief @f$\delta g_1@f$  */
+    double dg1 = 0., /** @brief @f$\delta g_2@f$  */ dg2 = 0., /**@brief @f$\delta g_3@f$  */ dg3 = 0.,
+    /** @brief @f$\delta m_h ^2 @f$ (Higgs boson mass squared) 
+      @details See https://arxiv.org/pdf/1308.2627.pdf for the normalization */ dmh2 = 0.,
+    /** @brief @f$ \delta \lambda @f$ (Higgs quartic coupling)
+     *  @details See https://arxiv.org/pdf/1308.2627.pdf for the normalization  */ dlambda = 0.;
+    gslpp::matrix<double> dyuR, dyuI, dydR, dydI, dyeR, dyeI;
+    ///@}
+
     
             /**@name SMEFT dimension-six operators 
              * By default, all SMEFT dimension-six operators' coefficients are set to 0. 
