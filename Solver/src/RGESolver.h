@@ -6,6 +6,7 @@
 #include <cmath>
 #include <fstream>
 #include <sstream>
+#include <vector>
 
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_matrix.h>
