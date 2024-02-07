@@ -1119,7 +1119,7 @@ void RGESolver::Evolve(std::string method, double muI, double muF)
     {
       double beta[dim] = {0.};
       double Log_muF_over_muI = log(muF / muI);
-      /*int status = */ func(10., x, beta, NULL);
+      /*int status = */ func(10., x, beta, &SMEFTinSMbeta);
       for (int i = 0; i < dim; i++)
       {
         x[i] += beta[i] * Log_muF_over_muI;
