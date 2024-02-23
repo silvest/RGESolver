@@ -396,9 +396,9 @@ public:
     void Evolve(std::string method, double muI, double muF);
 
     /**
-     * @brief Performs the RGE evolution and the back rotation 
+     * @brief Performs the RGE evolution and the back rotation to a basis with diagonal SM Yukawa matrices
      * on the coefficients with flavour indices.
-     * @details After the evolution, the CKM matrix is computed. A flavour rotation is performed 
+     * @details After the evolution, the SM CKM matrix is computed. A flavour rotation is performed 
      * on the coefficients to go in the chosen basis.
      * @param method solution method
      * @param muI initial energy scale (in GeV)

@@ -20,7 +20,7 @@
 #
 #--------------------------------------------------------------------
 
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.5)
 #set(LIBTYPE OBJECT)
 
 
@@ -84,6 +84,15 @@ else()
 endif()
 
 message(STATUS "Found Boost headers in ${BOOST_INCLUDE_DIR}")
+message(STATUS "Searching for Boost version...")
+file(STRINGS "${BOOST_INCLUDE_DIR}/version.hpp" BOOST_VERSION_LINE REGEX "BOOST_VERSION[ \t]+[0-9]+")
+string(REGEX REPLACE ".*BOOST_VERSION[ \t]+([0-9]+).*" "\\1" BOOST_VERSION ${BOOST_VERSION_LINE})
+message(STATUS "Boost version: ${BOOST_VERSION}")
+if(BOOST_VERSION LESS 106000)
+  message(FATAL_ERROR "Boost version 1.60.0 or later is required.") 
+else()
+  message(STATUS "Boost version 1.60.0 or later found.")
+endif()
 string(REGEX REPLACE "/boost$" "" BOOST_INC ${BOOST_INCLUDE_DIR})
 
 
@@ -183,18 +192,47 @@ file(GLOB headers "${CMAKE_CURRENT_SOURCE_DIR}/gslpp/src/*.h")
 add_library(gslpp OBJECT ${srcs} )
 add_library(RGESolver $<TARGET_OBJECTS:gslpp>  "${CMAKE_CURRENT_SOURCE_DIR}/Solver/src/RGESolver.cpp" )
 target_include_directories(RGESolver PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/gslpp/src/)
-target_compile_features(gslpp PUBLIC cxx_std_11)
-target_compile_features(RGESolver PUBLIC cxx_std_11)
+
+if(NOT ROOT_CONFIG_DIR)
+  find_program(ROOT_CONFIG root-config)
+  if(ROOT_CONFIG)
+    string(REGEX REPLACE "/root-config$" "" TMP_PATH ${ROOT_CONFIG})
+    set(ROOT_CONFIG_DIR ${TMP_PATH} CACHE PATH "Path to root-config")
+    unset(TMP_PATH)
+  endif()
+else()
+  set(ROOT_CONFIG_DIR ${ROOT_CONFIG_DIR} CACHE PATH "Path to root-config" FORCE)
+  find_program(ROOT_CONFIG root-config PATHS ${ROOT_CONFIG_DIR} NO_DEFAULT_PATH)
+endif()
+if(NOT ROOT_CONFIG)
+  unset(ROOT_CONFIG CACHE)
+  message(STATUS "root-config could not be found. Please specify the directory of root-config with ${RedBold}-DROOT_CONFIG_DIR=<directory>${ColReset} if you want to use ROOT to set the cxx standard.")
+  message(STATUS "Will use C++11.")
+  target_compile_features(gslpp PUBLIC cxx_std_11)
+  target_compile_features(RGESolver PUBLIC cxx_std_11)  
+else()  
+  message(STATUS "Found root-config in ${ROOT_CONFIG_DIR}")
+  execute_process(COMMAND ${ROOT_CONFIG} --cflags
+                  OUTPUT_VARIABLE ROOT_CFLAGS
+                  OUTPUT_STRIP_TRAILING_WHITESPACE)
+  message(STATUS "ROOT cflags: ${ROOT_CFLAGS}")
+  string(REGEX MATCH "-std=c\\+\\+[^ \\t]+" ROOT_CXX_STD ${ROOT_CFLAGS})
+  if(ROOT_CXX_STD)
+    string(REGEX REPLACE "-std=c\\+\\+" "cxx_std_" ROOT_CXX_STD ${ROOT_CXX_STD})
+    message(STATUS "ROOT cflags contains the C++ standard flag: ${ROOT_CXX_STD}.")
+    target_compile_features(gslpp PUBLIC ${ROOT_CXX_STD})
+    target_compile_features(RGESolver PUBLIC ${ROOT_CXX_STD})
+  else()
+    message(STATUS "ROOT cflags does not contain the C++ standard flag. Will use C++11.")
+    target_compile_features(gslpp PUBLIC cxx_std_11)
+    target_compile_features(RGESolver PUBLIC cxx_std_11)  
+  endif()
+endif()
+
 
 #include(CMakePrintHelpers)
 #cmake_print_properties(TARGETS RGESolver PROPERTIES
 #                       INTERFACE_COMPILE_FEATURES CXX_STANDARD)
-get_target_property(pippo RGESolver CXX_STANDARD)
-if(NOT ${pippo} STREQUAL "pippo-NOTFOUND")
-  set(stdflag "-std=c++${pippo}")
-else()
-  set(stdflag "")
-endif()
 
 #add_library(RGESolver STATIC $<TARGET_OBJECTS:gslpp> $<TARGET_OBJECTS:Solver>)
 
