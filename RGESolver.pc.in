@@ -7,5 +7,5 @@ Name: RGESolver
 Description: The RGESolver library
 Version: 1.0
 Requires: gsl 
-Cflags: -I${includedir} @stdflag@ @CMAKE_CXX_FLAGS@
+Cflags: -I${includedir} @stdflag@
 Libs: -L${libdir} -lRGESolver 
