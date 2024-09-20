@@ -1357,10 +1357,10 @@ private:
     ///@{
     std::unordered_map<std::string, double*> CKMAngles;
     std::unordered_map<std::string, double*> Operators0F;
-    std::unordered_map<std::string, boost::function<void(int, int, double) >> Setter2F;
-    std::unordered_map<std::string, boost::function<double(int, int) >> Getter2F;
-    std::unordered_map<std::string, boost::function<void(int, int, int, int, double) >> Setter4F;
-    std::unordered_map<std::string, boost::function<double(int, int, int, int) >> Getter4F;
+    std::unordered_map<std::string, boost::function<void(int, int, double) > > Setter2F;
+    std::unordered_map<std::string, boost::function<double(int, int) > > Getter2F;
+    std::unordered_map<std::string, boost::function<void(int, int, int, int, double) > > Setter4F;
+    std::unordered_map<std::string, boost::function<double(int, int, int, int) > > Getter4F;
     ///@}
 
 
