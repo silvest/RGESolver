@@ -18,4 +18,4 @@ if test $# -eq 0; then
     usage 1
 fi
 
-pkg-config $@ @CMAKE_CURRENT_BINARY_DIR@/RGESolver.pc
+pkg-config $@ @CMAKE_INSTALL_PREFIX@/RGESolver.pc
