@@ -1135,6 +1135,8 @@ void RGESolver::Evolve(std::string method, double muI, double muF)
 
 void RGESolver::EvolveSMEFTOnly(double muI, double muF)
 {
+  if(muF!=muI)
+  {
   // Cached evolution
   Init();
   // Check if the evolution is already in the cache
@@ -1186,7 +1188,7 @@ void RGESolver::EvolveSMEFTOnly(double muI, double muF)
         Update();
         Evolve("Numeric", muI, muF);
         // Save the evolved value of the SM couplings
-        memccpy(SMcache, x, sizeof(double), 59);
+        memcpy(SMcache, x, sizeof(double) * 59);
         // Redo the evolution of the SM couplings without the SMEFT contributions
         memset(x, 0, sizeof(x));
         // For the SM couplings, set the initial condition to the appropriate value
@@ -1305,6 +1307,7 @@ void RGESolver::EvolveSMEFTOnly(double muI, double muF)
   // Evolved values from x are put
   // back in the coefficients
   Update();
+  }
 }
 
 void RGESolver::SaveOutputFile(std::string filename,
