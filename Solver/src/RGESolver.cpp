@@ -2,6 +2,12 @@
 #include "RGESolver.h"
 #include <boost/bind/bind.hpp>
 // #include <chrono> //To measure execution times
+#include <algorithm>
+#include <fstream>
+#include <vector>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/serialization/vector.hpp>
 
 #include "StaticMembers.cpp"
 
@@ -1142,24 +1148,28 @@ void RGESolver::EvolveSMEFTOnly(double muI, double muF)
   // Check if the evolution is already in the cache
   if (!cache || muIcache != muI || muFcache != muF)
   {
+    //std::cout << "Evolution not in the cache" << std::endl;
     // Evolution is not in the cache
-    SMEFTevcache.reserve(NX * (NX-59));
+    SMEFTevcache.assign(NX * (NX-59),0.);
     // check if a file with the evolution matrix exists
     std::string filename = "evolution_matrix_" + std::to_string(muI) + "_" + std::to_string(muF) + "_" + basisAtLambda + ".dat";
-    FILE *pFile;
-    pFile = fopen(filename.c_str(), "rb");
-    if (pFile != NULL)
+//    FILE *pFile;
+//    pFile = fopen(filename.c_str(), "rb");
+    std::ifstream is(filename, std::ios::binary);
+    if (is.is_open())
     {
+      //std::cout << "reading evolution matrix from file " << filename << std::endl;
       // File exists, read the evolution matrix from the file
-      //std::cout << "Reading evolution matrix from file " << filename << std::endl;
-      fread(SMEFTevcache.data(), sizeof(double), NX * (NX-59), pFile);
-      fclose(pFile);
+      boost::archive::binary_iarchive ia(is);
+      ia >> SMEFTevcache;
+      is.close();
       muIcache = muI;
       muFcache = muF;
       cache = true;
     }
     else
     {
+      //std::cout << "File " << filename << " does not exist, compute evolution matrix" << std::endl;
       // File does not exist, we need to compute it
       //std::cout << "Computing evolution matrix for " << muI << " -> " << muF << std::endl;
       cache = true;
@@ -1175,22 +1185,24 @@ void RGESolver::EvolveSMEFTOnly(double muI, double muF)
       // We compute first the correction to the evolution of the SM couplings due to the SMEFT
       for (int i = 59; i < NX; i++)
       {
-        memset(x, 0, sizeof(x));
+        std::fill(std::begin(x), std::end(x), 0.);
         // For the SM couplings, set the initial condition to the appropriate value
         for (int j = 0; j < 59; j++){
           x[j] = xcache[j];
         }
         //Keep the SMEFT contributions to the evolution of the SM couplings
         SMEFTinSMbeta = true;       
-        // Set the initial condition for the SMEFT coefficient to a small value to ensure linearity
-        x[i] = 1.e-3 / muI / muI;
+        // Set the initial condition for the SMEFT coefficient
+        x[i] = 1. / muI / muI;
 
         Update();
         Evolve("Numeric", muI, muF);
         // Save the evolved value of the SM couplings
-        memcpy(SMcache, x, sizeof(double) * 59);
+        for (int j = 0; j < 59; j++){
+          SMcache[j] = x[j];
+        }
         // Redo the evolution of the SM couplings without the SMEFT contributions
-        memset(x, 0, sizeof(x));
+        std::fill(std::begin(x), std::end(x), 0.);
         // For the SM couplings, set the initial condition to the appropriate value
         for (int j = 0; j < 59; j++){
           x[j] = xcache[j];
@@ -1198,14 +1210,11 @@ void RGESolver::EvolveSMEFTOnly(double muI, double muF)
         
         Update();
         EvolveSMOnly("Numeric", muI, muF);
-        
-        for (int j = 0; j < 59; j++){
-          x[j] = SMcache[j] - x[j];
-          SMEFTevcache[idx(j, i)] = x[j] * 1.e3 * muI * muI;
-        }
+        for (int j = 0; j < 59; j++)
+          SMEFTevcache.at(idx(j, i)) = (SMcache[j] - x[j]) * muI * muI;
         
         // Now we compute the evolution of the SMEFT coefficients, neglecting the SMEFT effects in the SM beta functions
-        memset(x, 0, sizeof(x));
+        std::fill(std::begin(x), std::end(x), 0.);
         // For the SM couplings, set the initial condition to the appropriate value
         for (int j = 0; j < 59; j++){
           x[j] = xcache[j];
@@ -1224,9 +1233,12 @@ void RGESolver::EvolveSMEFTOnly(double muI, double muF)
         }
       }
       // Save the evolution matrix into a file
-      pFile = fopen(filename.c_str(), "wb");
-      fwrite(SMEFTevcache.data(), sizeof(double), NX * (NX-59), pFile);
-      fclose(pFile);
+      //std::cout << "Saving evolution matrix into file " << filename << std::endl;
+      std::ofstream os(filename, std::ios::binary);
+      boost::archive::binary_oarchive oa3(os);
+      oa3 << SMEFTevcache;
+      os.close();
+
       // Restore the initial conditions
       for (int i = 0; i < NX; i++)
       {
@@ -1245,48 +1257,55 @@ void RGESolver::EvolveSMEFTOnly(double muI, double muF)
   // Compute the contribution of SMEFT operators to the evolution of the SM parameters
   dg2 = 0.;
   for (int j = 59; j < NX; j++)
-      dg2 += SMEFTevcache[idx(0, j)] * x[j];
+      dg2 += SMEFTevcache.at(idx(0, j)) * x[j];
   dg1 = 0.;
   for (int j = 59; j < NX; j++)
-      dg1 += SMEFTevcache[idx(1, j)] * x[j];
+      dg1 += SMEFTevcache.at(idx(1, j)) * x[j];
   dg3 = 0.;
   for (int j = 59; j < NX; j++)
-      dg3 += SMEFTevcache[idx(2, j)] * x[j];
+      dg3 += SMEFTevcache.at(idx(2, j)) * x[j];
   dlambda = 0.;
   for (int j = 59; j < NX; j++)
-      dlambda += SMEFTevcache[idx(3, j)] * x[j];
+      dlambda += SMEFTevcache.at(idx(3, j)) * x[j];
   dmh2 = 0.;
   for (int j = 59; j < NX; j++)
-      dmh2 += SMEFTevcache[idx(4, j)] * x[j];
+      dmh2 += SMEFTevcache.at(idx(4, j)) * x[j];
   int n = 5;
+  int ii; //line
   for (int i = 0; i < NG; i++)
   {
     for (int j = 0; j < NG; j++)
     {
       int a = 0;
       dyuR(i, j) = 0.;
+      ii = n + a * DF; // updated line
       for (int k = 59; k < NX; k++)
-        dyuR(i, j) += SMEFTevcache[idx(n + a * DF, k)] * x[k];
+        dyuR(i, j) += SMEFTevcache.at(idx(ii, k)) * x[k];
       a++;
       dyuI(i, j) = 0.;
+      ii = n + a * DF; // updated line
       for (int k = 59; k < NX; k++)
-        dyuI(i, j) += SMEFTevcache[idx(n + a * DF, k)] * x[k];
+        dyuI(i, j) += SMEFTevcache.at(idx(ii, k)) * x[k];
       a++;
       dydR(i, j) = 0.;
+      ii = n + a * DF; // updated line
       for (int k = 59; k < NX; k++)
-        dydR(i, j) += SMEFTevcache[idx(n + a * DF, k)] * x[k];
+        dydR(i, j) += SMEFTevcache.at(idx(ii, k)) * x[k];
       a++;
       dydI(i, j) = 0.;
+      ii = n + a * DF; // updated line
       for (int k = 59; k < NX; k++)
-        dydI(i, j) += SMEFTevcache[idx(n + a * DF, k)] * x[k];
+        dydI(i, j) += SMEFTevcache.at(idx(ii, k)) * x[k];
       a++;
       dyeR(i, j) = 0.;
+      ii = n + a * DF; // updated line
       for (int k = 59; k < NX; k++)
-        dyeR(i, j) += SMEFTevcache[idx(n + a * DF, k)] * x[k];
+        dyeR(i, j) += SMEFTevcache.at(idx(ii, k)) * x[k];
       a++;
       dyeI(i, j) = 0.;
+      ii = n + a * DF; // updated line
       for (int k = 59; k < NX; k++)
-        dyeI(i, j) += SMEFTevcache[idx(n + a * DF, k)] * x[k];
+        dyeI(i, j) += SMEFTevcache.at(idx(ii, k)) * x[k]; 
       a++;
       n++;
     }
@@ -1297,7 +1316,7 @@ void RGESolver::EvolveSMEFTOnly(double muI, double muF)
   {
     xcache[i] = 0.;
     for (int j = 59; j < NX; j++)
-      xcache[i] += SMEFTevcache[idx(i, j)] * x[j];
+      xcache[i] += SMEFTevcache.at(idx(i, j)) * x[j];
   }
   // Put into the array x the initial conditions for the SM parameters and the evolved SMEFT coefficients
   for (int i = 0; i < NX; i++)

@@ -2,10 +2,11 @@ prefix=@CMAKE_INSTALL_PREFIX@
 includedir=${prefix}/include
 libdir=${prefix}/lib
 bindir=${prefix}/bin
+boost_lib_dir=@BOOST_LIB_DIR@
 
 Name: RGESolver
 Description: The RGESolver library
 Version: 1.0
 Requires: gsl 
 Cflags: -I${includedir} @stdflag@
-Libs: -L${libdir} -lRGESolver 
+Libs: -L${libdir} -lRGESolver -L${boost_lib_dir} -lboost_serialization 

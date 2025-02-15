@@ -15,6 +15,9 @@
 #   -DBOOST_INCLUDE_DIR:PATH=<include path>/boost/
 #    Path to boost headers
 #
+#   -DBOOST_LIB_DIR:PATH=<boost lib path>
+#    Path to boost libraries
+#
 #   -DGSL_CONFIG_DIR:PATH=<gsl-config directory>
 #    Path to gsl-config
 #
@@ -95,6 +98,28 @@ else()
 endif()
 string(REGEX REPLACE "/boost$" "" BOOST_INC ${BOOST_INCLUDE_DIR})
 
+set(BOOST_LIB_ERROR_MESSAGE "Boost libraries could not be found. Please specify the Boost library path with ${RedBold}-DBOOST_LIB_DIR=<boost library path>${ColReset}.")
+
+if(NOT BOOST_LIB_DIR)
+  find_library(BOOST_LIB_DIR "libboost_serialization.a" HINTS $ENV{LD_LIBRARY_PATH} DOC "Boost library path")
+  if(BOOST_LIB_DIR-NOTFOUND)
+    message(FATAL_ERROR "${BOOST_LIB_ERROR_MESSAGE}")
+  else()
+    string(REGEX REPLACE "/libboost_serialization.a$" "" BOOST_LIB_DIR ${BOOST_LIB_DIR})
+    set(BOOST_LIB_DIR "${BOOST_LIB_DIR}" CACHE PATH "Boost library path" FORCE)
+  endif()
+else()
+  set(BOOST_LIB_DIR ${BOOST_LIB_DIR} CACHE PATH "Boost library path" FORCE)
+  find_path(TMP_BOOST_LIB "libboost_serialization.a" PATHS ${BOOST_LIB_DIR} NO_DEFAULT_PATH)
+  if(TMP_BOOST_LIB_NOTFOUND)
+    unset(TMP_BOOST_LIB CACHE)
+    message(FATAL_ERROR "${BOOST_LIB_ERROR_MESSAGE}")
+  else()
+    unset(TMP_BOOST_LIB CACHE)
+  endif()
+endif()
+
+message(STATUS "Found Boost libs in ${BOOST_LIB_DIR}")
 
 
 
