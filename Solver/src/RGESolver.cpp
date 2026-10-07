@@ -1254,22 +1254,35 @@ void RGESolver::EvolveSMEFTOnly(double muI, double muF)
   {
     xcache[i] = x[i];
   }
+  // Only the non-vanishing SMEFT coefficients contribute to the products with the evolution matrix
+  int nzIdx[NX - 59];
+  double nzVal[NX - 59];
+  int nnz = 0;
+  for (int j = 59; j < NX; j++)
+  {
+    if (x[j] != 0.)
+    {
+      nzIdx[nnz] = j - 59;
+      nzVal[nnz++] = x[j];
+    }
+  }
+  const double *evm = SMEFTevcache.data();
+  // Product of one row of the evolution matrix with the SMEFT coefficients
+  auto rowDot = [&](int row)
+  {
+    const double *r = evm + (size_t)row * (NX - 59);
+    double sum = 0.;
+    for (int k = 0; k < nnz; k++)
+      sum += r[nzIdx[k]] * nzVal[k];
+    return sum;
+  };
+
   // Compute the contribution of SMEFT operators to the evolution of the SM parameters
-  dg2 = 0.;
-  for (int j = 59; j < NX; j++)
-      dg2 += SMEFTevcache.at(idx(0, j)) * x[j];
-  dg1 = 0.;
-  for (int j = 59; j < NX; j++)
-      dg1 += SMEFTevcache.at(idx(1, j)) * x[j];
-  dg3 = 0.;
-  for (int j = 59; j < NX; j++)
-      dg3 += SMEFTevcache.at(idx(2, j)) * x[j];
-  dlambda = 0.;
-  for (int j = 59; j < NX; j++)
-      dlambda += SMEFTevcache.at(idx(3, j)) * x[j];
-  dmh2 = 0.;
-  for (int j = 59; j < NX; j++)
-      dmh2 += SMEFTevcache.at(idx(4, j)) * x[j];
+  dg2 = rowDot(0);
+  dg1 = rowDot(1);
+  dg3 = rowDot(2);
+  dlambda = rowDot(3);
+  dmh2 = rowDot(4);
   int n = 5;
   int ii; //line
   for (int i = 0; i < NG; i++)
@@ -1277,35 +1290,23 @@ void RGESolver::EvolveSMEFTOnly(double muI, double muF)
     for (int j = 0; j < NG; j++)
     {
       int a = 0;
-      dyuR(i, j) = 0.;
       ii = n + a * DF; // updated line
-      for (int k = 59; k < NX; k++)
-        dyuR(i, j) += SMEFTevcache.at(idx(ii, k)) * x[k];
+      dyuR(i, j) = rowDot(ii);
       a++;
-      dyuI(i, j) = 0.;
       ii = n + a * DF; // updated line
-      for (int k = 59; k < NX; k++)
-        dyuI(i, j) += SMEFTevcache.at(idx(ii, k)) * x[k];
+      dyuI(i, j) = rowDot(ii);
       a++;
-      dydR(i, j) = 0.;
       ii = n + a * DF; // updated line
-      for (int k = 59; k < NX; k++)
-        dydR(i, j) += SMEFTevcache.at(idx(ii, k)) * x[k];
+      dydR(i, j) = rowDot(ii);
       a++;
-      dydI(i, j) = 0.;
       ii = n + a * DF; // updated line
-      for (int k = 59; k < NX; k++)
-        dydI(i, j) += SMEFTevcache.at(idx(ii, k)) * x[k];
+      dydI(i, j) = rowDot(ii);
       a++;
-      dyeR(i, j) = 0.;
       ii = n + a * DF; // updated line
-      for (int k = 59; k < NX; k++)
-        dyeR(i, j) += SMEFTevcache.at(idx(ii, k)) * x[k];
+      dyeR(i, j) = rowDot(ii);
       a++;
-      dyeI(i, j) = 0.;
       ii = n + a * DF; // updated line
-      for (int k = 59; k < NX; k++)
-        dyeI(i, j) += SMEFTevcache.at(idx(ii, k)) * x[k]; 
+      dyeI(i, j) = rowDot(ii);
       a++;
       n++;
     }
@@ -1313,11 +1314,7 @@ void RGESolver::EvolveSMEFTOnly(double muI, double muF)
 
   // Evolve the SMEFT coefficients
   for (int i = 59; i < NX; i++)
-  {
-    xcache[i] = 0.;
-    for (int j = 59; j < NX; j++)
-      xcache[i] += SMEFTevcache.at(idx(i, j)) * x[j];
-  }
+    xcache[i] = rowDot(i);
   // Put into the array x the initial conditions for the SM parameters and the evolved SMEFT coefficients
   for (int i = 0; i < NX; i++)
   {
