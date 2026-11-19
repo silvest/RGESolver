@@ -680,6 +680,11 @@ private:
      */
     void ExtractParametersFromCKM();
     /**
+     * @brief Extracts from the CKM matrix the 4 
+     * Wolfenstein parameters. 
+     */
+    void ExtractWolfensteinParametersFromCKM(double & CKMlambda, double & CKMA, double & CKMRho, double & CKMEta);
+    /**
      * @brief Starting from the current values of the 
      * masses, Yukawa matrices are generated in the chosen basis. 
      * @param basis

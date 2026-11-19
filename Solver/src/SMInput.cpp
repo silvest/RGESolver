@@ -60,6 +60,16 @@ void RGESolver::ExtractParametersFromCKM()
 
 }
 
+void RGESolver::ExtractWolfensteinParametersFromCKM(double & CKMlambda, double & CKMA, double & CKMRho, double & CKMEta)
+{
+    // Wolfenstein to all orders
+    CKMlambda = s12;
+    CKMA = s23 / CKMlambda / CKMlambda;
+    gslpp::complex Rb = CKM(0, 0) * CKM(0, 2).conjugate() / (CKM(1, 0) * CKM(1, 2).conjugate());
+    CKMRho = -Rb.real();
+    CKMEta = -Rb.imag();
+}
+
 void RGESolver::FromMassesToYukawas(std::string basis)
 {
     double v = sqrt(0.5 * mh2 / lambda);
@@ -100,7 +110,7 @@ void RGESolver::FromMassesToYukawas(std::string basis)
         yuI = yu.imag();
 
     } else
-        std::cout << "WARNING: wrong basis choice: " << basis << ": Yukawa couplings not updated!!!" << std::endl;
+        std::cout << "WARNING: wrong basis choice in FromMassesToYukawas: " << basis << ": Yukawa couplings not updated!!!" << std::endl;
 
 }
 
@@ -143,7 +153,8 @@ void RGESolver::GenerateSMInitialConditions(
 
     //if (inputCKM == true) {
     UpdateCKM();
-    FromMassesToYukawas(basis);
+    //Always go to the UP basis before evolving, since anyway the evolution will move away from the initial basis. The final basis will be chosen after the evolution.
+    FromMassesToYukawas("UP");
     // }
 
     EvolveSMOnly(method, InputScale_SM, mu);
@@ -187,9 +198,11 @@ void RGESolver::GenerateSMInitialConditions(double muIn, double muFin, std::stri
         c23 = sqrt(1. - s23 * s23);
 
         UpdateCKM();
-        FromMassesToYukawas(basis);
+        //Always go to the UP basis before evolving, since anyway the evolution will move away from the initial basis. The final basis will be chosen after the evolution.
+        FromMassesToYukawas("UP");
 
         EvolveSMOnly(method, muIn, muFin);
+        
         GoToBasisSMOnly(basis);
         basisAtLambda = basis;
 }
@@ -279,8 +292,6 @@ void RGESolver::GoToBasisSMOnly(std::string basis)
 
     gslpp::matrix<gslpp::complex> Re(3, 3, 0.);
     gslpp::matrix<gslpp::complex> Rl(3, 3, 0.);
-    gslpp::matrix<gslpp::complex> Redag(3, 3, 0.);
-    gslpp::matrix<gslpp::complex> Rldag(3, 3, 0.);
     gslpp::matrix<gslpp::complex> yeDiag(3, 3, 0.);
     gslpp::vector<double> Se(3, 0.);
 
@@ -295,14 +306,6 @@ void RGESolver::GoToBasisSMOnly(std::string basis)
     yu.singularvalue(Uu, Vu, Su);
     yd.singularvalue(Ud, Vd, Sd);
     ye.singularvalue(Re, Rl, Se);
-
-
-
-
-    //Matrix to rotate fields
-    gslpp::matrix<gslpp::complex> Ru(3, 3, 0.);
-    gslpp::matrix<gslpp::complex> Rd(3, 3, 0.);
-    gslpp::matrix<gslpp::complex> Rq(3, 3, 0.);
 
     //Computing the CKM 
     CKM = (Vu.hconjugate()) * Vd;
@@ -320,26 +323,134 @@ void RGESolver::GoToBasisSMOnly(std::string basis)
 
     if (basis == "UP") {
 
-        Ru = Uu;
-        Rd = Ud;
-        Rq = Vu;
-
-        gslpp::matrix<gslpp::complex> yd = ydR * CKM.hconjugate();
+        yd = ydR * CKM.hconjugate();
         ydR = yd.real();
         ydI = yd.imag();
 
     } else if (basis == "DOWN") {
 
-        Ru = Uu;
-        Rd = Ud;
-        Rq = Vd;
-
-        gslpp::matrix<gslpp::complex> yu = yuR * CKM; // CKM*yuR;
+        yu = yuR * CKM; // CKM*yuR;
         yuR = yu.real();
         yuI = yu.imag();
 
+    } else if (basis == "MFP") {
+
+        //MFP basis: we build the rotation matrices starting from Wolfenstein parameters
+        double CKMlambda, CKMA, CKMRho, CKMEta;
+        ExtractWolfensteinParametersFromCKM(CKMlambda, CKMA, CKMRho, CKMEta);
+
+        /* Debugging to compare with Mauro's Mathematica notebook to make Laura happy 
+        CKMlambda = 225./1000.; 
+        CKMA = 826./1000.; 
+        CKMRho = 163./1000.; 
+        CKMEta = 357./1000.; 
+        Su(0) = 4445./1.e9; 
+        Su(1) = 228./1.e5; 
+        Su(2) = 67./100.; 
+        Sd(0) = 996./1.e8; 
+        Sd(1) = 1978./1.e7; 
+        Sd(2) = 10009./1.e6; 
+
+        yuR = gslpp::matrix<double>(Su);
+        yuI.reset();
+        ydR = gslpp::matrix<double>(Sd);
+        ydI.reset();
+        */
+
+        double CKMlambda2 = CKMlambda * CKMlambda;
+        double CKMlambda3 = CKMlambda2 * CKMlambda;
+        double CKMlambda4 = CKMlambda2 * CKMlambda2;
+        double CKMlambda5 = CKMlambda3 * CKMlambda2;
+
+        gslpp::matrix<gslpp::complex> Lu(3, 3, 0.);
+
+        double th12uL = CKMA * CKMA * pow(CKMlambda,5)*(0.5 - CKMRho) - asin(CKMlambda);
+        
+        Lu.assign(0, 0, cos(th12uL));
+        Lu.assign(0, 1, sin(th12uL));
+        Lu.assign(1, 0, -Lu(0, 1));
+        Lu.assign(1, 1, Lu(0, 0));
+        Lu.assign(2, 2, 1.);
+
+        gslpp::matrix<gslpp::complex> Ru(3, 3, 0.);
+
+        double th12uR = atan(Su(0)/Su(1) *  tan(th12uL));
+
+        Ru.assign(0, 0, cos(th12uR));
+        Ru.assign(0, 1, sin(th12uR));
+        Ru.assign(1, 0, -Ru(0, 1));
+        Ru.assign(1, 1, Ru(0, 0));
+        Ru.assign(2, 2, 1.);
+
+        gslpp::complex z13dL = - CKMA * CKMlambda3 * (1. - CKMRho + gslpp::complex::i() * CKMEta) - 
+                                CKMA * CKMlambda5 * ((CKMRho - gslpp::complex::i() * CKMEta)/2. + 
+                                gslpp::complex::i() * CKMEta * (1. - CKMRho) - CKMEta*CKMEta);
+        gslpp::matrix<gslpp::complex> Ld13(3, 3, 0.);
+        
+        Ld13.assign(0, 0, sqrt(1.-z13dL.abs2()));
+        Ld13.assign(0, 2, z13dL);
+        Ld13.assign(2, 0, -z13dL.conjugate());
+        Ld13.assign(2, 2, sqrt(1.-z13dL.abs2()));
+        Ld13.assign(1, 1, 1.);
+
+        gslpp::complex z13dR = Sd(0)/Sd(2) * z13dL / sqrt(1.-z13dL.abs2() * (1. - Sd(0)*Sd(0)/(Sd(2)*Sd(2))));
+        gslpp::matrix<gslpp::complex> Rd13(3, 3, 0.);
+        
+        Rd13.assign(0, 0, sqrt(1.-z13dR.abs2()));
+        Rd13.assign(0, 2, z13dR);
+        Rd13.assign(2, 0, -z13dR.conjugate());
+        Rd13.assign(2, 2, sqrt(1.-z13dR.abs2()));
+        Rd13.assign(1, 1, 1.);
+
+        double th23dL = CKMA * CKMlambda2 - CKMA * CKMlambda4 * (0.5 - CKMRho);
+        gslpp::matrix<gslpp::complex> Ld23(3, 3, 0.);
+
+        Ld23.assign(1, 1, cos(th23dL));
+        Ld23.assign(1, 2, sin(th23dL));
+        Ld23.assign(2, 1, -Ld23(1, 2));
+        Ld23.assign(2, 2, Ld23(1, 1));
+        Ld23.assign(0, 0, 1.);
+
+        double th23dR = atan(Sd(1)/Sd(2) *  tan(th23dL) * (1. - z13dL.abs2() * (1. - Sd(0)*Sd(0)/(Sd(2)*Sd(2))) / (1. - Sd(0)*Sd(0)/(Sd(1)*Sd(1)))) /
+            (sqrt(1. - z13dL.abs2()) * sqrt(1. - z13dR.abs2())));
+
+
+        gslpp::matrix<gslpp::complex> Rd23(3, 3, 0.);
+        Rd23.assign(1, 1, cos(th23dR));
+        Rd23.assign(1, 2, sin(th23dR));
+        Rd23.assign(2, 1, -Rd23(1, 2));
+        Rd23.assign(2, 2, Rd23(1, 1));
+        Rd23.assign(0, 0, 1.);
+
+        gslpp::complex z12dL = -z13dL * th23dL * (1. - Sd(0)*Sd(0)/(Sd(2)*Sd(2))) / (1. - Sd(0)*Sd(0)/(Sd(1)*Sd(1)));
+        gslpp::matrix<gslpp::complex> Ld12(3, 3, 0.);
+        Ld12.assign(0, 0, sqrt(1.-z12dL.abs2()));
+        Ld12.assign(0, 1, z12dL);
+        Ld12.assign(1, 0, -z12dL.conjugate());
+        Ld12.assign(1, 1, sqrt(1.-z12dL.abs2()));
+        Ld12.assign(2, 2, 1.);
+
+        gslpp::complex z12dR = Sd(0)/Sd(1) * z12dL;
+        gslpp::matrix<gslpp::complex> Rd12(3, 3, 0.);
+        Rd12.assign(0, 0, sqrt(1.-z12dR.abs2()));
+        Rd12.assign(0, 1, z12dR);
+        Rd12.assign(1, 0, -z12dR.conjugate());
+        Rd12.assign(1, 1, sqrt(1.-z12dR.abs2()));
+        Rd12.assign(2, 2, 1.);
+
+        gslpp::matrix<gslpp::complex> Ld = Ld23 * Ld13 * Ld12;
+        gslpp::matrix<gslpp::complex> Rd = Rd23 * Rd13 * Rd12;        
+
+        yu = Ru * yuR * Lu.hconjugate();
+        yd = Rd * ydR * Ld.hconjugate();
+
+        yuR = yu.real();
+        yuI = yu.imag();
+        ydR = yd.real();
+        ydI = yd.imag();
+
     } else
-        std::cout << "WARNING: wrong basis choice: " << basis << ": Yukawa couplings not updated!!!" << std::endl;
+        std::cout << "WARNING: wrong basis choice in GoToBasisSMOnly: " << basis << ": Yukawa couplings not updated!!!" << std::endl;
 
 
 }
@@ -1205,7 +1316,7 @@ void RGESolver::GoToBasis(std::string basis)
         yuI = yu.imag();
 
     } else
-        std::cout << "WARNING: wrong basis choice: " << basis << ": Yukawa couplings not updated!!!" << std::endl;
+        std::cout << "WARNING: wrong basis choice in GoToBasis: " << basis << ": Yukawa couplings not updated!!!" << std::endl;
 
     //I save the hermitian conjugates of the rotation 
     //matrix to be more efficient. 
